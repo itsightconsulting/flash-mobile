@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +39,6 @@
             </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
-
         <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -47,6 +47,35 @@
             android:layout_weight="1"
             app:defaultNavHost="true"
             app:navGraph="@navigation/mobile_navigation" />
+
+
+        <LinearLayout
+            android:id="@+id/transitionerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@drawable/validating_image_peru"
+            android:layout_marginBottom="?android:attr/actionBarSize">
+
+
+            <ImageView
+                android:id="@+id/mainSpinner"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_hourglass_empty"
+                android:textAlignment="center"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/spinner_message"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
