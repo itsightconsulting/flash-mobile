@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "915770413863",
+    "firebase_url": "https://flash-mobile-267122.firebaseio.com",
+    "project_id": "flash-mobile-267122",
+    "storage_bucket": "flash-mobile-267122.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915770413863:android:fa9a615e71658d653e4f02",
+        "android_client_info": {
+          "package_name": "com.itsight.flash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915770413863-mnbvrq1147rv5v2hfp9khp9cool36ll8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmBeUAZ4THF2To0vsak4jC8dcqUkTrJTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915770413863-mnbvrq1147rv5v2hfp9khp9cool36ll8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
