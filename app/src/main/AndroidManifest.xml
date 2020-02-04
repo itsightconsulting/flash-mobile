@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.itsight.flash">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="true"/>
+        android:required="true" />
 
     <uses-feature
         android:name="android.hardware.camera.autofocus"
@@ -18,14 +18,14 @@
     <uses-feature android:name="android.hardware.sensor.light" />
 
     <application
+        android:name=".FlashApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        android:name=".FlashApplication">
+        android:theme="@style/AppTheme.Launcher"
+        android:usesCleartextTraffic="true">
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,18 +37,19 @@
         <!-- VERIDIUM -->
         <meta-data
             android:name="com.veridiumid.sdk.LICENSE"
-            android:value="ZMWMMEcWVmGmtlAYFA4A/TcTpzKm0GRMYDU9V3/msIoUo+codKSWWWLqOFPxFsvTuHelK3wbp6szDA2VMVoBBHsiZGV2aWNlRmluZ2VycHJpbnQiOiJ3bmZPM2pzTUIzWUwrdktPWFlFem91dFJVbFprQkFJaVB0R0xQQXQvbDZJPSIsImxpY2Vuc2UiOiJTanY1aVcvQ0xZdnB5ZW9WajVuRks4UUJzUmtVbm1lTGRodG9jYUlxRzZjSEthcnNPOWZYM25xZ2M1Z0xuZjh3Q2NYd2FKU29KVDBvK2tmZElLU09CSHNpZEhsd1pTSTZJbE5FU3lJc0ltNWhiV1VpT2lKVFJFc2lMQ0pzWVhOMFRXOWthV1pwWldRaU9qRTFOemcwTVRreE56VXNJbU52YlhCaGJubE9ZVzFsSWpvaVEzVjVJRzF2WW1sc1pTQXRJRkJ5YjJRZ0xTQTBSa1VpTENKamIyNTBZV04wU1c1bWJ5STZJazFwWjNWbGJDQklaWEp1WVc1a1pYb2dTVzV6YjJ4MWRHbHZibk1nVUdGeWRHNWxjaUlzSW1OdmJuUmhZM1JGYldGcGJDSTZJbTFwWjNWbGJDNW9aWEp1WVc1a1pYcEFhVzV6YjJ4MWRHbHZibk11Y0dVaUxDSnpkV0pNYVdObGJuTnBibWRRZFdKc2FXTkxaWGtpT2lKdVExcGlWa0ZsVTJwSU5VVTNSelpITDIxc04wWjROV2hKUmxwMVRHTklRV0ZrTlhSTUsyNXFSMWh2UFNJc0luTjBZWEowUkdGMFpTSTZNVFUwTmpNd01EZ3dNQ3dpWlhod2FYSmhkR2x2YmtSaGRHVWlPakUyTURrek9UQTRNREFzSW1keVlXTmxSVzVrUkdGMFpTSTZNVFl3T1RneU1qZ3dNQ3dpZFhOcGJtZFRRVTFNVkc5clpXNGlPbVpoYkhObExDSjFjMmx1WjBaeVpXVlNRVVJKVlZNaU9tWmhiSE5sTENKMWMybHVaMEZqZEdsMlpVUnBjbVZqZEc5eWVTSTZabUZzYzJVc0ltSnBiMnhwWWtaaFkyVkZlSEJ2Y25SRmJtRmliR1ZrSWpwbVlXeHpaU3dpY25WdWRHbHRaVVZ1ZG1seWIyNXRaVzUwSWpwN0luTmxjblpsY2lJNlptRnNjMlVzSW1SbGRtbGpaVlJwWldRaU9tWmhiSE5sZlN3aVpXNW1iM0pqWlNJNmV5SndZV05yWVdkbFRtRnRaWE1pT2xzaWNHVXViVzlpYVd4bExtTjFlU0lzSW5CbExtMXZZbWxzWlM1amRYa3VjMlZzYkdWeUlsMHNJbk5sY25abGNrTmxjblJJWVhOb1pYTWlPbHRkZlgwPSJ9"/>
+            android:value="ZMWMMEcWVmGmtlAYFA4A/TcTpzKm0GRMYDU9V3/msIoUo+codKSWWWLqOFPxFsvTuHelK3wbp6szDA2VMVoBBHsiZGV2aWNlRmluZ2VycHJpbnQiOiJ3bmZPM2pzTUIzWUwrdktPWFlFem91dFJVbFprQkFJaVB0R0xQQXQvbDZJPSIsImxpY2Vuc2UiOiJTanY1aVcvQ0xZdnB5ZW9WajVuRks4UUJzUmtVbm1lTGRodG9jYUlxRzZjSEthcnNPOWZYM25xZ2M1Z0xuZjh3Q2NYd2FKU29KVDBvK2tmZElLU09CSHNpZEhsd1pTSTZJbE5FU3lJc0ltNWhiV1VpT2lKVFJFc2lMQ0pzWVhOMFRXOWthV1pwWldRaU9qRTFOemcwTVRreE56VXNJbU52YlhCaGJubE9ZVzFsSWpvaVEzVjVJRzF2WW1sc1pTQXRJRkJ5YjJRZ0xTQTBSa1VpTENKamIyNTBZV04wU1c1bWJ5STZJazFwWjNWbGJDQklaWEp1WVc1a1pYb2dTVzV6YjJ4MWRHbHZibk1nVUdGeWRHNWxjaUlzSW1OdmJuUmhZM1JGYldGcGJDSTZJbTFwWjNWbGJDNW9aWEp1WVc1a1pYcEFhVzV6YjJ4MWRHbHZibk11Y0dVaUxDSnpkV0pNYVdObGJuTnBibWRRZFdKc2FXTkxaWGtpT2lKdVExcGlWa0ZsVTJwSU5VVTNSelpITDIxc04wWjROV2hKUmxwMVRHTklRV0ZrTlhSTUsyNXFSMWh2UFNJc0luTjBZWEowUkdGMFpTSTZNVFUwTmpNd01EZ3dNQ3dpWlhod2FYSmhkR2x2YmtSaGRHVWlPakUyTURrek9UQTRNREFzSW1keVlXTmxSVzVrUkdGMFpTSTZNVFl3T1RneU1qZ3dNQ3dpZFhOcGJtZFRRVTFNVkc5clpXNGlPbVpoYkhObExDSjFjMmx1WjBaeVpXVlNRVVJKVlZNaU9tWmhiSE5sTENKMWMybHVaMEZqZEdsMlpVUnBjbVZqZEc5eWVTSTZabUZzYzJVc0ltSnBiMnhwWWtaaFkyVkZlSEJ2Y25SRmJtRmliR1ZrSWpwbVlXeHpaU3dpY25WdWRHbHRaVVZ1ZG1seWIyNXRaVzUwSWpwN0luTmxjblpsY2lJNlptRnNjMlVzSW1SbGRtbGpaVlJwWldRaU9tWmhiSE5sZlN3aVpXNW1iM0pqWlNJNmV5SndZV05yWVdkbFRtRnRaWE1pT2xzaWNHVXViVzlpYVd4bExtTjFlU0lzSW5CbExtMXZZbWxzWlM1amRYa3VjMlZzYkdWeUlsMHNJbk5sY25abGNrTmxjblJJWVhOb1pYTWlPbHRkZlgwPSJ9" />
 
         <meta-data
             android:name="com.veridiumid.sdk.fourf.LICENSE"
-            android:value="ett+Y7IMrw0KLxO0mcbPyDi/LbBwvvyThKGuXEtszCuP30FmiJtz2zuOXN/PZcfFWzoD3JjvmX4+GPt58tLGCnsiZGV2aWNlRmluZ2VycHJpbnQiOiJ3bmZPM2pzTUIzWUwrdktPWFlFem91dFJVbFprQkFJaVB0R0xQQXQvbDZJPSIsImxpY2Vuc2UiOiJlR1FiUzQrZEtGNmg5TzE5bWVXMzlaK3pFYmRXWEp6U2Jrcm5NYk0xZldyOTVUOHVHVVNXMWNlWEhtcUVEblNSb1dMdnI3Yi8weFNPWWRWUkdWeVVEbnNpZEhsd1pTSTZJa0pKVDB4SlFsTWlMQ0p1WVcxbElqb2lORVlpTENKc1lYTjBUVzlrYVdacFpXUWlPakUxTnpnME1Ua3hOelV5TmpRc0ltTnZiWEJoYm5sT1lXMWxJam9pUTNWNUlHMXZZbWxzWlNBdElGQnliMlFnTFNBMFJrVWlMQ0pqYjI1MFlXTjBTVzVtYnlJNklrMXBaM1ZsYkNCSVpYSnVZVzVrWlhvZ1NXNXpiMngxZEdsdmJuTWdVR0Z5ZEc1bGNpSXNJbU52Ym5SaFkzUkZiV0ZwYkNJNkltMXBaM1ZsYkM1b1pYSnVZVzVrWlhwQWFXNXpiMngxZEdsdmJuTXVjR1VpTENKemRXSk1hV05sYm5OcGJtZFFkV0pzYVdOTFpYa2lPaUp1UTFwaVZrRmxVMnBJTlVVM1J6WkhMMjFzTjBaNE5XaEpSbHAxVEdOSVFXRmtOWFJNSzI1cVIxaHZQU0lzSW5OMFlYSjBSR0YwWlNJNk1UVTBOak13TURnd01EQXdNQ3dpWlhod2FYSmhkR2x2YmtSaGRHVWlPakUyTURrek9UQTRNREF3TURBc0ltZHlZV05sUlc1a1JHRjBaU0k2TVRZd09UZ3lNamd3TURBd01Dd2lkWE5wYm1kVFFVMU1WRzlyWlc0aU9tWmhiSE5sTENKMWMybHVaMFp5WldWU1FVUkpWVk1pT21aaGJITmxMQ0oxYzJsdVowRmpkR2wyWlVScGNtVmpkRzl5ZVNJNlptRnNjMlVzSW1KcGIyeHBZa1poWTJWRmVIQnZjblJGYm1GaWJHVmtJanBtWVd4elpTd2ljblZ1ZEdsdFpVVnVkbWx5YjI1dFpXNTBJanA3SW5ObGNuWmxjaUk2Wm1Gc2MyVXNJbVJsZG1salpWUnBaV1FpT21aaGJITmxmU3dpWm1WaGRIVnlaWE1pT25zaVltRnpaU0k2ZEhKMVpTd2ljM1JsY21WdlRHbDJaVzVsYzNNaU9uUnlkV1VzSW1WNGNHOXlkQ0k2ZEhKMVpYMHNJbVZ1Wm05eVkyVmtVSEpsWm1WeVpXNWpaWE1pT25zaWJXRnVaR0YwYjNKNVRHbDJaVzVsYzNNaU9tWmhiSE5sZlN3aWRtVnljMmx2YmlJNklqUXVLaUo5In0="/>
+            android:value="ett+Y7IMrw0KLxO0mcbPyDi/LbBwvvyThKGuXEtszCuP30FmiJtz2zuOXN/PZcfFWzoD3JjvmX4+GPt58tLGCnsiZGV2aWNlRmluZ2VycHJpbnQiOiJ3bmZPM2pzTUIzWUwrdktPWFlFem91dFJVbFprQkFJaVB0R0xQQXQvbDZJPSIsImxpY2Vuc2UiOiJlR1FiUzQrZEtGNmg5TzE5bWVXMzlaK3pFYmRXWEp6U2Jrcm5NYk0xZldyOTVUOHVHVVNXMWNlWEhtcUVEblNSb1dMdnI3Yi8weFNPWWRWUkdWeVVEbnNpZEhsd1pTSTZJa0pKVDB4SlFsTWlMQ0p1WVcxbElqb2lORVlpTENKc1lYTjBUVzlrYVdacFpXUWlPakUxTnpnME1Ua3hOelV5TmpRc0ltTnZiWEJoYm5sT1lXMWxJam9pUTNWNUlHMXZZbWxzWlNBdElGQnliMlFnTFNBMFJrVWlMQ0pqYjI1MFlXTjBTVzVtYnlJNklrMXBaM1ZsYkNCSVpYSnVZVzVrWlhvZ1NXNXpiMngxZEdsdmJuTWdVR0Z5ZEc1bGNpSXNJbU52Ym5SaFkzUkZiV0ZwYkNJNkltMXBaM1ZsYkM1b1pYSnVZVzVrWlhwQWFXNXpiMngxZEdsdmJuTXVjR1VpTENKemRXSk1hV05sYm5OcGJtZFFkV0pzYVdOTFpYa2lPaUp1UTFwaVZrRmxVMnBJTlVVM1J6WkhMMjFzTjBaNE5XaEpSbHAxVEdOSVFXRmtOWFJNSzI1cVIxaHZQU0lzSW5OMFlYSjBSR0YwWlNJNk1UVTBOak13TURnd01EQXdNQ3dpWlhod2FYSmhkR2x2YmtSaGRHVWlPakUyTURrek9UQTRNREF3TURBc0ltZHlZV05sUlc1a1JHRjBaU0k2TVRZd09UZ3lNamd3TURBd01Dd2lkWE5wYm1kVFFVMU1WRzlyWlc0aU9tWmhiSE5sTENKMWMybHVaMFp5WldWU1FVUkpWVk1pT21aaGJITmxMQ0oxYzJsdVowRmpkR2wyWlVScGNtVmpkRzl5ZVNJNlptRnNjMlVzSW1KcGIyeHBZa1poWTJWRmVIQnZjblJGYm1GaWJHVmtJanBtWVd4elpTd2ljblZ1ZEdsdFpVVnVkbWx5YjI1dFpXNTBJanA3SW5ObGNuWmxjaUk2Wm1Gc2MyVXNJbVJsZG1salpWUnBaV1FpT21aaGJITmxmU3dpWm1WaGRIVnlaWE1pT25zaVltRnpaU0k2ZEhKMVpTd2ljM1JsY21WdlRHbDJaVzVsYzNNaU9uUnlkV1VzSW1WNGNHOXlkQ0k2ZEhKMVpYMHNJbVZ1Wm05eVkyVmtVSEpsWm1WeVpXNWpaWE1pT25zaWJXRnVaR0YwYjNKNVRHbDJaVzVsYzNNaU9tWmhiSE5sZlN3aWRtVnljMmx2YmlJNklqUXVLaUo5In0=" />
+
         <activity
             android:name="pe.veridiumid.sdk.fourf.defaultui.activity.DefaultFourFBiometricsActivity"
             android:label="4 Fingers"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="com.veridiumid.sdk.component.config"
-                android:value="uid=4F,optional=false,validator=com.veridiumid.sdk.fourf.FourFValidator"/>
+                android:value="uid=4F,optional=false,validator=com.veridiumid.sdk.fourf.FourFValidator" />
         </activity>
         <!-- END VERIDIUM -->
     </application>

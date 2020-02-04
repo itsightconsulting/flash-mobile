@@ -9,4 +9,7 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/splash_flash_mobile</item>
+    </style>
 </resources>

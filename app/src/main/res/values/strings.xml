@@ -82,4 +82,25 @@
     <string name="address">Dirección</string>
     <string name="step9_more_info">Presione "Continuar" para iniciar la captura de fotos de su dedo. Coloque su dedo en la vista de la cámara trasera del teléfono, más o menos en la guía. Manténgase estable cuando esté verde.</string>
 
+    <string name="searching">Buscando</string>
+    <string name="right_finger">Pulgar derecho</string>
+
+    <!-- Step 9.1 -->
+    <string name="success">!Éxito!</string>
+    <string name="search_complete">Exploración completa</string>
+
+    <!-- Step 10 -->
+    <string name="sim_activated">SIM Activated</string>
+    <string name="sim_activated_successfully">Your SIM has been acitvated successfully</string>
+    <string name="sim_activated_greetings">Now, you are member of the Flas Peru Community</string>
+    <string name="finalize">Finalize</string>
+
+    <!-- Step 10 Error -->
+    <string name="error_detail">And error ocurred during the validation</string>
+    <string name="message_support">Try again or contact our support center</string>
+    <string name="try_again">Try again</string>
+
+    <!-- Step 8 Error -->
+    <string name="error_in_scan">Error in scan</string>
+
 </resources>

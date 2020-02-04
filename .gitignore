@@ -26,3 +26,5 @@ fourfnative/build
 sdk/build
 veridium-licensing/build
 
+#Google Services
+app/google-services.json
