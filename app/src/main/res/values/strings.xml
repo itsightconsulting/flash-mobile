@@ -93,9 +93,9 @@
     <string name="finalize">Finalize</string>
 
     <!-- Step 10 Error -->
-    <string name="finalize">And error ocurred during the validation</string>
-    <string name="finalize">Try again or contact our support center</string>
-    <string name="finalize">Try again</string>
+    <string name="error_detail">And error ocurred during the validation</string>
+    <string name="message_support">Try again or contact our support center</string>
+    <string name="try_again">Try again</string>
 
     <!-- Step 8 Error -->
     <string name="error_in_scan">Error in scan</string>
