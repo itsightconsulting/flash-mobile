@@ -8,7 +8,16 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/analytics" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/biometricsupport" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/defaultdata" />
+            <option value="$PROJECT_DIR$/fourfdefaultui" />
+            <option value="$PROJECT_DIR$/fourfimaging" />
+            <option value="$PROJECT_DIR$/fourfnative" />
+            <option value="$PROJECT_DIR$/sdk" />
+            <option value="$PROJECT_DIR$/veridium-licensing" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

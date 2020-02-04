@@ -12,3 +12,16 @@
 /captures
 .externalNativeBuild
 .cxx
+
+#VeridiumProjects
+
+analytics/build
+biometricsupport/build
+core/build
+defaultdata/build
+fourfdefaultui/build
+fourfimaging/build
+fourfnative/build
+sdk/build
+veridium-licensing/build
+

@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':sdk', ':core', ':fourfimaging', ':veridium-licensing', ':biometricsupport', ':defaultdata', ':fourfnative', ':analytics', ':fourfdefaultui'
 rootProject.name='FlashMobile'
