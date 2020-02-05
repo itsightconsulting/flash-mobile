@@ -26,88 +26,91 @@
 
     <style name="pages_name">
         <item name="android:fontFamily">@font/gotham_bold</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="pages_subtitle">
         <item name="android:fontFamily">@font/gotham_light</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="fields_name">
         <item name="android:fontFamily">@font/gotham_medium</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/gray</item>
+
     </style>
 
     <style name="text_fields_answered">
         <item name="android:fontFamily">@font/gotham_light</item>
-        <item name="android:textSize">20px</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/dark</item>
     </style>
 
     <style name="message_for_text_fields">
         <item name="android:fontFamily">@font/gotham_light</item>
-        <item name="android:textSize">16px</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/dark_purple</item>
+
     </style>
 
     <style name="placeholder">
         <item name="android:fontFamily">@font/gotham_light</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/gray_medium</item>
     </style>
 
     <style name="fields_name_with_options">
         <item name="android:fontFamily">@font/gotham_medium</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/dark_purple</item>
     </style>
 
     <style name="text_options_radio">
         <item name="android:fontFamily">@font/gotham_light</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/dark</item>
     </style>
 
     <style name="summary_text">
         <item name="android:fontFamily">@font/gotham_light</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/dark</item>
         <item name="android:background">@color/gray</item>
     </style>
 
     <style name="text_options_check_dark_purple">
         <item name="android:fontFamily">@font/gotham_bold</item>
-        <item name="android:textSize">16px</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/dark_purple</item>
     </style>
 
     <style name="text_options_check_dark">
         <item name="android:fontFamily">@font/gotham_light</item>
-        <item name="android:textSize">16px</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/dark</item>
     </style>
 
     <style name="button_purple">
         <item name="android:fontFamily">@font/gotham_bold</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:backgroundTint">@color/purple</item>
     </style>
 
     <style name="button_white">
         <item name="android:fontFamily">@font/gotham_bold</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/purple</item>
         <item name="android:backgroundTint">@color/white</item>
+        <item name="android:strokeWidth">2sp</item>
     </style>
 
     <style name="button_dark_purple">
         <item name="android:fontFamily">@font/gotham_bold</item>
-        <item name="android:textSize">18px</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:backgroundTint">@color/dark_purple</item>
     </style>
