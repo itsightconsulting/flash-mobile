@@ -28,7 +28,10 @@
     <!-- List of web orders -->
     <string name="web_activation_orders">Web Activation orders</string>
     <string name="web_activation_orders_description">These are all the pending activation requests you started on the web site. Select those you to complete</string>
-    <string name="web_activation_orders_info">Only 5 activations per DNI are allowed</string>
+    <string name="web_activation_orders_info">Only 5 activations per DNI are allowed </string>
+    <string name="web_activation_order_type_ph">Activation &amp; portability </string>
+    <string name="web_activation_order_date_ph">15/01/2020 at 09:45 am </string>
+    <string name="web_activation_order_number_ph">Phone number: 94483-8302 </string>
 
     <!-- Step 2b.1 and 2b.2 -->
     <string name="flash_activation_form">Flash Activation Form</string>

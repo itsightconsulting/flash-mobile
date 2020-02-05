@@ -13,6 +13,7 @@
     <color name="gray">#545454</color>
     <color name="gray_medium">#898989</color>
     <color name="light">#f2f2f2</color>
+    <color name="black">#000</color>
 
     <!-- Colors error -->
     <color name="black_error">#4c4151</color>

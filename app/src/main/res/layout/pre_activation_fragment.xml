@@ -103,7 +103,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/option_help_description"
                 android:textAlignment="center"
-                style="@style/welcome_help_descrition"
+                style="@style/summary_text"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
                 app:layout_constraintStart_toStartOf="@+id/linearLayout3"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
