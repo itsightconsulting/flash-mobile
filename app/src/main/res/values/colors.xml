@@ -3,4 +3,19 @@
     <color name="colorPrimary">#88237C</color>
     <color name="colorPrimaryDark">#88237C</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!-- Colors -->
+    <color name="white">#fff</color>
+    <color name="dark_purple">#88237c</color>
+    <color name="purple">#b13ace</color>
+    <color name="green">#979939</color>
+    <color name="dark">#1c1c1c</color>
+    <color name="gray">#545454</color>
+    <color name="gray_medium">#898989</color>
+    <color name="light">#f2f2f2</color>
+
+    <!-- Colors error -->
+    <color name="black_error">#4c4151</color>
+    <color name="button_error">#86599b</color>
+    <color name="text_error">#cdc8ce</color>
 </resources>
