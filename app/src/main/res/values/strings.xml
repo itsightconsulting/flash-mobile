@@ -9,8 +9,8 @@
 
     <!-- Carrusel - Quick Guide -->
     <string name="flash_mobile_peru">Flash Mobile Peru</string>
-    <string name="title_carrusel_1">Welcome to Activa to Flash Peru App</string>
-    <string name="description_carrusel_1">Message 1</string>
+    <string name="title_carrusel_1">Welcome to\nActiva to Flash Peru App</string>
+    <string name="description_carrusel_1">Lorem ipsum dolor sit amet, consectetur adipiscing elitenim ad minim veniam, quis nostrud exercitation ullamco adipiscing elitenim ad minim veniam</string>
     <string name="title_carrusel_2">Title 2</string>
     <string name="description_carrusel_2">Message 2</string>
     <string name="title_carrusel_3">Title 3</string>

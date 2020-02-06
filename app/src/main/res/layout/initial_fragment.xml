@@ -28,22 +28,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/carrusel_1" />-->
 
-        <TextView
-            android:id="@+id/listError"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="An error occured while loading data"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ProgressBar
             android:id="@+id/loadingView"
             android:layout_width="wrap_content"
@@ -81,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
-            android:text="@string/Welcome_to_Activa_tu_Flash"
+            android:text="@string/title_carrusel_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/carouselView" />
@@ -89,11 +73,10 @@
         <TextView
             android:id="@+id/txtDescriptionCarousel"
             style="@style/carrusel_subtitles"
-            android:layout_width="wrap_content"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:gravity="center_horizontal"
-            android:text="Lorem ipsum dolor sit amet"
+            android:text="@string/description_carrusel_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtTitleCarousel" />
@@ -114,7 +97,7 @@
         <Button
             android:id="@+id/btnGetStarted"
             style="@style/button_white"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="24dp"
@@ -122,7 +105,9 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:text="@string/get_started"
+            android:visibility="visible"
             app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tabLayout"
             app:layout_constraintStart_toStartOf="@+id/tabLayout"
             app:layout_constraintTop_toBottomOf="@+id/tabLayout" />

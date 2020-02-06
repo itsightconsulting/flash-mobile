@@ -12,10 +12,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.itsight.flash.FlashApplication
 import kotlinx.android.synthetic.main.navigation_activity.*
 import java.util.*
 
 import com.itsight.flash.R
+import com.itsight.flash.preferences.UserPrefs
 
 
 class MainActivity : AppCompatActivity() {

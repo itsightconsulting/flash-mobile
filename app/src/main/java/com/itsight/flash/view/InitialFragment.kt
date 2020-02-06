@@ -1,18 +1,14 @@
 package com.itsight.flash.view
 
-
-import android.content.res.Resources
-import android.opengl.Visibility
+import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
+import com.itsight.flash.FlashApplication
 import com.itsight.flash.R
+import com.itsight.flash.preferences.UserPrefs
 import com.itsight.flash.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.initial_fragment.*
 import com.synnapps.carouselview.ImageListener
@@ -43,11 +39,14 @@ class InitialFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        //        var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
+//        if (estado)
+
 //        viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
 //        viewModel.refresh()
 
         refreshLayout.setOnRefreshListener {
-            listError.visibility = View.GONE
             loadingView.visibility = View.VISIBLE
             txtTitleCarousel.visibility = View.VISIBLE
             txtDescriptionCarousel.visibility = View.VISIBLE
@@ -62,6 +61,7 @@ class InitialFragment : Fragment() {
         // Inflate the layout for this fragment
         btnGetStarted.setOnClickListener {
             carouselView.pauseCarousel()
+            saveHideCarousel()
             val action = InitialFragmentDirections.actionInitialFragmentToPreActivationFragment()
             findNavController().navigate(action)
         }
@@ -69,7 +69,6 @@ class InitialFragment : Fragment() {
         carouselView.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 //                Toast.makeText(context!!, "x", Toast.LENGTH_SHORT).show()
-
             }
 
             override fun onPageScrolled(
@@ -81,22 +80,19 @@ class InitialFragment : Fragment() {
             }
 
             override fun onPageSelected(position: Int) {
-                PrintCarousel(position);
+                printCarousel(position);
                 if (position == 2) {
                     btnGetStarted.visibility = View.VISIBLE
-                    carouselView.stopCarousel()
+                    carouselView.pauseCarousel()
                 }
-
-                Toast.makeText(context!!, "$position", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context!!, "$position", Toast.LENGTH_SHORT).show()
             }
         })
 
         tabLayout.setupWithViewPager(carouselView.containerViewPager, true)
     }
 
-    fun PrintCarousel(pos: Int) {
-//        var title = arrTitles[pos];
-        /*var description = arrDescritions[pos];*/
+    private fun printCarousel(pos: Int) {
 
         var title: String = "";
         var description: String = "";
@@ -118,24 +114,7 @@ class InitialFragment : Fragment() {
         txtDescriptionCarousel.text = description;
     }
 
-    /*fun observeViewModel() {
-
-        viewModel.carouselLoadError.observe(this, Observer {isError ->
-            isError?.let {
-                listError.visibility = if(it) View.VISIBLE else View.GONE
-            }
-        })
-        viewModel.loading.observe(this, Observer { isLoading ->
-            isLoading?.let {
-                loadingView.visibility = if(it) View.VISIBLE else View.GONE
-                if(it) {
-                    listError.visibility = View.GONE
-                    dogsList.visibility = View.GONE
-                }
-            }
-        })
-    }*/
-    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-    }*/
+    private fun saveHideCarousel() {
+        UserPrefs.putHideCarousel(FlashApplication.appContext, true)
+    }
 }
