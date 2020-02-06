@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="7dp"
+    android:orientation="horizontal"
+    android:background="@color/light"
+    android:layout_marginBottom="12dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.85"
+        android:orientation="vertical"
+        android:layout_gravity="left"
+        android:paddingLeft="32dp">
+
+        <TextView
+            android:id="@+id/orderType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/web_activation_order_type_ph"
+            android:layout_marginTop="8dp"
+            style="@style/subtitles_fields"/>
+
+        <TextView
+            android:id="@+id/orderDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/web_activation_order_date_ph"
+            android:layout_marginTop="8dp"
+            style="@style/summary_text"/>
+
+        <TextView
+            android:id="@+id/orderNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/web_activation_order_number_ph"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="8dp"
+            style="@style/summary_text"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnContactCall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.15"
+        android:src="@drawable/ic_act_app_order_next"
+        android:background="@color/transparent"/>
+</LinearLayout>
