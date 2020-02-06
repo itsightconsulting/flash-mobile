@@ -1,6 +1,7 @@
 package com.itsight.flash.view
 
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -21,7 +22,8 @@ import com.synnapps.carouselview.ImageListener
 class InitialFragment : Fragment() {
 
     private lateinit var viewModel: ListViewModel
-    private val sampleImages = intArrayOf(R.drawable.carrusel_1, R.drawable.carrusel_2, R.drawable.carrusel_3)
+    private val sampleImages =
+        intArrayOf(R.drawable.carrusel_1, R.drawable.carrusel_2, R.drawable.carrusel_3)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,27 +42,21 @@ class InitialFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
-        viewModel.refresh()
+//        viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
+//        viewModel.refresh()
 
         refreshLayout.setOnRefreshListener {
-            dogsList.visibility = View.GONE
             listError.visibility = View.GONE
             loadingView.visibility = View.VISIBLE
-            viewModel.refreshBypassCache()
+            txtTitleCarousel.visibility = View.VISIBLE
+            txtDescriptionCarousel.visibility = View.VISIBLE
             refreshLayout.isRefreshing = false
         }
 
-        observeViewModel()
+//        observeViewModel()
         carouselView.pageCount = sampleImages.size
 
         carouselView.setImageListener(imageListener)
-
-        txtDescriptionCarousel.setOnClickListener {
-            carouselView.stopCarousel()
-            carouselView.isDisableAutoPlayOnUserInteraction
-            Toast.makeText(context!!, "x", Toast.LENGTH_SHORT).show()
-        }
 
         // Inflate the layout for this fragment
         button.setOnClickListener {
@@ -69,7 +65,7 @@ class InitialFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        carouselView.addOnPageChangeListener( object : ViewPager.OnPageChangeListener{
+        carouselView.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 //                Toast.makeText(context!!, "x", Toast.LENGTH_SHORT).show()
 
@@ -84,7 +80,8 @@ class InitialFragment : Fragment() {
             }
 
             override fun onPageSelected(position: Int) {
-                if (position== 3)
+                PrintCarousel(position);
+                if (position == 3)
                     carouselView.stopCarousel()
 
                 Toast.makeText(context!!, "$position", Toast.LENGTH_SHORT).show()
@@ -94,7 +91,31 @@ class InitialFragment : Fragment() {
         tabLayout.setupWithViewPager(carouselView.containerViewPager, true)
     }
 
-    fun observeViewModel() {
+    fun PrintCarousel(pos: Int) {
+//        var title = arrTitles[pos];
+        /*var description = arrDescritions[pos];*/
+
+        var title: String = "";
+        var description: String = "";
+        when (pos) {
+            0 -> {
+                title = resources.getString(R.string.title_carrusel_1)
+                description = resources.getString(R.string.description_carrusel_1)
+            }
+            1 -> {
+                title = resources.getString(R.string.title_carrusel_2)
+                description = resources.getString(R.string.description_carrusel_2)
+            }
+            2 -> {
+                title = resources.getString(R.string.title_carrusel_3)
+                description = resources.getString(R.string.description_carrusel_3)
+            }
+        }
+        txtTitleCarousel.text = title;
+        txtDescriptionCarousel.text = description;
+    }
+
+    /*fun observeViewModel() {
 
         viewModel.carouselLoadError.observe(this, Observer {isError ->
             isError?.let {
@@ -110,7 +131,7 @@ class InitialFragment : Fragment() {
                 }
             }
         })
-    }
+    }*/
     /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
     }*/
