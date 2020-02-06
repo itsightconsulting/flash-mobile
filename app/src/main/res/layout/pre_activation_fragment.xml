@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:text="@string/option_help"
-                    style="@style/welcome_help_option"/>
+                    android:fontFamily="@font/gotham_bold"/>
 
                 <ImageView
                     android:id="@+id/imageView4"
@@ -103,7 +103,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/option_help_description"
                 android:textAlignment="center"
-                style="@style/summary_text"
+                android:fontFamily="@font/gotham_light"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
                 app:layout_constraintStart_toStartOf="@+id/linearLayout3"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />

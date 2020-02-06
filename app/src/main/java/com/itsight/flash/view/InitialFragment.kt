@@ -2,6 +2,7 @@ package com.itsight.flash.view
 
 
 import android.content.res.Resources
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -59,7 +60,7 @@ class InitialFragment : Fragment() {
         carouselView.setImageListener(imageListener)
 
         // Inflate the layout for this fragment
-        button.setOnClickListener {
+        btnGetStarted.setOnClickListener {
             carouselView.pauseCarousel()
             val action = InitialFragmentDirections.actionInitialFragmentToPreActivationFragment()
             findNavController().navigate(action)
@@ -81,8 +82,10 @@ class InitialFragment : Fragment() {
 
             override fun onPageSelected(position: Int) {
                 PrintCarousel(position);
-                if (position == 3)
+                if (position == 2) {
+                    btnGetStarted.visibility = View.VISIBLE
                     carouselView.stopCarousel()
+                }
 
                 Toast.makeText(context!!, "$position", Toast.LENGTH_SHORT).show()
             }
