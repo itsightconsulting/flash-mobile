@@ -20,7 +20,7 @@
     <!-- Step 3 -->
     <string name="Welcome_to_Activa_tu_Flash">Welcome to Activa tu Flash</string>
     <string name="enter_your_dni">Enter your DNI</string>
-    <string name="digits">digits</string>
+    <string name="digits">8 digits</string>
     <string name="go">Go</string>
     <string name="option_help">Chat with an agent</string>
     <string name="option_help_description">In case of any problem contact \n Customer Service team</string>
@@ -105,5 +105,8 @@
 
     <!-- Step 8 Error -->
     <string name="error_in_scan">Error in scan</string>
+
+    <!-- External links -->
+    <string name="chatExternalLink">https://www.marca.com</string>
 
 </resources>

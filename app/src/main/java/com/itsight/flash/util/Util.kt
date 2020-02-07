@@ -18,18 +18,24 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.itsight.flash.FlashApplication
 import com.itsight.flash.R
+import com.itsight.flash.model.dto.ErrorResponse
+import com.itsight.flash.model.dto.OrderInformation
+import com.itsight.flash.model.parcelable.OrderInformationArgs
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import retrofit2.HttpException
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 
 enum class POSTYPES(val value: Int) {
@@ -43,18 +49,6 @@ enum class RULESVAL(val value: Int) {
     MAX_LENGTH(2),
     EMAIL(3),
 }
-
-enum class PROFILES {
-    DEV_HOME, DEV_WORK, DEV_CLOUD, PRODUCTION
-}
-
-val API_PROFILE = PROFILES.DEV_CLOUD.name
-
-
-val API_BASE_URL = getAPIBaseURLByProfile(API_PROFILE)
-val API_RESOURCE_SERVERBASE_URL = getAPIResourceServerBaseURLByProfile(API_PROFILE)
-const val API_BASE_AUTH_SERVER = "https://epay-auth.azurewebsites.net"
-const val API_BASE_RSRC_SERVER = "https://epay-rsrc.azurewebsites.net"
 
 
 val documentTypes: HashMap<Int, String> = hashMapOf(
@@ -74,26 +68,6 @@ val profiles: HashMap<Int, String> = hashMapOf(
     7 to "PDV"
 )
 
-fun getAPIBaseURLByProfile(profile: String): String {
-    return when (profile) {
-        PROFILES.DEV_CLOUD.name -> "$API_BASE_AUTH_SERVER/api/v1/"
-        PROFILES.DEV_WORK.name -> "http://192.168.1.4:8080/api/v1/"
-        PROFILES.DEV_HOME.name -> "http://192.168.1.6:8080/api/v1/"
-        PROFILES.PRODUCTION.name -> "/"
-        else -> "/"
-    }
-}
-
-fun getAPIResourceServerBaseURLByProfile(profile: String): String {
-    return when (profile) {
-        PROFILES.DEV_CLOUD.name -> "$API_BASE_RSRC_SERVER/api/v1/"
-        PROFILES.DEV_WORK.name -> "http://192.168.1.4:8090/api/v1/"
-        PROFILES.DEV_HOME.name -> "http://192.168.1.6:8090/api/v1/"
-        PROFILES.PRODUCTION.name -> "/"
-        else -> "/"
-    }
-}
-
 fun getText(editText: EditText): String {
     return editText.text.toString()
 }
@@ -104,18 +78,54 @@ fun View.csSnackbar(
     messageCallback: String = "",
     callback: (() -> Unit)? = null
 ) {
-    if(callback != null){
+    if (callback != null) {
         Snackbar.make(this, message, duration)
             .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
             .setAction(messageCallback) { callback() }
             .show()
-    }else {
+    } else {
         Snackbar.make(this, message, duration)
             .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
             .show()
     }
 }
 
+fun showSpinner(activity: FragmentActivity?) {
+
+    activity?.let {
+        Glide.with(it.applicationContext).load(R.drawable.cargador).into(
+            it.findViewById(R.id.mainSpinner)
+        )
+        it.findViewById<LinearLayout>(R.id.transitionerLayout).visibility = View.VISIBLE
+    }
+}
+
+
+fun hideSpinner(activity: FragmentActivity?) {
+    activity?.let {
+        it.findViewById<LinearLayout>(R.id.transitionerLayout).visibility = View.GONE
+        Glide.with(it.applicationContext).load(R.drawable.ic_hourglass_empty).into(
+            it.findViewById(R.id.mainSpinner)
+        )
+    }
+}
+
+fun instanceHttpError(e: Throwable): ErrorResponse {
+    val exception = e as HttpException
+    if (exception.response() != null) {
+        val error = JSONObject(exception.toString())
+        return ErrorResponse(
+            error.getString("code"),
+            error.getString("message"),
+            error.getInt("status")
+        )
+    }
+    return ErrorResponse(
+        exception.code().toString(),
+        GENERIC_ERROR_MESSAGE,
+        exception.code()
+    )
+}
 
 fun getRealPathFromUri(uri: Uri): String? {
     // DocumentProvider
@@ -302,198 +312,24 @@ fun Boolean.nextEvaluation(
     return this
 }
 
-class MasterValidation {
-
-    private var inputs: ArrayList<Validations> = ArrayList()
-
-    fun getRules() = this.inputs
-
-    fun valid(textInputEditText: TextInputEditText, eventsActive: Boolean = true): Validations {
-        val objVal = Validations(textInputEditText, null, this, eventsActive)
-        this.inputs.add(objVal)
-        return objVal
-    }
-
-    fun valid(autoCompleteTextView: AutoCompleteTextView, eventsActive: Boolean = true): Validations {
-        val objVal = Validations(null, autoCompleteTextView, this, eventsActive)
-        this.inputs.add(objVal)
-        return objVal
-    }
-
-    fun checkValidity(): Boolean {
-        return this.inputs.filter{it.internalValidation()}.size == this.inputs.size
-    }
-
-}
-
-class ValRules (callback: () -> Boolean, preReqCallback: (() -> Boolean)? = null, flMsg: String, ruleId: Int){
-
-    var msg: String = flMsg
-    private val flCallback = callback
-    private val preCallback = preReqCallback
-    private val id = ruleId
-    fun check(): Boolean{
-        if(preCallback != null){
-            if(preCallback.invoke()){
-                return flCallback()
-            }
-            return true
-        }
-        return flCallback()
-    }
-
-    fun getId(): Any {
-        return this.id
-    }
-}
-
-class Validations(textInputEditText: TextInputEditText?, autoCompleteTextView: AutoCompleteTextView?, masterValidation: MasterValidation, eventEnabled: Boolean) {
-
-    private val textInputLayout = (textInputEditText?:autoCompleteTextView!!).parent.parent as TextInputLayout
-    val value = (textInputEditText?:autoCompleteTextView!!).text.toString()
-    var valid: Boolean = true
-    val list: ArrayList<ValRules> = ArrayList()
-    val editText = textInputEditText?:autoCompleteTextView!!
-    var minLen: Int = 0
-    var min:Int = 0
-    var maxLen: Int = 0
-    val master = masterValidation
-    val id = (textInputEditText?:autoCompleteTextView!!).id
-
-    init {
-        textInputEditText?.let { it ->
-            if(!eventEnabled) return@let
-
-            it.setOnFocusChangeListener { view: View, focus: Boolean ->
-                if(focus) return@setOnFocusChangeListener
-                if(this.list.size > 0){
-                    var ele = this.list.firstOrNull { !it.check() }
-                    ele?.let {
-                        textInputLayout.error = it.msg
-                    }
-                    if(ele == null){
-                        textInputLayout.error = ""
-                    }
-                }
-            }
-
-            it.doAfterTextChanged {
-                if(this.list.size > 0){
-                    var ele = this.list.firstOrNull { !it.check() }
-                    if(ele == null){
-                        textInputLayout.error = ""
-                    }
-                }
-            }
-        }
-
-        autoCompleteTextView?.let { it ->
-            if(!eventEnabled) return@let
-
-            it.setOnItemClickListener {parent, view, position, id ->
-                var ele = this.list.firstOrNull { !it.check() }
-                ele?.let {
-                    textInputLayout.error = it.msg
-                }
-                if(ele == null){
-                    textInputLayout.error = ""
-                }
-            }
-        }
-    }
-
-    fun internalValidation(): Boolean{
-        var flValid = true
-        var ele = this.list.firstOrNull { !it.check() }
-        ele?.let {
-            flValid = false
-            textInputLayout.error = it.msg
-        }
-        if(ele == null){
-            textInputLayout.error = ""
-        }
-        return flValid
-    }
-
-    fun email(): Validations {
-        this.list.add(
-            ValRules(::flValidateEmail, null,"Email with invalid format", RULESVAL.EMAIL.value)
+fun orderInformationToArgs(orders: List<OrderInformation>, ordersArgs: ArrayList<OrderInformationArgs>): ArrayList<OrderInformationArgs>{
+    orders.forEach{
+        ordersArgs.add(
+            OrderInformationArgs(
+                it.id,
+                it.planType,
+                it.sponsorTeamId,
+                it.name,
+                it.lastName,
+                it.birthDate,
+                it.email,
+                it.wantPortability,
+                UUID.randomUUID().toString(),
+                it.currentCompany,
+                it.status,
+                it.creationDate
+            )
         )
-        return this
     }
-
-    fun email(csMsg: String): Validations {
-        this.list.add(
-            ValRules(::flValidateEmail,null, csMsg, RULESVAL.EMAIL.value)
-        )
-        return this
-    }
-
-    fun flValidateEmail(): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(editText!!.text.toString()).matches()
-    }
-
-    fun minLength(len: Int): Validations {
-        this.minLen = len
-        this.list.add(
-            ValRules(::flValidateLength, null,"Debe ingresar mínimo $len caracteres", RULESVAL.MIN_LENGTH.value)
-        )
-        return this
-    }
-
-    fun flValidateLength(): Boolean {
-        return editText!!.text.toString().isBlank() || editText!!.text.toString().length >= this.minLen
-    }
-
-    fun required(): Validations{
-        this.list.add(
-            ValRules(::flRequired, null,"Este campo es obligatorio", RULESVAL.REQUIRED.value)
-        )
-        return this
-    }
-
-    fun min(min: Int): Validations{
-        this.min = min
-        this.list.add(
-            ValRules(::flmin, null,"Debe ingresar un valor mayor a: S/. ${"%.2f".format(this.min.toDouble())}", RULESVAL.REQUIRED.value)
-        )
-        return this
-    }
-
-    fun flmin(): Boolean {
-        return editText!!.text.toString().isBlank() || editText!!.text.toString().toDouble() >= this.min
-    }
-
-    fun required(prerequisite: () -> Boolean): Validations{
-        this.list.add(
-            ValRules(::flRequired, prerequisite, "Este campo es obligatorio", RULESVAL.REQUIRED.value)
-        )
-        return this
-    }
-
-    fun flRequired(): Boolean{
-        return  editText!!.text.toString().isNotEmpty()
-    }
-
-    fun callbackTrue(): Boolean{
-        return true
-    }
-
-
-    fun validateNumber(): Validations {
-        try {
-
-        } catch (ex: NumberFormatException) {
-            valid = false
-        }
-        return this
-    }
-
-    fun and(): MasterValidation {
-        return this.master
-    }
-
-    fun active(): MasterValidation {
-        return this.master
-    }
+    return ordersArgs
 }
