@@ -48,8 +48,8 @@
             android:id="@+id/carouselView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:fillColor="@color/light"
             app:layout_constraintEnd_toEndOf="parent"
+            app:fillColor="@color/light"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:pageColor="@color/light"
@@ -83,16 +83,15 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="78dp"
+            android:layout_height="25dp"
             android:layout_marginTop="24dp"
             android:backgroundTint="@color/light"
-            app:layout_constraintEnd_toEndOf="@+id/txtDescriptionCarousel"
-            app:layout_constraintStart_toStartOf="@+id/txtDescriptionCarousel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtDescriptionCarousel"
-            app:tabBackground="@drawable/tab_selector"
-            app:tabGravity="center"
-            app:tabIndicatorHeight="0dp" />
+            app:tabBackground="@drawable/tab_selector"/>
 
         <Button
             android:id="@+id/btnGetStarted"
