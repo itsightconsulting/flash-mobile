@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+
         // Obtain the FirebaseAnalytics instance.
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
@@ -53,7 +54,12 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
 
         // Set up Action Bar
+        // Prepare redirect
         val navController = host.navController
+        val inflater = navController.navInflater
+        val graph = inflater.inflate(R.navigation.mobile_navigation)
+//        graph.setDe .setDefaultArguments(intent.extras)
+
 
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.initialFragment)
@@ -86,6 +92,11 @@ class MainActivity : AppCompatActivity() {
             }
             toolbar_title.text = toolbar.title
         }
+
+        var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
+        if (estado) graph.startDestination = R.id.preActivationFragment
+        else graph.startDestination = R.id.initialFragment
+        host.navController.graph = graph
 
     }
 

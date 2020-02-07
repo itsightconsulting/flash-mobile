@@ -22,37 +22,37 @@ object UserPrefs {
     val USER_HIDE_CAROUSEL = "flash.user.prefs.HIDE_CAROUSEL"
 
     fun setSystemToken(context: Context?, systemToken: String) {
-        PreferenceManager.getDefaultSharedPreferences(context).put {
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).put {
             putString(SYSTEM_TOKEN, systemToken)
         }
     }
 
     fun getSystemToken(context: Context?): String {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
+        return androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).get {
             getString(SYSTEM_TOKEN, "")!!
         }
     }
 
     fun isLoggedIn(context: Context?): Boolean {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
+        return androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).get {
             !TextUtils.isEmpty(getString(USER_TOKEN, ""))
         }
     }
 
     fun putPhone(context: Context?, phone: String?) {
-        PreferenceManager.getDefaultSharedPreferences(context).put {
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).put {
             putString(USER_PHONE, phone)
         }
     }
 
     fun getUserPhone(context: Context?): String {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
+        return androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).get {
             getString(USER_PHONE, "")!!
         }
     }
 
     fun updateUser(context: Context?, user: User) {
-        PreferenceManager.getDefaultSharedPreferences(context).put {
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).put {
             /*putLong(USER_ID, user.id)*/
             putString(USER_NAME, user.name)
             putString(USER_LAST_NAME, user.lastName)
@@ -62,7 +62,7 @@ object UserPrefs {
     }
 
     fun putUser(context: Context, user: User, userToken: String, expirationTime: Long) {
-        PreferenceManager.getDefaultSharedPreferences(context).put {
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).put {
             putString(USER_TOKEN, userToken)
             putLong(USER_TOKEN_EXPIRATION_TIME, expirationTime)
             /*putLong(USER_ID, user.id)*/
@@ -74,7 +74,7 @@ object UserPrefs {
     }
 
     fun getUser(context: Context?): User {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
+        return androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).get {
             val token = getString(USER_TOKEN, "")
             val expires = getLong(USER_TOKEN_EXPIRATION_TIME, 0)
             val id = getLong(USER_ID, 0)
@@ -91,7 +91,7 @@ object UserPrefs {
     }
 
     fun clear(context: Context?) {
-        PreferenceManager.getDefaultSharedPreferences(context).delete {
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).delete {
             remove(SYSTEM_TOKEN)
             remove(USER_TOKEN)
             remove(USER_TOKEN_EXPIRATION_TIME)
@@ -109,25 +109,25 @@ object UserPrefs {
 
 
     fun putUserBiometricWrongAttempts(context: Context, wrongAttempts: Int) {
-        PreferenceManager.getDefaultSharedPreferences(context).put {
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).put {
             putInt(USER_BIOMETRIC_WRONG_ATTEMPTS, wrongAttempts)
         }
     }
 
     fun getUserBiometricWrongAttempts(context: Context): Int {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
+        return androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).get {
             getInt(USER_BIOMETRIC_WRONG_ATTEMPTS, 0)
         }
     }
 
     fun putHideCarousel(context: Context, estado: Boolean) {
-        PreferenceManager.getDefaultSharedPreferences(context).put {
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).put {
             putBoolean(USER_HIDE_CAROUSEL, estado)
         }
     }
 
     fun getHideCarousel(context: Context): Boolean {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
+        return androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).get {
             getBoolean(USER_HIDE_CAROUSEL, false)
         }
     }
