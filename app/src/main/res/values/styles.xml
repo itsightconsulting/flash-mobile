@@ -17,6 +17,7 @@
     <style name="pages_name_links_button">
         <item name="android:fontFamily">@font/gotham_bold</item>
     </style>
+
     <style name="subtitles_fields_name_carrusel_titles">
         <item name="android:fontFamily">@font/gotham_medium</item>
     </style>
@@ -51,12 +52,6 @@
     </style>
 
     <style name="message_for_text_fields">
-        <item name="android:fontFamily">@font/gotham_light</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/dark_purple</item>
-    </style>
-
-    <style name="field_error">
         <item name="android:fontFamily">@font/gotham_light</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/dark_purple</item>
@@ -136,7 +131,6 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/purple</item>
         <item name="android:backgroundTint">@color/white</item>
-        <item name="android:strokeWidth">2</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:strokeColor">@color/purple</item>
     </style>
@@ -166,5 +160,34 @@
         <item name="android:textAlignment">center</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="flash_input_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:paddingLeft">-12dp</item>
+        <item name="hintEnabled">false</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="errorTextAppearance">@style/field_error</item>
+    </style>
+
+    <style name="flash_edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fontFamily">@font/gotham_light</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/dark</item>
+        <item name="android:layout_marginTop">-12dp</item>
+        <item name="android:layout_marginRight">-10dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="field_error" parent="Widget.Design.TextInputLayout">
+        <item name="android:fontFamily">@font/gotham_light</item>
+        <item name="android:textSize">16sp</item>
+        <!--Propiedad sin efecto(textColor). En revisión... -->
+        <item name="android:textColor">@color/dark_purple</item>
     </style>
 </resources>

@@ -38,21 +38,6 @@ class InitialFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        //        var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
-//        if (estado)
-
-//        viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
-//        viewModel.refresh()
-
-        refreshLayout.setOnRefreshListener {
-            loadingView.visibility = View.VISIBLE
-            txtTitleCarousel.visibility = View.VISIBLE
-            txtDescriptionCarousel.visibility = View.VISIBLE
-            refreshLayout.isRefreshing = false
-        }
-
-//        observeViewModel()
         carouselView.pageCount = sampleImages.size
 
         carouselView.setImageListener(imageListener)
@@ -67,7 +52,6 @@ class InitialFragment : Fragment() {
 
         carouselView.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
-//                Toast.makeText(context!!, "x", Toast.LENGTH_SHORT).show()
             }
 
             override fun onPageScrolled(
@@ -75,16 +59,14 @@ class InitialFragment : Fragment() {
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
-//                Toast.makeText(context!!, "x1", Toast.LENGTH_SHORT).show()
             }
 
             override fun onPageSelected(position: Int) {
-                printCarousel(position);
+                printCarousel(position)
                 if (position == 2) {
                     btnGetStarted.visibility = View.VISIBLE
                     carouselView.pauseCarousel()
                 }
-//                Toast.makeText(context!!, "$position", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -93,8 +75,8 @@ class InitialFragment : Fragment() {
 
     private fun printCarousel(pos: Int) {
 
-        var title: String = "";
-        var description: String = "";
+        var title = ""
+        var description = ""
         when (pos) {
             0 -> {
                 title = resources.getString(R.string.title_carrusel_1)
@@ -109,8 +91,8 @@ class InitialFragment : Fragment() {
                 description = resources.getString(R.string.description_carrusel_3)
             }
         }
-        txtTitleCarousel.text = title;
-        txtDescriptionCarousel.text = description;
+        txtTitleCarousel.text = title
+        txtDescriptionCarousel.text = description
     }
 
     private fun saveHideCarousel() {

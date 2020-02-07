@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/ic_home"
+        android:id="@+id/preActivationFragment"
+        android:icon="@drawable/ic_act_app_home"
         android:title="Hm"
+        android:menuCategory="secondary"
         app:showAsAction="ifRoom" />
 
 </menu>

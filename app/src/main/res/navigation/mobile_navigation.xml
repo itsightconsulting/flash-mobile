@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/initialFragment">
+    app:startDestination="@id/preActivationFragment">
 
     <fragment
         android:id="@+id/initialFragment"
         android:name="com.itsight.flash.view.InitialFragment"
-        android:label="Flash Mobile Peru"
+        android:label="@string/flash_mobile_peru"
         tools:layout="@layout/initial_fragment"
         >
         <action
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/preActivationFragment"
         android:name="com.itsight.flash.view.PreActivationFragment"
-        android:label="Welcome to Activa tu Flash"
+        android:label="@string/welcome_to_activa_tu_flash"
         tools:layout="@layout/pre_activation_fragment" >
         <action
             android:id="@+id/action_preActivationFragment_to_ordersFragment"
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/ordersFragment"
         android:name="com.itsight.flash.view.OrdersFragment"
-        android:label="Web Activation orders"
+        android:label="@string/web_activation_orders"
         tools:layout="@layout/orders_fragment">
         <argument
             android:name="dni"
@@ -58,6 +58,11 @@
     <fragment
         android:id="@+id/formFragment"
         android:name="com.itsight.flash.view.FormFragment"
-        android:label="Flash Activation Form"
+        android:label="@string/flash_activation_form"
         tools:layout="@layout/form_fragment" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.itsight.flash.view.TermsFragment"
+        android:label="@string/term_and_conditions"
+        tools:layout="@layout/terms_fragment" />
 </navigation>

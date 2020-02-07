@@ -8,9 +8,4 @@
     <size
         android:width="25dp"
         android:height="25dp" />
-    <padding
-        android:top="50dp"
-        android:bottom="50dp"
-        android:left="50dp"
-        android:right="50dp" />
 </shape>

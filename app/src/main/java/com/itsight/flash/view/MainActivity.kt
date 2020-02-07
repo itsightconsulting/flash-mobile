@@ -3,6 +3,7 @@ package com.itsight.flash.view
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -12,9 +13,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.*
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.itsight.flash.FlashApplication
 import com.itsight.flash.R
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
             if (dest.id == R.id.preActivationFragment) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            } else if (dest.id == R.id.ordersFragment) {
+            } else if (dest.id == R.id.ordersFragment || dest.id == R.id.formFragment) {
 
                 toolbar.navigationIcon?.let {
                     toolbarTitleParams.setMargins(
@@ -113,6 +113,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return item.onNavDestinationSelected(findNavController(R.id.nav_host_fragment))
+                || super.onOptionsItemSelected(item)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
