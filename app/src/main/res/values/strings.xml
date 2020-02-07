@@ -36,15 +36,15 @@
     <!-- Step 2b.1 and 2b.2 -->
     <string name="flash_activation_form">Flash Activation Form</string>
     <string name="flash_activation_form_subtitle">Complete the following information</string>
-    <string name="name">Name</string>
-    <string name="last_name">Last name</string>
-    <string name="date_of_birth">Date of birth</string>
-    <string name="email_account">Email account</string>
-    <string name="do_you_want_to_port">Do you want to port</string>
+    <string name="name">Name:</string>
+    <string name="last_name">Last name:</string>
+    <string name="date_of_birth">Date of birth:</string>
+    <string name="email_account">Email account:</string>
+    <string name="do_you_want_to_port">Do you want to port?</string>
     <string name="do_you_want_to_port_negative_answer">No, I want a new number</string>
     <string name="do_you_want_to_port_positve_answer">Yes, I want to port my number</string>
-    <string name="who_refered_you">Who refered you</string>
-    <string name="sponsor_tid">Sponsor TID</string>
+    <string name="who_refered_you">Who refered you?</string>
+    <string name="sponsor_tid">Sponsor TID: (Optional)</string>
     <string name="optional">Optional</string>
     <string name="text_continue">Continue</string>
 
