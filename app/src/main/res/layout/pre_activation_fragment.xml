@@ -48,7 +48,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDNI"
                     style="@style/flash_edit_text"
-                    android:drawableRight="@drawable/ic_act_app_calendar"
                     android:hint="@string/digits"
                     android:inputType="number"
                     android:text="44444444"/>

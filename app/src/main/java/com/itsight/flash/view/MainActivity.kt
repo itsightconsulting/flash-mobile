@@ -77,7 +77,9 @@ class MainActivity : AppCompatActivity() {
 
             if (dest.id == R.id.preActivationFragment) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            } else if (dest.id == R.id.ordersFragment || dest.id == R.id.formFragment) {
+            } else if (dest.id == R.id.ordersFragment ||
+                        dest.id == R.id.formFragment ||
+                        dest.id == R.id.termsFragment) {
 
                 toolbar.navigationIcon?.let {
                     toolbarTitleParams.setMargins(

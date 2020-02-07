@@ -7,21 +7,82 @@
     tools:context=".view.TermsFragment">
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:background="@drawable/ic_background_subtitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/ic_background_subtitle">
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
+            style="@style/pages_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textStart"
-            android:text="@string/term_and_conditions"
-            style="@style/pages_subtitle"
             android:paddingLeft="32dp"
             android:paddingTop="16dp"
-            android:paddingBottom="16dp"/>
+            android:paddingBottom="16dp"
+            android:text="@string/term_and_conditions"
+            android:textAlignment="textStart" />
     </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txtTerms"
+                style="@style/text_options_check_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/terms_border"
+                android:padding="12dp"
+                android:scrollbars="vertical"
+                android:singleLine="false"
+                android:text="I. Flash Mobile Peru Ctrero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui ofﬁcia deserunt mollitia animi, id est laborum et dolorum fuga. II. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est elerigendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut ofﬁciis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae. Temporibus autem quibusdam et aut ofﬁciis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et quas molestias excepturi sint occaecati cupiditate nonsimilique I. Flash Mobile Peru Ctrero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui ofﬁcia deserunt mollitia animi, id est laborum et dolorum fuga. II. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est elerigendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut ofﬁciis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae. Temporibus autem quibusdam et aut ofﬁciis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et quas molestias excepturi sint occaecati cupiditate nonsimilique" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/chkTermsLabel"
+            style="@style/text_options_check_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/term_and_conditions_check_accept"
+            app:layout_constraintBottom_toTopOf="@+id/btnTerms"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="top"
+            android:paddingTop="4dp"/>
+
+        <Button
+            android:id="@+id/btnTerms"
+            style="@style/button_purple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/accept"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
