@@ -1,8 +1,12 @@
 package com.itsight.flash.view
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -13,11 +17,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.itsight.flash.FlashApplication
-import kotlinx.android.synthetic.main.navigation_activity.*
-import java.util.*
-
 import com.itsight.flash.R
 import com.itsight.flash.preferences.UserPrefs
+import kotlinx.android.synthetic.main.navigation_activity.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -110,5 +113,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val v = currentFocus
+
+        if (v != null &&
+            (ev!!.action === MotionEvent.ACTION_UP || ev!!.action === MotionEvent.ACTION_MOVE) &&
+            v is EditText &&
+            !v.javaClass.name.startsWith("android.webkit.")
+        ) {
+            val scrcoords = IntArray(2)
+            v.getLocationOnScreen(scrcoords)
+            val x = ev!!.rawX + v.left - scrcoords[0]
+            val y = ev!!.rawY + v.top - scrcoords[1]
+
+            if (x < v.left || x > v.right || y < v.top || y > v.bottom)
+                hideKeyboard(this)
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    fun hideKeyboard(activity: Activity?) {
+        if (activity != null && activity.window != null && activity.window.decorView != null) {
+            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(activity.window.decorView.windowToken, 0)
+        }
     }
 }

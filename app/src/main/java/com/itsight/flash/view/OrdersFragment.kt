@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.itsight.flash.R
 import com.itsight.flash.model.pojo.OrderPOJO
 import com.itsight.flash.util.RecyclerViewOnItemClickListener
+import com.itsight.flash.util.showSpinner
 import com.itsight.flash.view.adapter.OrdersListAdapter
+import com.itsight.flash.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.orders_fragment.*
 
 /**
@@ -20,6 +24,8 @@ import kotlinx.android.synthetic.main.orders_fragment.*
 class OrdersFragment : Fragment() {
 
     private lateinit var ordersListAdapter: OrdersListAdapter
+    private lateinit var orderViewModel: OrderViewModel
+    private val safeArgs: OrdersFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -32,14 +38,27 @@ class OrdersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        this.orderViewModel = ViewModelProviders.of(this).get(OrderViewModel::class.java)
 
         ordersListAdapter = OrdersListAdapter(
             arrayListOf(
-                OrderPOJO("Activation & portability", "15/01/2020 at 09:45 am", "Phone number: 94483-8302\n"),
+                OrderPOJO(
+                    "Activation & portability",
+                    "15/01/2020 at 09:45 am",
+                    "Phone number: 94483-8302\n"
+                ),
                 OrderPOJO("New phone number activation ", "18/01/2020 at 02:10 pm", ""),
-                OrderPOJO("Activation & portability", "18/01/2020 at 05:34 pm", "Phone number: 92726-3521"),
+                OrderPOJO(
+                    "Activation & portability",
+                    "18/01/2020 at 05:34 pm",
+                    "Phone number: 92726-3521"
+                ),
                 OrderPOJO("New phone number activation ", "18/01/2020 at 02:10 pm", ""),
-                OrderPOJO("Activation & portability", "18/01/2020 at 05:34 pm", "Phone number: 92726-3521"),
+                OrderPOJO(
+                    "Activation & portability",
+                    "18/01/2020 at 05:34 pm",
+                    "Phone number: 92726-3521"
+                ),
                 OrderPOJO("New phone number activation ", "18/01/2020 at 02:10 pm", "")
             ),
             object : RecyclerViewOnItemClickListener<OrderPOJO> {
@@ -60,5 +79,8 @@ class OrdersFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = ordersListAdapter
         }
+        Toast.makeText(context!!, "${safeArgs.dni}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context!!, "${safeArgs.orders!!.list}", Toast.LENGTH_SHORT).show()
+
     }
 }

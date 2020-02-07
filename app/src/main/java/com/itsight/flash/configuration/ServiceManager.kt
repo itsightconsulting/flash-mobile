@@ -2,7 +2,7 @@ package com.itsight.flash.configuration
 
 import androidx.preference.PreferenceManager
 import com.itsight.flash.FlashApplication
-import com.itsight.flash.util.API_RESOURCE_SERVERBASE_URL
+import com.itsight.flash.util.API_BASE_URL
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import retrofit2.Converter
@@ -40,7 +40,7 @@ class ServiceManager {
      * @return the created services implementation.
     </T> */
     fun <T> createService(clazz: Class<T>): T {
-        return createService(clazz, HttpUrl.parse(API_RESOURCE_SERVERBASE_URL))
+        return createService(clazz, HttpUrl.parse(API_BASE_URL)!!)
     }
 
     /**
@@ -52,7 +52,7 @@ class ServiceManager {
      * @param <T>     type of the service.
      * @return the created services implementation.
     </T> */
-    fun <T> createService(clazz: Class<T>, httpUrl: HttpUrl?): T {
+    fun <T> createService(clazz: Class<T>, httpUrl: HttpUrl): T {
         val retrofit = getRetrofit(httpUrl)
         return retrofit.create(clazz)
     }
@@ -61,9 +61,9 @@ class ServiceManager {
         return retrofit.create(clazz)
     }
 
-    private fun getRetrofit(httpUrl: HttpUrl?): Retrofit {
+    private fun getRetrofit(httpUrl: HttpUrl): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(httpUrl!!)
+            .baseUrl(httpUrl)
             .client(createClient())
             .addConverterFactory(getConverter())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

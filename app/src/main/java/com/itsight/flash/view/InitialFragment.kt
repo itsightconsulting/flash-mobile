@@ -1,24 +1,23 @@
 package com.itsight.flash.view
 
-import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.itsight.flash.FlashApplication
 import com.itsight.flash.R
 import com.itsight.flash.preferences.UserPrefs
-import com.itsight.flash.viewmodel.ListViewModel
-import kotlinx.android.synthetic.main.initial_fragment.*
 import com.synnapps.carouselview.ImageListener
+import kotlinx.android.synthetic.main.initial_fragment.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class InitialFragment : Fragment() {
 
-    private lateinit var viewModel: ListViewModel
     private val sampleImages =
         intArrayOf(R.drawable.carrusel_1, R.drawable.carrusel_2, R.drawable.carrusel_3)
 
@@ -29,7 +28,7 @@ class InitialFragment : Fragment() {
         return inflater.inflate(R.layout.initial_fragment, container, false)
     }
 
-    var imageListener =
+    private var imageListener =
         ImageListener { position, imageView ->
             run {
                 imageView.setImageResource(sampleImages[position])

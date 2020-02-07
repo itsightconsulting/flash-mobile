@@ -17,7 +17,6 @@
     <style name="pages_name_links_button">
         <item name="android:fontFamily">@font/gotham_bold</item>
     </style>
-
     <style name="subtitles_fields_name_carrusel_titles">
         <item name="android:fontFamily">@font/gotham_medium</item>
     </style>
@@ -55,7 +54,12 @@
         <item name="android:fontFamily">@font/gotham_light</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/dark_purple</item>
+    </style>
 
+    <style name="field_error">
+        <item name="android:fontFamily">@font/gotham_light</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/dark_purple</item>
     </style>
 
     <style name="placeholder">

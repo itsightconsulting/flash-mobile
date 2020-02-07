@@ -1,9 +1,7 @@
 package com.itsight.flash.preferences
 
 import android.content.Context
-import android.preference.PreferenceManager
 import android.text.TextUtils
-import com.itsight.flash.model.User
 
 object UserPrefs {
 
@@ -48,45 +46,6 @@ object UserPrefs {
     fun getUserPhone(context: Context?): String {
         return androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).get {
             getString(USER_PHONE, "")!!
-        }
-    }
-
-    fun updateUser(context: Context?, user: User) {
-        androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).put {
-            /*putLong(USER_ID, user.id)*/
-            putString(USER_NAME, user.name)
-            putString(USER_LAST_NAME, user.lastName)
-            putString(USER_EMAIL, user.email)
-            putString(USER_DNI, user.dni)
-        }
-    }
-
-    fun putUser(context: Context, user: User, userToken: String, expirationTime: Long) {
-        androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).put {
-            putString(USER_TOKEN, userToken)
-            putLong(USER_TOKEN_EXPIRATION_TIME, expirationTime)
-            /*putLong(USER_ID, user.id)*/
-            putString(USER_NAME, user.name)
-            putString(USER_LAST_NAME, user.lastName)
-            putString(USER_EMAIL, user.email)
-            putString(USER_DNI, user.dni)
-        }
-    }
-
-    fun getUser(context: Context?): User {
-        return androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).get {
-            val token = getString(USER_TOKEN, "")
-            val expires = getLong(USER_TOKEN_EXPIRATION_TIME, 0)
-            val id = getLong(USER_ID, 0)
-            val name = getString(USER_NAME, "")
-            val lastName = getString(USER_LAST_NAME, "")
-            val email = getString(USER_EMAIL, "")
-            val dni = getString(USER_DNI, "")
-            val referralCode = getString(USER_REFERRAL_CODE, "")
-            val referralUrl = getString(USER_REFERRAL_URL, "")
-            val phone = getString(USER_PHONE, "")
-
-            User("", "", "", "", "", "")
         }
     }
 

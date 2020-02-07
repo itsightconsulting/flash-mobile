@@ -31,10 +31,33 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_preActivationFragment_to_formFragment"
+            app:destination="@id/formFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
         android:name="com.itsight.flash.view.OrdersFragment"
         android:label="Web Activation orders"
-        tools:layout="@layout/orders_fragment" />
+        tools:layout="@layout/orders_fragment">
+        <argument
+            android:name="dni"
+            app:argType="string"
+            app:nullable="false"
+            android:defaultValue="0"/>
+        <argument
+            android:name="orders"
+            app:argType="com.itsight.flash.model.args.DataResponseVerifyDNIArgs"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
+    <fragment
+        android:id="@+id/formFragment"
+        android:name="com.itsight.flash.view.FormFragment"
+        android:label="Flash Activation Form"
+        tools:layout="@layout/form_fragment" />
 </navigation>
