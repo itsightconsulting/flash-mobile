@@ -63,6 +63,6 @@
     <fragment
         android:id="@+id/termsFragment"
         android:name="com.itsight.flash.view.TermsFragment"
-        android:label="@string/term_and_conditions"
+        android:label="@string/flash_activation_form"
         tools:layout="@layout/terms_fragment" />
 </navigation>
