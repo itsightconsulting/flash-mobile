@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.FormConfirmFragment">
+
+    <FrameLayout
+        android:id="@+id/subtitle_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_background_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/pages_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="@string/confirmr_your_information"
+            android:textAlignment="textStart" />
+    </FrameLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle_form">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="32dp">
+
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/summary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/gotham_bold"
+                android:text="@string/summay"
+                android:textColor="@color/dark_purple"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+            <!--<LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView">-->
+
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/name"
+                app:layout_constraintTop_toBottomOf="@id/textView" />
+
+            <TextView
+                android:id="@+id/tvLastName"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/last_name"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+            <TextView
+                android:id="@+id/tvDni"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/dni"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@id/tvLastName" />
+
+            <TextView
+                android:id="@+id/tvDateOfBirth"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/date_of_birth"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@id/tvDni" />
+
+
+            <TextView
+                android:id="@+id/tvEmailAccount"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/email"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@id/tvDateOfBirth" />
+
+            <TextView
+                android:id="@+id/tvSponsorTID"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/sponsor_tid"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@id/tvEmailAccount" />
+
+            <TextView
+                android:id="@+id/tvNumberToPort"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/number_to_port"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@id/tvSponsorTID" />
+
+            <TextView
+                android:id="@+id/tvMobileOperator"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/mobile_operator"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@id/tvNumberToPort" />
+
+            <TextView
+                android:id="@+id/tvPlanType"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/plan_type"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@id/tvMobileOperator" />
+
+            <!--</LinearLayout>-->
+
+
+            <Button
+                android:id="@+id/btn_confirm"
+                style="@style/button_purple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="48dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/text_continue"
+                app:cornerRadius="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/tvPlanType" />
+
+            <Button
+                android:id="@+id/btn_cancel"
+                style="@style/button_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="48dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/modify"
+                app:cornerRadius="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/btn_confirm" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

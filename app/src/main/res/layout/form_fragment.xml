@@ -111,7 +111,7 @@
                     style="@style/flash_edit_text"
                     android:drawableRight="@drawable/ic_act_app_calendar"
                     android:hint="dd/mm/yy"
-                    android:inputType="text" />
+                    android:inputType="date" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -134,8 +134,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     style="@style/flash_edit_text"
-                    android:inputType="text"
                     android:hint="\@"
+                    android:inputType="text"
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -228,9 +228,10 @@
                 app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtSponsorTID" />
+                app:layout_constraintTop_toBottomOf="@id/txtSponsorTID" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.core.widget.NestedScrollView>
 

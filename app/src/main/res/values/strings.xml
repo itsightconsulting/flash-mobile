@@ -44,23 +44,28 @@
     <string name="do_you_want_to_port_negative_answer">No, I want a new number</string>
     <string name="do_you_want_to_port_positve_answer">Yes, I want to port my number</string>
     <string name="who_refered_you">Who refered you?</string>
-    <string name="sponsor_tid">Sponsor TID: (Optional)</string>
+    <string name="sponsor_tid_optional">Sponsor TID: (Optional)</string>
     <string name="optional">Optional</string>
     <string name="text_continue">Continue</string>
 
     <!-- Step 2.2 -->
     <string name="port_your_phone_number">Port your phone number</string>
-    <string name="your_phone_number">Your phone number</string>
-    <string name="current_mobile_operator">Current Mobile Operator</string>
+    <string name="your_phone_number">Your phone number:</string>
+    <string name="current_mobile_operator">Current Mobile Operator:</string>
     <string name="select">Select</string>
-    <string name="plan_type">Plan type</string>
+    <string name="plan_type">Plan type:</string>
     <string name="check_info">All Flash Mobile services are Prepaid, when you port your service will be always prepaid</string>
 
     <!-- Step 2.3 -->
     <string name="confirmr_your_information">Confirmr your information</string>
-    <string name="summay">Summay</string>
+    <string name="summay">Summay:</string>
     <string name="confirm">Confirm</string>
     <string name="modify">Modify</string>
+    <string name="dni">DNI:</string>
+    <string name="email">Email:</string>
+    <string name="sponsor_tid">Sponsor TID:</string>
+    <string name="number_to_port">Number to port:</string>
+    <string name="mobile_operator">Mobile Operator:</string>
 
     <!-- Step 7 -->
     <string name="term_and_conditions">Terms and Conditions</string>
