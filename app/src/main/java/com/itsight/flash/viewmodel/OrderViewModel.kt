@@ -46,7 +46,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 }
 
                 override fun onError(e: Throwable) {
-                    userHasOrders = true
+                    userHasOrders = false
                     lstOrder.value = arrayListOf(
                         OrderInformation(
                             "",
