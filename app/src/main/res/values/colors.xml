@@ -6,7 +6,7 @@
 
     <!-- Colors -->
     <color name="white">#fff</color>
-    <color name="dark_purple">#88237c</color>
+    <color name="dark_purple">#6a237c</color>
     <color name="purple">#b13ace</color>
     <color name="green">#6EB955</color>
     <color name="dark">#1c1c1c</color>
@@ -15,6 +15,7 @@
     <color name="light">#f2f2f2</color>
     <color name="black">#000</color>
     <color name="sand">#f2eddf</color>
+    <color name="light_sec">#cdc7ce</color>
 
 
     <!-- Colors error -->
