@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 
 import com.itsight.flash.R
 import kotlinx.android.synthetic.main.sim_card_fragment.*
@@ -28,6 +29,8 @@ class SimCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         imageButton.setOnClickListener {
+            val action = SimCardFragmentDirections.actionSimCardFragmentToSuccessFragment()
+            findNavController().navigate(action)
         }
     }
 

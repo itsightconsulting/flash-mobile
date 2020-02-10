@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 //        var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
 //        if (estado) graph.startDestination = R.id.preActivationFragment
 //        else
-        graph.startDestination = R.id.formConfirmFragment
+        graph.startDestination = R.id.initialFragment
         host.navController.graph = graph
 
     }
