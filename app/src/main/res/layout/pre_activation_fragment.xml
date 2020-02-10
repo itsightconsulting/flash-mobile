@@ -54,18 +54,13 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnValidateDocument"
                 style="@style/button_purple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="48dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
                 android:text="@string/go"
-                app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtDNI" />

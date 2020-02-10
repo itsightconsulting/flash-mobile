@@ -15,7 +15,7 @@
     <string name="description_carrusel_2">Message 2</string>
     <string name="title_carrusel_3">Title 3</string>
     <string name="description_carrusel_3">Message 3</string>
-    <string name="get_started">Get Started</string>
+    <string name="get_started">Iniciar</string>
 
     <!-- Step 3 -->
     <string name="welcome_to_activa_tu_flash">Welcome to Activa tu Flash</string>
@@ -77,7 +77,7 @@
     <!-- Step 8 -->
     <string name="sim_validation">Sim Validation</string>
     <string name="sim_validation_subtitle">SIM information - ICCID</string>
-    <string name="sim_validation_description">Lorem ipsum</string>
+    <string name="sim_validation_description">El ICCID (identiﬁcador de la tarjeta del circuito integrado) es un número único de cada SIM, que sirve para identiﬁcar el país, la red y el circuito a los que pertenece. </string>
 
     <!-- Scan ICCID using the camera -->
     <string name="qr_barcode_scanner">Qr BarCode Scanner</string>
@@ -99,9 +99,10 @@
 
     <!-- Step 10 -->
     <string name="sim_activated">SIM Activated</string>
-    <string name="sim_activated_successfully">Your SIM has been acitvated successfully</string>
-    <string name="sim_activated_greetings">Now, you are member of the Flas Peru Community</string>
-    <string name="finalize">Finalize</string>
+    <string name="sim_activated_successfully">Tu SIM Card Flash Mobile se activó con éxito</string>
+    <string name="sim_activated_greetings">¡Ahora eres parte de la familia Flash Mobile!</string>
+    <string name="sim_activated_fl_message">Te enviamos un correo de conﬁrmación. Recuerda que si elegiste portar tu número, el proceso de tardará 24 horas en completarse.</string>
+    <string name="sim_finalize">Finalize</string>
 
     <!-- Step 10 Error -->
     <string name="error_detail">And error ocurred during the validation</string>

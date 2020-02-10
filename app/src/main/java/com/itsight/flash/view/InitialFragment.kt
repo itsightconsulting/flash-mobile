@@ -28,19 +28,21 @@ class InitialFragment : Fragment() {
         return inflater.inflate(R.layout.initial_fragment, container, false)
     }
 
-    private var imageListener =
-        ImageListener { position, imageView ->
-            run {
-                imageView.setImageResource(sampleImages[position])
-            }
-        }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        btnGetStarted.visibility = View.INVISIBLE
+
+        var imageListener =
+            ImageListener { position, imageView ->
+                run {
+                    imageView.setImageResource(sampleImages[position])
+                }
+            }
+
+        carouselView.setImageListener(imageListener)
 
         carouselView.pageCount = sampleImages.size
 
-        carouselView.setImageListener(imageListener)
 
         // Inflate the layout for this fragment
         btnGetStarted.setOnClickListener {

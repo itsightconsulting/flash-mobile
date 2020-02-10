@@ -61,13 +61,12 @@
         tools:layout="@layout/form_fragment">
         <action
             android:id="@+id/action_formFragment_to_formPhoneFragment"
-            app:destination="@id/formPhoneFragment" />
+            app:destination="@id/formPhoneFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
-    <fragment
-        android:id="@+id/termsFragment"
-        android:name="com.itsight.flash.view.TermsFragment"
-        android:label="@string/flash_activation_form"
-        tools:layout="@layout/terms_fragment" />
     <fragment
         android:id="@+id/formPhoneFragment"
         android:name="com.itsight.flash.view.FormPhoneFragment"
@@ -75,11 +74,50 @@
         tools:layout="@layout/form_phone_fragment">
         <action
             android:id="@+id/action_formPhoneFragment_to_formConfirmFragment"
-            app:destination="@id/formConfirmFragment" />
+            app:destination="@id/formConfirmFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/formConfirmFragment"
         android:name="com.itsight.flash.view.FormConfirmFragment"
         android:label="@string/flash_activation_form"
-        tools:layout="@layout/form_confirm_fragment" />
+        tools:layout="@layout/form_confirm_fragment">
+        <action
+            android:id="@+id/action_formConfirmFragment_to_termsFragment"
+            app:destination="@id/termsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.itsight.flash.view.TermsFragment"
+        android:label="@string/flash_activation_form"
+        tools:layout="@layout/terms_fragment">
+        <action
+            android:id="@+id/action_termsFragment_to_simCardFragment"
+            app:destination="@id/simCardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"  />
+    </fragment>
+    <fragment
+        android:id="@+id/simCardFragment"
+        android:name="com.itsight.flash.view.SimCardFragment"
+        android:label="@string/sim_validation"
+        tools:layout="@layout/sim_card_fragment" >
+        <action
+            android:id="@+id/action_simCardFragment_to_successFragment"
+            app:destination="@id/successFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.itsight.flash.view.SuccessFragment"
+        android:label="@string/sim_activated"
+        tools:layout="@layout/success_fragment" />
 </navigation>

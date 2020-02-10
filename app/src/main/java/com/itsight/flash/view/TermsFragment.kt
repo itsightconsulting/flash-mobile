@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.itsight.flash.R
 import com.itsight.flash.util.CustomTypefaceSpan
@@ -35,23 +36,14 @@ class TermsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         txtTerms.movementMethod = ScrollingMovementMethod()
-        txtTerms.visibility = View.INVISIBLE
-        frameLayout.post {
-            val elementsHeight = frameLayout.height
-            txtTerms.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                this.topMargin = elementsHeight + 32
-                this.bottomMargin = elementsHeight + (96 * 3.2).toInt()
-            }
-            txtTerms.visibility = View.VISIBLE
-
-        }
 
         settingFullTermAndCoditionsText()
         settingTermAcceptText()
 
         btnTerms.setOnClickListener {
             if (chkTermsLabel.isChecked) {
-
+                val action = TermsFragmentDirections.actionTermsFragmentToSimCardFragment()
+                findNavController().navigate(action)
             } else {
                 this.view?.csSnackbar(
                     "Debe aceptar los términos y condiciones",
