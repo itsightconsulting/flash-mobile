@@ -114,10 +114,18 @@
         <action
             android:id="@+id/action_simCardFragment_to_successFragment"
             app:destination="@id/successFragment" />
+        <action
+            android:id="@+id/action_simCardFragment_to_errorFragment"
+            app:destination="@id/errorFragment" />
     </fragment>
     <fragment
         android:id="@+id/successFragment"
         android:name="com.itsight.flash.view.SuccessFragment"
         android:label="@string/sim_activated"
         tools:layout="@layout/success_fragment" />
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.itsight.flash.view.ErrorFragment"
+        android:label="@string/empty"
+        tools:layout="@layout/error_fragment" />
 </navigation>

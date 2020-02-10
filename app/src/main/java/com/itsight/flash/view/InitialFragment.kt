@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.itsight.flash.FlashApplication
 import com.itsight.flash.R
 import com.itsight.flash.preferences.UserPrefs
@@ -73,6 +74,13 @@ class InitialFragment : Fragment() {
         })
 
         tabLayout.setupWithViewPager(carouselView.containerViewPager, true)
+
+        MaterialAlertDialogBuilder(context)
+            .setTitle("¿Deseas abandonar la activación en curso?")
+            .setMessage("Si lo haces, se perderá tu información y tendrás que comenzar un nuevo proceso de activación")
+            .setPositiveButton("Aceptar", null)
+            .setNegativeButton("Cancelar", null)
+            .show()
     }
 
     private fun printCarousel(pos: Int) {
