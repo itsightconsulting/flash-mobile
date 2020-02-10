@@ -78,8 +78,11 @@ class MainActivity : AppCompatActivity() {
             if (dest.id == R.id.preActivationFragment) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
             } else if (dest.id == R.id.ordersFragment ||
-                        dest.id == R.id.formFragment ||
-                        dest.id == R.id.termsFragment) {
+                dest.id == R.id.formFragment ||
+                dest.id == R.id.formPhoneFragment ||
+                dest.id == R.id.formConfirmFragment ||
+                dest.id == R.id.termsFragment
+            ) {
 
                 toolbar.navigationIcon?.let {
                     toolbarTitleParams.setMargins(
@@ -98,10 +101,11 @@ class MainActivity : AppCompatActivity() {
             toolbar_title.text = toolbar.title
         }
 
-//        var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
-//        if (estado) graph.startDestination = R.id.preActivationFragment
-//        else
-        graph.startDestination = R.id.initialFragment
+        var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
+        if (estado)
+            graph.startDestination = R.id.preActivationFragment
+        else
+            graph.startDestination = R.id.initialFragment
         host.navController.graph = graph
 
     }
