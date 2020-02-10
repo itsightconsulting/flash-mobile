@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.FormPhoneFragment"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context=".view.FormPhoneFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,11 +35,11 @@
             android:id="@+id/lyFields"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subtitle_form"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="24dp"
-            android:layout_marginRight="32dp">
+            android:layout_marginRight="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subtitle_form">
 
             <TextView
                 android:id="@+id/tvPhoneNumber"
@@ -65,6 +65,30 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/tvConfirmPhoneNumber"
+                style="@style/fields_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:text="@string/confirm_your_phone_number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPhoneNumber" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtConfirmPhoneNumber"
+                style="@style/flash_input_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvConfirmPhoneNumber">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmPhoneNumber"
+                    style="@style/flash_edit_text"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
                 android:id="@+id/tvOperator"
                 style="@style/fields_name"
                 android:layout_width="match_parent"
@@ -72,7 +96,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/current_mobile_operator"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtPhoneNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/txtConfirmPhoneNumber" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtOperator"

@@ -9,63 +9,65 @@
 
     <!-- Carrusel - Quick Guide -->
     <string name="flash_mobile_peru">Flash Mobile Peru</string>
-    <string name="title_carrusel_1">Welcome to\nActiva to Flash Peru App</string>
-    <string name="description_carrusel_1">Lorem ipsum dolor sit amet, consectetur adipiscing elitenim ad minim veniam, quis nostrud exercitation ullamco adipiscing elitenim ad minim veniam</string>
-    <string name="title_carrusel_2">Title 2</string>
-    <string name="description_carrusel_2">Message 2</string>
-    <string name="title_carrusel_3">Title 3</string>
-    <string name="description_carrusel_3">Message 3</string>
+    <string name="title_carrusel_1">Bienvenido a tu app \n Activa tu Flash Perú</string>
+    <string name="description_carrusel_1">Completa las activaciones que hayas iniciado \n desde nuestro sitio web o empieza nuevas \n solicitudes de activación.</string>
+    <string name="title_carrusel_2">Elige qué deseas hacer</string>
+    <string name="description_carrusel_2">Comienza procesos de portabilidad para \n SIM Cards o activa nuevos números Flash</string>
+    <string name="title_carrusel_3">Disfruta tu Flash Mobile</string>
+    <string name="description_carrusel_3">Sólo puedes activar 5 SIM Cards por DNI. \n Para activar más, ingresa un DNI distinto por \n cada 5 SIM Cards.</string>
     <string name="get_started">Iniciar</string>
 
     <!-- Step 3 -->
-    <string name="welcome_to_activa_tu_flash">Welcome to Activa tu Flash</string>
-    <string name="enter_your_dni">Enter your DNI</string>
-    <string name="digits">8 digits</string>
-    <string name="go">Go</string>
-    <string name="option_help">Chat with an agent</string>
-    <string name="option_help_description">In case of any problem contact \n Customer Service team</string>
+    <string name="welcome_to_activa_tu_flash">Bienvenido</string>
+    <string name="enter_your_dni">Ingresa tu DNI:</string>
+    <string name="digits">8 dígitos</string>
+    <string name="go">Buscar</string>
+    <string name="option_help">Chatea con un agente</string>
+    <string name="option_help_description">¿Tienes algún problema? Charla con nuestro \n equipo de Servicio a clientes</string>
 
     <!-- List of web orders -->
-    <string name="web_activation_orders">Web Activation orders</string>
-    <string name="web_activation_orders_description">These are all the pending activation requests you started on the web site. Select those you to complete</string>
-    <string name="web_activation_orders_info">Only 5 activations per DNI are allowed </string>
+    <string name="web_activation_orders">Órdenes de activación</string>
+    <string name="web_activation_orders_description">Lista de órdenes que iniciaste desde \n nuestro sitio web. Elige las que \n quieras completar.</string>
+    <string name="web_activation_orders_info">Recuerda que sólo se permite hacer 5 \n activaciones por DNI.</string>
     <string name="web_activation_order_type_ph">Activation &amp; portability </string>
     <string name="web_activation_order_date_ph">15/01/2020 at 09:45 am </string>
     <string name="web_activation_order_number_ph">Phone number: 94483-8302 </string>
 
     <!-- Step 2b.1 and 2b.2 -->
-    <string name="flash_activation_form">Flash Activation Form</string>
-    <string name="flash_activation_form_subtitle">Complete the following information</string>
-    <string name="name">Name:</string>
-    <string name="last_name">Last name:</string>
-    <string name="date_of_birth">Date of birth:</string>
-    <string name="email_account">Email account:</string>
-    <string name="do_you_want_to_port">Do you want to port?</string>
-    <string name="do_you_want_to_port_negative_answer">No, I want a new number</string>
-    <string name="do_you_want_to_port_positve_answer">Yes, I want to port my number</string>
-    <string name="who_refered_you">Who refered you?</string>
-    <string name="sponsor_tid_optional">Sponsor TID: (Optional)</string>
-    <string name="optional">Optional</string>
-    <string name="text_continue">Continue</string>
+    <string name="flash_activation_form">Formato de activación</string>
+    <string name="flash_activation_form_subtitle">Completa la siguiente información:</string>
+    <string name="name">Nombre</string>
+    <string name="last_name">Apellido</string>
+    <string name="date_of_birth">Fecha de nacimiento</string>
+    <string name="email_account">Correo electrónico</string>
+    <string name="do_you_want_to_port">¿Quieres portar tu número?</string>
+    <string name="do_you_want_to_port_negative_answer">No, quiero tener un nuevo número</string>
+    <string name="do_you_want_to_port_positve_answer">Sí, quiero portar mi número actual</string>
+    <string name="who_refered_you">¿Quién te refirió?</string>
+    <string name="sponsor_tid_optional">Código del Patrocinador</string>
+    <string name="optional">- opcional -</string>
+    <string name="text_continue">Siguiente</string>
 
     <!-- Step 2.2 -->
-    <string name="port_your_phone_number">Port your phone number</string>
-    <string name="your_phone_number">Your phone number:</string>
-    <string name="current_mobile_operator">Current Mobile Operator:</string>
-    <string name="select">Select</string>
-    <string name="plan_type">Plan type:</string>
-    <string name="check_info">All Flash Mobile services are Prepaid, when you port your service will be always prepaid</string>
-
+    <string name="port_your_phone_number">Porta tu número telefónico</string>
+    <string name="your_phone_number">Tu número telefónico</string>
+    <string name="nine_digits">9 dígitos</string>
+    <string name="confirm_your_phone_number">Confirma tu número</string>
+    <string name="current_mobile_operator">Operador móvil actual</string>
+    <string name="select">Selecciona</string>
+    <string name="plan_type">Tipo de plan</string>
+    <string name="check_info">Todos los números de Flash Mobile \n son de prepago. Cuando te cambies \n con nosotros, tu servicio siempre será\n de prepago.</string>
+    <string name="port_your_phone_number_info">El proceso de portabilidad tarda 24 horas \n en completarse.</string>
     <!-- Step 2.3 -->
-    <string name="confirmr_your_information">Confirmr your information</string>
-    <string name="summay">Summay:</string>
-    <string name="confirm">Confirm</string>
-    <string name="modify">Modify</string>
+    <string name="confirmr_your_information">Confirma tu información</string>
+    <string name="summay">Resumen</string>
+    <string name="confirm">Confirmar</string>
+    <string name="modify">Editar</string>
     <string name="dni">DNI:</string>
-    <string name="email">Email:</string>
-    <string name="sponsor_tid">Sponsor TID:</string>
-    <string name="number_to_port">Number to port:</string>
-    <string name="mobile_operator">Mobile Operator:</string>
+    <string name="email">Correo:</string>
+    <string name="sponsor_tid">Patrocinador</string>
+    <string name="number_to_port">Número a portar:</string>
+    <string name="mobile_operator">Operador móvil:</string>
 
     <!-- Step 7 -->
     <string name="term_and_conditions">Terms and Conditions</string>
