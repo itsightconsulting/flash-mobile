@@ -22,7 +22,7 @@ class Validations(
     val editText = TextInputEditText ?: autoCompleteTextView!!
     val master = masterValidation
     val id = (TextInputEditText ?: autoCompleteTextView!!).id
-    
+
     private var minLen: Int = 0
     private var min: Int = 0
     private var maxLen: Int = 0
@@ -84,7 +84,12 @@ class Validations(
 
     fun email(): Validations {
         this.list.add(
-            ValRules(::flValidateEmail, null, "El correo tiene un formato inválido", RULESVAL.EMAIL.value)
+            ValRules(
+                ::flValidateEmail,
+                null,
+                "El correo tiene un formato inválido",
+                RULESVAL.EMAIL.value
+            )
         )
         return this
     }
@@ -195,4 +200,5 @@ class Validations(
     fun active(): MasterValidation {
         return this.master
     }
+
 }
