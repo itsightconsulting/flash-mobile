@@ -117,15 +117,35 @@
         <action
             android:id="@+id/action_simCardFragment_to_errorFragment"
             app:destination="@id/errorFragment" />
+        <action
+            android:id="@+id/action_simCardFragment_to_biometricFragment"
+            app:destination="@id/biometricFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/successFragment"
         android:name="com.itsight.flash.view.SuccessFragment"
-        android:label="@string/sim_activated"
-        tools:layout="@layout/success_fragment" />
+        android:label="@string/sim_success"
+        tools:layout="@layout/success_fragment" >
+        <action
+            android:id="@+id/action_successFragment_to_preActivationFragment"
+            app:destination="@id/preActivationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/errorFragment"
         android:name="com.itsight.flash.view.ErrorFragment"
         android:label="@string/empty"
         tools:layout="@layout/error_fragment" />
+    <fragment
+        android:id="@+id/biometricFragment"
+        android:name="com.itsight.flash.view.BiometricFragment"
+        android:label="@string/biometric"
+        tools:layout="@layout/biometric_fragment" />
 </navigation>

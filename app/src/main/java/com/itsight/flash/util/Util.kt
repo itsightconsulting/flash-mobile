@@ -264,6 +264,8 @@ public fun createImageFile(context: Context): File {
 fun invokerSuccessDialog(context: Context, bodyMessage: String?): Dialog {
     val dialog = Dialog(context)
     dialog.setContentView(R.layout.alert_success)
+    dialog.setCanceledOnTouchOutside(false)
+    dialog.setCancelable(false)
 
     dialog.window!!.setLayout(
         (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
@@ -282,6 +284,8 @@ fun invokerSuccessDialog(context: Context, bodyMessage: String?): Dialog {
 fun invokerErrorDialog(context: Context, bodyMessage: String?): Dialog {
     val dialog = Dialog(context)
     dialog.setContentView(R.layout.alert_error)
+    dialog.setCanceledOnTouchOutside(false)
+    dialog.setCancelable(false)
 
     dialog.window!!.setLayout(
         (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
@@ -302,7 +306,20 @@ fun invokerErrorDialog(context: Context, bodyMessage: String?): Dialog {
 fun invokerQuitDialog(context: Context): Dialog {
     val dialog = Dialog(context)
     dialog.setContentView(R.layout.alert_quit)
-    dialog.setCanceledOnTouchOutside(true)
+    dialog.setCanceledOnTouchOutside(false)
+    dialog.setCancelable(false)
+    dialog.window!!.setLayout(
+        (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+        WindowManager.LayoutParams.WRAP_CONTENT
+    )
+    return dialog
+}
+
+fun invokerBarcodeSuccess(context: Context): Dialog {
+    val dialog = Dialog(context)
+    dialog.setContentView(R.layout.info_barcode_success)
+    dialog.setCanceledOnTouchOutside(false)
+    dialog.setCancelable(false)
     dialog.window!!.setLayout(
         (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
         WindowManager.LayoutParams.WRAP_CONTENT
