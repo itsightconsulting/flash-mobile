@@ -107,6 +107,10 @@
                 <AutoCompleteTextView
                     android:id="@+id/acMobileOperator"
                     style="@style/flash_input_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:hint="@string/select" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,6 +133,10 @@
                 <AutoCompleteTextView
                     android:id="@+id/acPlanType"
                     style="@style/flash_input_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:hint="@string/select" />
             </com.google.android.material.textfield.TextInputLayout>
 

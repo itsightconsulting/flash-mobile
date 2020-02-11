@@ -3,7 +3,6 @@ package com.itsight.flash.view
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -13,15 +12,12 @@ import com.itsight.flash.validator.MasterValidation
 import kotlinx.android.synthetic.main.form_fragment.*
 import java.util.*
 import android.app.DatePickerDialog
-import android.widget.DatePicker
-import com.itsight.flash.util.invokerQuitDialog
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.alert_error.view.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class FormFragment : Fragment() {
-    private var cal = java.util.Calendar.getInstance()
     private lateinit var validatorMatrix: MasterValidation
 
     override fun onCreateView(
@@ -29,6 +25,7 @@ class FormFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.form_fragment, container, false)
     }
@@ -52,56 +49,41 @@ class FormFragment : Fragment() {
             .active()
 
 
-        // create an OnDateSetListener
-        /*val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-
-            override fun onDateSet(
-                view: DatePicker, year: Int, monthOfYear: Int,
-                dayOfMonth: Int
-            ) {
-                cal.set(Calendar.YEAR, year)
-                cal.set(Calendar.MONTH, monthOfYear)
-                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateDateInView()
-            }
-        }
-
-         */
+        // Calendar
+        val cal = java.util.Calendar.getInstance()
+        val year = cal.get(Calendar.YEAR)
+        val month = cal.get(Calendar.MONTH)
+        val day = cal.get(Calendar.DAY_OF_MONTH)
 
         // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
-        txtDateOfBirth.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View) {
-                /* DatePickerDialog(
-                    this@FormFragment,
-                    dateSetListener,
-                    // set DatePickerDialog to point to today's date when it loads up
-                    cal.get(Calendar.YEAR),
-                    cal.get(Calendar.MONTH),
-                    cal.get(Calendar.DAY_OF_MONTH)
-                ).show()
-                */
-            }
-        })
-
-
-
+        ivCalendar.setOnClickListener {
+            BuildDatePickerDialog(year, month, day)
+        }
 
         btn_continue.setOnClickListener {
-            if (!this.validatorMatrix.checkValidity())
+            var estado: Boolean? = null;
+            if (rbDoNotWantToPort.isChecked) estado = false
+            if (rbWantToPort.isChecked) estado = true
+            if (estado == null) {
+                rbWantToPort.error = "Debes seleccionar una opción"
+            }
+
+            if (!this.validatorMatrix.checkValidity() || estado == null)
                 this.view?.csSnackbar(
                     "Debe completar los campos requeridos",
                     Snackbar.LENGTH_LONG
                 )
             else {
-                val action = FormFragmentDirections.actionFormFragmentToFormPhoneFragment()
+                var action = FormFragmentDirections.actionFormFragmentToFormConfirmFragment()
+                if (estado) action = FormFragmentDirections.actionFormFragmentToFormPhoneFragment()
                 findNavController().navigate(action)
             }
 
         }
 
-        /*this.view?.let {
-            invokerQuitDialog(context!!).show()
-        }*/
+/*this.view?.let {
+    invokerQuitDialog(context!!).show()
+}*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -109,15 +91,21 @@ class FormFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun updateDateInView() {
-        val myFormat = "MM/dd/yy" // mention the format you need
-        /*val sdf = java.text.SimpleDateFormat(myFormat, java.util.Locale.US)
-        etDateOfBirth!!.text = sdf?.format(cal.getTime())
-         */
-    }
+    fun BuildDatePickerDialog(year: Int, month: Int, day: Int) {
+        val dpd = DatePickerDialog(
+            context!!,
+            DatePickerDialog.OnDateSetListener { view, nYear, nMonth, nDayOfMonth ->
+                var nDayOfMonthStr = nDayOfMonth.toString()
+                var nMonthStr = nMonth.toString()
+                if (nDayOfMonth < 10)
+                    nDayOfMonthStr = "0" + nDayOfMonth
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
+                if (nMonth < 10)
+                    nMonthStr = "0" + nMonth
+                etDateOfBirth.setText(nDayOfMonthStr + "/" + nMonthStr + "/" + nYear)
+            }, year, month, day
+        )
+        dpd.datePicker.maxDate = Date().time
+        dpd.show()
     }
-
 }

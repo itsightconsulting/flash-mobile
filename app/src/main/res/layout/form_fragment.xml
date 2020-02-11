@@ -106,10 +106,21 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDateOfBirth"
                     style="@style/flash_edit_text"
-                    android:drawableRight="@drawable/ic_act_app_calendar"
+                    android:enabled="false"
                     android:hint="dd/mm/yy"
                     android:inputType="date" />
+
             </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/ivCalendar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_act_app_calendar"
+                app:layout_constraintEnd_toEndOf="@id/txtDateOfBirth"
+                app:layout_constraintTop_toBottomOf="@id/tvDateOfBirth" />
+
 
             <TextView
                 android:id="@+id/tvEmailAccount"
@@ -117,8 +128,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                android:text="@string/email_account"
                 android:inputType="textEmailAddress"
+                android:text="@string/email_account"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtDateOfBirth" />
 
@@ -133,7 +144,7 @@
                     android:id="@+id/etEmail"
                     style="@style/flash_edit_text"
                     android:hint="\@"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,7 +160,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
             <RadioGroup
-                android:id="@+id/rgWantToPort"
+                android:id="@+id/rgDoYouWantToPort"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
@@ -159,7 +170,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvOptionGroup">
 
                 <RadioButton
-                    android:id="@+id/wantToPortNo"
+                    android:id="@+id/rbDoNotWantToPort"
                     style="@style/text_options_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -168,7 +179,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <RadioButton
-                    android:id="@+id/wantToPortYes"
+                    android:id="@+id/rbWantToPort"
                     style="@style/text_options_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -185,7 +196,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rgWantToPort">
+                app:layout_constraintTop_toBottomOf="@+id/rgDoYouWantToPort">
 
                 <TextView
                     style="@style/fields_name_with_options"
@@ -196,13 +207,13 @@
                     android:text="@string/who_refered_you" />
 
                 <TextView
-                    android:fontFamily="@font/gotham_light"
-                    android:textSize="18dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:layout_weight="1"
-                    android:text="@string/optional" />
+                    android:fontFamily="@font/gotham_light"
+                    android:text="@string/optional"
+                    android:textSize="18dp" />
 
             </LinearLayout>
 
