@@ -7,6 +7,6 @@
         android:icon="@drawable/ic_act_app_home"
         android:title="Hm"
         android:menuCategory="secondary"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"/>
 
 </menu>

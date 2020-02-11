@@ -74,13 +74,6 @@ class InitialFragment : Fragment() {
         })
 
         tabLayout.setupWithViewPager(carouselView.containerViewPager, true)
-
-        MaterialAlertDialogBuilder(context)
-            .setTitle("¿Deseas abandonar la activación en curso?")
-            .setMessage("Si lo haces, se perderá tu información y tendrás que comenzar un nuevo proceso de activación")
-            .setPositiveButton("Aceptar", null)
-            .setNegativeButton("Cancelar", null)
-            .show()
     }
 
     private fun printCarousel(pos: Int) {

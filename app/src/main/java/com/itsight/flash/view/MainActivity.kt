@@ -2,23 +2,30 @@ package com.itsight.flash.view
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.*
-import com.google.android.material.navigation.NavigationView
+import androidx.navigation.navOptions
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.itsight.flash.FlashApplication
 import com.itsight.flash.R
 import com.itsight.flash.preferences.UserPrefs
+import com.itsight.flash.util.invokerQuitDialog
 import kotlinx.android.synthetic.main.navigation_activity.*
 import java.util.*
 
@@ -81,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                 dest.id == R.id.formFragment ||
                 dest.id == R.id.formPhoneFragment ||
                 dest.id == R.id.formConfirmFragment ||
+                dest.id == R.id.simCardFragment ||
                 dest.id == R.id.termsFragment
             ) {
 
@@ -110,6 +118,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val navHostFragment = this.supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        val childFragments = navHostFragment?.childFragmentManager?.fragments
+        childFragments?.forEach {
+            it.onActivityResult(requestCode, resultCode, data)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+
     private fun setupActionBar(
         navController: NavController,
         appBarConfig: AppBarConfiguration
@@ -122,8 +141,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(findNavController(R.id.nav_host_fragment))
-                || super.onOptionsItemSelected(item)
+        return if(item.itemId === R.id.preActivationFragment){
+            val quitDialog = invokerQuitDialog(this)
+            quitDialog.show()
+
+            val buttonDialog = quitDialog.findViewById(R.id.btnBack) as Button
+            buttonDialog.setOnClickListener {
+                quitDialog.dismiss()
+                val options = navOptions {
+                    anim {
+                        enter = R.anim.slide_in_left
+                        exit = R.anim.slide_out_right
+                        popEnter = R.anim.slide_in_right
+                        popExit = R.anim.slide_out_left
+                    }
+                }
+                findNavController(R.id.nav_host_fragment).navigate(R.id.preActivationFragment, null, options)
+            }
+            val buttonCancel = quitDialog.findViewById(R.id.btnCancel) as Button
+            buttonCancel.setOnClickListener {
+                quitDialog.dismiss()
+            }
+
+            true
+        }else{
+            (item.onNavDestinationSelected(findNavController(R.id.nav_host_fragment))
+                    || super.onOptionsItemSelected(item))
+        }
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

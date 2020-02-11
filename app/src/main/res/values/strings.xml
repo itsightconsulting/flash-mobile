@@ -9,12 +9,12 @@
 
     <!-- Carrusel - Quick Guide -->
     <string name="flash_mobile_peru">Flash Mobile Peru</string>
-    <string name="title_carrusel_1">Bienvenido a tu app \n Activa tu Flash Perú</string>
-    <string name="description_carrusel_1">Completa las activaciones que hayas iniciado \n desde nuestro sitio web o empieza nuevas \n solicitudes de activación.</string>
+    <string name="title_carrusel_1">Bienvenido a tu app\n Activa tu Flash Perú</string>
+    <string name="description_carrusel_1">Completa las activaciones que hayas iniciado desde nuestro sitio web o empieza nuevas solicitudes de activación.</string>
     <string name="title_carrusel_2">Elige qué deseas hacer</string>
     <string name="description_carrusel_2">Comienza procesos de portabilidad para \n SIM Cards o activa nuevos números Flash</string>
     <string name="title_carrusel_3">Disfruta tu Flash Mobile</string>
-    <string name="description_carrusel_3">Sólo puedes activar 5 SIM Cards por DNI. \n Para activar más, ingresa un DNI distinto por \n cada 5 SIM Cards.</string>
+    <string name="description_carrusel_3">Sólo puedes activar 5 SIM Cards por DNI. Para activar más, ingresa un DNI distinto por cada 5 SIM Cards.</string>
     <string name="get_started">Iniciar</string>
 
     <!-- Step 3 -->
@@ -23,12 +23,12 @@
     <string name="digits">8 dígitos</string>
     <string name="go">Buscar</string>
     <string name="option_help">Chatea con un agente</string>
-    <string name="option_help_description">¿Tienes algún problema? Charla con nuestro \n equipo de Servicio a clientes</string>
+    <string name="option_help_description">¿Tienes algún problema? Charla con nuestro equipo de Servicio a clientes</string>
 
     <!-- List of web orders -->
     <string name="web_activation_orders">Órdenes de activación</string>
-    <string name="web_activation_orders_description">Lista de órdenes que iniciaste desde \n nuestro sitio web. Elige las que \n quieras completar.</string>
-    <string name="web_activation_orders_info">Recuerda que sólo se permite hacer 5 \n activaciones por DNI.</string>
+    <string name="web_activation_orders_description">Lista de órdenes que iniciaste desde nuestro sitio web. Elige las que quieras completar.</string>
+    <string name="web_activation_orders_info">Recuerda que sólo se permite hacer 5 activaciones por DNI.</string>
     <string name="web_activation_order_type_ph">Activation &amp; portability </string>
     <string name="web_activation_order_date_ph">15/01/2020 at 09:45 am </string>
     <string name="web_activation_order_number_ph">Phone number: 94483-8302 </string>
@@ -56,7 +56,7 @@
     <string name="current_mobile_operator">Operador móvil actual</string>
     <string name="select">Selecciona</string>
     <string name="plan_type">Tipo de plan</string>
-    <string name="check_info">Todos los números de Flash Mobile \n son de prepago. Cuando te cambies \n con nosotros, tu servicio siempre será\n de prepago.</string>
+    <string name="check_info">Todos los números de Flash Mobile \n son de prepago. Cuando te cambies \n con nosotros, tu servicio siempre será de prepago.</string>
     <string name="port_your_phone_number_info">El proceso de portabilidad tarda 24 horas \n en completarse.</string>
     <!-- Step 2.3 -->
     <string name="confirmr_your_information">Confirma tu información</string>
@@ -70,15 +70,15 @@
     <string name="mobile_operator">Operador móvil:</string>
 
     <!-- Step 7 -->
-    <string name="term_and_conditions">Terms and Conditions</string>
+    <string name="term_and_conditions">Términos y condiciones</string>
     <string name="term_and_conditions_detail">I. FLash Mobile Peru</string>
-    <string name="term_and_conditions_check_accept">I read and accept the Terms and conditions of the service. And validate my information is real</string>
-    <string name="accept">Accept</string>
+    <string name="term_and_conditions_check_accept">He leído y acepto| los términos y condiciones del servicio. Valido que mi información es verdadera.</string>
+    <string name="accept">Aceptar</string>
 
 
     <!-- Step 8 -->
-    <string name="sim_validation">Sim Validation</string>
-    <string name="sim_validation_subtitle">SIM information - ICCID</string>
+    <string name="sim_validation">Validación de SIM Card</string>
+    <string name="sim_validation_subtitle">Información del ICCID</string>
     <string name="sim_validation_description">El ICCID (identiﬁcador de la tarjeta del circuito integrado) es un número único de cada SIM, que sirve para identiﬁcar el país, la red y el circuito a los que pertenece. </string>
 
     <!-- Scan ICCID using the camera -->
@@ -100,11 +100,11 @@
     <string name="search_complete">Exploración completa</string>
 
     <!-- Step 10 -->
-    <string name="sim_activated">SIM Activated</string>
+    <string name="sim_activated">Información del ICCID</string>
     <string name="sim_activated_successfully">Tu SIM Card Flash Mobile se activó con éxito</string>
     <string name="sim_activated_greetings">¡Ahora eres parte de la familia Flash Mobile!</string>
     <string name="sim_activated_fl_message">Te enviamos un correo de conﬁrmación. Recuerda que si elegiste portar tu número, el proceso de tardará 24 horas en completarse.</string>
-    <string name="sim_finalize">Finalize</string>
+    <string name="sim_finalize">Finalizar</string>
 
     <!-- Step 10 Error -->
     <string name="error_detail">Ocurrió un error durante el proceso de validación.</string>
@@ -117,5 +117,9 @@
     <!-- External links -->
     <string name="chatExternalLink">https://www.marca.com</string>
     <string name="empty">\u00A0</string>
+
+    <!-- Alert quit -->
+    <string name="alert_quit_title">¿Deseas abandonar la activación en curso?</string>
+    <string name="alert_quit_description">Si lo haces, se perderá tu información y tendrás que comenzar un nuevo proceso de activación.</string>
 
 </resources>

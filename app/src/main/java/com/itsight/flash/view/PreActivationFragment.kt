@@ -4,20 +4,21 @@ package com.itsight.flash.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.zxing.integration.android.IntentIntegrator
 import com.itsight.flash.R
 import com.itsight.flash.model.args.DataResponseVerifyDNIArgs
-import com.itsight.flash.util.csSnackbar
-import com.itsight.flash.util.hideSpinner
-import com.itsight.flash.util.orderInformationToArgs
-import com.itsight.flash.util.showSpinner
+import com.itsight.flash.util.*
 import com.itsight.flash.validator.MasterValidation
 import com.itsight.flash.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.pre_activation_fragment.*
@@ -100,10 +101,5 @@ class PreActivationFragment : Fragment() {
             }
         })
     }
-
-    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-    }*/
-
 
 }

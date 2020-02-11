@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.form_fragment.*
 import java.util.*
 import android.app.DatePickerDialog
 import android.widget.DatePicker
+import com.itsight.flash.util.invokerQuitDialog
 import java.text.SimpleDateFormat
 
 /**
@@ -97,6 +98,10 @@ class FormFragment : Fragment() {
             }
 
         }
+
+        /*this.view?.let {
+            invokerQuitDialog(context!!).show()
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -109,6 +114,10 @@ class FormFragment : Fragment() {
         /*val sdf = java.text.SimpleDateFormat(myFormat, java.util.Locale.US)
         etDateOfBirth!!.text = sdf?.format(cal.getTime())
          */
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 
 }

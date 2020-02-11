@@ -10,7 +10,6 @@ import android.text.style.StyleSpan
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -67,8 +66,10 @@ class TermsFragment : Fragment() {
 
     private fun settingTermAcceptText() {
         chkTermsLabel.text = ""
-
-        val prefixText = SpannableString("I read and accept ")
+        val termsText = resources.getString(R.string.term_and_conditions_check_accept).split("|")
+        val termsTextBold = termsText[0]
+        val termsTextNb = termsText[1]
+        val prefixText = SpannableString(termsTextBold)
         val prefixTextLen = prefixText.length
 
         prefixText.setSpan(
@@ -86,7 +87,7 @@ class TermsFragment : Fragment() {
             ), 0, prefixTextLen, 0
         )
         chkTermsLabel.append(prefixText)
-        chkTermsLabel.append("the Terms and conditions of the service and validate my information is real.")
+        chkTermsLabel.append(termsTextNb)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

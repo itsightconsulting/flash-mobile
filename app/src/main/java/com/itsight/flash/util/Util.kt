@@ -18,6 +18,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -294,6 +295,17 @@ fun invokerErrorDialog(context: Context, bodyMessage: String?): Dialog {
     buttonDialog.setOnClickListener {
         dialog.dismiss()
     }
+    return dialog
+}
+
+fun invokerQuitDialog(context: Context): Dialog {
+    val dialog = Dialog(context)
+    dialog.setContentView(R.layout.alert_quit)
+    dialog.setCanceledOnTouchOutside(true)
+    dialog.window!!.setLayout(
+        (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+        WindowManager.LayoutParams.WRAP_CONTENT
+    )
     return dialog
 }
 
