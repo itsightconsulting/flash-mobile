@@ -32,6 +32,11 @@ class FormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        etName.setText("Miranda")
+        etLastName.setText("Pedrosa")
+        etEmail.setText("mail@mail.com")
+        etDateOfBirth.setText("10/06/1980")
+
         this.validatorMatrix = MasterValidation()
             .valid(etName, true)
             .required()
