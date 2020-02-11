@@ -20,7 +20,7 @@
 
     <!-- FLOATING ACTION BUTTON -->
     <color name="material_blue_500">#5677fc</color>
-    <color name="colorPrimary">#38c0cc</color>
+    <color name="colorPrimary">#6A237C</color>
     <color name="colorPrimaryDark">#0f90be</color>
     <color name="colorAccent">#0B5671</color>
     <color name="callToAction">#F78D22</color>
