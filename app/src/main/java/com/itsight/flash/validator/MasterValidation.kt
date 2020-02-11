@@ -9,17 +9,21 @@ class MasterValidation {
 
     fun getRules() = this.inputs
 
-    fun valid(textInputEditText: TextInputEditText, eventsActive: Boolean = true): Validations {
-        val objVal = Validations(textInputEditText, null, this, eventsActive)
+    fun valid(
+        textInputEditText: TextInputEditText,
+        eventsActive: Boolean = true,
+        preRequisite: (() -> Boolean)? = null
+    ): Validations {
+        val objVal = Validations(textInputEditText, null, this, eventsActive, preRequisite)
         this.inputs.add(objVal)
         return objVal
     }
 
     fun valid(
         autoCompleteTextView: AutoCompleteTextView,
-        eventsActive: Boolean = true
+        eventsActive: Boolean = true, preRequisite: (() -> Boolean)? = null
     ): Validations {
-        val objVal = Validations(null, autoCompleteTextView, this, eventsActive)
+        val objVal = Validations(null, autoCompleteTextView, this, eventsActive, preRequisite)
         this.inputs.add(objVal)
         return objVal
     }

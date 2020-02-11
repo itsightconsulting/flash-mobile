@@ -12,16 +12,18 @@ class Validations(
     TextInputEditText: TextInputEditText?,
     autoCompleteTextView: AutoCompleteTextView?,
     masterValidation: MasterValidation,
-    eventEnabled: Boolean
+    eventEnabled: Boolean,
+    highPriorityCallback: (() -> Boolean)? = null
 ) {
     private val textInputLayout =
         (TextInputEditText ?: autoCompleteTextView!!).parent.parent as TextInputLayout
     val value = (TextInputEditText ?: autoCompleteTextView!!).text.toString()
     var valid: Boolean = true
-    val list: ArrayList<ValRules> = ArrayList()
+    val list: ArrayList<Rule> = ArrayList()
     val editText = TextInputEditText ?: autoCompleteTextView!!
     val master = masterValidation
     val id = (TextInputEditText ?: autoCompleteTextView!!).id
+    val preCallback: (() -> Boolean)? = highPriorityCallback
 
     private var minLen: Int = 0
     private var min: Int = 0
@@ -84,11 +86,11 @@ class Validations(
 
     fun email(): Validations {
         this.list.add(
-            ValRules(
-                ::flValidateEmail,
-                null,
-                "El correo tiene un formato inválido",
-                RULESVAL.EMAIL.value
+            Rule(
+                callback = ::flValidateEmail,
+                preReqCallback = preCallback,
+                flMsg = "El correo tiene un formato inválido",
+                ruleId = RULESVAL.EMAIL.value
             )
         )
         return this
@@ -96,7 +98,12 @@ class Validations(
 
     fun email(csMsg: String): Validations {
         this.list.add(
-            ValRules(::flValidateEmail, null, csMsg, RULESVAL.EMAIL.value)
+            Rule(
+                callback = ::flValidateEmail,
+                preReqCallback = preCallback,
+                flMsg = csMsg,
+                ruleId = RULESVAL.EMAIL.value
+            )
         )
         return this
     }
@@ -108,11 +115,11 @@ class Validations(
     fun minLength(len: Int): Validations {
         this.minLen = len
         this.list.add(
-            ValRules(
-                ::flValidateMinLength,
-                null,
-                "Debe ingresar mínimo $len caracteres",
-                RULESVAL.MIN_LENGTH.value
+            Rule(
+                callback = ::flValidateMinLength,
+                preReqCallback = preCallback,
+                flMsg = "Debe ingresar mínimo $len caracteres",
+                ruleId = RULESVAL.MIN_LENGTH.value
             )
         )
         return this
@@ -121,11 +128,11 @@ class Validations(
     fun maxLength(len: Int): Validations {
         this.maxLen = len
         this.list.add(
-            ValRules(
-                ::flValidateMaxLength,
-                null,
-                "Debe ingresar máximo $len caracteres",
-                RULESVAL.MAX_LENGTH.value
+            Rule(
+                callback = ::flValidateMaxLength,
+                preReqCallback = preCallback,
+                flMsg = "Debe ingresar máximo $len caracteres",
+                ruleId = RULESVAL.MAX_LENGTH.value
             )
         )
         return this
@@ -141,7 +148,12 @@ class Validations(
 
     fun required(): Validations {
         this.list.add(
-            ValRules(::flRequired, null, "Este campo es obligatorio", RULESVAL.REQUIRED.value)
+            Rule(
+                callback = ::flRequired,
+                preReqCallback = preCallback,
+                flMsg = "Este campo es obligatorio",
+                ruleId = RULESVAL.REQUIRED.value
+            )
         )
         return this
     }
@@ -149,11 +161,11 @@ class Validations(
     fun min(min: Int): Validations {
         this.min = min
         this.list.add(
-            ValRules(
-                ::flmin,
-                null,
-                "Debe ingresar un valor mayor o igual a: ${"%.2f".format(this.min.toDouble())}",
-                RULESVAL.REQUIRED.value
+            Rule(
+                callback = ::flmin,
+                preReqCallback = preCallback,
+                flMsg = "Debe ingresar un valor mayor o igual a: ${"%.2f".format(this.min.toDouble())}",
+                ruleId = RULESVAL.REQUIRED.value
             )
         )
         return this
@@ -163,20 +175,25 @@ class Validations(
         return editText!!.text.toString().isBlank() || editText!!.text.toString().toDouble() >= this.min
     }
 
-    fun required(prerequisite: () -> Boolean): Validations {
+    fun flRequired(): Boolean {
+        return editText!!.text.toString().isNotEmpty()
+    }
+
+    fun equalsTo(editText: TextInputEditText): Validations {
         this.list.add(
-            ValRules(
-                ::flRequired,
-                prerequisite,
-                "Este campo es obligatorio",
-                RULESVAL.REQUIRED.value
+            Rule(
+                preReqCallback = preCallback,
+                equalsToCallback = ::flEqualsTo,
+                flMsg = "El campo ingresado debe ser igual al campo anterior",
+                ruleId = RULESVAL.EQUALS_TO.value,
+                editText = editText
             )
         )
         return this
     }
 
-    fun flRequired(): Boolean {
-        return editText!!.text.toString().isNotEmpty()
+    fun flEqualsTo(etText: TextInputEditText): Boolean {
+        return this.editText.text.toString() == etText.text.toString()
     }
 
     fun callbackTrue(): Boolean {

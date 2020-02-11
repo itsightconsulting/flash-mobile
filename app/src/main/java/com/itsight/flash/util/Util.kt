@@ -49,6 +49,7 @@ enum class RULESVAL(val value: Int) {
     MIN_LENGTH(1),
     MAX_LENGTH(2),
     EMAIL(3),
+    EQUALS_TO(4),
 }
 
 

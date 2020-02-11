@@ -5,14 +5,19 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 
 import com.itsight.flash.R
+import com.itsight.flash.util.csSnackbar
+import com.itsight.flash.validator.MasterValidation
 import kotlinx.android.synthetic.main.form_phone_fragment.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class FormPhoneFragment : Fragment() {
+
+    private lateinit var validatorMatrix: MasterValidation
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,10 +31,28 @@ class FormPhoneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        this.validatorMatrix =
+            MasterValidation().valid(etPhoneNumber, true, ::checkPortabilityArtificial).required()
+                .and()
+                .valid(etConfirmPhoneNumber, true, ::checkPortabilityArtificial)
+                .equalsTo(etPhoneNumber).active()
+
         btn_continue.setOnClickListener {
-            val action = FormPhoneFragmentDirections.actionFormPhoneFragmentToFormConfirmFragment()
-            findNavController().navigate(action)
+            if (this.validatorMatrix.checkValidity()) {
+                val action =
+                    FormPhoneFragmentDirections.actionFormPhoneFragmentToFormConfirmFragment()
+                findNavController().navigate(action)
+            } else {
+                this.view?.csSnackbar(
+                    "Debe completar los campos requeridos",
+                    Snackbar.LENGTH_LONG
+                )
+            }
         }
+    }
+
+    fun checkPortabilityArtificial(): Boolean {
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
