@@ -87,7 +87,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/btnFinalize"
         style="@style/button_purple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

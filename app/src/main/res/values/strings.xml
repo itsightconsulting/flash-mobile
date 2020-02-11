@@ -86,7 +86,7 @@
 
     <!-- Complete Step 8 -->
     <string name="scan_completed">Scan completed</string>
-    <string name="next">Next</string>
+    <string name="next">Siguiente</string>
 
     <!-- Step 9 -->
     <string name="address">Dirección</string>
@@ -105,6 +105,12 @@
     <string name="sim_activated_greetings">¡Ahora eres parte de la familia Flash Mobile!</string>
     <string name="sim_activated_fl_message">Te enviamos un correo de conﬁrmación. Recuerda que si elegiste portar tu número, el proceso de tardará 24 horas en completarse.</string>
     <string name="sim_finalize">Finalizar</string>
+    <string name="sim_success">SIM Card activada</string>
+    <!-- Step 11 -->
+    <string name="biometric">Validación biométrica</string>
+    <string name="biometric_title">Selecciona la huella dactilar</string>
+    <string name="biometric_description">que quieres utilizar para la validación biométrica. Después haz clic en "Siguiente".</string>
+
 
     <!-- Step 10 Error -->
     <string name="error_detail">Ocurrió un error durante el proceso de validación.</string>

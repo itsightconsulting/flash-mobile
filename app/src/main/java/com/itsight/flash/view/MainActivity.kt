@@ -41,10 +41,11 @@ class MainActivity : AppCompatActivity() {
         )
     private val aproxToolbarTitleLeftMargin = 5
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
+
         super.onCreate(savedInstanceState)
+
 
         // Obtain the FirebaseAnalytics instance.
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -89,7 +90,8 @@ class MainActivity : AppCompatActivity() {
                 dest.id == R.id.formPhoneFragment ||
                 dest.id == R.id.formConfirmFragment ||
                 dest.id == R.id.simCardFragment ||
-                dest.id == R.id.termsFragment
+                dest.id == R.id.termsFragment ||
+                dest.id == R.id.biometricFragment
             ) {
 
                 toolbar.navigationIcon?.let {
@@ -111,13 +113,12 @@ class MainActivity : AppCompatActivity() {
 
         var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
         if (estado)
-            graph.startDestination = R.id.preActivationFragment
+            graph.startDestination = R.id.simCardFragment
         else
             graph.startDestination = R.id.initialFragment
         host.navController.graph = graph
 
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val navHostFragment = this.supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
@@ -141,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if(item.itemId === R.id.preActivationFragment){
+        return if (item.itemId === R.id.preActivationFragment) {
             val quitDialog = invokerQuitDialog(this)
             quitDialog.show()
 
@@ -156,7 +157,11 @@ class MainActivity : AppCompatActivity() {
                         popExit = R.anim.slide_out_left
                     }
                 }
-                findNavController(R.id.nav_host_fragment).navigate(R.id.preActivationFragment, null, options)
+                findNavController(R.id.nav_host_fragment).navigate(
+                    R.id.preActivationFragment,
+                    null,
+                    options
+                )
             }
             val buttonCancel = quitDialog.findViewById(R.id.btnCancel) as Button
             buttonCancel.setOnClickListener {
@@ -164,7 +169,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             true
-        }else{
+        } else {
             (item.onNavDestinationSelected(findNavController(R.id.nav_host_fragment))
                     || super.onOptionsItemSelected(item))
         }

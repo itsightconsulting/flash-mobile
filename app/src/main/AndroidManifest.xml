@@ -39,6 +39,14 @@
             </intent-filter>
             <nav-graph android:value="@navigation/mobile_navigation"></nav-graph>
         </activity>
+
+        <!-- ZXING -->
+        <!--<activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation"/>-->
+        <!-- END ZXING -->
+
         <!-- VERIDIUM -->
         <meta-data
             android:name="com.veridiumid.sdk.LICENSE"
