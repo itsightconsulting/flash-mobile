@@ -29,6 +29,12 @@ class FormConfirmFragment : Fragment() {
             val action = FormConfirmFragmentDirections.actionFormConfirmFragmentToTermsFragment()
             findNavController().navigate(action)
         }
+
+        btn_cancel.setOnClickListener({
+            val action = FormConfirmFragmentDirections.actionFormConfirmFragmentToFormFragment()
+            findNavController().navigate(action)
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

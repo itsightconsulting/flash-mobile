@@ -45,7 +45,13 @@ class FormFragment : Fragment() {
             .and()
             .valid(etEmail, true)
             .required()
+            .maxLength(320)
             .email()
+            .and()
+            .valid(etSponserTID, true)
+            .minLength(2)
+            .maxLength(10)
+            .validateNumber()
             .active()
 
 

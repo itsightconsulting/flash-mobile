@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -34,20 +35,33 @@ class FormPhoneFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         this.validatorMatrix =
-            MasterValidation().valid(etPhoneNumber, true, ::checkPortabilityArtificial).required()
+            MasterValidation()
+                .valid(etPhoneNumber, true, ::checkPortabilityArtificial)
+                .required()
+                .minLength(9)
+                .maxLength(9)
+                .validateNumber()
                 .and()
                 .valid(etConfirmPhoneNumber, true, ::checkPortabilityArtificial)
-                .equalsTo(etPhoneNumber).active()
+                .equalsTo(etPhoneNumber)
+                .and()
+                .valid(acMobileOperator)
+                .required()
+                .and()
+                .valid(acPlanType)
+                .required()
+                .active()
 
-        val adapter = ArrayAdapter(
-            context!!,
-            R.layout.dropdown_menu_popup_item,
-            arrayOf(1, 2, 3)
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        acPlanType.setAdapter(adapter)
+        val OperadorList = arrayOf("Bitel", "Claro", "Cuy", "Inkacel", "Movistar")
+        val TipoPlanList = arrayOf("Postpago", "Prepago")
+        setAdapterToElement(OperadorList, acMobileOperator)
+        setAdapterToElement(TipoPlanList, acPlanType)
 
         btn_continue.setOnClickListener {
+
+            val MobileOperator = acMobileOperator.text.toString()
+            val PlanType = acPlanType.text.toString()
+
             if (this.validatorMatrix.checkValidity()) {
                 val action =
                     FormPhoneFragmentDirections.actionFormPhoneFragmentToFormConfirmFragment()
@@ -68,5 +82,15 @@ class FormPhoneFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    fun setAdapterToElement(listado: Array<String>, elemento: AutoCompleteTextView) {
+        val adapter = ArrayAdapter(
+            context!!,
+            R.layout.dropdown_menu_popup_item,
+            listado
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        elemento.setAdapter(adapter)
     }
 }

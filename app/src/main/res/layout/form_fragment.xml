@@ -58,6 +58,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etName"
                     style="@style/flash_edit_text"
+                    android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ "
                     android:inputType="text"
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -82,6 +83,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLastName"
                     style="@style/flash_edit_text"
+                    android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ "
                     android:inputType="text"
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>
