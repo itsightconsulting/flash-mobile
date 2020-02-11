@@ -3,6 +3,8 @@ package com.itsight.flash.view
 
 import android.os.Bundle
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -36,6 +38,14 @@ class FormPhoneFragment : Fragment() {
                 .and()
                 .valid(etConfirmPhoneNumber, true, ::checkPortabilityArtificial)
                 .equalsTo(etPhoneNumber).active()
+
+        val adapter = ArrayAdapter(
+            context!!,
+            R.layout.dropdown_menu_popup_item,
+            arrayOf(1, 2, 3)
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        acPlanType.setAdapter(adapter)
 
         btn_continue.setOnClickListener {
             if (this.validatorMatrix.checkValidity()) {
