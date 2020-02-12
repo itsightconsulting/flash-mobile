@@ -28,6 +28,7 @@ class Validations(
     private var minLen: Int = 0
     private var min: Int = 0
     private var maxLen: Int = 0
+    private var startWord: String = ""
 
     init {
         TextInputEditText?.let { it ->
@@ -125,6 +126,19 @@ class Validations(
         return this
     }
 
+    fun startWith(word: String): Validations {
+        this.startWord = word
+        this.list.add(
+            Rule(
+                callback = ::flStartWith,
+                preReqCallback = preCallback,
+                flMsg = "Debe comenzar con $word",
+                ruleId = RULESVAL.START_WITH.value
+            )
+        )
+        return this
+    }
+
     fun maxLength(len: Int): Validations {
         this.maxLen = len
         this.list.add(
@@ -177,6 +191,10 @@ class Validations(
 
     fun flRequired(): Boolean {
         return editText.text.toString().isNotEmpty()
+    }
+
+    fun flStartWith(): Boolean {
+        return editText.text.toString().startsWith(this.startWord)
     }
 
     fun equalsTo(editText: TextInputEditText): Validations {

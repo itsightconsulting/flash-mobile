@@ -45,7 +45,7 @@ enum class RULESVAL(val value: Int) {
     MAX_LENGTH(2),
     EMAIL(3),
     EQUALS_TO(4),
-    MAX_YEAR(5)
+    START_WITH(5)
 }
 
 
@@ -338,8 +338,11 @@ fun Boolean.nextEvaluation(
     return this
 }
 
-fun orderInformationToArgs(orders: List<OrderInformation>, ordersArgs: ArrayList<OrderInformationArgs>): ArrayList<OrderInformationArgs>{
-    orders.forEach{
+fun orderInformationToArgs(
+    orders: List<OrderInformation>,
+    ordersArgs: ArrayList<OrderInformationArgs>
+): ArrayList<OrderInformationArgs> {
+    orders.forEach {
         ordersArgs.add(
             OrderInformationArgs(
                 it.id,

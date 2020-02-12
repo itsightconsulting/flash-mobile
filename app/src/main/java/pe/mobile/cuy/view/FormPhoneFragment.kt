@@ -43,6 +43,7 @@ class FormPhoneFragment : Fragment() {
                 .required()
                 .minLength(9)
                 .maxLength(9)
+                .startWith("9")
                 .validateNumber()
                 .and()
                 .valid(etConfirmPhoneNumber, true, ::checkPortabilityArtificial)
@@ -64,6 +65,7 @@ class FormPhoneFragment : Fragment() {
         oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation.currentCompany != "" && oActivation.planType != "") {
             etPhoneNumber.setText(oActivation.phoneNumber)
+            etConfirmPhoneNumber.setText(oActivation.phoneNumber)
             acCurrentCompany.setText(oActivation.currentCompany)
             acPlanType.setText(oActivation.planType)
         }

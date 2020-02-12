@@ -41,6 +41,7 @@ class FormFragment : Fragment() {
         etLastName.setText("Pedrosa")
         etEmail.setText("mail@mail.com")
         etDateOfBirth.setText("10/06/1980")
+        //rbDoNotWantToPort.isChecked()
 
         oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation.name != "" && oActivation.lastName != "") {
@@ -160,9 +161,9 @@ class FormFragment : Fragment() {
             etEmail.text.toString(),
             estado,
             etSponserTeamID.text.toString(),
-            null,
-            null,
-            null
+            oActivation.phoneNumber,
+            oActivation.currentCompany,
+            oActivation.planType
         )
         UserPrefs.putActivation(FlashApplication.appContext, ActivationPOJO)
     }
