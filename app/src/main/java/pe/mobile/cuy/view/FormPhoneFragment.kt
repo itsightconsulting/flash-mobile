@@ -1,6 +1,7 @@
 package pe.mobile.cuy.view
 
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
 import android.widget.ArrayAdapter
@@ -13,6 +14,9 @@ import pe.mobile.cuy.R
 import pe.mobile.cuy.util.csSnackbar
 import pe.mobile.cuy.validator.MasterValidation
 import kotlinx.android.synthetic.main.form_phone_fragment.*
+import pe.mobile.cuy.FlashApplication
+import pe.mobile.cuy.model.pojo.ActivationPOJO
+import pe.mobile.cuy.preferences.UserPrefs
 
 /**
  * A simple [Fragment] subclass.
@@ -57,20 +61,7 @@ class FormPhoneFragment : Fragment() {
         setAdapterToElement(TipoPlanList, acPlanType)
 
         btn_continue.setOnClickListener {
-
-            val MobileOperator = acMobileOperator.text.toString()
-            val PlanType = acPlanType.text.toString()
-
-            if (this.validatorMatrix.checkValidity()) {
-                val action =
-                    FormPhoneFragmentDirections.actionFormPhoneFragmentToFormConfirmFragment()
-                findNavController().navigate(action)
-            } else {
-                this.view?.csSnackbar(
-                    "Debe completar los campos requeridos",
-                    Snackbar.LENGTH_LONG
-                )
-            }
+            ClickListener_for_btnContinue()
         }
     }
 
@@ -91,5 +82,38 @@ class FormPhoneFragment : Fragment() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         elemento.setAdapter(adapter)
+    }
+
+    fun ClickListener_for_btnContinue() {
+
+        if (this.validatorMatrix.checkValidity()) {
+
+            var oActivation = UserPrefs.getActivation(FlashApplication.appContext)
+
+            if (oActivation == null) throw  Resources.NotFoundException()
+
+            val ActivationPOJO = ActivationPOJO(
+                oActivation.dni,
+                oActivation.name,
+                oActivation.lastName,
+                oActivation.birthDate,
+                oActivation.email,
+                oActivation.wantToPortability,
+                oActivation.sponsorTeamId,
+                etPhoneNumber.text.toString(),
+                acMobileOperator.text.toString(),
+                acPlanType.text.toString()
+            )
+            UserPrefs.putActivation(FlashApplication.appContext, ActivationPOJO)
+
+            val action =
+                FormPhoneFragmentDirections.actionFormPhoneFragmentToFormConfirmFragment()
+            findNavController().navigate(action)
+        } else
+            this.view?.csSnackbar(
+                "Debe completar los campos requeridos",
+                Snackbar.LENGTH_LONG
+            )
+
     }
 }

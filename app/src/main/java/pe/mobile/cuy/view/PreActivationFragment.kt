@@ -17,6 +17,8 @@ import pe.mobile.cuy.model.args.DataResponseVerifyDNIArgs
 import pe.mobile.cuy.validator.MasterValidation
 import pe.mobile.cuy.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.pre_activation_fragment.*
+import pe.mobile.cuy.FlashApplication
+import pe.mobile.cuy.preferences.UserPrefs
 import pe.mobile.cuy.util.*
 
 
@@ -78,6 +80,8 @@ class PreActivationFragment : Fragment() {
 
                     hideSpinner(activity)
                     this.view?.visibility = View.VISIBLE
+
+                    UserPrefs.putUserDni(FlashApplication.appContext, etDNI.text.toString())
 
                     if (!orderViewModel.userHasOrders) {
                         val action =

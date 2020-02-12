@@ -118,7 +118,7 @@
 
 
             <TextView
-                android:id="@+id/tvEmailAccount"
+                android:id="@+id/tvEmail"
                 style="@style/fields_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -133,7 +133,7 @@
                 style="@style/flash_input_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvEmailAccount">
+                app:layout_constraintTop_toBottomOf="@+id/tvEmail">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
@@ -213,7 +213,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvSponsorTID"
+                android:id="@+id/tvSponsorTeamId"
                 style="@style/fields_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -223,16 +223,16 @@
                 app:layout_constraintTop_toBottomOf="@id/linearLayout6" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtSponsorTID"
+                android:id="@+id/txtSponsorTeamID"
                 style="@style/flash_input_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSponsorTID">
+                app:layout_constraintTop_toBottomOf="@+id/tvSponsorTeamId">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etSponserTID"
+                    android:id="@+id/etSponserTeamID"
                     style="@style/flash_edit_text"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -247,7 +247,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtSponsorTID" />
+                app:layout_constraintTop_toBottomOf="@id/txtSponsorTeamID" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

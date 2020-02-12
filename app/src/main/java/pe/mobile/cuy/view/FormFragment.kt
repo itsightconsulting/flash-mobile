@@ -12,6 +12,9 @@ import pe.mobile.cuy.validator.MasterValidation
 import kotlinx.android.synthetic.main.form_fragment.*
 import java.util.*
 import android.app.DatePickerDialog
+import pe.mobile.cuy.FlashApplication
+import pe.mobile.cuy.model.pojo.ActivationPOJO
+import pe.mobile.cuy.preferences.UserPrefs
 
 /**
  * A simple [Fragment] subclass.
@@ -31,7 +34,7 @@ class FormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // Datos preview
         etName.setText("Miranda")
         etLastName.setText("Pedrosa")
         etEmail.setText("mail@mail.com")
@@ -52,7 +55,7 @@ class FormFragment : Fragment() {
             .maxLength(320)
             .email()
             .and()
-            .valid(etSponserTID, true)
+            .valid(etSponserTeamID, true)
             .minLength(2)
             .maxLength(10)
             .validateNumber()
@@ -71,24 +74,7 @@ class FormFragment : Fragment() {
         }
 
         btn_continue.setOnClickListener {
-            var estado: Boolean? = null;
-            if (rbDoNotWantToPort.isChecked) estado = false
-            if (rbWantToPort.isChecked) estado = true
-            if (estado == null) {
-                rbWantToPort.error = "Debes seleccionar una opción"
-            }
-
-            if (!this.validatorMatrix.checkValidity() || estado == null)
-                this.view?.csSnackbar(
-                    "Debe completar los campos requeridos",
-                    Snackbar.LENGTH_LONG
-                )
-            else {
-                var action = FormFragmentDirections.actionFormFragmentToFormConfirmFragment()
-                if (estado) action = FormFragmentDirections.actionFormFragmentToFormPhoneFragment()
-                findNavController().navigate(action)
-            }
-
+            ClickListener_for_btnContinue()
         }
 
 /*this.view?.let {
@@ -106,12 +92,12 @@ class FormFragment : Fragment() {
             context!!,
             DatePickerDialog.OnDateSetListener { view, nYear, nMonth, nDayOfMonth ->
                 var nDayOfMonthStr = nDayOfMonth.toString()
-                var nMonthStr = nMonth.toString()
+                var nMonthStr = (nMonth + 1).toString()
                 if (nDayOfMonth < 10)
                     nDayOfMonthStr = "0" + nDayOfMonth
 
-                if (nMonth < 10)
-                    nMonthStr = "0" + nMonth
+                if ((nMonth + 1) < 10)
+                    nMonthStr = "0" + (nMonth + 1)
                 etDateOfBirth.setText(nDayOfMonthStr + "/" + nMonthStr + "/" + nYear)
             }, year, month, day
         )
@@ -119,5 +105,47 @@ class FormFragment : Fragment() {
         val todayTime = Date().time
         dpd.datePicker.maxDate = todayTime
         dpd.show()
+    }
+
+    fun ClickListener_for_btnContinue() {
+        var estado: Boolean? = null;
+        if (rbDoNotWantToPort.isChecked) estado = false
+        if (rbWantToPort.isChecked) estado = true
+        if (estado == null)
+            rbWantToPort.error = "Debes seleccionar una opción"
+
+
+        if (!this.validatorMatrix.checkValidity() || estado == null)
+            this.view?.csSnackbar(
+                "Debe completar los campos requeridos",
+                Snackbar.LENGTH_LONG
+            )
+        else {
+            // Save activation data
+            saveActivationPojo(estado)
+
+            var action = FormFragmentDirections.actionFormFragmentToFormConfirmFragment()
+            if (estado) action = FormFragmentDirections.actionFormFragmentToFormPhoneFragment()
+            findNavController().navigate(action)
+        }
+    }
+
+    fun saveActivationPojo(estado: Boolean) {
+
+        var dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
+
+        val ActivationPOJO = ActivationPOJO(
+            dni!!,
+            etName.text.toString(),
+            etLastName.text.toString(),
+            etDateOfBirth.text.toString(),
+            etEmail.text.toString(),
+            estado,
+            etSponserTeamID.text.toString(),
+            null,
+            null,
+            null
+        )
+        UserPrefs.putActivation(FlashApplication.appContext, ActivationPOJO)
     }
 }

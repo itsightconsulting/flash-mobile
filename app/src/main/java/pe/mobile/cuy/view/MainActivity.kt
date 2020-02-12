@@ -32,7 +32,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-//    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    //    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private val toolbarTitleParams: LinearLayout.LayoutParams =
         LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -156,6 +156,9 @@ class MainActivity : AppCompatActivity() {
                         popExit = R.anim.slide_out_left
                     }
                 }
+                // Delete all preferences
+                UserPrefs.clear(FlashApplication.appContext)
+
                 findNavController(R.id.nav_host_fragment).navigate(
                     R.id.preActivationFragment,
                     null,
