@@ -24,7 +24,7 @@ import pe.mobile.cuy.preferences.UserPrefs
 class FormPhoneFragment : Fragment() {
 
     private lateinit var validatorMatrix: MasterValidation
-
+    private lateinit var oActivation: ActivationPOJO
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,7 +48,7 @@ class FormPhoneFragment : Fragment() {
                 .valid(etConfirmPhoneNumber, true, ::checkPortabilityArtificial)
                 .equalsTo(etPhoneNumber)
                 .and()
-                .valid(acMobileOperator)
+                .valid(acCurrentCompany)
                 .required()
                 .and()
                 .valid(acPlanType)
@@ -58,8 +58,15 @@ class FormPhoneFragment : Fragment() {
         val OperadorList = arrayOf("Bitel", "Claro", "Cuy", "Entel", "Movistar")
         //"Bitel|Claro|Cuy|Entel|Movistar".split('|')
         val TipoPlanList = arrayOf("Postpago", "Prepago")
-        setAdapterToElement(OperadorList, acMobileOperator)
+        setAdapterToElement(OperadorList, acCurrentCompany)
         setAdapterToElement(TipoPlanList, acPlanType)
+
+        oActivation = UserPrefs.getActivation(FlashApplication.appContext)
+        if (oActivation.currentCompany != "" && oActivation.planType != "") {
+            etPhoneNumber.setText(oActivation.phoneNumber)
+            acCurrentCompany.setText(oActivation.currentCompany)
+            acPlanType.setText(oActivation.planType)
+        }
 
         btn_continue.setOnClickListener {
             ClickListener_for_btnContinue()
@@ -88,9 +95,6 @@ class FormPhoneFragment : Fragment() {
     fun ClickListener_for_btnContinue() {
 
         if (this.validatorMatrix.checkValidity()) {
-
-            var oActivation = UserPrefs.getActivation(FlashApplication.appContext)
-
             if (oActivation == null) throw  Resources.NotFoundException()
 
             val ActivationPOJO = ActivationPOJO(
@@ -102,7 +106,7 @@ class FormPhoneFragment : Fragment() {
                 oActivation.wantToPortability,
                 oActivation.sponsorTeamId,
                 etPhoneNumber.text.toString(),
-                acMobileOperator.text.toString(),
+                acCurrentCompany.text.toString(),
                 acPlanType.text.toString()
             )
             UserPrefs.putActivation(FlashApplication.appContext, ActivationPOJO)

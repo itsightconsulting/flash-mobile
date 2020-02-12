@@ -251,7 +251,7 @@
     <style name="flash_input_dropdown">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:fontFamily">@font/gotham_bold</item>
+        <item name="android:fontFamily">@font/gotham_light</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/dark</item>
         <item name="android:layout_marginTop">-12dp</item>

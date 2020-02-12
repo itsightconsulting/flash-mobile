@@ -12,6 +12,7 @@ import pe.mobile.cuy.validator.MasterValidation
 import kotlinx.android.synthetic.main.form_fragment.*
 import java.util.*
 import android.app.DatePickerDialog
+import kotlinx.android.synthetic.main.alert_error.view.*
 import pe.mobile.cuy.FlashApplication
 import pe.mobile.cuy.model.pojo.ActivationPOJO
 import pe.mobile.cuy.preferences.UserPrefs
@@ -21,6 +22,7 @@ import pe.mobile.cuy.preferences.UserPrefs
  */
 class FormFragment : Fragment() {
     private lateinit var validatorMatrix: MasterValidation
+    private lateinit var oActivation: ActivationPOJO
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +41,21 @@ class FormFragment : Fragment() {
         etLastName.setText("Pedrosa")
         etEmail.setText("mail@mail.com")
         etDateOfBirth.setText("10/06/1980")
+
+        oActivation = UserPrefs.getActivation(FlashApplication.appContext)
+        if (oActivation.name != "" && oActivation.lastName != "") {
+            etName.setText(oActivation.name)
+            etLastName.setText(oActivation.lastName)
+            etDateOfBirth.setText(oActivation.birthDate)
+            etEmail.setText(oActivation.email)
+            etSponserTeamID.setText(oActivation.sponsorTeamId)
+
+            if (oActivation.wantToPortability) rbWantToPort.isChecked()
+            else rbDoNotWantToPort.isChecked()
+
+        }
+
+
 
         this.validatorMatrix = MasterValidation()
             .valid(etName, true)
