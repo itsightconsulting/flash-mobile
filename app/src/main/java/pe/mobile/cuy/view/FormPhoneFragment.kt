@@ -55,7 +55,8 @@ class FormPhoneFragment : Fragment() {
                 .required()
                 .active()
 
-        val OperadorList = arrayOf("Bitel", "Claro", "Cuy", "Inkacel", "Movistar")
+        val OperadorList = arrayOf("Bitel", "Claro", "Cuy", "Entel", "Movistar")
+        //"Bitel|Claro|Cuy|Entel|Movistar".split('|')
         val TipoPlanList = arrayOf("Postpago", "Prepago")
         setAdapterToElement(OperadorList, acMobileOperator)
         setAdapterToElement(TipoPlanList, acPlanType)

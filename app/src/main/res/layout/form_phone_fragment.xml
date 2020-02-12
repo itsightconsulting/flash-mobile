@@ -61,6 +61,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPhoneNumber"
                     style="@style/flash_edit_text"
+                    android:hint="@string/nine_digits"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,6 +85,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etConfirmPhoneNumber"
                     style="@style/flash_edit_text"
+                    android:hint="@string/nine_digits"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 

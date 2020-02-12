@@ -63,14 +63,17 @@ class FormFragment : Fragment() {
 
 
         // Calendar
-        val cal = java.util.Calendar.getInstance()
+        val cal = Calendar.getInstance()
         val year = cal.get(Calendar.YEAR)
         val month = cal.get(Calendar.MONTH)
         val day = cal.get(Calendar.DAY_OF_MONTH)
 
+        cal.add(Calendar.YEAR, -18)
+        val minDate = cal.time
+
         // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
         etDateOfBirth.setOnClickListener {
-            BuildDatePickerDialog(year, month, day)
+            BuildDatePickerDialog(year, month, day, minDate)
         }
 
         btn_continue.setOnClickListener {
@@ -87,7 +90,7 @@ class FormFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    fun BuildDatePickerDialog(year: Int, month: Int, day: Int) {
+    fun BuildDatePickerDialog(year: Int, month: Int, day: Int, minDate: Date) {
         val dpd = DatePickerDialog(
             context!!,
             DatePickerDialog.OnDateSetListener { view, nYear, nMonth, nDayOfMonth ->
@@ -101,9 +104,7 @@ class FormFragment : Fragment() {
                 etDateOfBirth.setText(nDayOfMonthStr + "/" + nMonthStr + "/" + nYear)
             }, year, month, day
         )
-        //val pastTime = Date(year - 18, month, day).time
-        val todayTime = Date().time
-        dpd.datePicker.maxDate = todayTime
+        dpd.datePicker.maxDate = minDate.time
         dpd.show()
     }
 
