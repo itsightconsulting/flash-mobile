@@ -41,7 +41,7 @@ class FormFragment : Fragment() {
         etLastName.setText("Pedrosa")
         etEmail.setText("mail@mail.com")
         etDateOfBirth.setText("10/06/1980")
-        //rbDoNotWantToPort.isChecked()
+        rbDoNotWantToPort.isChecked = true
 
         oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation.name != "" && oActivation.lastName != "") {
@@ -51,8 +51,8 @@ class FormFragment : Fragment() {
             etEmail.setText(oActivation.email)
             etSponserTeamID.setText(oActivation.sponsorTeamId)
 
-            if (oActivation.wantToPortability) rbWantToPort.isChecked()
-            else rbDoNotWantToPort.isChecked()
+            if (oActivation.wantToPortability) rbWantToPort.isChecked = true
+            else rbDoNotWantToPort.isChecked = true
 
         }
 
