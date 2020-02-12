@@ -66,7 +66,7 @@ class FormFragment : Fragment() {
         val day = cal.get(Calendar.DAY_OF_MONTH)
 
         // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
-        ivCalendar.setOnClickListener {
+        etDateOfBirth.setOnClickListener {
             BuildDatePickerDialog(year, month, day)
         }
 
@@ -115,7 +115,9 @@ class FormFragment : Fragment() {
                 etDateOfBirth.setText(nDayOfMonthStr + "/" + nMonthStr + "/" + nYear)
             }, year, month, day
         )
-        dpd.datePicker.maxDate = Date().time
+        //val pastTime = Date(year - 18, month, day).time
+        val todayTime = Date().time
+        dpd.datePicker.maxDate = todayTime
         dpd.show()
     }
 }

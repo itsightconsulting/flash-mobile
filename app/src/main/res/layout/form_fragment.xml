@@ -108,20 +108,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDateOfBirth"
                     style="@style/flash_edit_text"
-                    android:enabled="false"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_act_app_calendar"
+                    android:focusable="false"
                     android:hint="dd/mm/yy"
                     android:inputType="date" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageView
-                android:id="@+id/ivCalendar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_act_app_calendar"
-                app:layout_constraintEnd_toEndOf="@id/txtDateOfBirth"
-                app:layout_constraintTop_toBottomOf="@id/tvDateOfBirth" />
 
 
             <TextView
