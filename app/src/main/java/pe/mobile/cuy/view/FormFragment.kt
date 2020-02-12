@@ -113,7 +113,7 @@ class FormFragment : Fragment() {
         if (rbDoNotWantToPort.isChecked) estado = false
         if (rbWantToPort.isChecked) estado = true
         if (estado == null)
-            rbWantToPort.error = "Debes seleccionar una opción"
+            rbWantToPort.setError("Debes seleccionar una opción")
 
 
         if (!this.validatorMatrix.checkValidity() || estado == null)

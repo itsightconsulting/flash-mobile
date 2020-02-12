@@ -251,7 +251,7 @@
     <style name="flash_input_dropdown">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:fontFamily">@font/gotham_light</item>
+        <item name="android:fontFamily">@font/gotham_bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/dark</item>
         <item name="android:layout_marginTop">-12dp</item>
@@ -281,4 +281,17 @@
         <!--Propiedad sin efecto(textColor). En revisión... -->
         <item name="android:textColor">@color/dark_purple</item>
     </style>
+
+
+    <style name="button_white_without_border">
+        <item name="android:fontFamily">@font/gotham_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/purple</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">40dp</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">18dp</item>
+    </style>
+
 </resources>

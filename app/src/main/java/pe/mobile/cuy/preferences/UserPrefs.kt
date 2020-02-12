@@ -78,7 +78,7 @@ object UserPrefs {
             remove(USER_PHONE)
             remove(USER_BIOMETRIC_WRONG_ATTEMPTS)
 
-            remove(USER_HIDE_CAROUSEL)
+            //remove(USER_HIDE_CAROUSEL)
 
             remove(ACTIVATION_DNI)
             remove(ACTIVATION_NAME)

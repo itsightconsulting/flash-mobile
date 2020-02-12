@@ -51,6 +51,13 @@ class FormConfirmFragment : Fragment() {
 
     fun showInformation() {
 
+        tvName.text = tvName.text.toString() + ":"
+        tvLastName.text = tvLastName.text.toString() + ":"
+        tvDateOfBirth.text = tvDateOfBirth.text.toString() + ":"
+        tvSponsorTeamId.text = tvSponsorTeamId.text.toString() + ":"
+        tvPlanType.text = tvPlanType.text.toString() + ":"
+
+
         var oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation == null) throw  Resources.NotFoundException()
 

@@ -154,33 +154,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
+
             <RadioGroup
                 android:id="@+id/rgDoYouWantToPort"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
+                android:checked="true"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvOptionGroup">
 
-                <RadioButton
+                <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rbDoNotWantToPort"
                     style="@style/text_options_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/do_you_want_to_port_negative_answer"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"></com.google.android.material.radiobutton.MaterialRadioButton>
 
-                <RadioButton
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rbWantToPort"
                     style="@style/text_options_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/do_you_want_to_port_positve_answer"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"></com.google.android.material.radiobutton.MaterialRadioButton>
+
             </RadioGroup>
 
             <LinearLayout
