@@ -56,8 +56,8 @@
     <string name="current_mobile_operator">Operador móvil actual</string>
     <string name="select">Selecciona</string>
     <string name="plan_type">Tipo de plan</string>
-    <string name="check_info">Todos los números de Flash Mobile \n son de prepago. Cuando te cambies \n con nosotros, tu servicio siempre será de prepago.</string>
-    <string name="port_your_phone_number_info">El proceso de portabilidad tarda 24 horas \n en completarse.</string>
+    <string name="check_info">Todos los números de Flash Mobile son de prepago. Cuando te cambies con nosotros, tu servicio siempre será de prepago.</string>
+    <string name="port_your_phone_number_info">El proceso de portabilidad tarda 24 horas en completarse.</string>
     <!-- Step 2.3 -->
     <string name="confirmr_your_information">Confirma tu información</string>
     <string name="summay">Resumen</string>
