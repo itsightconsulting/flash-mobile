@@ -362,3 +362,13 @@ fun orderInformationToArgs(
     }
     return ordersArgs
 }
+
+fun changeDateFormat(dateStr: String, formatoFin: String, _formatoInit: String?): String {
+    var formatoInit = _formatoInit
+    if (formatoInit.isNullOrEmpty()) formatoInit = "dd/MM/yyyy"
+
+    val parser = SimpleDateFormat(formatoInit)
+    val formatter = SimpleDateFormat(formatoFin)
+    val output: String = formatter.format(parser.parse(dateStr))
+    return output
+}

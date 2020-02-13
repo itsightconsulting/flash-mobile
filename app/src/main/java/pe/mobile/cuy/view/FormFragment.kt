@@ -15,6 +15,7 @@ import android.app.DatePickerDialog
 import pe.mobile.cuy.FlashApplication
 import pe.mobile.cuy.model.pojo.ActivationPOJO
 import pe.mobile.cuy.preferences.UserPrefs
+import pe.mobile.cuy.util.changeDateFormat
 
 /**
  * A simple [Fragment] subclass.
@@ -151,7 +152,8 @@ class FormFragment : Fragment() {
     fun saveActivationPojo(estado: Boolean) {
 
         var dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
-
+        // val fecha: String = etDateOfBirth.text.toString()
+        // val fechaFormat: String = changeDateFormat(fecha, "MM/dd/yyyy", null)
         val ActivationPOJO = ActivationPOJO(
             dni!!,
             etName.text.toString(),

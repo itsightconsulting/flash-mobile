@@ -59,8 +59,6 @@ class FormPhoneFragment : Fragment() {
         val OperadorList = arrayOf("Bitel", "Claro", "Cuy", "Entel", "Movistar")
         //"Bitel|Claro|Cuy|Entel|Movistar".split('|')
         val TipoPlanList = arrayOf("Postpago", "Prepago")
-        setAdapterToElement(OperadorList, acCurrentCompany)
-        setAdapterToElement(TipoPlanList, acPlanType)
 
         oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation.currentCompany != "" && oActivation.planType != "") {
@@ -69,6 +67,9 @@ class FormPhoneFragment : Fragment() {
             acCurrentCompany.setText(oActivation.currentCompany)
             acPlanType.setText(oActivation.planType)
         }
+
+        setAdapterToElement(OperadorList, acCurrentCompany)
+        setAdapterToElement(TipoPlanList, acPlanType)
 
         btn_continue.setOnClickListener {
             ClickListener_for_btnContinue()
