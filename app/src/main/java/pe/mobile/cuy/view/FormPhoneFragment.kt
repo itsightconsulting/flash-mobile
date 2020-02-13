@@ -105,7 +105,7 @@ class FormPhoneFragment : Fragment() {
                 oActivation.lastName,
                 oActivation.birthDate,
                 oActivation.email,
-                oActivation.wantToPortability,
+                oActivation.wantPortability,
                 oActivation.sponsorTeamId,
                 etPhoneNumber.text.toString(),
                 acCurrentCompany.text.toString(),

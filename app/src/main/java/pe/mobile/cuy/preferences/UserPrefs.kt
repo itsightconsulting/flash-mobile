@@ -126,7 +126,7 @@ object UserPrefs {
             putString(ACTIVATION_LASTNAME, activation.lastName)
             putString(ACTIVATION_BIRTHDATE, activation.birthDate)
             putString(ACTIVATION_EMAIL, activation.email)
-            putBoolean(ACTIVATION_WANT_TO_PORTABILITY, activation.wantToPortability)
+            putBoolean(ACTIVATION_WANT_TO_PORTABILITY, activation.wantPortability)
             putString(ACTIVATION_SPONSORTEAMID, activation.sponsorTeamId)
 
             putString(ACTIVATION_PHONENUMBER, activation.phoneNumber)

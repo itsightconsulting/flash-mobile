@@ -12,7 +12,7 @@
     <string name="title_carrusel_1">Bienvenido a tu app\n Activa tu Flash Perú</string>
     <string name="description_carrusel_1">Completa las activaciones que hayas iniciado desde nuestro sitio web o empieza nuevas solicitudes de activación.</string>
     <string name="title_carrusel_2">Elige qué deseas hacer</string>
-    <string name="description_carrusel_2">Comienza procesos de portabilidad para \n SIM Cards o activa nuevos números Flash</string>
+    <string name="description_carrusel_2">Comienza procesos de portabilidad para SIM Cards o activa nuevos números Flash</string>
     <string name="title_carrusel_3">Disfruta tu Flash Mobile</string>
     <string name="description_carrusel_3">Sólo puedes activar 5 SIM Cards por DNI. Para activar más, ingresa un DNI distinto por cada 5 SIM Cards.</string>
     <string name="get_started">Iniciar</string>
@@ -63,11 +63,11 @@
     <string name="summay">Resumen</string>
     <string name="confirm">Confirmar</string>
     <string name="modify">Editar</string>
-    <string name="dni">DNI:</string>
-    <string name="email">Correo:</string>
+    <string name="dni">DNI:\u0020</string>
+    <string name="email">Correo:\u0020</string>
     <string name="sponsor_tid">Patrocinador</string>
-    <string name="number_to_port">Número a portar:</string>
-    <string name="mobile_operator">Operador móvil:</string>
+    <string name="number_to_port">Número a portar:\u0020</string>
+    <string name="mobile_operator">Operador móvil:\u0020</string>
 
     <!-- Step 7 -->
     <string name="term_and_conditions">Términos y condiciones</string>

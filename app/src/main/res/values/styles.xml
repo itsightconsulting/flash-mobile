@@ -47,7 +47,6 @@
         <item name="android:fontFamily">@font/gotham_medium</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/gray</item>
-
     </style>
 
     <style name="text_fields_answered">
@@ -292,6 +291,12 @@
         <item name="cornerRadius">40dp</item>
         <item name="android:paddingTop">18dp</item>
         <item name="android:paddingBottom">18dp</item>
+    </style>
+
+    <style name="fields_name_resume">
+        <item name="android:fontFamily">@font/gotham_light</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray</item>
     </style>
 
 </resources>
