@@ -1,25 +1,40 @@
 package pe.mobile.cuy.view
 
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Layout
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.util.DisplayMetrics
 import android.view.*
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.zxing.Result
-import pe.mobile.cuy.R
-import pe.mobile.cuy.util.invokerBarcodeSuccess
 import kotlinx.android.synthetic.main.sim_card_fragment.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
+import pe.mobile.cuy.R
+import pe.mobile.cuy.util.CustomTypefaceSpan
+import pe.mobile.cuy.util.invokerBarcodeSuccess
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
+import pub.devrel.easypermissions.PermissionRequest
+
 
 /**
  * A simple [Fragment] subclass.
  */
-class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler {
+class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
+    EasyPermissions.PermissionCallbacks {
 
+    private val REQUEST_CAMERA_CAPTURE = 1
     private lateinit var mScannerView: ZXingScannerView
     private var dialog: Dialog? = null
 
@@ -53,18 +68,82 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler {
         super.onViewCreated(view, savedInstanceState)
 
         imageButton.setOnClickListener {
-            mScannerView = ZXingScannerView(context)
-            dialog = Dialog(context!!, R.style.dialog_scanner)
 
-            dialog?.setContentView(mScannerView)
-            dialog?.show()
-            mScannerView.setResultHandler(this)
-            mScannerView.startCamera()
+            EasyPermissions.requestPermissions(
+                PermissionRequest.Builder(
+                    this,
+                    REQUEST_CAMERA_CAPTURE,
+                    Manifest.permission.CAMERA
+                )
+                    .setRationale("¿Podría concedernos el permiso para acceder a su cámara?")
+                    .setPositiveButtonText("ACEPTAR")
+                    .setNegativeButtonText("CANCELAR")
+                    .build()
+            )
         }
+    }
+
+    private fun initBarcodeScanner() {
+        mScannerView = ZXingScannerView(context)
+        dialog = Dialog(context!!, R.style.dialog_scanner)
+
+        dialog?.setContentView(mScannerView)
+        dialog?.show()
+
+        val prefixText = SpannableString("Enfoque el código de barras\n de su chip \uD83D\uDCB3")
+        val prefixTextLen = prefixText.length
+
+        prefixText.setSpan(
+            CustomTypefaceSpan("", ResourcesCompat.getFont(context!!, R.font.gotham_bold)!!),
+            0,
+            prefixTextLen,
+            0
+        )
+
+        prefixText.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.sand
+                )
+            ), 0, prefixTextLen, 0
+        )
+
+        val tv = TextView(context)
+        tv.text = ""
+        tv.append(prefixText)
+        tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        tv.gravity = Gravity.BOTTOM
+        tv.top
+        tv.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+        tv.textSize = 18f
+        val tvParams = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.MATCH_PARENT
+        )
+        tvParams.setMargins(
+            96,
+            0,
+            96,
+            (context!!.resources.displayMetrics.heightPixels * 0.25).toInt()
+        )
+        tv.layoutParams = tvParams
+        dialog?.addContentView(
+            tv, tvParams
+        )
+
+        mScannerView.setResultHandler(this)
+        mScannerView.startCamera()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
+            if (EasyPermissions.hasPermissions(context!!, Manifest.permission.CAMERA)) {
+                initBarcodeScanner()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -72,5 +151,30 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (grantResults[0] == -1) {
+            if (EasyPermissions.somePermissionPermanentlyDenied(
+                    activity!!,
+                    permissions.toMutableList()
+                )
+            ) {
+                AppSettingsDialog.Builder(this).build().show()
+            }
+        } else {
+            initBarcodeScanner()
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        initBarcodeScanner()
+    }
 }
