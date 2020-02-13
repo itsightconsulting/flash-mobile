@@ -3,6 +3,7 @@ package pe.mobile.cuy.util
 import android.app.Dialog
 import android.content.ContentUris
 import android.content.Context
+import android.content.res.Resources
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
@@ -46,6 +47,19 @@ enum class RULESVAL(val value: Int) {
     EMAIL(3),
     EQUALS_TO(4),
     START_WITH(5)
+}
+
+enum class PLAN_TYPES(val value: String) {
+    POSTPAGO("Postpago"),
+    PREPAGO("Prepago")
+}
+
+enum class OPERATORS(val value: String) {
+    BITEL("Bitel"),
+    CLARO("Claro"),
+    CUY("Cuy"),
+    ENTEL("Entel"),
+    MOVISTAR("Movistar")
 }
 
 
@@ -371,4 +385,13 @@ fun changeDateFormat(dateStr: String, formatoFin: String, _formatoInit: String?)
     val formatter = SimpleDateFormat(formatoFin)
     val output: String = formatter.format(parser.parse(dateStr))
     return output
+}
+
+fun getPlanType(c_planType: String): String {
+    // "example": "Prepaid (prepago)"
+    var n_planType: String = ""
+    if (c_planType == PLAN_TYPES.POSTPAGO.value) n_planType = "Postpaid (postpago)"
+    else if (c_planType == PLAN_TYPES.PREPAGO.value) n_planType = "Prepaid (prepago)"
+    else throw Resources.NotFoundException()
+    return n_planType
 }

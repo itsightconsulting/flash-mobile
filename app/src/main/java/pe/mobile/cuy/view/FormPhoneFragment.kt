@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.form_phone_fragment.*
 import pe.mobile.cuy.FlashApplication
 import pe.mobile.cuy.model.pojo.ActivationPOJO
 import pe.mobile.cuy.preferences.UserPrefs
+import pe.mobile.cuy.util.PLAN_TYPES
 
 /**
  * A simple [Fragment] subclass.
@@ -57,8 +58,7 @@ class FormPhoneFragment : Fragment() {
                 .active()
 
         val OperadorList = arrayOf("Bitel", "Claro", "Cuy", "Entel", "Movistar")
-        //"Bitel|Claro|Cuy|Entel|Movistar".split('|')
-        val TipoPlanList = arrayOf("Postpago", "Prepago")
+        val TipoPlanList = arrayOf(PLAN_TYPES.POSTPAGO.value, PLAN_TYPES.PREPAGO.value)
 
         oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation.currentCompany != "" && oActivation.planType != "") {
