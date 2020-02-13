@@ -51,11 +51,11 @@ class FormConfirmFragment : Fragment() {
 
     fun showInformation() {
 
-        tvName.text = tvName.text.toString() + ":"
-        tvLastName.text = tvLastName.text.toString() + ":"
-        tvDateOfBirth.text = tvDateOfBirth.text.toString() + ":"
-        tvSponsorTeamId.text = tvSponsorTeamId.text.toString() + ":"
-        tvPlanType.text = tvPlanType.text.toString() + ":"
+        tvName.text = tvName.text.toString() + ": "
+        tvLastName.text = tvLastName.text.toString() + ": "
+        tvDateOfBirth.text = tvDateOfBirth.text.toString() + ": "
+        tvSponsorTeamId.text = tvSponsorTeamId.text.toString() + ": "
+        tvPlanType.text = tvPlanType.text.toString() + ": "
 
 
         var oActivation = UserPrefs.getActivation(FlashApplication.appContext)
@@ -68,12 +68,13 @@ class FormConfirmFragment : Fragment() {
         tvEmailResumen.text = oActivation.email
 
         if (oActivation.sponsorTeamId != "") {
+            lySponsorTeamId.visibility = View.VISIBLE
             tvSponsorTeamId.visibility = View.VISIBLE
             tvSponsorTeamIdResumen.visibility = View.VISIBLE
             tvSponsorTeamIdResumen.text = oActivation.sponsorTeamId
         }
 
-        if (oActivation.wantToPortability) {
+        if (oActivation.wantPortability) {
             tvPhoneNumber.visibility = View.VISIBLE
             tvPhoneNumberResumen.visibility = View.VISIBLE
             tvPhoneNumberResumen.text = oActivation.phoneNumber

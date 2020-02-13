@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.form_phone_fragment.*
 import pe.mobile.cuy.FlashApplication
 import pe.mobile.cuy.model.pojo.ActivationPOJO
 import pe.mobile.cuy.preferences.UserPrefs
+import pe.mobile.cuy.util.PLAN_TYPES
 
 /**
  * A simple [Fragment] subclass.
@@ -57,10 +58,7 @@ class FormPhoneFragment : Fragment() {
                 .active()
 
         val OperadorList = arrayOf("Bitel", "Claro", "Cuy", "Entel", "Movistar")
-        //"Bitel|Claro|Cuy|Entel|Movistar".split('|')
-        val TipoPlanList = arrayOf("Postpago", "Prepago")
-        setAdapterToElement(OperadorList, acCurrentCompany)
-        setAdapterToElement(TipoPlanList, acPlanType)
+        val TipoPlanList = arrayOf(PLAN_TYPES.POSTPAGO.value, PLAN_TYPES.PREPAGO.value)
 
         oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation.currentCompany != "" && oActivation.planType != "") {
@@ -69,6 +67,9 @@ class FormPhoneFragment : Fragment() {
             acCurrentCompany.setText(oActivation.currentCompany)
             acPlanType.setText(oActivation.planType)
         }
+
+        setAdapterToElement(OperadorList, acCurrentCompany)
+        setAdapterToElement(TipoPlanList, acPlanType)
 
         btn_continue.setOnClickListener {
             ClickListener_for_btnContinue()
@@ -105,7 +106,7 @@ class FormPhoneFragment : Fragment() {
                 oActivation.lastName,
                 oActivation.birthDate,
                 oActivation.email,
-                oActivation.wantToPortability,
+                oActivation.wantPortability,
                 oActivation.sponsorTeamId,
                 etPhoneNumber.text.toString(),
                 acCurrentCompany.text.toString(),

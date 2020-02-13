@@ -12,10 +12,10 @@ import pe.mobile.cuy.validator.MasterValidation
 import kotlinx.android.synthetic.main.form_fragment.*
 import java.util.*
 import android.app.DatePickerDialog
-import kotlinx.android.synthetic.main.alert_error.view.*
 import pe.mobile.cuy.FlashApplication
 import pe.mobile.cuy.model.pojo.ActivationPOJO
 import pe.mobile.cuy.preferences.UserPrefs
+import pe.mobile.cuy.util.changeDateFormat
 
 /**
  * A simple [Fragment] subclass.
@@ -41,7 +41,7 @@ class FormFragment : Fragment() {
         etLastName.setText("Pedrosa")
         etEmail.setText("mail@mail.com")
         etDateOfBirth.setText("10/06/1980")
-        rbDoNotWantToPort.isChecked = true
+        //rbDoNotWantToPort.isChecked = true
 
         oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation.name != "" && oActivation.lastName != "") {
@@ -51,7 +51,7 @@ class FormFragment : Fragment() {
             etEmail.setText(oActivation.email)
             etSponserTeamID.setText(oActivation.sponsorTeamId)
 
-            if (oActivation.wantToPortability) rbWantToPort.isChecked = true
+            if (oActivation.wantPortability) rbWantToPort.isChecked = true
             else rbDoNotWantToPort.isChecked = true
 
         }
@@ -152,7 +152,8 @@ class FormFragment : Fragment() {
     fun saveActivationPojo(estado: Boolean) {
 
         var dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
-
+        // val fecha: String = etDateOfBirth.text.toString()
+        // val fechaFormat: String = changeDateFormat(fecha, "MM/dd/yyyy", null)
         val ActivationPOJO = ActivationPOJO(
             dni!!,
             etName.text.toString(),
