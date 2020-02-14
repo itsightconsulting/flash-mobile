@@ -154,7 +154,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
-
             <RadioGroup
                 android:id="@+id/rgDoYouWantToPort"
                 android:layout_width="match_parent"
@@ -173,8 +172,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/do_you_want_to_port_negative_answer"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"></com.google.android.material.radiobutton.MaterialRadioButton>
+                    app:layout_constraintStart_toStartOf="parent">
 
+                </com.google.android.material.radiobutton.MaterialRadioButton>
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rbWantToPort"
@@ -183,15 +183,28 @@
                     android:layout_height="wrap_content"
                     android:text="@string/do_you_want_to_port_positve_answer"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"></com.google.android.material.radiobutton.MaterialRadioButton>
+                    app:layout_constraintStart_toStartOf="parent">
 
+                </com.google.android.material.radiobutton.MaterialRadioButton>
             </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtDoYouWantToPort"
+                style="@style/flash_input_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rgDoYouWantToPort">
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <LinearLayout
                 android:id="@+id/linearLayout6"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="24dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
