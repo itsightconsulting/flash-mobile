@@ -127,13 +127,13 @@ class Validations(
         return this
     }
 
-    fun startWith(word: String): Validations {
+    fun startWith(word: String, customMessage: String? = null): Validations {
         this.startWord = word
         this.list.add(
             Rule(
                 callback = ::flStartWith,
                 preReqCallback = preCallback,
-                flMsg = "Debe comenzar con $word",
+                flMsg = customMessage ?: "Debe comenzar con $word",
                 ruleId = RULESVAL.START_WITH.value
             )
         )
@@ -162,7 +162,8 @@ class Validations(
     }
 
     fun required(customMessage: String? = null): Validations {
-        val message = if(isAutoCompleteTextView) "Campo es obligatorio" else "Este campo es obligatorio"
+        val message =
+            if (isAutoCompleteTextView) "Campo es obligatorio" else "Este campo es obligatorio"
 
         this.list.add(
             Rule(
@@ -200,12 +201,12 @@ class Validations(
         return editText.text.toString().startsWith(this.startWord)
     }
 
-    fun equalsTo(editText: TextInputEditText): Validations {
+    fun equalsTo(editText: TextInputEditText, customMessage: String? = null): Validations {
         this.list.add(
             Rule(
                 preReqCallback = preCallback,
                 equalsToCallback = ::flEqualsTo,
-                flMsg = "El campo ingresado debe ser igual al campo anterior",
+                flMsg = customMessage ?: "El campo ingresado debe ser igual al campo anterior",
                 ruleId = RULESVAL.EQUALS_TO.value,
                 editText = editText
             )

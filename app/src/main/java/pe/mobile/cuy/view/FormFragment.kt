@@ -66,7 +66,7 @@ class FormFragment : Fragment() {
             .required()
             .and()
             .valid(etDateOfBirth, true)
-            .required()
+            .required("Campo obligatorio. Por favor, selecciona una fecha")
             .and()
             .valid(etEmail, true)
             .required()
