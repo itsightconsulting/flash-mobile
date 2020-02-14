@@ -17,5 +17,5 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     val loadError = MutableLiveData<Boolean>()
     var errorMessage: String = ""
 
-    
+
 }
