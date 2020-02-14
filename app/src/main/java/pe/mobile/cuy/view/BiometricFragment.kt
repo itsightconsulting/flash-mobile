@@ -108,7 +108,7 @@ class BiometricFragment : Fragment() {
                 val action = BiometricFragmentDirections.actionBiometricFragmentToSuccessFragment()
                 findNavController().navigate(action)
             } else {
-                val action = BiometricFragmentDirections.actionBiometricFragmentToSuccessFragment()
+                val action = BiometricFragmentDirections.actionBiometricFragmentToErrorFragment()
                 findNavController().navigate(action)
             }
         }
