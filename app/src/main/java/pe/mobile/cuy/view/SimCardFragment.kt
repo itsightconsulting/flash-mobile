@@ -5,16 +5,12 @@ import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Layout
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.DisplayMetrics
 import android.view.*
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.zxing.Result
@@ -22,6 +18,7 @@ import kotlinx.android.synthetic.main.sim_card_fragment.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import pe.mobile.cuy.R
 import pe.mobile.cuy.util.CustomTypefaceSpan
+import pe.mobile.cuy.util.invokerBarcodeError
 import pe.mobile.cuy.util.invokerBarcodeSuccess
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -40,18 +37,34 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
 
     override fun handleResult(rawResult: Result?) {
-//        Toast.makeText(context!!, "${rawResult?.text}", Toast.LENGTH_LONG).show()
+        Toast.makeText(context!!, "${rawResult?.text}", Toast.LENGTH_LONG).show()
 //        invokerQuitDialog(context!!).show()
         mScannerView.stopCamera()
 
-        val diagSucc = invokerBarcodeSuccess(context!!)
-        diagSucc.show()
+        rawResult?.let {
+            if (it.text.length == 20) {
 
-        diagSucc.findViewById<Button>(R.id.btnBarcodeSuccess).setOnClickListener {
-            diagSucc.dismiss()
-            dialog?.dismiss()
-            val action = SimCardFragmentDirections.actionSimCardFragmentToBiometricFragment()
-            findNavController().navigate(action)
+                val diagSucc = invokerBarcodeSuccess(context!!)
+                diagSucc.show()
+
+                diagSucc.findViewById<Button>(R.id.btnBarcodeSuccess).setOnClickListener {
+                    diagSucc.dismiss()
+                    dialog?.dismiss()
+                    val action =
+                        SimCardFragmentDirections.actionSimCardFragmentToBiometricFragment()
+                    findNavController().navigate(action)
+                }
+            } else {
+
+                val diagError = invokerBarcodeError(context!!)
+                diagError.show()
+
+                diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
+                    diagError.dismiss()
+                    dialog?.dismiss()
+                }
+
+            }
         }
     }
 

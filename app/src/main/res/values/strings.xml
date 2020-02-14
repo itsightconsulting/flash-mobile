@@ -118,7 +118,7 @@
     <string name="try_again">Intenta de nuevo</string>
 
     <!-- Step 8 Error -->
-    <string name="error_in_scan">Error in scan</string>
+    <string name="error_in_scan">Error en el escaneo</string>
 
     <!-- External links -->
     <string name="chatExternalLink">https://www.marca.com</string>

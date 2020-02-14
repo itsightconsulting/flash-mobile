@@ -78,8 +78,8 @@ class OrdersFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = ordersListAdapter
         }
-        Toast.makeText(context!!, "${safeArgs.dni}", Toast.LENGTH_SHORT).show()
-        Toast.makeText(context!!, "${safeArgs.orders!!.list}", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context!!, "${safeArgs.dni}", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context!!, "${safeArgs.orders!!.list}", Toast.LENGTH_SHORT).show()
 
     }
 }
