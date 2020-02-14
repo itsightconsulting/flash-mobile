@@ -44,6 +44,8 @@ class PreActivationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         forceMinimize(requireActivity(), this)
 
+        // Delete all preferences
+        UserPrefs.clear(FlashApplication.appContext)
 
         this.orderViewModel = ViewModelProviders.of(this).get(OrderViewModel::class.java)
 
@@ -54,10 +56,15 @@ class PreActivationFragment : Fragment() {
             .maxLength(8).active()
 
         btnValidateDocument.setOnClickListener {
-            if(TRICK_GLOBAL == 1){
+            if (TRICK_GLOBAL == 1) {
                 TRICK_GLOBAL = 0
-                (Snackbar.make(this.view!!, "Desea abrir la vista temporal de activaciones?", Snackbar.LENGTH_INDEFINITE).setAction("SI"){
-                    val action = PreActivationFragmentDirections.actionPreActivationFragmentToOrdersFragment()
+                (Snackbar.make(
+                    this.view!!,
+                    "Desea abrir la vista temporal de activaciones?",
+                    Snackbar.LENGTH_INDEFINITE
+                ).setAction("SI") {
+                    val action =
+                        PreActivationFragmentDirections.actionPreActivationFragmentToOrdersFragment()
                     findNavController().navigate(action)
                 }).show()
                 return@setOnClickListener

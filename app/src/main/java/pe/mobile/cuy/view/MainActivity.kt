@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 // Delete all preferences
-                UserPrefs.clear(FlashApplication.appContext)
+                // UserPrefs.clear(FlashApplication.appContext)
 
                 findNavController(R.id.nav_host_fragment).navigate(
                     R.id.preActivationFragment,
