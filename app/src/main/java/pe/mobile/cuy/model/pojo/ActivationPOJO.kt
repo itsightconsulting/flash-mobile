@@ -2,13 +2,13 @@ package pe.mobile.cuy.model.pojo
 
 import java.io.Serializable
 
+// ConsolidatedDataRequest
 class ActivationPOJO(
 
     val formId: String?,
-    val token: String?,
-    val status: Boolean?,
+    val formStatus: String?,
     val iccid: String?,
-    val creationDate: String?, // YYYY-DD-MM HH-mm-ss
+    val formCreationDate: String?, // YYYY-DD-MM HH-mm-ss
 
     val dni: String,
     val name: String,
@@ -21,8 +21,8 @@ class ActivationPOJO(
     val currentCompany: String?,
     val planType: String?,
 
-    val validatedBiometric: Boolean?,
-    val validatedBiometricDate: String? // YYYY-MM-DD HH-mm-ss
+    val validationBiometric: Boolean?,
+    val validationBiometricDate: String? // YYYY-MM-DD HH-mm-ss
 
 ) : Serializable {
     constructor(
@@ -37,7 +37,7 @@ class ActivationPOJO(
         currentCompany: String?,
         planType: String?
     ) : this(
-        null, null, null, null, null,
+        null, null, null, null,
         dni,
         name,
         lastName,
