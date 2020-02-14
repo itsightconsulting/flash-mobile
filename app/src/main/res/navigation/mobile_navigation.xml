@@ -157,5 +157,8 @@
         <action
             android:id="@+id/action_biometricFragment_to_successFragment"
             app:destination="@id/successFragment" />
+        <action
+            android:id="@+id/action_biometricFragment_to_errorFragment"
+            app:destination="@id/errorFragment" />
     </fragment>
 </navigation>

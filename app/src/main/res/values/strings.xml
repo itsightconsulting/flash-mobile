@@ -128,4 +128,7 @@
     <string name="alert_quit_title">¿Deseas abandonar la activación en curso?</string>
     <string name="alert_quit_description">Si lo haces, se perderá tu información y tendrás que comenzar un nuevo proceso de activación.</string>
 
+    <!-- Validation messages -->
+    <string name="dropdown_required">Campo Obligatorio</string>
+
 </resources>

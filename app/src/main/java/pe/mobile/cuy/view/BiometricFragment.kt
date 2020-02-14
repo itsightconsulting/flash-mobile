@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 import pe.mobile.cuy.R
 import pe.mobile.cuy.util.MyVeridiumPreferencesManager
@@ -37,7 +38,7 @@ class BiometricFragment : Fragment() {
 
         imgLeftHand.setOnClickListener {
 
-            val fingerSelected = 2
+            val fingerSelected = 1
             MyVeridiumPreferencesManager.saveFinger(context!!, "$fingerSelected")
 
             launchVeridium(
@@ -48,7 +49,7 @@ class BiometricFragment : Fragment() {
 
         imgRightHand.setOnClickListener {
 
-            val fingerSelected = 7
+            val fingerSelected = 6
             MyVeridiumPreferencesManager.saveFinger(context!!, "$fingerSelected")
             launchVeridium(
                 ExportConfig.CaptureHand.RIGHT_ENFORCED,
@@ -60,7 +61,10 @@ class BiometricFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-        imgLeftHand.setColorFilter(ContextCompat.getColor(context!!, R.color.black), PorterDuff.Mode.SRC_IN)
+//        imgLeftHand.setColorFilter(
+//            ContextCompat.getColor(context!!, R.color.black),
+//            PorterDuff.Mode.SRC_IN
+//        )
     }
 
 
@@ -93,13 +97,20 @@ class BiometricFragment : Fragment() {
             putExtra("uid", "4F")
             putExtra("optional", "true")
             putExtra("validator", "com.veridiumid.sdk.fourf.FourFValidator")
-            action = IVeridiumSDK.ACTION_CAPTURE_8F
+            action = IVeridiumSDK.ACTION_CAPTURE_INDIVIDUALF
         }, 141)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 141) {
+            if (data != null) {
+                val action = BiometricFragmentDirections.actionBiometricFragmentToSuccessFragment()
+                findNavController().navigate(action)
+            } else {
+                val action = BiometricFragmentDirections.actionBiometricFragmentToSuccessFragment()
+                findNavController().navigate(action)
+            }
         }
     }
 }

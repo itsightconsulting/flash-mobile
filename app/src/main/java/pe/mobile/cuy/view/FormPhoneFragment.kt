@@ -37,7 +37,6 @@ class FormPhoneFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         this.validatorMatrix =
             MasterValidation()
                 .valid(etPhoneNumber, true, ::checkPortabilityArtificial)

@@ -216,7 +216,7 @@
             android:text="@string/text_continue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/footerInfo_form" />
+            app:layout_constraintTop_toBottomOf="@id/footerInfo_form"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

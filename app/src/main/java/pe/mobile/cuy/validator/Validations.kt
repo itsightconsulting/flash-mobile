@@ -24,6 +24,7 @@ class Validations(
     val master = masterValidation
     val id = (TextInputEditText ?: autoCompleteTextView!!).id
     val preCallback: (() -> Boolean)? = highPriorityCallback
+    val isAutoCompleteTextView = autoCompleteTextView != null
 
     private var minLen: Int = 0
     private var min: Int = 0
@@ -90,7 +91,7 @@ class Validations(
             Rule(
                 callback = ::flValidateEmail,
                 preReqCallback = preCallback,
-                flMsg = "El correo tiene un formato inválido",
+                flMsg = "Por favor, ingresa un formato de correo válido. Ejemplo: mail@mail.com",
                 ruleId = RULESVAL.EMAIL.value
             )
         )
@@ -113,13 +114,13 @@ class Validations(
         return Patterns.EMAIL_ADDRESS.matcher(editText.text.toString()).matches()
     }
 
-    fun minLength(len: Int): Validations {
+    fun minLength(len: Int, customMessage: String? = null): Validations {
         this.minLen = len
         this.list.add(
             Rule(
                 callback = ::flValidateMinLength,
                 preReqCallback = preCallback,
-                flMsg = "Debe ingresar mínimo $len caracteres",
+                flMsg = customMessage ?: "Debe ingresar mínimo $len caracteres",
                 ruleId = RULESVAL.MIN_LENGTH.value
             )
         )
@@ -139,13 +140,13 @@ class Validations(
         return this
     }
 
-    fun maxLength(len: Int): Validations {
+    fun maxLength(len: Int, customMessage: String? = null): Validations {
         this.maxLen = len
         this.list.add(
             Rule(
                 callback = ::flValidateMaxLength,
                 preReqCallback = preCallback,
-                flMsg = "Debe ingresar máximo $len caracteres",
+                flMsg = customMessage ?: "Debe ingresar máximo $len caracteres",
                 ruleId = RULESVAL.MAX_LENGTH.value
             )
         )
@@ -160,12 +161,14 @@ class Validations(
         return editText.text.toString().isBlank() || editText.text.toString().length <= this.maxLen
     }
 
-    fun required(): Validations {
+    fun required(customMessage: String? = null): Validations {
+        val message = if(isAutoCompleteTextView) "Campo es obligatorio" else "Este campo es obligatorio"
+
         this.list.add(
             Rule(
                 callback = ::flRequired,
                 preReqCallback = preCallback,
-                flMsg = "Este campo es obligatorio",
+                flMsg = customMessage ?: message,
                 ruleId = RULESVAL.REQUIRED.value
             )
         )
