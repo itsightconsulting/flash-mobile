@@ -35,6 +35,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
+var TRICK_GLOBAL = 0
+
 enum class POSTYPES(val value: Int) {
     POS_APPROVED(1),
     POS_APPLICANT(2)
@@ -328,6 +330,18 @@ fun invokerQuitDialog(context: Context): Dialog {
 fun invokerBarcodeSuccess(context: Context): Dialog {
     val dialog = Dialog(context)
     dialog.setContentView(R.layout.info_barcode_success)
+    dialog.setCanceledOnTouchOutside(false)
+    dialog.setCancelable(false)
+    dialog.window!!.setLayout(
+        (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+        WindowManager.LayoutParams.WRAP_CONTENT
+    )
+    return dialog
+}
+
+fun invokerBarcodeError(context: Context): Dialog {
+    val dialog = Dialog(context)
+    dialog.setContentView(R.layout.info_barcode_error)
     dialog.setCanceledOnTouchOutside(false)
     dialog.setCancelable(false)
     dialog.window!!.setLayout(

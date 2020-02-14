@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 
 import pe.mobile.cuy.R
 import kotlinx.android.synthetic.main.success_fragment.*
+import pe.mobile.cuy.util.TRICK_GLOBAL
 
 /**
  * A simple [Fragment] subclass.
@@ -28,6 +29,7 @@ class SuccessFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btnFinalize.setOnClickListener {
+            TRICK_GLOBAL = 1
             val action = SuccessFragmentDirections.actionSuccessFragmentToPreActivationFragment()
             findNavController().navigate(action)
         }

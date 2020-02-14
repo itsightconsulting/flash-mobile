@@ -18,6 +18,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/preActivationFragment"
         android:name="pe.mobile.cuy.view.PreActivationFragment"
@@ -38,6 +39,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/ordersFragment"
         android:name="pe.mobile.cuy.view.OrdersFragment"
@@ -54,6 +56,7 @@
             app:argType="pe.mobile.cuy.model.args.DataResponseVerifyDNIArgs"
             app:nullable="true" />
     </fragment>
+
     <fragment
         android:id="@+id/formFragment"
         android:name="pe.mobile.cuy.view.FormFragment"
@@ -70,6 +73,7 @@
             android:id="@+id/action_formFragment_to_formConfirmFragment"
             app:destination="@id/formConfirmFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/formPhoneFragment"
         android:name="pe.mobile.cuy.view.FormPhoneFragment"
@@ -83,6 +87,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/formConfirmFragment"
         android:name="pe.mobile.cuy.view.FormConfirmFragment"
@@ -99,6 +104,7 @@
             android:id="@+id/action_formConfirmFragment_to_formFragment"
             app:destination="@id/formFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/termsFragment"
         android:name="pe.mobile.cuy.view.TermsFragment"
@@ -110,13 +116,14 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"  />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/simCardFragment"
         android:name="pe.mobile.cuy.view.SimCardFragment"
         android:label="@string/sim_validation"
-        tools:layout="@layout/sim_card_fragment" >
+        tools:layout="@layout/sim_card_fragment">
         <action
             android:id="@+id/action_simCardFragment_to_successFragment"
             app:destination="@id/successFragment" />
@@ -131,11 +138,33 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
+    <fragment
+        android:id="@+id/biometricFragment"
+        android:name="pe.mobile.cuy.view.BiometricFragment"
+        android:label="@string/biometric"
+        tools:layout="@layout/biometric_fragment">
+        <action
+            android:id="@+id/action_biometricFragment_to_successFragment"
+            app:destination="@id/successFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_biometricFragment_to_errorFragment"
+            app:destination="@id/errorFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
     <fragment
         android:id="@+id/successFragment"
         android:name="pe.mobile.cuy.view.SuccessFragment"
         android:label="@string/sim_success"
-        tools:layout="@layout/success_fragment" >
+        tools:layout="@layout/success_fragment">
         <action
             android:id="@+id/action_successFragment_to_preActivationFragment"
             app:destination="@id/preActivationFragment"
@@ -144,21 +173,18 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/errorFragment"
         android:name="pe.mobile.cuy.view.ErrorFragment"
         android:label="@string/empty"
-        tools:layout="@layout/error_fragment" />
-    <fragment
-        android:id="@+id/biometricFragment"
-        android:name="pe.mobile.cuy.view.BiometricFragment"
-        android:label="@string/biometric"
-        tools:layout="@layout/biometric_fragment" >
+        tools:layout="@layout/error_fragment">
         <action
-            android:id="@+id/action_biometricFragment_to_successFragment"
-            app:destination="@id/successFragment" />
-        <action
-            android:id="@+id/action_biometricFragment_to_errorFragment"
-            app:destination="@id/errorFragment" />
+            android:id="@+id/action_errorFragment_to_preActivationFragment"
+            app:destination="@id/preActivationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

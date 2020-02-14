@@ -54,6 +54,14 @@ class PreActivationFragment : Fragment() {
             .maxLength(8).active()
 
         btnValidateDocument.setOnClickListener {
+            if(TRICK_GLOBAL == 1){
+                TRICK_GLOBAL = 0
+                (Snackbar.make(this.view!!, "Desea abrir la vista temporal de activaciones?", Snackbar.LENGTH_INDEFINITE).setAction("SI"){
+                    val action = PreActivationFragmentDirections.actionPreActivationFragmentToOrdersFragment()
+                    findNavController().navigate(action)
+                }).show()
+                return@setOnClickListener
+            }
             if (!this.validatorMatrix.checkValidity()) {
                 this.view?.csSnackbar(
                     "Debe completar los campos requeridos",
