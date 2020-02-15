@@ -49,26 +49,14 @@ class PreActivationFragment : Fragment() {
 
         this.orderViewModel = ViewModelProviders.of(this).get(OrderViewModel::class.java)
 
+        val dniLenMessage = resources.getString(R.string.dni_length)
         this.validatorMatrix = MasterValidation()
             .valid(etDNI, true)
             .required()
-            .minLength(8)
-            .maxLength(8).active()
+            .minLength(8, dniLenMessage)
+            .maxLength(8, dniLenMessage).active()
 
         btnValidateDocument.setOnClickListener {
-            if (TRICK_GLOBAL == 1) {
-                TRICK_GLOBAL = 0
-                (Snackbar.make(
-                    this.view!!,
-                    "Desea abrir la vista temporal de activaciones?",
-                    Snackbar.LENGTH_INDEFINITE
-                ).setAction("SI") {
-                    val action =
-                        PreActivationFragmentDirections.actionPreActivationFragmentToOrdersFragment()
-                    findNavController().navigate(action)
-                }).show()
-                return@setOnClickListener
-            }
             if (!this.validatorMatrix.checkValidity()) {
                 this.view?.csSnackbar(
                     "Debe completar los campos requeridos",

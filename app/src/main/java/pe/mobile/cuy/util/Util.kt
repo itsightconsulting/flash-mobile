@@ -13,7 +13,10 @@ import android.provider.MediaStore
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.view.WindowManager
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
@@ -21,21 +24,18 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import org.json.JSONObject
+import pe.mobile.cuy.FlashApplication
 import pe.mobile.cuy.R
 import pe.mobile.cuy.model.dto.ErrorResponse
 import pe.mobile.cuy.model.dto.OrderInformation
 import pe.mobile.cuy.model.parcelable.OrderInformationArgs
-import org.json.JSONObject
-import pe.mobile.cuy.FlashApplication
 import retrofit2.HttpException
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
-
-var TRICK_GLOBAL = 0
 
 enum class POSTYPES(val value: Int) {
     POS_APPROVED(1),

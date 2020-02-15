@@ -130,5 +130,6 @@
 
     <!-- Validation messages -->
     <string name="dropdown_required">Campo Obligatorio</string>
+    <string name="dni_length">Asegúrate de escribir un número de DNI de 8 dígitos</string>
 
 </resources>

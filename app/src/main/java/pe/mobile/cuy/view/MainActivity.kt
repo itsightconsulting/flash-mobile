@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -116,7 +117,6 @@ class MainActivity : AppCompatActivity() {
         else
             graph.startDestination = R.id.initialFragment
         host.navController.graph = graph
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

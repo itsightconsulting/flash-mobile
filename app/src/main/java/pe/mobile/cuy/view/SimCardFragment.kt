@@ -63,7 +63,6 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                     diagError.dismiss()
                     dialog?.dismiss()
                 }
-
             }
         }
     }
