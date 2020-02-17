@@ -2,10 +2,9 @@ package pe.mobile.cuy.api
 
 import io.reactivex.Single
 import pe.mobile.cuy.model.dto.ConsolidatedDataResponse
+import pe.mobile.cuy.model.dto.VerifyIccidResponse
 import pe.mobile.cuy.util.API_VERSION_V1
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ActivationApi {
     @FormUrlEncoded
@@ -25,6 +24,9 @@ interface ActivationApi {
         @Field("phoneNumber") phoneNumber: String?,
         @Field("planType") planType: String?,
         @Field("validationBiometric") validationBiometric: Boolean,
-        @Field("validationBiometricDate") validationBiometricDate: String
+        @Field("validationBiometricDate") validationBiometricDate: String?
     ): Single<ConsolidatedDataResponse>
+
+    @GET( "$API_VERSION_V1/users")
+    fun validateICCID(@Query("iccid") iccid: String): Single<VerifyIccidResponse>
 }

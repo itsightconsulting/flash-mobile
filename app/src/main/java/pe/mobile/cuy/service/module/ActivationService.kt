@@ -6,10 +6,12 @@ import io.reactivex.Single
 import pe.mobile.cuy.api.ActivationApi
 import pe.mobile.cuy.di.DaggerApiComponent
 import pe.mobile.cuy.model.dto.ConsolidatedDataResponse
+import pe.mobile.cuy.model.dto.VerifyIccidResponse
 import javax.inject.Inject
 
 @Module
 class ActivationService {
+
     @Inject
     lateinit var api: ActivationApi
 
@@ -35,7 +37,7 @@ class ActivationService {
         phoneNumber: String?,
         planType: String?,
         validationBiometric: Boolean,
-        validationBiometricDate: String
+        validationBiometricDate: String?
     ): Single<ConsolidatedDataResponse> = api.saveActivation(
         formId,
         dni,
@@ -53,4 +55,6 @@ class ActivationService {
         validationBiometric,
         validationBiometricDate
     )
+
+    fun validateICCID(iccid: String): Single<VerifyIccidResponse> = api.validateICCID(iccid)
 }

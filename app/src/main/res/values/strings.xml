@@ -116,6 +116,7 @@
     <string name="error_detail">Ocurrió un error durante el proceso de validación.</string>
     <string name="message_support">Intenta de nuevo o contacta a nuestro Centro de Servicio a clientes.</string>
     <string name="try_again">Intenta de nuevo</string>
+    <string name="api_generic_error">Validación fallida</string>
 
     <!-- Step 8 Error -->
     <string name="error_in_scan">Error en el escaneo</string>
@@ -131,5 +132,8 @@
     <!-- Validation messages -->
     <string name="dropdown_required">Campo Obligatorio</string>
     <string name="dni_length">Asegúrate de escribir un número de DNI de 8 dígitos</string>
+
+    <!-- Flash API Date formats -->
+    <string name="datetime_format">YYYY-DD-MM HH-mm-ss</string>
 
 </resources>

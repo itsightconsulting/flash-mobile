@@ -26,7 +26,6 @@
             android:textAlignment="textStart" />
     </FrameLayout>
 
-
     <FrameLayout
         android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
@@ -65,7 +64,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
-
 
     <ImageButton
         android:id="@+id/imageButton"

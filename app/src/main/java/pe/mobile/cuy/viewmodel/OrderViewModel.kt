@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class OrderViewModel(application: Application) : BaseViewModel(application) {
 
-    private val composite = CompositeDisposable()
+    private val disposable = CompositeDisposable()
 
     @Inject
     lateinit var orderService: OrderService
@@ -34,7 +34,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
     fun getAllByDni(dni: String) {
         loading.value = false
 
-        composite.add(
+        disposable.add(
             orderService.findAllByDNI(dni).subscribeOn(Schedulers.newThread()).observeOn(
                 AndroidSchedulers.mainThread()
             ).subscribeWith(object : DisposableSingleObserver<ResponseVerifyDNI>() {
@@ -75,6 +75,6 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
 
     override fun onCleared() {
         super.onCleared()
-        composite.clear()
+        disposable.clear()
     }
 }

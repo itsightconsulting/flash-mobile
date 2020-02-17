@@ -8,21 +8,28 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.*
-import android.widget.*
+import android.widget.Button
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.zxing.Result
 import kotlinx.android.synthetic.main.sim_card_fragment.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import pe.mobile.cuy.R
-import pe.mobile.cuy.util.CustomTypefaceSpan
-import pe.mobile.cuy.util.invokerBarcodeError
-import pe.mobile.cuy.util.invokerBarcodeSuccess
+import pe.mobile.cuy.preferences.UserPrefs
+import pe.mobile.cuy.util.*
+import pe.mobile.cuy.viewmodel.ActivationViewModel
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -33,39 +40,9 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
     private val REQUEST_CAMERA_CAPTURE = 1
     private lateinit var mScannerView: ZXingScannerView
+    private lateinit var activationViewModel: ActivationViewModel
     private var dialog: Dialog? = null
-
-
-    override fun handleResult(rawResult: Result?) {
-        Toast.makeText(context!!, "${rawResult?.text}", Toast.LENGTH_LONG).show()
-//        invokerQuitDialog(context!!).show()
-        mScannerView.stopCamera()
-
-        rawResult?.let {
-            if (it.text.length == 20) {
-
-                val diagSucc = invokerBarcodeSuccess(context!!)
-                diagSucc.show()
-
-                diagSucc.findViewById<Button>(R.id.btnBarcodeSuccess).setOnClickListener {
-                    diagSucc.dismiss()
-                    dialog?.dismiss()
-                    val action =
-                        SimCardFragmentDirections.actionSimCardFragmentToBiometricFragment()
-                    findNavController().navigate(action)
-                }
-            } else {
-
-                val diagError = invokerBarcodeError(context!!)
-                diagError.show()
-
-                diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
-                    diagError.dismiss()
-                    dialog?.dismiss()
-                }
-            }
-        }
-    }
+    private var iccid: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,7 +55,15 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModelInjections()
+        eventListeners()
+    }
 
+    private fun viewModelInjections() {
+        this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
+    }
+
+    private fun eventListeners() {
         imageButton.setOnClickListener {
 
             EasyPermissions.requestPermissions(
@@ -93,6 +78,65 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                     .build()
             )
         }
+
+        activationViewModel.loading.observe(this, Observer { loading ->
+            loading?.let {
+                if (it) {
+                    var error = activationViewModel.loadError.value ?: false
+                    var formError = activationViewModel.formError.value ?: false
+                    if (error) {
+                        val attemps = UserPrefs.getUserBarscanAttempts(context)
+                        if (attemps > 4) {
+                            val form = UserPrefs.getActivation(context)
+                            form.formStatus = FORMSTATUS.REJECTICCD.value
+                            form.formCreationDate = SimpleDateFormat(
+                                resources.getString(R.string.datetime_format),
+                                Locale.getDefault()
+                            ).format(Date())
+                            form.validationBiometric = false
+                            form.iccid = iccid
+                            activationViewModel.sendFormWithStatus(form)
+                            activationViewModel.loadError.value = false
+
+                        } else {
+                            UserPrefs.putUserBarscanAttempts(context)
+                            Toast.makeText(context!!, "Vuelva a intentarlo...", Toast.LENGTH_SHORT).show()
+                            mScannerView.resumeCameraPreview(this)
+                            mScannerView.setResultHandler(this)
+                            mScannerView.startCamera()
+                        }
+
+                    } else if (formError) {
+                        simcardError()
+                    } else {
+
+                        if(UserPrefs.getUserBarscanAttempts(context) > 4){
+                            simcardError()
+                            return@let
+                        }
+
+                        val diagSucc = invokerBarcodeSuccess(context!!)
+                        diagSucc.show()
+
+                        diagSucc.findViewById<Button>(R.id.btnBarcodeSuccess).setOnClickListener {
+                            diagSucc.dismiss()
+                            dialog?.dismiss()
+                            val action =
+                                SimCardFragmentDirections.actionSimCardFragmentToBiometricFragment()
+                            findNavController().navigate(action)
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    private fun simcardError(){
+        UserPrefs.resetUserBarscanAttempts(context)
+        dialog?.dismiss()
+        val action =
+            SimCardFragmentDirections.actionSimCardFragmentToErrorFragment()
+        findNavController().navigate(action)
     }
 
     private fun initBarcodeScanner() {
@@ -188,5 +232,27 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         initBarcodeScanner()
+    }
+
+    override fun handleResult(rawResult: Result?) {
+        Toast.makeText(context!!, "${rawResult?.text}", Toast.LENGTH_LONG).show()
+
+        mScannerView.stopCamera()
+
+        rawResult?.let {
+            if (it.text.length == 20 && validateOnlyNumber(it.text)) {
+                activationViewModel.checkIccidValid(it.text)
+                iccid = it.text
+            } else {
+
+                val diagError = invokerBarcodeError(context!!)
+                diagError.show()
+
+                diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
+                    diagError.dismiss()
+                    dialog?.dismiss()
+                }
+            }
+        }
     }
 }

@@ -51,6 +51,12 @@ enum class RULESVAL(val value: Int) {
     START_WITH(5)
 }
 
+enum class FORMSTATUS(val value: String) {
+    COMPLETED("Completed"),
+    REJECTICCD("Rejected ICCD"),
+    REJECTBIO("Rejected BIO")
+}
+
 enum class PLAN_TYPES(val value: String) {
     POSTPAGO("Postpago"),
     PREPAGO("Prepago")

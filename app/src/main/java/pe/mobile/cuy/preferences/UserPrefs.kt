@@ -7,30 +7,32 @@ import pe.mobile.cuy.model.pojo.ActivationPOJO
 
 object UserPrefs {
 
-    val SYSTEM_TOKEN = "flash.system.prefs.SYSTEM_TOKEN"
-    val USER_TOKEN = "flash.user.prefs.USER_TOKEN"
-    val USER_TOKEN_EXPIRATION_TIME = "flash.user.prefs.USER_TOKEN_EXPIRATION_TIME"
-    val USER_ID = "flash.user.prefs.ID"
-    val USER_NAME = "flash.user.prefs.USER_FIRST_NAME"
-    val USER_LAST_NAME = "flash.user.prefs.USER_LAST_NAME"
-    val USER_EMAIL = "flash.user.prefs.USER_EMAIL"
-    val USER_DNI = "flash.user.prefs.USER_DNI"
-    val USER_REFERRAL_CODE = "flash.user.prefs.REFERRAL_CODE"
-    val USER_REFERRAL_URL = "flash.user.prefs.REFERRAL_URL"
-    val USER_PHONE = "flash.user.prefs.PHONE"
-    val USER_BIOMETRIC_WRONG_ATTEMPTS = "flash.user.prefs.BIOMETRIC_ATTEMPTS"
-    val USER_HIDE_CAROUSEL = "flash.user.prefs.HIDE_CAROUSEL"
+    private val SYSTEM_TOKEN = "flash.system.prefs.SYSTEM_TOKEN"
+    private val USER_TOKEN = "flash.user.prefs.USER_TOKEN"
+    private val USER_TOKEN_EXPIRATION_TIME = "flash.user.prefs.USER_TOKEN_EXPIRATION_TIME"
+    private val USER_ID = "flash.user.prefs.ID"
+    private val USER_NAME = "flash.user.prefs.USER_FIRST_NAME"
+    private val USER_LAST_NAME = "flash.user.prefs.USER_LAST_NAME"
+    private val USER_EMAIL = "flash.user.prefs.USER_EMAIL"
+    private val USER_DNI = "flash.user.prefs.USER_DNI"
+    private val USER_REFERRAL_CODE = "flash.user.prefs.REFERRAL_CODE"
+    private val USER_REFERRAL_URL = "flash.user.prefs.REFERRAL_URL"
+    private val USER_PHONE = "flash.user.prefs.PHONE"
+    private val USER_BIOMETRIC_WRONG_ATTEMPTS = "flash.user.prefs.BIOMETRIC_ATTEMPTS"
+    private val USER_ICCID_WRONG_ATTEMPTS = "flash.user.prefs.BIOMETRIC_ATTEMPTS"
+    private val USER_HIDE_CAROUSEL = "flash.user.prefs.HIDE_CAROUSEL"
 
-    val ACTIVATION_DNI = "flash.user.prefs.ACTIVATION_DNI"
-    val ACTIVATION_NAME = "flash.user.prefs.ACTIVATION_NAME"
-    val ACTIVATION_LASTNAME = "flash.user.prefs.ACTIVATION_LASTNAME"
-    val ACTIVATION_BIRTHDATE = "flash.user.prefs.ACTIVATION_BIRTHDATE"
-    val ACTIVATION_EMAIL = "flash.user.prefs.ACTIVATION_EMAIL"
-    val ACTIVATION_WANT_TO_PORTABILITY = "flash.user.prefs.ACTIVATION_WANT_TO_PORTABILITY"
-    val ACTIVATION_SPONSORTEAMID = "flash.user.prefs.ACTIVATION_SPONSORTEAMID"
-    val ACTIVATION_PHONENUMBER = "flash.user.prefs.ACTIVATION_PHONENUMBER"
-    val ACTIVATION_CURRENTCOMPANY = "flash.user.prefs.ACTIVATION_CURRENTCOMPANY"
-    val ACTIVATION_PLANTYPE = "flash.user.prefs.ACTIVATION_PLANTYPE"
+    private val ACTIVATION_DNI = "flash.user.prefs.ACTIVATION_DNI"
+    private val ACTIVATION_NAME = "flash.user.prefs.ACTIVATION_NAME"
+    private val ACTIVATION_LASTNAME = "flash.user.prefs.ACTIVATION_LASTNAME"
+    private val ACTIVATION_BIRTHDATE = "flash.user.prefs.ACTIVATION_BIRTHDATE"
+    private val ACTIVATION_EMAIL = "flash.user.prefs.ACTIVATION_EMAIL"
+    private val ACTIVATION_WANT_TO_PORTABILITY = "flash.user.prefs.ACTIVATION_WANT_TO_PORTABILITY"
+    private val ACTIVATION_SPONSORTEAMID = "flash.user.prefs.ACTIVATION_SPONSORTEAMID"
+    private val ACTIVATION_PHONENUMBER = "flash.user.prefs.ACTIVATION_PHONENUMBER"
+    private val ACTIVATION_ICCID = "flash.user.prefs.ACTIVATION_ICCID"
+    private val ACTIVATION_CURRENTCOMPANY = "flash.user.prefs.ACTIVATION_CURRENTCOMPANY"
+    private val ACTIVATION_PLANTYPE = "flash.user.prefs.ACTIVATION_PLANTYPE"
 
 
     fun setSystemToken(context: Context?, systemToken: String) {
@@ -90,6 +92,25 @@ object UserPrefs {
             remove(ACTIVATION_PHONENUMBER)
             remove(ACTIVATION_CURRENTCOMPANY)
             remove(ACTIVATION_PLANTYPE)
+            remove(ACTIVATION_ICCID)
+        }
+    }
+
+    fun resetUserBarscanAttempts(context: Context?) {
+        PreferenceManager.getDefaultSharedPreferences(context).put {
+            putInt(USER_ICCID_WRONG_ATTEMPTS, 0)
+        }
+    }
+
+    fun putUserBarscanAttempts(context: Context?) {
+        PreferenceManager.getDefaultSharedPreferences(context).put {
+            putInt(USER_ICCID_WRONG_ATTEMPTS, getUserBarscanAttempts(context)+1)
+        }
+    }
+
+    fun getUserBarscanAttempts(context: Context?): Int {
+        return PreferenceManager.getDefaultSharedPreferences(context).get {
+            getInt(USER_ICCID_WRONG_ATTEMPTS, 0)
         }
     }
 
