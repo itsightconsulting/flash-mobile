@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import pe.mobile.cuy.util.RecyclerViewOnItemClickListener
 import pe.mobile.cuy.view.adapter.OrdersListAdapter
 import pe.mobile.cuy.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.orders_fragment.*
+import pe.mobile.cuy.model.pojo.ActivationPOJO
 
 /**
  * A simple [Fragment] subclass.
@@ -39,8 +41,65 @@ class OrdersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         this.orderViewModel = ViewModelProviders.of(this).get(OrderViewModel::class.java)
 
+        //if (orderViewModel.userHasOrders) { ArrayList<ActivationPOJO>()
+        // arrayListOf(this.orderViewModel.lstOrder)
+
         ordersListAdapter = OrdersListAdapter(
-            arrayListOf(
+            arrayListOf()
+            , object : RecyclerViewOnItemClickListener<ActivationPOJO> {
+                override fun onItemClicked(posApplicant: ActivationPOJO) {
+                    Toast.makeText(context!!, "${posApplicant.formId}", Toast.LENGTH_SHORT)
+                        .show()
+//                    findNavController().navigate(action)
+//                    Navigation.createNavigateOnClickListener(R.id.action_contactsFragment_to_contactProfileFragment)
+                }
+
+                override fun onCallButtonClicked(posApplicant: ActivationPOJO) {
+                    Toast.makeText(context!!, "${posApplicant.formId}", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        )
+        ordersList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = ordersListAdapter
+        }
+
+        //} else {
+
+        //}
+//        Toast.makeText(context!!, "${safeArgs.dni}", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context!!, "${safeArgs.orders!!.list}", Toast.LENGTH_SHORT).show()
+
+    }
+
+    fun bindOrders() {
+        this.orderViewModel.loadError.observe(this, Observer { loadError ->
+            loadError?.let {
+                if (loadError) {
+                    ordersListAdapter.updateordersList(orderViewModel.lstOrder.value!!)
+                    //ordersError.visibility = View.VISIBLE
+                    ordersList.visibility = View.GONE
+                    //pbOrders.visibility = View.GONE
+                }
+            }
+        })
+
+        orderViewModel.loading.observe(this, Observer { loading ->
+            loading?.let {
+                if (!loading) {
+                    ordersListAdapter.updateordersList(orderViewModel.lstOrder.value!!)
+                    ordersList.visibility = View.VISIBLE
+                    //ordersError.visibility = View.GONE
+                    //pbOrders.visibility = View.GONE
+                }
+            }
+        })
+    }
+}
+
+/*
+arrayListOf(
                 OrderPOJO(
                     "Activation & portability",
                     "15/01/2020 at 09:45 am",
@@ -59,27 +118,5 @@ class OrdersFragment : Fragment() {
                     "Phone number: 92726-3521"
                 ),
                 OrderPOJO("New phone number activation ", "18/01/2020 at 02:10 pm", "")
-            ),
-            object : RecyclerViewOnItemClickListener<OrderPOJO> {
-                override fun onItemClicked(posApplicant: OrderPOJO) {
-                    Toast.makeText(context!!, "${posApplicant.timestamp}", Toast.LENGTH_SHORT)
-                        .show()
-//                    findNavController().navigate(action)
-//                    Navigation.createNavigateOnClickListener(R.id.action_contactsFragment_to_contactProfileFragment)
-                }
-
-                override fun onCallButtonClicked(posApplicant: OrderPOJO) {
-                    Toast.makeText(context!!, "${posApplicant.timestamp}", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        )
-        ordersList.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ordersListAdapter
-        }
-//        Toast.makeText(context!!, "${safeArgs.dni}", Toast.LENGTH_SHORT).show()
-//        Toast.makeText(context!!, "${safeArgs.orders!!.list}", Toast.LENGTH_SHORT).show()
-
-    }
-}
+            )
+ */

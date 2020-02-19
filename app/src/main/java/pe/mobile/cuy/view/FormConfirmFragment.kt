@@ -11,6 +11,7 @@ import pe.mobile.cuy.R
 import kotlinx.android.synthetic.main.form_confirm_fragment.*
 import pe.mobile.cuy.FlashApplication
 import pe.mobile.cuy.preferences.UserPrefs
+import pe.mobile.cuy.util.changeDateFormat
 
 /**
  * A simple [Fragment] subclass.
@@ -32,6 +33,12 @@ class FormConfirmFragment : Fragment() {
         showInformation()
 
         btn_confirm.setOnClickListener {
+
+            var oActivation = UserPrefs.getActivation(FlashApplication.appContext)
+            if (oActivation == null) throw  Resources.NotFoundException()
+
+            UserPrefs.putActivation(FlashApplication.appContext, oActivation)
+
             val action =
                 FormConfirmFragmentDirections.actionFormConfirmFragmentToTermsFragment()
             findNavController().navigate(action)

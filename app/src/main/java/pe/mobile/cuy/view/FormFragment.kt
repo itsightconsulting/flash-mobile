@@ -157,12 +157,12 @@ class FormFragment : Fragment() {
         // val fechaFormat: String = changeDateFormat(fecha, "MM/dd/yyyy", null)
         val ActivationPOJO = ActivationPOJO(
             dni!!,
-            etName.text.toString(),
-            etLastName.text.toString(),
+            etName.text.toString().trim(),
+            etLastName.text.toString().trim(),
             etDateOfBirth.text.toString(),
             etEmail.text.toString(),
             estado,
-            etSponserTeamID.text.toString(),
+            etSponserTeamID.text.toString().trim(),
             oActivation.phoneNumber,
             oActivation.currentCompany,
             oActivation.planType

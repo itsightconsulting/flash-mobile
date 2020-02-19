@@ -9,14 +9,16 @@ import pe.mobile.cuy.R
 import pe.mobile.cuy.model.pojo.OrderPOJO
 import pe.mobile.cuy.util.RecyclerViewOnItemClickListener
 import kotlinx.android.synthetic.main.item_order.view.*
+import pe.mobile.cuy.model.pojo.ActivationPOJO
+import pe.mobile.cuy.util.changeDateFormat
 import java.util.*
 
 class OrdersListAdapter(
-    val ordersList: ArrayList<OrderPOJO>
-    , val itemClickListener: RecyclerViewOnItemClickListener<OrderPOJO>
+    val ordersList: ArrayList<ActivationPOJO>
+    , val itemClickListener: RecyclerViewOnItemClickListener<ActivationPOJO>
 ) : RecyclerView.Adapter<OrdersListAdapter.ContactViewHolder>() {
 
-    fun updateordersList(newordersList: List<OrderPOJO>) {
+    fun updateordersList(newordersList: List<ActivationPOJO>) {
         ordersList.clear()
         ordersList.addAll(newordersList)
         notifyDataSetChanged()
@@ -31,9 +33,13 @@ class OrdersListAdapter(
     override fun getItemCount() = ordersList.size
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        holder.view.orderType.text = ordersList[position].type
-        holder.view.orderDate.text = ordersList[position].timestamp
-        holder.view.orderNumber.text = ordersList[position].number
+        if (ordersList[position].wantPortability){
+            holder.view.orderType.text = "Activación y portabilidad"
+            holder.view.orderNumber.text = "Número telefónico: " + ordersList[position].phoneNumber
+        }
+        else holder.view.orderType.text = "Activación de nuevo número telefónico"
+
+        //holder.view.orderDate.text = changeDateFormat(ordersList[position].formCreationDate!!,"dd/MM/yyyy a las HH:mm","yyyy-MM-dd HH:mm:ss") //  + " a las " + ordersList[position].formCreationDate
         val ordersList = ordersList[position]
         holder.bind(ordersList, itemClickListener)
     }
@@ -42,10 +48,14 @@ class OrdersListAdapter(
         private val type: TextView = view.orderType
 
         fun bind(
-            posApplicant: OrderPOJO,
-            clickListener: RecyclerViewOnItemClickListener<OrderPOJO>
+            posApplicant: ActivationPOJO,
+            clickListener: RecyclerViewOnItemClickListener<ActivationPOJO>
         ) {
-            type.text = posApplicant.type
+            if (posApplicant.wantPortability)
+                type.text = "Activación y portabilidad"
+            type.text = "Activación de nuevo número telefónico"
+
+            //type.text = posApplicant.type
 
             itemView.setOnClickListener {
                 clickListener.onItemClicked(posApplicant)

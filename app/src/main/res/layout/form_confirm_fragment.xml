@@ -154,6 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:width="110dp"
                     android:text="@string/date_of_birth" />
 
                 <TextView

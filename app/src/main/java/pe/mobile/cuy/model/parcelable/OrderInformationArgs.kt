@@ -11,7 +11,7 @@ data class OrderInformationArgs(val id: String?,
                                 val birthDate: String?,
                                 val email: String?,
                                 val wantPortability: Boolean,
-                                val phoneNumber: String,
+                                val phoneNumber: String?,
                                 val currentCompany: String?,
                                 val status: String?,
                                 val creationDate: String?): Parcelable{

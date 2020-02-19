@@ -95,12 +95,17 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             ).format(Date())
                             form.validationBiometric = false
                             form.iccid = iccid
+                            form.birthDate =
+                                changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
+                            form.planType = getPlanType(form.planType!!)
+
                             activationViewModel.sendFormWithStatus(form)
                             activationViewModel.loadError.value = false
 
                         } else {
                             UserPrefs.putUserBarscanAttempts(context)
-                            Toast.makeText(context!!, "Vuelva a intentarlo...", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context!!, "Vuelva a intentarlo...", Toast.LENGTH_SHORT)
+                                .show()
                             mScannerView.resumeCameraPreview(this)
                             mScannerView.setResultHandler(this)
                             mScannerView.startCamera()
@@ -110,7 +115,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                         simcardError()
                     } else {
 
-                        if(UserPrefs.getUserBarscanAttempts(context) > 4){
+                        if (UserPrefs.getUserBarscanAttempts(context) > 4) {
                             simcardError()
                             return@let
                         }
@@ -131,7 +136,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         })
     }
 
-    private fun simcardError(){
+    private fun simcardError() {
         UserPrefs.resetUserBarscanAttempts(context)
         dialog?.dismiss()
         val action =

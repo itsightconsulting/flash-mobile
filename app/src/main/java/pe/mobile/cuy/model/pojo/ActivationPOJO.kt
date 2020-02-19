@@ -13,13 +13,13 @@ data class ActivationPOJO(
     val dni: String,
     val name: String,
     val lastName: String,
-    val birthDate: String, // YYYY-MM-DD
+    var birthDate: String, // YYYY-MM-DD
     val email: String,
     val wantPortability: Boolean,
     val sponsorTeamId: String?,
     val phoneNumber: String?,
     val currentCompany: String?,
-    val planType: String?,
+    var planType: String?,
 
     var validationBiometric: Boolean?,
     var validationBiometricDate: String? // YYYY-MM-DD HH-mm-ss

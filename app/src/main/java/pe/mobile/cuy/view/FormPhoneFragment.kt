@@ -107,9 +107,9 @@ class FormPhoneFragment : Fragment() {
                 oActivation.email,
                 oActivation.wantPortability,
                 oActivation.sponsorTeamId,
-                etPhoneNumber.text.toString(),
-                acCurrentCompany.text.toString(),
-                acPlanType.text.toString()
+                etPhoneNumber.text.toString().trim(),
+                acCurrentCompany.text.toString().trim(),
+                acPlanType.text.toString().trim()
             )
             UserPrefs.putActivation(FlashApplication.appContext, ActivationPOJO)
 
@@ -121,6 +121,5 @@ class FormPhoneFragment : Fragment() {
                 "Debe completar los campos requeridos",
                 Snackbar.LENGTH_LONG
             )
-
     }
 }

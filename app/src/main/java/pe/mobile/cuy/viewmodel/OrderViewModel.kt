@@ -10,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import pe.mobile.cuy.model.pojo.ActivationPOJO
 import java.util.*
 import javax.inject.Inject
 
@@ -20,7 +21,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
     @Inject
     lateinit var orderService: OrderService
 
-    var lstOrder = MutableLiveData<List<OrderInformation>>()
+    var lstOrder = MutableLiveData<List<ActivationPOJO>>()
     val loading = MutableLiveData<Boolean>()
     val loadError = MutableLiveData<Boolean>()
     var userHasOrders: Boolean = false
@@ -39,14 +40,15 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 AndroidSchedulers.mainThread()
             ).subscribeWith(object : DisposableSingleObserver<ResponseVerifyDNI>() {
                 override fun onSuccess(t: ResponseVerifyDNI) {
-                    userHasOrders = true
-                    lstOrder.value = t.data.formsInformation
+                    userHasOrders = t.data.count() > 0
+                    lstOrder.value = t.data//.formsInformation
                     loading.value = true
                     loadError.value = false
                 }
 
                 override fun onError(e: Throwable) {
-                    userHasOrders = false
+                    // userHasOrders = false
+                    /*
                     lstOrder.value = arrayListOf(
                         OrderInformation(
                             "",
@@ -63,8 +65,9 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                             ""
                         )
                     )
+                     */
                     loading.value = true
-                    loadError.value = false
+                    loadError.value = true
 
                     /*errorMessage = instanceHttpError(e).message
                     loadError.value = true*/

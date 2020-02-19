@@ -30,6 +30,8 @@ import pe.mobile.cuy.R
 import pe.mobile.cuy.model.dto.ErrorResponse
 import pe.mobile.cuy.model.dto.OrderInformation
 import pe.mobile.cuy.model.parcelable.OrderInformationArgs
+import pe.mobile.cuy.model.pojo.ActivationPOJO
+import pe.mobile.cuy.model.pojo.OrderPOJO
 import retrofit2.HttpException
 import java.io.File
 import java.io.IOException
@@ -372,7 +374,8 @@ fun Boolean.nextEvaluation(
     return this
 }
 
-fun orderInformationToArgs(
+
+fun orderInformationToArgsBase(
     orders: List<OrderInformation>,
     ordersArgs: ArrayList<OrderInformationArgs>
 ): ArrayList<OrderInformationArgs> {
@@ -396,6 +399,32 @@ fun orderInformationToArgs(
     }
     return ordersArgs
 }
+
+fun orderInformationToArgs(
+    orders: List<ActivationPOJO>,
+    ordersArgs: ArrayList<OrderInformationArgs>
+): ArrayList<OrderInformationArgs> {
+    orders.forEach {
+        ordersArgs.add(
+            OrderInformationArgs(
+                it.formId,
+                it.planType,
+                it.sponsorTeamId,
+                it.name,
+                it.lastName,
+                it.birthDate,
+                it.email,
+                it.wantPortability,
+                it.phoneNumber,
+                it.currentCompany,
+                it.formStatus,
+                it.formCreationDate
+            )
+        )
+    }
+    return ordersArgs
+}
+
 
 fun changeDateFormat(dateStr: String, formatoFin: String, _formatoInit: String?): String {
     var formatoInit = _formatoInit

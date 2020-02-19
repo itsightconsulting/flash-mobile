@@ -33,17 +33,17 @@ object UserPrefs {
     private val ACTIVATION_ICCID = "flash.user.prefs.ACTIVATION_ICCID"
     private val ACTIVATION_CURRENTCOMPANY = "flash.user.prefs.ACTIVATION_CURRENTCOMPANY"
     private val ACTIVATION_PLANTYPE = "flash.user.prefs.ACTIVATION_PLANTYPE"
+    private val API_TOKEN = "API_TOKEN"
 
-
-    fun setSystemToken(context: Context?, systemToken: String) {
+    fun setApiToken(context: Context?, apiToken: String) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
-            putString(SYSTEM_TOKEN, systemToken)
+            putString(API_TOKEN, apiToken)
         }
     }
 
-    fun getSystemToken(context: Context?): String {
+    fun getApiToken(context: Context?): String {
         return PreferenceManager.getDefaultSharedPreferences(context).get {
-            getString(SYSTEM_TOKEN, "")!!
+            getString(API_TOKEN, "")!!
         }
     }
 
@@ -104,7 +104,7 @@ object UserPrefs {
 
     fun putUserBarscanAttempts(context: Context?) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
-            putInt(USER_ICCID_WRONG_ATTEMPTS, getUserBarscanAttempts(context)+1)
+            putInt(USER_ICCID_WRONG_ATTEMPTS, getUserBarscanAttempts(context) + 1)
         }
     }
 

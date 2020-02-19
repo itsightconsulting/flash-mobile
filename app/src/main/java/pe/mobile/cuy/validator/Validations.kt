@@ -194,7 +194,7 @@ class Validations(
     }
 
     fun flRequired(): Boolean {
-        return editText.text.toString().isNotEmpty()
+        return editText.text.toString().trim().isNotEmpty()
     }
 
     fun flStartWith(): Boolean {

@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 //        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
 //        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
 
+        UserPrefs.setApiToken(FlashApplication.appContext, "key_access")
         setContentView(R.layout.navigation_activity)
 
         //Load nav host fragment

@@ -135,5 +135,6 @@
 
     <!-- Flash API Date formats -->
     <string name="datetime_format">YYYY-DD-MM HH-mm-ss</string>
-
+    <string name="title_activation">Activación de nuevo número telefónico</string>
+    <string name="title_activation_portability">Activación y portabilidad</string>
 </resources>
