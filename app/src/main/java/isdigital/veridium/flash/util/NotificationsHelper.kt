@@ -1,3 +1,4 @@
+/*
 package isdigital.veridium.flash.util
 
 import android.app.NotificationChannel
@@ -53,4 +54,4 @@ class NotificationsHelper(val context: Context) {
             notificationManager.createNotificationChannel(channel)
         }
     }
-}
+}*/
