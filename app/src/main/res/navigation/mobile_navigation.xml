@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/initialFragment"
-        android:name="pe.mobile.cuy.view.InitialFragment"
+        android:name="isdigital.veridium.flash.view.InitialFragment"
         android:label="@string/flash_mobile_peru"
         tools:layout="@layout/initial_fragment">
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/preActivationFragment"
-        android:name="pe.mobile.cuy.view.PreActivationFragment"
+        android:name="isdigital.veridium.flash.view.PreActivationFragment"
         android:label="@string/welcome_to_activa_tu_flash"
         tools:layout="@layout/pre_activation_fragment">
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/ordersFragment"
-        android:name="pe.mobile.cuy.view.OrdersFragment"
+        android:name="isdigital.veridium.flash.view.OrdersFragment"
         android:label="@string/web_activation_orders"
         tools:layout="@layout/orders_fragment">
         <argument
@@ -53,13 +53,13 @@
         <argument
             android:name="orders"
             android:defaultValue="@null"
-            app:argType="pe.mobile.cuy.model.args.DataResponseVerifyDNIArgs"
+            app:argType="isdigital.veridium.flash.model.args.DataResponseVerifyDNIArgs"
             app:nullable="true" />
     </fragment>
 
     <fragment
         android:id="@+id/formFragment"
-        android:name="pe.mobile.cuy.view.FormFragment"
+        android:name="isdigital.veridium.flash.view.FormFragment"
         android:label="@string/flash_activation_form"
         tools:layout="@layout/form_fragment">
         <action
@@ -76,7 +76,7 @@
 
     <fragment
         android:id="@+id/formPhoneFragment"
-        android:name="pe.mobile.cuy.view.FormPhoneFragment"
+        android:name="isdigital.veridium.flash.view.FormPhoneFragment"
         android:label="@string/flash_activation_form"
         tools:layout="@layout/form_phone_fragment">
         <action
@@ -90,7 +90,7 @@
 
     <fragment
         android:id="@+id/formConfirmFragment"
-        android:name="pe.mobile.cuy.view.FormConfirmFragment"
+        android:name="isdigital.veridium.flash.view.FormConfirmFragment"
         android:label="@string/flash_activation_form"
         tools:layout="@layout/form_confirm_fragment">
         <action
@@ -107,7 +107,7 @@
 
     <fragment
         android:id="@+id/termsFragment"
-        android:name="pe.mobile.cuy.view.TermsFragment"
+        android:name="isdigital.veridium.flash.view.TermsFragment"
         android:label="@string/flash_activation_form"
         tools:layout="@layout/terms_fragment">
         <action
@@ -121,7 +121,7 @@
 
     <fragment
         android:id="@+id/simCardFragment"
-        android:name="pe.mobile.cuy.view.SimCardFragment"
+        android:name="isdigital.veridium.flash.view.SimCardFragment"
         android:label="@string/sim_validation"
         tools:layout="@layout/sim_card_fragment">
         <action
@@ -141,7 +141,7 @@
 
     <fragment
         android:id="@+id/biometricFragment"
-        android:name="pe.mobile.cuy.view.BiometricFragment"
+        android:name="isdigital.veridium.flash.view.BiometricFragment"
         android:label="@string/biometric"
         tools:layout="@layout/biometric_fragment">
         <action
@@ -162,7 +162,7 @@
 
     <fragment
         android:id="@+id/successFragment"
-        android:name="pe.mobile.cuy.view.SuccessFragment"
+        android:name="isdigital.veridium.flash.view.SuccessFragment"
         android:label="@string/sim_success"
         tools:layout="@layout/success_fragment">
         <action
@@ -176,7 +176,7 @@
 
     <fragment
         android:id="@+id/errorFragment"
-        android:name="pe.mobile.cuy.view.ErrorFragment"
+        android:name="isdigital.veridium.flash.view.ErrorFragment"
         android:label="@string/empty"
         tools:layout="@layout/error_fragment">
         <action

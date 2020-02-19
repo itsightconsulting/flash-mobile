@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
-    <pe.veridiumid.sdk.fourf.defaultui.activity.SlidingImageView
+    <isdigital.veridiumid.sdk.fourf.defaultui.activity.SlidingImageView
 
         android:id="@+id/processing_fingerprint"
         android:layout_width="wrap_content"

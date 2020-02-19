@@ -10,7 +10,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "pe.mobile.cuy"
+        applicationId "isdigital.veridium.flash"
         minSdkVersion 19
         targetSdkVersion 29
         multiDexEnabled true
@@ -103,13 +103,13 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    api project(':analytics')
-    api project(':biometricsupport')
-    api project(':core')
-    api project(':defaultdata')
-    api project(':fourfimaging')
-    api project(':fourfnative')
-    api project(':sdk')
-    implementation project(':veridium-licensing')
-    implementation project(':fourfdefaultui')
+//    api project(':analytics')
+//    api project(':biometricsupport')
+//    api project(':core')
+//    api project(':defaultdata')
+//    api project(':fourfimaging')
+//    api project(':fourfnative')
+//    api project(':sdk')
+//    implementation project(':veridium-licensing')
+//    implementation project(':fourfdefaultui')
 }
