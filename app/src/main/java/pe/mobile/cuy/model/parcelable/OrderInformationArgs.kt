@@ -14,7 +14,7 @@ data class OrderInformationArgs(val id: String?,
                                 val phoneNumber: String?,
                                 val currentCompany: String?,
                                 val status: String?,
-                                val creationDate: String?): Parcelable{
+                                val formCreationDate: String?): Parcelable{
 
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -43,7 +43,7 @@ data class OrderInformationArgs(val id: String?,
         dest.writeString(phoneNumber)
         dest.writeString(currentCompany)
         dest.writeString(status)
-        dest.writeString(creationDate)
+        dest.writeString(formCreationDate)
     }
 
     override fun describeContents(): Int {

@@ -17,6 +17,8 @@ import pe.mobile.cuy.util.RecyclerViewOnItemClickListener
 import pe.mobile.cuy.view.adapter.OrdersListAdapter
 import pe.mobile.cuy.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.orders_fragment.*
+import pe.mobile.cuy.model.args.DataResponseVerifyDNIArgs
+import pe.mobile.cuy.model.parcelable.OrderInformationArgs
 import pe.mobile.cuy.model.pojo.ActivationPOJO
 
 /**
@@ -39,32 +41,32 @@ class OrdersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        this.orderViewModel = ViewModelProviders.of(this).get(OrderViewModel::class.java)
 
         //if (orderViewModel.userHasOrders) { ArrayList<ActivationPOJO>()
         // arrayListOf(this.orderViewModel.lstOrder)
+        val myArgs = arguments!!.getParcelable<DataResponseVerifyDNIArgs>("orders")
 
         ordersListAdapter = OrdersListAdapter(
-            arrayListOf()
-            , object : RecyclerViewOnItemClickListener<ActivationPOJO> {
-                override fun onItemClicked(posApplicant: ActivationPOJO) {
-                    Toast.makeText(context!!, "${posApplicant.formId}", Toast.LENGTH_SHORT)
+            myArgs!!.list
+            , object : RecyclerViewOnItemClickListener<OrderInformationArgs> {
+                override fun onItemClicked(posApplicant: OrderInformationArgs) {
+                    Toast.makeText(context!!, "${posApplicant.id}", Toast.LENGTH_SHORT)
                         .show()
 //                    findNavController().navigate(action)
 //                    Navigation.createNavigateOnClickListener(R.id.action_contactsFragment_to_contactProfileFragment)
                 }
 
-                override fun onCallButtonClicked(posApplicant: ActivationPOJO) {
-                    Toast.makeText(context!!, "${posApplicant.formId}", Toast.LENGTH_SHORT)
+                override fun onCallButtonClicked(posApplicant: OrderInformationArgs) {
+                    Toast.makeText(context!!, "${posApplicant.id}", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
         )
+        orderViewModel = ViewModelProviders.of(this).get(OrderViewModel::class.java)
         ordersList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = ordersListAdapter
         }
-
         //} else {
 
         //}
@@ -73,29 +75,6 @@ class OrdersFragment : Fragment() {
 
     }
 
-    fun bindOrders() {
-        this.orderViewModel.loadError.observe(this, Observer { loadError ->
-            loadError?.let {
-                if (loadError) {
-                    ordersListAdapter.updateordersList(orderViewModel.lstOrder.value!!)
-                    //ordersError.visibility = View.VISIBLE
-                    ordersList.visibility = View.GONE
-                    //pbOrders.visibility = View.GONE
-                }
-            }
-        })
-
-        orderViewModel.loading.observe(this, Observer { loading ->
-            loading?.let {
-                if (!loading) {
-                    ordersListAdapter.updateordersList(orderViewModel.lstOrder.value!!)
-                    ordersList.visibility = View.VISIBLE
-                    //ordersError.visibility = View.GONE
-                    //pbOrders.visibility = View.GONE
-                }
-            }
-        })
-    }
 }
 
 /*

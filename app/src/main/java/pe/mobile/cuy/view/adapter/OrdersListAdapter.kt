@@ -9,16 +9,17 @@ import pe.mobile.cuy.R
 import pe.mobile.cuy.model.pojo.OrderPOJO
 import pe.mobile.cuy.util.RecyclerViewOnItemClickListener
 import kotlinx.android.synthetic.main.item_order.view.*
+import pe.mobile.cuy.model.parcelable.OrderInformationArgs
 import pe.mobile.cuy.model.pojo.ActivationPOJO
 import pe.mobile.cuy.util.changeDateFormat
 import java.util.*
 
 class OrdersListAdapter(
-    val ordersList: ArrayList<ActivationPOJO>
-    , val itemClickListener: RecyclerViewOnItemClickListener<ActivationPOJO>
+    val ordersList: ArrayList<OrderInformationArgs>
+    , val itemClickListener: RecyclerViewOnItemClickListener<OrderInformationArgs>
 ) : RecyclerView.Adapter<OrdersListAdapter.ContactViewHolder>() {
 
-    fun updateordersList(newordersList: List<ActivationPOJO>) {
+    fun updateordersList(newordersList: List<OrderInformationArgs>) {
         ordersList.clear()
         ordersList.addAll(newordersList)
         notifyDataSetChanged()
@@ -39,7 +40,7 @@ class OrdersListAdapter(
         }
         else holder.view.orderType.text = "Activación de nuevo número telefónico"
 
-        //holder.view.orderDate.text = changeDateFormat(ordersList[position].formCreationDate!!,"dd/MM/yyyy a las HH:mm","yyyy-MM-dd HH:mm:ss") //  + " a las " + ordersList[position].formCreationDate
+        holder.view.orderDate.text = changeDateFormat(ordersList[position].formCreationDate!!,"dd/MM/yyyy HH:mm","yyyy-MM-dd HH:mm:ss") //  + " a las " + ordersList[position].formCreationDate
         val ordersList = ordersList[position]
         holder.bind(ordersList, itemClickListener)
     }
@@ -48,8 +49,8 @@ class OrdersListAdapter(
         private val type: TextView = view.orderType
 
         fun bind(
-            posApplicant: ActivationPOJO,
-            clickListener: RecyclerViewOnItemClickListener<ActivationPOJO>
+            posApplicant: OrderInformationArgs,
+            clickListener: RecyclerViewOnItemClickListener<OrderInformationArgs>
         ) {
             if (posApplicant.wantPortability)
                 type.text = "Activación y portabilidad"

@@ -19,7 +19,6 @@
             android:id="@+id/orderType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/web_activation_order_type_ph"
             android:layout_marginTop="8dp"
             style="@style/subtitles_fields"/>
 
@@ -27,7 +26,6 @@
             android:id="@+id/orderDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/web_activation_order_date_ph"
             android:layout_marginTop="8dp"
             style="@style/summary_text"/>
 
@@ -35,7 +33,6 @@
             android:id="@+id/orderNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/web_activation_order_number_ph"
             android:layout_marginTop="8dp"
             android:paddingBottom="8dp"
             style="@style/summary_text"/>
