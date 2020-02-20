@@ -16,6 +16,8 @@
     <color name="black">#000</color>
     <color name="sand">#f2eddf</color>
     <color name="light_sec">#cdc7ce</color>
+    <color name="transparent">#00000000</color>
+    <color name="light_gray">#F4F4F4</color>
 
 
     <!-- Colors error -->
