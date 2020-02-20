@@ -9,15 +9,16 @@ import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.veridiumid.sdk.imaging.SimpleCameraImagingSampler;
-import com.veridiumid.sdk.support.ui.AspectRatioSafeFrameLayout;
+import androidx.annotation.NonNull;
+
 import com.veridiumid.sdk.fourf.defaultui.R;
 import com.veridiumid.sdk.imaging.CameraLayoutDecorator;
+import com.veridiumid.sdk.imaging.SimpleCameraImagingSampler;
+import com.veridiumid.sdk.support.ui.AspectRatioSafeFrameLayout;
 
 public class RealtimeRoisDecorator implements CameraLayoutDecorator, RoisRenderer, SurfaceHolder.Callback{
     private static final String LOG_TAG = RealtimeRoisDecorator.class.getName();

@@ -1,29 +1,46 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    //Migrating to AndroidX
+    compileSdkVersion 29
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion 19
+        targetSdkVersion 29
         versionCode 1
-        versionName "1.8"
+        versionName "1.0"
     }
+    //End - Migrating to AndroidX
+
+//    compileSdkVersion rootProject.ext.compileSdkVersion
+//
+//    defaultConfig {
+//        minSdkVersion rootProject.ext.minSdkVersion
+//        targetSdkVersion rootProject.ext.targetSdkVersion
+//        versionCode 1
+//        versionName "1.8"
+//    }
 
     buildTypes {
         debug {
-            minifyEnabled project.minifyDebug
+            minifyEnabled false
         }
 
         release {
-            minifyEnabled project.minifyRelease
+            minifyEnabled false
             consumerProguardFiles 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    implementation rootProject.ext.appcompatV7
+
+    //Migrating to AndroidX
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.activity:activity:1.0.0'
+    //End - Migrating to AndroidX
 
     implementation project(':biometricsupport')
     implementation project (':defaultdata')

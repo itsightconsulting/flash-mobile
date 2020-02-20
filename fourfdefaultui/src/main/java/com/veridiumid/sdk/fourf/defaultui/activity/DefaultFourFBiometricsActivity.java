@@ -17,9 +17,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.support.annotation.UiThread;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -34,6 +31,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 
 import com.veridiumid.sdk.IBiometricFormats.TemplateFormat;
 import com.veridiumid.sdk.analytics.Analytics;
@@ -383,9 +384,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         Log.d(LOG_TAG, ExportConfig.getConfig());
 
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "Enroll Sequence");
-
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG, Analytics.Cat.SEQUENCE, "Enroll Sequence");
     }
 
     private void setup_enrollExportSequence(){
@@ -422,8 +422,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.add(firstImage);
 
         outputSlots = Arrays.asList(1); // final 8F, multi-shot merged result
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "Enroll-Export Sequence");
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG, Analytics.Cat.SEQUENCE, "Enroll-Export Sequence");
     }
 
     private void setup_authExportSequence(){
@@ -485,9 +485,9 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.clear();
         captureSequence.add(firstImage);
 
-        outputSlots = Arrays.asList(1);
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.SEQUENCE, "Authenticate-Export Sequence");
+        outputSlots = Arrays.asList(2); // final 8F, multi-shot merged result
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "Enroll-Export Sequence");
     }
 
     /*
@@ -537,8 +537,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         outputSlots = Arrays.asList(0);
 
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.SEQUENCE, "Authentification Sequence");
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "Authentification Sequence");
     }
 
 
@@ -556,8 +556,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         }else{
             setup_8F_capture_basic_Sequence();
         }
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.SEQUENCE, "8F Capture Sequence");
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "8F Capture Sequence");
     }
 
     /*
@@ -595,8 +595,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.add(secondImage);
 
         outputSlots = Arrays.asList(2);
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.SEQUENCE, "8F Capture Basic Sequence");
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "8F Capture Basic Sequence");
     }
 
     private void setup_2F_capture_basic_Sequence(){
@@ -627,8 +627,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.add(secondImage);
 
         outputSlots = Arrays.asList(2);
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.SEQUENCE, "2F Capture Basic Sequence");
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "2F Capture Basic Sequence");
     }
 
     private void setup_1F_capture_basic_Sequence(){
@@ -644,8 +644,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.add(firstImage);
 
         outputSlots = Arrays.asList(0);
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.SEQUENCE, "1F Capture Basic Sequence");
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "1F Capture Basic Sequence");
     }
 
 
@@ -772,8 +772,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         outputSlots = Arrays.asList(6);
 
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.SEQUENCE, "8F Capture Double Optimise Sequence");
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "8F Capture Double Optimise Sequence");
     }
 
     /*
@@ -822,8 +822,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         outputSlots = Arrays.asList(4); // should be 4
 
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.SEQUENCE, "8F Capture Double Optimise Liveness Sequence");
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "8F Capture Double Optimise Liveness Sequence");
     }
 
     /*
@@ -849,8 +849,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         outputSlots = Arrays.asList(0);
         captureSequence.add(firstImage);
 
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-        Analytics.send(Analytics.Verbosity.DEBUG, Analytics.Comp.FOURF_EXP,Analytics.Cat.SEQUENCE, "Capture Sequence");
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "Capture Sequence");
     }
 
     private OptimiseMode getOptimiseModeFromConfig(){

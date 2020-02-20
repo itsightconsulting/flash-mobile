@@ -8,7 +8,7 @@ package com.veridiumid.sdk.fourf.defaultui.activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 public class SlidingImageView extends AppCompatImageView {

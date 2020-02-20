@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
 
         var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
         if (estado)
-            graph.startDestination = R.id.preActivationFragment
+            graph.startDestination = R.id.biometricFragment
         else
             graph.startDestination = R.id.initialFragment
         host.navController.graph = graph
