@@ -93,6 +93,19 @@ import static java.lang.Math.abs;
 
 public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivity implements IFourFTrackingListener, IFourFProcessingListener {
 
+    public class Comp {
+        public static final String FOURF = "4FF";
+        public static final String FOURF_EXP = "4FE";
+        public static final String LUXAND_FACE = "LFA";
+        public static final String VERID_FACE = "VFA";
+        public static final String NATIVE_BIO = "NBI";
+        public static final String SERVER = "VSR";
+        public static final String CORE = "COR";
+
+        public Comp() {
+        }
+    }
+
     private final int ENROLLMENT_STEP1_COMPLETE = 1;
     private final int INDEX_COMPLETE = 2;
     private final int SWITCH_HANDS = 3;
@@ -199,8 +212,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         setUpInitialResults();
 
-        if(!checkFormatSupported()){  // Check that the chosen formats are supported
-            onError(BiometricsException.ERROR_TEMPATE_HANDLING,  getString(R.string.unsupported_template_format)+":"+TemplateFormat.resolveFriendly(ExportConfig.getFormat()));
+        if (!checkFormatSupported()) {  // Check that the chosen formats are supported
+            onError(BiometricsException.ERROR_TEMPATE_HANDLING, getString(R.string.unsupported_template_format) + ":" + TemplateFormat.resolveFriendly(ExportConfig.getFormat()));
         }
 
         if (isEnrollment()) {
@@ -212,7 +225,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
                 showInstructionalFragment();
 
             }
-        }else if(isEnrollExport()) {
+        } else if (isEnrollExport()) {
             clearEnrollement();
             setup_enrollExportSequence();
             if (tipsDisabled()) {
@@ -220,75 +233,75 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             } else {
                 showInstructionalFragment();
             }
-        }else if(isCapture() ){
+        } else if (isCapture()) {
             setup_captureSequence();
             if (tipsDisabled()) {
                 kickOffBiometricsProcess();
             } else {
                 showInstructionalFragment();
             }
-        }else if(isCapture8F() ){
+        } else if (isCapture8F()) {
             setup_8F_captureSequence();
             if (tipsDisabled()) {
                 kickOffBiometricsProcess();
             } else {
                 showInstructionalFragment();
             }
-        } else if(isCapture2THUMB()) {
+        } else if (isCapture2THUMB()) {
             setup_2F_capture_basic_Sequence();
             if (tipsDisabled()) {
                 kickOffBiometricsProcess();
             } else {
                 showThumbInstructionalFragment();
             }
-        }else if(isCaptureTHUMB()) {
+        } else if (isCaptureTHUMB()) {
             setup_1F_capture_basic_Sequence();
             if (tipsDisabled()) {
                 kickOffBiometricsProcess();
             } else {
                 showThumbInstructionalFragment();
             }
-        }else if(isCaptureIndividualF()) {
+        } else if (isCaptureIndividualF()) {
             setup_missingf_capture_sequence();
             if (tipsDisabled()) {
                 kickOffBiometricsProcess();
             } else {
                 showIndividualInstructionalFragment();
             }
-        }else if(isAuthentication()){
-            if(!isEnrolled()){
+        } else if (isAuthentication()) {
+            if (!isEnrolled()) {
                 onError(BiometricsException.ERROR_CAPTURE_SEQUENCE, "User not enrolled");
                 return;
             }
             setup_authenticationSequence();
             kickOffBiometricsProcess();
-        }else if(isAuthenticationExport()){
-            if(!isEnrolled()){
+        } else if (isAuthenticationExport()) {
+            if (!isEnrolled()) {
                 onError(BiometricsException.ERROR_CAPTURE_SEQUENCE, "User not enrolled");
                 return;
             }
             setup_authExportSequence();
             kickOffBiometricsProcess();
-        } else{
+        } else {
             onError(BiometricsException.ERROR_CAPTURE_SEQUENCE, "Unknown Mode");
         }
     }
 
-    public void showInstructionalFragment(){
+    public void showInstructionalFragment() {
         showFragment(new DefaultFourFCaptureInstructionalFragment());
     }
 
-    public void showThumbInstructionalFragment(){
+    public void showThumbInstructionalFragment() {
         showFragment(new DefaultFourFCaptureInstructionalThumbFragment());
     }
 
-    public void showIndividualInstructionalFragment(){
+    public void showIndividualInstructionalFragment() {
         showFragment(new DefaultFourFCaptureInstructionalIndividualFFragment());
     }
 
 
     private void checkForLibraryDebugMode(Context context) {
-        if(FourFIntegrationWrapper.isDebugMode()) {
+        if (FourFIntegrationWrapper.isDebugMode()) {
             if (!doNotShowAgainTickBoxChecked) {
                 View checkBoxView = View.inflate(this, R.layout.checkbox, null);
                 CheckBox checkBox = (CheckBox) checkBoxView.findViewById(R.id.alert_checkbox);
@@ -312,7 +325,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which){
+                            public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                                 cancel();
                             }
@@ -336,12 +349,12 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
      * Templates should have been opened with openTemplateStorage();
      * Can be enrolled for left, right, or both.
      */
-    private boolean isEnrolled(){
+    private boolean isEnrolled() {
         boolean enrolled = false;
-        if(templates_store_left!=null){
+        if (templates_store_left != null) {
             enrolled = templates_store_left.isEnrolled();
         }
-        if(templates_store_right!=null){
+        if (templates_store_right != null) {
             enrolled = enrolled || templates_store_right.isEnrolled();
         }
         return enrolled;
@@ -351,13 +364,13 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
      Create a capture sequence for single hand enrolment
      */
 
-    private void setup_enrollSequence(){
-        boolean rightHand = ExportConfig.getCaptureHandSide()== ExportConfig.CaptureHand.RIGHT;
+    private void setup_enrollSequence() {
+        boolean rightHand = ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT;
 
         FourFInterface.LivenessType livenessType = null;
-        if( ExportConfig.getUseLiveness()){
+        if (ExportConfig.getUseLiveness()) {
             livenessType = LivenessType.STEREO_HORZ;
-        }else{
+        } else {
             livenessType = FourFInterface.LivenessType.NONE;
         }
 
@@ -384,22 +397,22 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         Log.d(LOG_TAG, ExportConfig.getConfig());
 
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG, Analytics.Cat.SEQUENCE, "Enroll Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "Enroll Sequence");
     }
 
-    private void setup_enrollExportSequence(){
+    private void setup_enrollExportSequence() {
 
         CaptureConfig.JoinMergeFormat = ExportConfig.getFormat();
 
         // hand selection
         boolean rightHand = false;
         boolean allowHandSwitch = false;
-        if(ExportConfig.getCaptureHandFixed()){
-            if(ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT){
+        if (ExportConfig.getCaptureHandFixed()) {
+            if (ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT) {
                 rightHand = true;
             }
-        }else{
+        } else {
             allowHandSwitch = true;
         }
 
@@ -422,11 +435,11 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.add(firstImage);
 
         outputSlots = Arrays.asList(1); // final 8F, multi-shot merged result
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG, Analytics.Cat.SEQUENCE, "Enroll-Export Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "Enroll-Export Sequence");
     }
 
-    private void setup_authExportSequence(){
+    private void setup_authExportSequence() {
 
         CaptureConfig.JoinMergeFormat = ExportConfig.getFormat();
 
@@ -435,22 +448,22 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         boolean allowHandSwitch = false;
 
         // Determine which hand to auth
-        if(ExportConfig.getCaptureHandFixed()){
-            if(ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT && templates_store_right.isEnrolled()){
+        if (ExportConfig.getCaptureHandFixed()) {
+            if (ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT && templates_store_right.isEnrolled()) {
                 rightHand = true;
-            }else if(ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.LEFT && templates_store_left.isEnrolled()) {
+            } else if (ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.LEFT && templates_store_left.isEnrolled()) {
                 rightHand = false;
-            }else{
+            } else {
                 onError(BiometricsException.ERROR_CAPTURE_SEQUENCE, "Forced request hand is not enrolled");
             }
-        }else {
+        } else {
             if ((ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT && templates_store_right.isEnrolled())
                     || !templates_store_left.isEnrolled()) {
                 rightHand = true;
             } else {
                 rightHand = false;
             }
-            if(templates_store_right.isEnrolled() && templates_store_left.isEnrolled()){
+            if (templates_store_right.isEnrolled() && templates_store_left.isEnrolled()) {
                 allowHandSwitch = true;
             }
         }
@@ -458,9 +471,9 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         //---------
         FourFInterface.LivenessType livenessType = null;
-        if( ExportConfig.getUseLiveness()){
+        if (ExportConfig.getUseLiveness()) {
             livenessType = LivenessType.STEREO_HORZ;
-        }else{
+        } else {
             livenessType = FourFInterface.LivenessType.NONE;
         }
 
@@ -472,9 +485,9 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         firstImage.setMatchAgainstEnrol(true);
         firstImage.setAllowUserHandSwitch(allowHandSwitch);
 
-        if(livenessType == LivenessType.STEREO_HORZ){
+        if (livenessType == LivenessType.STEREO_HORZ) {
             firstImage.setGetTemplateFromLivenessImage(true);
-        }else{
+        } else {
             firstImage.setStore_image_interally(true);
             firstImage.setGetTemplateFromStoredImage(true);
         }
@@ -486,43 +499,43 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.add(firstImage);
 
         outputSlots = Arrays.asList(2); // final 8F, multi-shot merged result
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "Enroll-Export Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "Authenticate-Export Sequence");
     }
 
     /*
      *   Create a capture sequence for single hand authentication
-    */
-    private void setup_authenticationSequence(){
+     */
+    private void setup_authenticationSequence() {
         boolean rightHand = false;
         boolean allowHandSwitch = false;
 
         // Determine which hand to auth
-        if(ExportConfig.getCaptureHandFixed()){
-            if(ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT && templates_store_right.isEnrolled()){
+        if (ExportConfig.getCaptureHandFixed()) {
+            if (ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT && templates_store_right.isEnrolled()) {
                 rightHand = true;
-            }else if(ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.LEFT && templates_store_left.isEnrolled()) {
+            } else if (ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.LEFT && templates_store_left.isEnrolled()) {
                 rightHand = false;
-            }else{
+            } else {
                 onError(BiometricsException.ERROR_CAPTURE_SEQUENCE, "Forced request hand is not enrolled");
             }
-        }else {
+        } else {
             if ((ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT && templates_store_right.isEnrolled())
                     || !templates_store_left.isEnrolled()) {
                 rightHand = true;
             } else {
                 rightHand = false;
             }
-            if(templates_store_right.isEnrolled() && templates_store_left.isEnrolled()){
+            if (templates_store_right.isEnrolled() && templates_store_left.isEnrolled()) {
                 allowHandSwitch = true;
             }
         }
 
         FourFInterface.CaptureType type = FourFInterface.CaptureType.AUTH;
         LivenessType livenessType = null;
-        if(ExportConfig.getUseLiveness()) {
+        if (ExportConfig.getUseLiveness()) {
             livenessType = LivenessType.STEREO_HORZ;
-        }else{
+        } else {
             livenessType = LivenessType.NONE;
         }
 
@@ -537,8 +550,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         outputSlots = Arrays.asList(0);
 
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "Authentification Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "Authentification Sequence");
     }
 
 
@@ -547,29 +560,29 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
      Supports various combo's of liveness, and finger optimisations
      */
     private void setup_8F_captureSequence() {
-        if(ExportConfig.getOptimiseForIndexLittle()){
-            if(ExportConfig.getUseLiveness()){
+        if (ExportConfig.getOptimiseForIndexLittle()) {
+            if (ExportConfig.getUseLiveness()) {
                 setup_8F_capture_DoubleOptimise_Liveness_Sequence();
-            }else {
+            } else {
                 setup_8F_capture_DoubleOptimise_Sequence();
             }
-        }else{
+        } else {
             setup_8F_capture_basic_Sequence();
         }
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "8F Capture Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "8F Capture Sequence");
     }
 
     /*
         Create a capture sequence for extracting export templates from both hands
         One image for right and left. Liveness can be on / off
     */
-    private void setup_8F_capture_basic_Sequence(){
+    private void setup_8F_capture_basic_Sequence() {
         boolean rightHand = false;
         LivenessType livenessType = null;
-        if(ExportConfig.getUseLiveness()) {
+        if (ExportConfig.getUseLiveness()) {
             livenessType = LivenessType.STEREO_HORZ;
-        }else{
+        } else {
             livenessType = LivenessType.NONE;
         }
 
@@ -595,13 +608,13 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.add(secondImage);
 
         outputSlots = Arrays.asList(2);
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "8F Capture Basic Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "8F Capture Basic Sequence");
     }
 
-    private void setup_2F_capture_basic_Sequence(){
+    private void setup_2F_capture_basic_Sequence() {
         boolean rightHand = false;
-        LivenessType livenessType =  LivenessType.NONE;
+        LivenessType livenessType = LivenessType.NONE;
 
         CaptureConfig.JoinMergeFormat = ExportConfig.getFormat();
 
@@ -627,13 +640,13 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.add(secondImage);
 
         outputSlots = Arrays.asList(2);
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "2F Capture Basic Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "2F Capture Basic Sequence");
     }
 
-    private void setup_1F_capture_basic_Sequence(){
+    private void setup_1F_capture_basic_Sequence() {
         boolean rightHand = ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT;
-        LivenessType livenessType =  LivenessType.NONE;
+        LivenessType livenessType = LivenessType.NONE;
         CaptureConfig firstImage = new CaptureConfig(FourFInterface.CaptureType.NONE, ExportConfig.getFormat(), rightHand, livenessType);
         firstImage.setOptimiseMode(OptimiseMode.THUMB);
         firstImage.setShowProcessingScreen(true);
@@ -644,14 +657,14 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.add(firstImage);
 
         outputSlots = Arrays.asList(0);
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "1F Capture Basic Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "1F Capture Basic Sequence");
     }
 
 
-    private void setup_missingf_capture_sequence(){
+    private void setup_missingf_capture_sequence() {
 
-        FourFInterface.LivenessType livenessType =  FourFInterface.LivenessType.NONE;
+        FourFInterface.LivenessType livenessType = FourFInterface.LivenessType.NONE;
 
         CaptureConfig.JoinMergeFormat = ExportConfig.getFormat();
 
@@ -663,22 +676,22 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         captureSequence.clear();
 
 
-        int takingIndexPicture = ExportConfig.getIndividualindex() ? 1:0;
-        int takingMiddlePicture = ExportConfig.getIndividualmiddle() ? 1:0;
-        int takingRingPicture = ExportConfig.getIndividualring() ? 1:0;
-        int takingLittlePicture = ExportConfig.getIndividuallittle() ? 1:0;
-        int takingThumbPicture = ExportConfig.getIndividualthumb() ? 1:0;
+        int takingIndexPicture = ExportConfig.getIndividualindex() ? 1 : 0;
+        int takingMiddlePicture = ExportConfig.getIndividualmiddle() ? 1 : 0;
+        int takingRingPicture = ExportConfig.getIndividualring() ? 1 : 0;
+        int takingLittlePicture = ExportConfig.getIndividuallittle() ? 1 : 0;
+        int takingThumbPicture = ExportConfig.getIndividualthumb() ? 1 : 0;
         int indiviudalFingerArray[] = new int[]{takingIndexPicture, takingMiddlePicture, takingRingPicture, takingLittlePicture};
 
         int totalPics = takingIndexPicture + takingMiddlePicture + takingRingPicture + takingLittlePicture + takingThumbPicture;
 
-        for(int i = 0; i< indiviudalFingerArray.length; i++){
-            if(indiviudalFingerArray[i] == 1) {
+        for (int i = 0; i < indiviudalFingerArray.length; i++) {
+            if (indiviudalFingerArray[i] == 1) {
                 CaptureConfig firstImage = new CaptureConfig(FourFInterface.CaptureType.NONE, ExportConfig.getFormat(), rightHand, livenessType);
                 firstImage.setOptimiseMode(FourFInterface.OptimiseMode.INDIVIDUAL_FINGER);
                 firstImage.setShowProcessingScreen(true);
                 int fingerToUse = i + 2;
-                if(rightHand == false){
+                if (rightHand == false) {
                     fingerToUse = i + 7;
                 }
                 firstImage.setIndividualFingerCaptured(FourFInterface.IndividualFingerCaptured.resolve(fingerToUse));
@@ -688,12 +701,12 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             }
         }
 
-        if(takingThumbPicture == 1){
+        if (takingThumbPicture == 1) {
             CaptureConfig secondImage = new CaptureConfig(FourFInterface.CaptureType.NONE, ExportConfig.getFormat(), rightHand, livenessType);
             secondImage.setOptimiseMode(OptimiseMode.THUMB);
             secondImage.setShowProcessingScreen(true);
             int fingerToUse = 1;
-            if(rightHand == false){
+            if (rightHand == false) {
                 fingerToUse = 6;
             }
             secondImage.setIndividualFingerCaptured(FourFInterface.IndividualFingerCaptured.resolve(fingerToUse));
@@ -702,8 +715,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             captureSequence.add(secondImage);
         }
 
-        outputSlots = Arrays.asList((totalPics - 1)*2);
-
+        outputSlots = Arrays.asList((totalPics - 1) * 2);
 
 
     }
@@ -713,7 +725,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         8F capture, but with vertical liveness and finger fusing.
         No Liveness here. 4 separate shots.
      */
-    private void setup_8F_capture_DoubleOptimise_Sequence(){
+    private void setup_8F_capture_DoubleOptimise_Sequence() {
         Log.d(LOG_TAG, "Double optimise sequence");
         CaptureConfig.JoinMergeFormat = ExportConfig.getFormat();
 
@@ -772,15 +784,15 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         outputSlots = Arrays.asList(6);
 
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "8F Capture Double Optimise Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "8F Capture Double Optimise Sequence");
     }
 
     /*
         8F capture, but with vertical liveness and finger fusing.
         Uses Vertical Liveness to allow just two shots
      */
-    private void setup_8F_capture_DoubleOptimise_Liveness_Sequence(){
+    private void setup_8F_capture_DoubleOptimise_Liveness_Sequence() {
         Log.d(LOG_TAG, "Double optimise sequence with liveness");
         CaptureConfig.JoinMergeFormat = ExportConfig.getFormat();
 
@@ -822,20 +834,20 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         outputSlots = Arrays.asList(4); // should be 4
 
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "8F Capture Double Optimise Liveness Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "8F Capture Double Optimise Liveness Sequence");
     }
 
     /*
     Create a capture sequence for extracting export templates from one hand
     */
-    private void setup_captureSequence(){
-        boolean rightHand = ExportConfig.getCaptureHandSide()== ExportConfig.CaptureHand.RIGHT;
+    private void setup_captureSequence() {
+        boolean rightHand = ExportConfig.getCaptureHandSide() == ExportConfig.CaptureHand.RIGHT;
         FourFInterface.CaptureType type = rightHand ? FourFInterface.CaptureType.EIGHTF_RIGHT : FourFInterface.CaptureType.EIGHTF_LEFT;
-        LivenessType livenessType = null;
-        if(ExportConfig.getUseLiveness()) {
+        LivenessType livenessType;
+        if (ExportConfig.getUseLiveness()) {
             livenessType = LivenessType.STEREO_HORZ;
-        }else{
+        } else {
             livenessType = LivenessType.NONE;
         }
         OptimiseMode optimiseMode = getOptimiseModeFromConfig();
@@ -849,14 +861,14 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         outputSlots = Arrays.asList(0);
         captureSequence.add(firstImage);
 
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
-//        Analytics.sendAnalyticsEvents(Analytics.verbosity.DEBUG,Analytics.Cat.SEQUENCE, "Capture Sequence");
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.EXPORT_CONF, ExportConfig.getConfig());
+        Analytics.d(Comp.FOURF_EXP, Analytics.Cat.SEQUENCE, "Capture Sequence");
     }
 
-    private OptimiseMode getOptimiseModeFromConfig(){
-        if(ExportConfig.getOptimiseForIndex()){
+    private OptimiseMode getOptimiseModeFromConfig() {
+        if (ExportConfig.getOptimiseForIndex()) {
             return OptimiseMode.INDEX_MIDDLE;
-        }else{
+        } else {
             return OptimiseMode.NONE;
         }
     }
@@ -870,10 +882,10 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     // Called at each kickoff event
     @Override
     protected void configureBiometricEngine(IBiometricsEngine<ImageHolder, RectF[]> engine) {
-        if(currentConfig.getLivenessType() == LivenessType.STEREO_VERT){
+        if (currentConfig.getLivenessType() == LivenessType.STEREO_VERT) {
             currentConfig.setOptimiseMode(OptimiseMode.RING_LITTLE);
         }
-        if(currentConfig.getOptimiseMode() == OptimiseMode.THUMB || currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER){
+        if (currentConfig.getOptimiseMode() == OptimiseMode.THUMB || currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER) {
             thumbProcessor = new ThumbProcessor(this, FOURF_TIMEOUT, getTemplatesCount(), async, this, this);
             thumbProcessor.setConfig(currentConfig);
 
@@ -881,8 +893,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             configureFourFResultsHandler(handler);
             thumbProcessor.setResultHandler(handler);
             engine.addProcessor(thumbProcessor);
-        }
-        else {
+        } else {
             fourFProcessor = new FourFProcessor(this, FOURF_TIMEOUT, getTemplatesCount(), async, this, this);
             fourFProcessor.setConfig(currentConfig);
 
@@ -906,41 +917,40 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         // Done inside fourf processor so we can send a liveness fail event
         //if(currentConfig.isUseLiveness()){
-            //chainedHandler.addSuccessor(new LocalFourFLivenessCheckerRH<ImageHolder>(currentConfig.getFormat())); // check liveness
+        //chainedHandler.addSuccessor(new LocalFourFLivenessCheckerRH<ImageHolder>(currentConfig.getFormat())); // check liveness
         //}
 
-        if( currentConfig.isMatchWithStored()){
+        if (currentConfig.isMatchWithStored()) {
             LocalBiometricMatcher matcher = createMatcher();
             TemplateProviderFromTemplateStorage templateProvider = new TemplateProviderFromTemplateStorage(temporaryStorage);
             matcher.setTemplatedProvider(templateProvider);
             chainedHandler.addSuccessor(new AuthenticationHandler<ImageHolder>(matcher)); // match first acquired template against the one from the review step
         }
 
-        if( currentConfig.isStoreForMatch()){
+        if (currentConfig.isStoreForMatch()) {
             temporaryStorage = new TemplateStorageInMemory();
             chainedHandler.addSuccessor(new PersistEnrollmentHandler<ImageHolder>(temporaryStorage));
         }
 
-        if( currentConfig.isGetTemplateFromLivenessImage()){
+        if (currentConfig.isGetTemplateFromLivenessImage()) {
             additionalTemplateStorage = new TemplateStorageInMemory();
-            chainedHandler.addSuccessor(new LocalFourFGetLivenessTemplateRH<ImageHolder>(additionalTemplateStorage, currentConfig.getAdditionalTemplateformat().getCode(), ExportConfig.getConfig() ));
-        }else if(currentConfig.isGetTemplateFromStoredImage()){
+            chainedHandler.addSuccessor(new LocalFourFGetLivenessTemplateRH<ImageHolder>(additionalTemplateStorage, currentConfig.getAdditionalTemplateformat().getCode(), ExportConfig.getConfig()));
+        } else if (currentConfig.isGetTemplateFromStoredImage()) {
             additionalTemplateStorage = new TemplateStorageInMemory();
-            chainedHandler.addSuccessor(new LocalFourFGetTemplateInternalRH<ImageHolder>(additionalTemplateStorage, currentConfig.getAdditionalTemplateformat().getCode(), ExportConfig.getConfig() ));
+            chainedHandler.addSuccessor(new LocalFourFGetTemplateInternalRH<ImageHolder>(additionalTemplateStorage, currentConfig.getAdditionalTemplateformat().getCode(), ExportConfig.getConfig()));
         }
 
-        if( currentConfig.isGetTemplateFromSecondLivenessImage()){ // get an additional template from the second liveness image
+        if (currentConfig.isGetTemplateFromSecondLivenessImage()) { // get an additional template from the second liveness image
             additionalTemplateStorage_liveness2 = new TemplateStorageInMemory();
-            chainedHandler.addSuccessor(new LocalFourFGetSecondLivenessTemplateRH<ImageHolder>(additionalTemplateStorage_liveness2, currentConfig.getAdditionalTemplateformat().getCode(), ExportConfig.getConfig() ));
+            chainedHandler.addSuccessor(new LocalFourFGetSecondLivenessTemplateRH<ImageHolder>(additionalTemplateStorage_liveness2, currentConfig.getAdditionalTemplateformat().getCode(), ExportConfig.getConfig()));
         }
 
-        if( currentConfig.isSecondLivenessImageAsEnrol() &&                     // get a VFP template from the second liveness image
+        if (currentConfig.isSecondLivenessImageAsEnrol() &&                     // get a VFP template from the second liveness image
                 (currentConfig.getLivenessType() == LivenessType.STEREO_VERT ||
-                 currentConfig.getLivenessType() == LivenessType.STEREO_HORZ))
-        {
+                        currentConfig.getLivenessType() == LivenessType.STEREO_HORZ)) {
             // get a VFP template from second liveness image
             temporaryStorage_liveness2 = new TemplateStorageInMemory();
-            chainedHandler.addSuccessor(new LocalFourFGetSecondLivenessTemplateRH<ImageHolder>(temporaryStorage_liveness2, TemplateFormat.FORMAT_VERIDFP.getCode(), ExportConfig.getConfig() ));
+            chainedHandler.addSuccessor(new LocalFourFGetSecondLivenessTemplateRH<ImageHolder>(temporaryStorage_liveness2, TemplateFormat.FORMAT_VERIDFP.getCode(), ExportConfig.getConfig()));
 
             // match the second liveness image template to the one stored in persistence
             LocalBiometricMatcher matcher = createMatcher();
@@ -950,23 +960,23 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         }
 
-        if(currentConfig.isMatchAgainstEnrol() || currentConfig.isStoreAsEnrolTemplate()){
+        if (currentConfig.isMatchAgainstEnrol() || currentConfig.isStoreAsEnrolTemplate()) {
             //ITemplatesStorage storage = templates_store;
             TemplateProviderCache cacheProvider = new TemplateProviderCache(new TemplateProviderFromTemplateStorage(templates_store));
 
-            if(currentConfig.isMatchAgainstEnrol()){
+            if (currentConfig.isMatchAgainstEnrol()) {
                 LocalBiometricMatcher matcher = createMatcher();
                 matcher.setTemplatedProvider(cacheProvider);
                 chainedHandler.addSuccessor(new AuthenticationHandler<ImageHolder>(matcher));
             }
 
-            if(currentConfig.isStoreAsEnrolTemplate()){
+            if (currentConfig.isStoreAsEnrolTemplate()) {
                 chainedHandler.addSuccessor(new AdaptiveEnrollmentHandler<ImageHolder>(cacheProvider, templates_store, ADAPTIVE_TEMPLATES_LIMIT));
             }
         }
 
         // use the second liveness image as an enrol verification, and store as an enrol template
-        if( currentConfig.isSecondLivenessImageAsEnrol()){
+        if (currentConfig.isSecondLivenessImageAsEnrol()) {
             // save as an enrol template
             TemplateProviderCache cacheProvider = new TemplateProviderCache(new TemplateProviderFromTemplateStorage(templates_store));
             chainedHandler.addSuccessor(new AdaptiveEnrollmentHandlerLive<ImageHolder>(cacheProvider, templates_store, temporaryStorage_liveness2, ADAPTIVE_TEMPLATES_LIMIT));
@@ -1014,57 +1024,57 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
         // add the results to previous results
         BiometricsResult new_result = results.get(FourFInterface.UID);
-        previousResults.addResult(  (ImageHolder) new_result.getInputs()[0], new_result.getOutput(-1));
+        previousResults.addResult((ImageHolder) new_result.getInputs()[0], new_result.getOutput(-1));
 
         // add second liveness image to multishot queue. Do first, as this is the index-middle we want
-        if( currentConfig.isSecondLiveness_to_multishot_queue()){
+        if (currentConfig.isSecondLiveness_to_multishot_queue()) {
             try {
                 byte[] added_template = additionalTemplateStorage_liveness2.restore()[0];
                 Log.d(LOG_TAG, "added second liveness template to multishot queue");
-                multishot_fuse_queue.addResult( (ImageHolder) new_result.getInputs()[0], added_template);
-            }catch(IOException e){
+                multishot_fuse_queue.addResult((ImageHolder) new_result.getInputs()[0], added_template);
+            } catch (IOException e) {
                 e.printStackTrace();
                 onError(BiometricsException.ERROR_TEMPATE_HANDLING, "failed to retrieve additionalTemplateStorage");
             }
         }
 
         // there is another template to save in from the additionalTemplateStorage
-        if( currentConfig.isGetTemplateFromStoredImage() || currentConfig.isGetTemplateFromLivenessImage()){
+        if (currentConfig.isGetTemplateFromStoredImage() || currentConfig.isGetTemplateFromLivenessImage()) {
             Log.d(LOG_TAG, "Adding template generated from stored");
-            try{
+            try {
                 byte[] added_template = additionalTemplateStorage.restore()[0];
-                previousResults.addResult( (ImageHolder) new_result.getInputs()[0], added_template);
-                if(currentConfig.isStoreTemplate_to_multishot_queue()){
+                previousResults.addResult((ImageHolder) new_result.getInputs()[0], added_template);
+                if (currentConfig.isStoreTemplate_to_multishot_queue()) {
                     Log.d(LOG_TAG, "added additional store template to multishot queue");
-                    multishot_fuse_queue.addResult( (ImageHolder) new_result.getInputs()[0], added_template);
+                    multishot_fuse_queue.addResult((ImageHolder) new_result.getInputs()[0], added_template);
                 }
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
                 onError(BiometricsException.ERROR_TEMPATE_HANDLING, "failed to retrieve additionalTemplateStorage");
             }
         }
 
         // merge last two templates if specified. Gets added to previous results
-        if(currentConfig.isAdd_to_multishot_fuse_queue()){
+        if (currentConfig.isAdd_to_multishot_fuse_queue()) {
             Log.d(LOG_TAG, "Add to multi-shot queue");
-            multishot_fuse_queue.addResult( (ImageHolder) new_result.getInputs()[0], new_result.getOutput(-1));
+            multishot_fuse_queue.addResult((ImageHolder) new_result.getInputs()[0], new_result.getOutput(-1));
         }
 
 
         // merge last two templates if specified. Gets added to previous results
-        if(currentConfig.isAdd_to_8F_fuse_queue()){
+        if (currentConfig.isAdd_to_8F_fuse_queue()) {
             Log.d(LOG_TAG, "Add to 8F fuse queue");
-            eightF_fuse_queue.addResult( (ImageHolder) new_result.getInputs()[0], new_result.getOutput(-1));
+            eightF_fuse_queue.addResult((ImageHolder) new_result.getInputs()[0], new_result.getOutput(-1));
         }
 
         // run fusing if queued
-        if(multishot_fuse_queue.size() >=2) mergeTemplates(multishot_fuse_queue);
-        if(eightF_fuse_queue.size() >=2) joinTemplates(eightF_fuse_queue);
+        if (multishot_fuse_queue.size() >= 2) mergeTemplates(multishot_fuse_queue);
+        if (eightF_fuse_queue.size() >= 2) joinTemplates(eightF_fuse_queue);
 
         // see if we have completed the capture list, put all previous results into finalResults
         // and clear out the 4F lib
         boolean complete = false;
-        if(currentConfigIndex == captureSequence.size()-1){
+        if (currentConfigIndex == captureSequence.size() - 1) {
             onCaptureSequenceComplete();
             complete = true;
         }
@@ -1073,32 +1083,28 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         currentConfigIndex++;
 
         // Show an intermediate fragment. Need to move this into the capture config.
-        if((currentConfig.getCaptureType() == FourFInterface.CaptureType.ENROLMENT_ONE)){
+        if ((currentConfig.getCaptureType() == FourFInterface.CaptureType.ENROLMENT_ONE)) {
             onEnrollmentStep1Complete();
-        }else if(currentConfig.getCaptureType() == FourFInterface.CaptureType.ENROLMENT_TWO){
+        } else if (currentConfig.getCaptureType() == FourFInterface.CaptureType.ENROLMENT_TWO) {
             onEnrollmentStep2Complete();
-        }else if(currentConfig.getCaptureType() == FourFInterface.CaptureType.AUTH) {
+        } else if (currentConfig.getCaptureType() == FourFInterface.CaptureType.AUTH) {
             showDialogWithMode(AUTHENTICATION_COMPLETE);
-        }
-        else if(complete){
+        } else if (complete) {
             showDialogWithMode(CAPTURE_COMPLETE);
-        }
-        else if(currentConfig.isShowSwitchHands()){
+        } else if (currentConfig.isShowSwitchHands()) {
             showDialogWithMode(SWITCH_HANDS);
-        }
-        else if(currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER){
+        } else if (currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER) {
             CaptureConfig nextConfig = captureSequence.get(currentConfigIndex);
             int nextFinger = nextConfig.getIndividualFingerCaptured().getCode();
 
             showNextIndividualDialog(nextConfig, nextFinger);
 
 
-        }
-        else if(ExportConfig.getOptimiseForIndexLittle()) {
+        } else if (ExportConfig.getOptimiseForIndexLittle()) {
             if (!currentConfig.isRightHand()) {
                 if (currentConfig.getOptimiseMode() == OptimiseMode.INDEX_MIDDLE) {
                     showDialogWithMode(INDEX_COMPLETE);
-                } else{
+                } else {
                     showDialogWithMode(SWITCH_HANDS);
                 }
             } else {
@@ -1108,34 +1114,31 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
                     onEnrollmentStep2Complete();
                 }
             }
-        }
-        else if(isCapture8F()) {
-            if(!currentConfig.isRightHand()) {
+        } else if (isCapture8F()) {
+            if (!currentConfig.isRightHand()) {
                 showDialogWithMode(SWITCH_HANDS);
-            }
-            else{
+            } else {
                 showDialogWithMode(ENROLLMENT_COMPLETE);
             }
-        }
-        else {
-            if(!complete) {
+        } else {
+            if (!complete) {
                 kickOffBiometricsProcess();
-            }else{
+            } else {
                 super.onComplete(finalResults);
                 return;
             }
         }
     }
 
-    private void printBiometricsResult(BiometricsResult<ImageHolder> results){
-         int N = results.size();
-         Log.d(LOG_TAG, "printBiometricsResult size:"+N);
-        for(int i=0; i <N; i++){
-            Log.d(LOG_TAG, "output " + i+", length: " + results.getOutput(i).length);
+    private void printBiometricsResult(BiometricsResult<ImageHolder> results) {
+        int N = results.size();
+        Log.d(LOG_TAG, "printBiometricsResult size:" + N);
+        for (int i = 0; i < N; i++) {
+            Log.d(LOG_TAG, "output " + i + ", length: " + results.getOutput(i).length);
         }
     }
 
-    private void onCaptureSequenceComplete(){
+    private void onCaptureSequenceComplete() {
         // When the capture list has been completed fill finalResults
         Log.d(LOG_TAG, "onCaptureSequenceComplete");
         printBiometricsResult(previousResults);
@@ -1143,15 +1146,15 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         ImageHolder[] inputs = previousResults.getInputs();
         byte[][] outputs = previousResults.getOutputs();
 
-        for( int i : outputSlots){
-            if(i<0 || i>=previousResults.size()){
+        for (int i : outputSlots) {
+            if (i < 0 || i >= previousResults.size()) {
                 onError(BiometricsException.ERROR_CAPTURE_SEQUENCE, "outputSlots exceeds captured results");
             }
             outputResults.addResult((ImageHolder) inputs[0], outputs[i]);
         }
 
         finalResults = new HashMap<>();
-        finalResults.put(FourFInterface.UID, outputResults );
+        finalResults.put(FourFInterface.UID, outputResults);
         previousResults = null;
         FourFIntegrationWrapper.purge();// this could be a shutdown call
     }
@@ -1159,10 +1162,10 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     private int getTemplatesCount() {
         int templates;
 
-        if( currentConfig.getLivenessType() == LivenessType.STEREO_VERT
-            || currentConfig.getLivenessType() == LivenessType.STEREO_HORZ){
+        if (currentConfig.getLivenessType() == LivenessType.STEREO_VERT
+                || currentConfig.getLivenessType() == LivenessType.STEREO_HORZ) {
             templates = 2; // liveness takes stereo images
-        }else{
+        } else {
             templates = 1; // all other modes get one at a time
         }
 
@@ -1251,9 +1254,9 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     private void clearEnrollement() {
         HandGuideHelper.clearGuides(this);
         try {
-           templates_store_left.clear();
-           templates_store_right.clear();
-        }catch(Exception ex){
+            templates_store_left.clear();
+            templates_store_right.clear();
+        } catch (Exception ex) {
             ex.printStackTrace();
             onError(BiometricsException.ERROR_TEMPATE_HANDLING, "Error clearing template: " + ex.getMessage());
         }
@@ -1263,7 +1266,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     // fourf fragment with custom layout (extends DefaultFourFFragment)
     @Override
     public void kickOffBiometricsProcess() {
-        if(captureSequence.size()<1){
+        if (captureSequence.size() < 1) {
             onError(BiometricsException.ERROR_CAPTURE_SEQUENCE, "The capture sequence is empty");
             return;
         }
@@ -1273,11 +1276,9 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         //Below is horrible hack to force a delay in android 4 phones. This is because the decorators
         //are not shown if the delay is not added as the decorators are added in the wrong order.
         //This should be fixed with a more permanent solution.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             kickOffOptimisedFragment();
-        }
-        else {
+        } else {
             new CountDownTimer(400, 1) {
                 public void onTick(long millisUntilFinished) {
                 }
@@ -1291,10 +1292,9 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     private void kickOffOptimisedFragment() {
-        if(currentConfig.getOptimiseMode() == OptimiseMode.THUMB || currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER){
+        if (currentConfig.getOptimiseMode() == OptimiseMode.THUMB || currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER) {
             kickOffThumbFragment();
-        }
-        else {
+        } else {
             kickOffFourFFragment();
         }
     }
@@ -1357,7 +1357,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             });
         }
 
-        if(fourFFragment.button_tips != null){
+        if (fourFFragment.button_tips != null) {
             fourFFragment.button_tips.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1369,13 +1369,13 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
 
-    private void setHand(boolean useRightHand){
-        if(useRightHand) templates_store.updateKey(FourFInterface.SUFFIX_KEY_ENROL_RIGHT);
+    private void setHand(boolean useRightHand) {
+        if (useRightHand) templates_store.updateKey(FourFInterface.SUFFIX_KEY_ENROL_RIGHT);
         else templates_store.updateKey(FourFInterface.SUFFIX_KEY_ENROL_LEFT);
 
-        if(fourFProcessor!=null) fourFProcessor.updateDefaultFocusRegion(useRightHand);
+        if (fourFProcessor != null) fourFProcessor.updateDefaultFocusRegion(useRightHand);
 
-        if(currentConfig.getOptimiseMode() == OptimiseMode.THUMB) {
+        if (currentConfig.getOptimiseMode() == OptimiseMode.THUMB) {
             updateSwitchThumbUI();
             if (useRightHand) {
                 //thumbFragment.iv_imgFingerHint.setImageDrawable(getResources().getDrawable(R.drawable.thumb_guide_right));
@@ -1389,29 +1389,29 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
                 currentConfig.setIndividualFingerCaptured(FourFInterface.IndividualFingerCaptured.THUMB_LEFT);
             }
 
-        }else if(currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER){
+        } else if (currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER) {
             updateSwitchThumbUI();
             thumbFragment.iv_handSide.setImageDrawable(null);
             int currentFinger = currentConfig.getIndividualFingerCaptured().getCode();
             Drawable[] drawableIndicators = new Drawable[]{getResources().getDrawable(R.drawable.indicator_index),
-                                                            getResources().getDrawable(R.drawable.indicator_middle),
-                                                            getResources().getDrawable(R.drawable.indicator_ring),
-                                                            getResources().getDrawable(R.drawable.indicator_little) };
-            String[] arrayOfFingerLabels = new String[]{getString(R.string.right_thumb),getString(R.string.right_index),
+                    getResources().getDrawable(R.drawable.indicator_middle),
+                    getResources().getDrawable(R.drawable.indicator_ring),
+                    getResources().getDrawable(R.drawable.indicator_little)};
+            String[] arrayOfFingerLabels = new String[]{getString(R.string.right_thumb), getString(R.string.right_index),
                     getString(R.string.right_middle), getString(R.string.right_ring),
-                    getString(R.string.right_little),getString(R.string.left_thumb),
+                    getString(R.string.right_little), getString(R.string.left_thumb),
                     getString(R.string.left_index), getString(R.string.left_middle),
                     getString(R.string.left_ring), getString(R.string.left_little)};
 
-            if(currentConfig.isRightHand()) {
+            if (currentConfig.isRightHand()) {
                 int imageIndex = currentFinger - 2;
                 Bitmap outputHand;
-                Bitmap inputHand = ((BitmapDrawable)(drawableIndicators[imageIndex])).getBitmap();
+                Bitmap inputHand = ((BitmapDrawable) (drawableIndicators[imageIndex])).getBitmap();
                 Matrix matrix = new Matrix();
                 matrix.preScale(-1.0f, 1.0f);
                 outputHand = Bitmap.createBitmap(inputHand, 0, 0, inputHand.getWidth(), inputHand.getHeight(), matrix, true);
                 thumbFragment.iv_handSide.setImageBitmap(outputHand);
-            }else{
+            } else {
                 int imageIndex = currentFinger - 7;
                 thumbFragment.iv_handSide.setImageDrawable(drawableIndicators[imageIndex]);
 
@@ -1421,7 +1421,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             setIndividualImageHand(useRightHand);
 
 
-        }else{
+        } else {
             updateSwitchHandUI();
             setGuideImageHand(useRightHand);
         }
@@ -1430,7 +1430,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     private void updateSwitchHandUI() {
         Log.d(LOG_TAG, "updateSwitchHandUI");
         //updateCountDownUI();
-        if(fourFFragment!=null && fourFFragment.left_right_switch != null) {
+        if (fourFFragment != null && fourFFragment.left_right_switch != null) {
             if (currentConfig.isAllowUserHandSwitch()) {
                 fourFFragment.left_right_switch.setVisibility(View.VISIBLE);
             } else {
@@ -1442,7 +1442,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
     private void updateSwitchThumbUI() {
         Log.d(LOG_TAG, "updateSwitchThumbUI");
-        if(thumbFragment!=null) {
+        if (thumbFragment != null) {
             if (currentConfig.isAllowUserHandSwitch()) {
                 thumbFragment.rl_switchHand.setVisibility(View.VISIBLE);
             } else {
@@ -1466,9 +1466,9 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     private void setIndividualImageHand(boolean isRightHand) {
         float currentScale = thumbFragment.iv_imgFingerHint.getScaleX();
         Log.d(LOG_TAG, "poi finger hint scale: " + currentScale);
-        if(isRightHand){
+        if (isRightHand) {
             thumbFragment.iv_imgFingerHint.setScaleX(abs(currentScale) * -1.0f);
-        }else{
+        } else {
             thumbFragment.iv_imgFingerHint.setScaleX(abs(currentScale));
         }
     }
@@ -1524,7 +1524,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
                 }
             });
             return list;
-        }else{
+        } else {
             List<CameraLayoutDecorator> list = new ArrayList<>();
             if (fourFFragment.roiRenderer == null) {
                 synchronized (DefaultFourFBiometricsActivity.class) {
@@ -1534,7 +1534,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
                 }
             }
 
-            if(displayROIs()) {
+            if (displayROIs()) {
                 list.add(fourFFragment.roiRenderer);
             }
 
@@ -1583,12 +1583,12 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(currentConfig.getOptimiseMode() == OptimiseMode.THUMB || currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER) {
+                if (currentConfig.getOptimiseMode() == OptimiseMode.THUMB || currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER) {
                     thumbFragment.tv_placeYourFingers.setText(displayMessage);
                     if (thumbFragment.tv_placeYourFingers.getVisibility() != View.VISIBLE) {
                         thumbFragment.tv_placeYourFingers.setVisibility(View.VISIBLE);
                     }
-                }else {
+                } else {
                     fourFFragment.tv_placeYourFingers.setText(displayMessage);
                     if (fourFFragment.tv_placeYourFingers.getVisibility() != View.VISIBLE) {
                         fourFFragment.tv_placeYourFingers.setVisibility(View.VISIBLE);
@@ -1614,7 +1614,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             public void run() {
                 if (mCountDownTimer != null && mCountDownTimer.isStarted()) {
                     // update the timer when past
-                    if(!timer_state && mCountDownTimer.getCurrentTime() < FOURF_TIMEOUT_WARN){
+                    if (!timer_state && mCountDownTimer.getCurrentTime() < FOURF_TIMEOUT_WARN) {
                         timer_state = true;
                     }
                     String timeout = Long.toString(mCountDownTimer.getCurrentTime() / SECOND);
@@ -1635,72 +1635,72 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     // Join the last two templates in the provided results (normally left and right hand. Works for any)
-    private void joinTemplates(BiometricsResult<ImageHolder> results){
+    private void joinTemplates(BiometricsResult<ImageHolder> results) {
         Log.d(LOG_TAG, "Join templates");
 
         int N = results.size();
-        if(N < 2){
-            onError(BiometricsException.ERROR_TEMPATE_HANDLING,"Not enough templates to join");
+        if (N < 2) {
+            onError(BiometricsException.ERROR_TEMPATE_HANDLING, "Not enough templates to join");
         }
 
-        Log.d(LOG_TAG, "template 1 length: " + results.getOutput(N-2).length);
-        Log.d(LOG_TAG, "template 2 length: " + results.getOutput(N-1).length);
+        Log.d(LOG_TAG, "template 1 length: " + results.getOutput(N - 2).length);
+        Log.d(LOG_TAG, "template 2 length: " + results.getOutput(N - 1).length);
 
-        byte[] joinedTemplate = FourFIntegrationWrapper.JoinExportData(results.getOutput(N-2),
-                results.getOutput(N-1), CaptureConfig.JoinMergeFormat.getCode());
+        byte[] joinedTemplate = FourFIntegrationWrapper.JoinExportData(results.getOutput(N - 2),
+                results.getOutput(N - 1), CaptureConfig.JoinMergeFormat.getCode());
 
         Log.d(LOG_TAG, "Joined template length: " + joinedTemplate.length);
         if (joinedTemplate.length == 1) { // need to check for an error
             int returnCode = joinedTemplate[0];
             if (returnCode != FourFInterface.JNIresult.SUCCESS.getCode()) {
                 Log.e(LOG_TAG, "FourF ERROR Code = " + returnCode);
-                onError(BiometricsException.ERROR_TEMPATE_HANDLING,  getString(R.string.eight_f_template_failed));
+                onError(BiometricsException.ERROR_TEMPATE_HANDLING, getString(R.string.eight_f_template_failed));
             }
         }
 
         previousResults.addResult((ImageHolder) results.getInputs()[0], joinedTemplate);
-        if(currentConfig.getIndividualFingerCaptured() == FourFInterface.IndividualFingerCaptured.NONE) {
+        if (currentConfig.getIndividualFingerCaptured() == FourFInterface.IndividualFingerCaptured.NONE) {
             results.clearResults();
-        }else{
+        } else {
             eightF_fuse_queue.addResult((ImageHolder) results.getInputs()[0], joinedTemplate);
         }
     }
 
     // Merge the last two templates in the provided results
-    private void mergeTemplates(BiometricsResult<ImageHolder> results){
+    private void mergeTemplates(BiometricsResult<ImageHolder> results) {
         Log.d(LOG_TAG, "Merge templates");
 
         int N = results.size();
-        if(N < 2){
-            onError(BiometricsException.ERROR_TEMPATE_HANDLING,"Not enough templates to merge");
+        if (N < 2) {
+            onError(BiometricsException.ERROR_TEMPATE_HANDLING, "Not enough templates to merge");
         }
 
-        Log.d(LOG_TAG, "template 1 length: " + results.getOutput(N-2).length);
-        Log.d(LOG_TAG, "template 2 length: " + results.getOutput(N-1).length);
+        Log.d(LOG_TAG, "template 1 length: " + results.getOutput(N - 2).length);
+        Log.d(LOG_TAG, "template 2 length: " + results.getOutput(N - 1).length);
 
-        byte[] mergedTemplate = FourFIntegrationWrapper.MergeExportData(results.getOutput(N-2),
-                results.getOutput(N-1), CaptureConfig.JoinMergeFormat.getCode());
+        byte[] mergedTemplate = FourFIntegrationWrapper.MergeExportData(results.getOutput(N - 2),
+                results.getOutput(N - 1), CaptureConfig.JoinMergeFormat.getCode());
 
         Log.d(LOG_TAG, "Merged template length: " + mergedTemplate.length);
         if (mergedTemplate.length == 1) { // need to check for an error
             int returnCode = mergedTemplate[0];
             if (returnCode != FourFInterface.JNIresult.SUCCESS.getCode()) {
                 Log.e(LOG_TAG, "FourF ERROR Code = " + returnCode);
-                onError(BiometricsException.ERROR_TEMPATE_HANDLING,  getString(R.string.merge_f_template_failed));
+                onError(BiometricsException.ERROR_TEMPATE_HANDLING, getString(R.string.merge_f_template_failed));
             }
         }
 
         previousResults.addResult((ImageHolder) results.getInputs()[0], mergedTemplate);
-        if(currentConfig.isMultishot_to_8F_queue()){
+        if (currentConfig.isMultishot_to_8F_queue()) {
             Log.d(LOG_TAG, "added multishot result to 8F queue");
-            eightF_fuse_queue.addResult( (ImageHolder) results.getInputs()[0], mergedTemplate);
+            eightF_fuse_queue.addResult((ImageHolder) results.getInputs()[0], mergedTemplate);
         }
         results.clearResults();
     }
 
     @Override
     @UiThread
-    public void clearRois(){
+    public void clearRois() {
         fourFFragment.roiRenderer.clear();
         thumbFragment.roiRenderer.clear();
     }
@@ -1765,7 +1765,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         if (fourFFragment != null && fourFFragment.roiRenderer != null) {
             reviewGuidanceImages(roiStatusCode);
             fourFFragment.roiRenderer.update(newRois, fourfCodeToRoiColor(roiStatusCode));
-        } else if(thumbFragment != null && thumbFragment.roiRenderer != null){
+        } else if (thumbFragment != null && thumbFragment.roiRenderer != null) {
             thumbFragment.roiRenderer.update(newRois, fourfCodeToRoiColor(roiStatusCode));
         }
 
@@ -1780,7 +1780,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     private void resetMeterUI(boolean isRightHand) {
         if (!useHandMeter()) return;
 
-        if(fourFFragment !=null) {
+        if (fourFFragment != null) {
             if (isRightHand) {
                 fourFFragment.iv_arrowRight.setVisibility(View.INVISIBLE);
                 fourFFragment.tv_tooCloseRight.setShadowLayer(0, 0, 0, Color.WHITE);
@@ -1795,14 +1795,14 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
     // show / hide the appropriate meters and reset them
     private void updateMeterUI(boolean isRightHand) {
-        if(fourFFragment !=null) {
-            if(!useHandMeter()){
+        if (fourFFragment != null) {
+            if (!useHandMeter()) {
                 fourFFragment.rl_meter.setVisibility(View.GONE);
                 fourFFragment.rl_meterRight.setVisibility(View.GONE);
                 return;
             }
 
-            if(isRightHand) {
+            if (isRightHand) {
                 if (fourFFragment.rl_meterRight.getVisibility() != View.VISIBLE) {
                     fourFFragment.rl_meterRight.setVisibility(View.VISIBLE);
                 }
@@ -1810,7 +1810,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
                     fourFFragment.rl_meter.setVisibility(View.GONE);
                 }
                 resetMeterUI(isRightHand);
-            }else{
+            } else {
                 if (fourFFragment.rl_meterRight.getVisibility() != View.GONE) {
                     fourFFragment.rl_meterRight.setVisibility(View.GONE);
                 }
@@ -1823,13 +1823,13 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     // Move the little arrow
-    private void animateMeter(boolean isRightHand){
-        if(!useHandMeter()) return;
+    private void animateMeter(boolean isRightHand) {
+        if (!useHandMeter()) return;
 
-        if(fourFFragment !=null) {
-            if(isRightHand) {
+        if (fourFFragment != null) {
+            if (isRightHand) {
                 meterAnimation(fourFFragment.iv_arrowRight, fourFFragment.tv_tooCloseRight, fourFFragment.tv_tooFarRight, fourFFragment.rl_meterRight);
-            }else{
+            } else {
                 meterAnimation(fourFFragment.iv_arrow, fourFFragment.tv_tooClose, fourFFragment.tv_tooFar, fourFFragment.rl_meter);
             }
         }
@@ -1841,7 +1841,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             arrow.setVisibility(View.VISIBLE);
         }
 
-        float convertedFeedback = ((((float)feedback[FourFInterface.Feedback.DISTANCE.ordinal()])/1000.0f) * container.getHeight());
+        float convertedFeedback = ((((float) feedback[FourFInterface.Feedback.DISTANCE.ordinal()]) / 1000.0f) * container.getHeight());
 
         float new_arrow_position = convertedFeedback + ((container.getHeight() / 2) - (arrow.getHeight() / 2));
 
@@ -1881,7 +1881,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         switch (roiStatusCode) {
             case PREVIEW_STAGE_NORMAL:
                 return normalRoiColor;
-                //return errorRoiColor;
+            //return errorRoiColor;
             case PREVIEW_STAGE_STABILIZED:
                 return finalRoiColor;
             case PREVIEW_STAGE_TAKING_PICTURE:
@@ -1931,7 +1931,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         this.thumbFragment = thumbFragment;
         setupThumbCancel();
         setHand(currentConfig.isRightHand());
-        if(currentConfig.isRightHand() && currentConfig.getOptimiseMode() == OptimiseMode.THUMB) {
+        if (currentConfig.isRightHand() && currentConfig.getOptimiseMode() == OptimiseMode.THUMB) {
             thumbFragment.iv_handSide.setImageDrawable(getResources().getDrawable(R.drawable.righthand_thumb));
             thumbFragment.tv_handside.setText(getString(R.string.right_thumb));
         }
@@ -1955,8 +1955,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
                     //currentConfig.setIndividualFingerCaptured(FourFInterface.IndividualFingerCaptured.THUMB_RIGHT);
                     setHand(true);
 
-                }
-                else if (currentConfig.isRightHand()) {
+                } else if (currentConfig.isRightHand()) {
                     CaptureConfig.setRightHandChoice(false);
                     //currentConfig.setIndividualFingerCaptured(FourFInterface.IndividualFingerCaptured.THUMB_LEFT);
                     setHand(false);
@@ -2019,7 +2018,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         });
     }
 
-    public void onInstructionalIndividualFFragmentReady(final DefaultFourFCaptureInstructionalIndividualFFragment individualFFragment){
+    public void onInstructionalIndividualFFragmentReady(final DefaultFourFCaptureInstructionalIndividualFFragment individualFFragment) {
         individualFFragment.btn_getStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -2029,17 +2028,16 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
     //** End - Instruction fragment callbacks
 
-    public void setHandGuideDesign(){
+    public void setHandGuideDesign() {
         HandGuideHelper.setGuideDesign(FourFInterface.GuideDesign.FINGERS_DARK);
     }
 
     // Set the size of the meter according to the choosen hand guide. Ensure setupHandGuide has
     // already been called.
-    private void setupMeter(float cameraFOV, float screenRatio)
-    {
+    private void setupMeter(float cameraFOV, float screenRatio) {
         double fraction = HandGuideHelper.queryGuideHeightAsFraction(cameraFOV, screenRatio, CameraHelper.getCmSubjectDistanceFromCam());
 
-        if(fourFFragment != null) {
+        if (fourFFragment != null) {
             fourFFragment.setMeterSize(fraction);
         }
         updateMeterUI(currentConfig.isRightHand());
@@ -2076,10 +2074,14 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     /*
         Override to turn UI guidance arrows on/off
      */
-    public boolean useGuidanceArrows() { return true; }
+    public boolean useGuidanceArrows() {
+        return true;
+    }
 
     protected void reviewGuidanceImages(FourFInterface.TrackingState guidanceImageIndex) {
-        if(useGuidanceArrows()) { fourFFragment.setGuidanceSymbol(guidanceImageIndex); }
+        if (useGuidanceArrows()) {
+            fourFFragment.setGuidanceSymbol(guidanceImageIndex);
+        }
     }
 
     /*
@@ -2087,13 +2089,13 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         Or use some other photo success indication (user can remove their hand)
         (UICust)
      */
-    public void doVibrate(){
+    public void doVibrate() {
         Vibrator v = (Vibrator) DefaultFourFBiometricsActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(300);
     }
 
     public void onProcessingStart() {
-        if(fourFFragment!=null) {
+        if (fourFFragment != null) {
             this.fourFFragment.tv_placeYourFingers.setVisibility(View.GONE);
         }
         Log.d(LOG_TAG, "onProcessingStart");
@@ -2110,7 +2112,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         Log.d(LOG_TAG, "onProcessingStartInternal");
         doVibrate();  // Vibrate to indicate capture success.
         dismissDialog();
-        if( currentConfig.isShowProcessingScreen()){
+        if (currentConfig.isShowProcessingScreen()) {
             start_processing_time = System.currentTimeMillis();
             onProcessingStart(); // show processing fragment.
         }
@@ -2122,21 +2124,21 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     @Override
-    public void onDigestionComplete(){
+    public void onDigestionComplete() {
         // template extraction has finished
         Log.d(LOG_TAG, "onDigestionComplete");
     }
 
     @Override
-    public void onRetryCapture(){
+    public void onRetryCapture() {
         showDialogWithMode(RETRY_CAPTURE);
     }
 
     @Override
-    public void onStereo1Accepted(){
+    public void onStereo1Accepted() {
         Log.d(LOG_TAG, "onStereo1Accepted");
         doVibrate();
-        if(currentConfig.isAllowUserHandSwitch()) {
+        if (currentConfig.isAllowUserHandSwitch()) {
             currentConfig.setAllowUserHandSwitch(false);
         }
         updateSwitchHandUI();
@@ -2144,7 +2146,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     @Override
-    public void onLivenessFail(){
+    public void onLivenessFail() {
         Log.d(LOG_TAG, "Liveness failed");
 
         DefaultFourFLivenessFailedInstructionalFragment fragment = new DefaultFourFLivenessFailedInstructionalFragment();
@@ -2157,7 +2159,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     @Override
-    public void onPassiveLivenessFail(){
+    public void onPassiveLivenessFail() {
         Log.d(LOG_TAG, "Passive Liveness failed");
         dismissDialog();
         pauseFourFProcessor();
@@ -2171,19 +2173,18 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     @Override
-    public void onAttemptError(){
+    public void onAttemptError() {
         mCountDownTimer.stop();
-        if(currentConfig.getOptimiseMode() == OptimiseMode.THUMB ||
-                currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER)
-        {
+        if (currentConfig.getOptimiseMode() == OptimiseMode.THUMB ||
+                currentConfig.getOptimiseMode() == OptimiseMode.INDIVIDUAL_FINGER) {
             showFragment(new DefaultFourFSingleDigitFailedFragment());
-        }else {
+        } else {
             showFragment(new DefaultFourFEnrollmentFailedFragment());
         }
     }
 
     @Override
-    protected void cancel(){
+    protected void cancel() {
         if (isEnrollment() || isEnrollExport()) {
             // clear any enrolled templates
             clearEnrollement();
@@ -2194,20 +2195,20 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     /* Check the chosen format is supported
      * @return True if supported, else false
      */
-    protected boolean checkFormatSupported(){
+    protected boolean checkFormatSupported() {
         Log.d(LOG_TAG, "checkFormatSupported : " + TemplateFormat.resolveFriendly(ExportConfig.getFormat()));
-        if(isCapture()){
+        if (isCapture()) {
             return checkFormatSupportedCapture4F(ExportConfig.getFormat());
-        }else if(isCapture8F()){
-            if(ExportConfig.getOptimiseForIndexLittle()){
+        } else if (isCapture8F()) {
+            if (ExportConfig.getOptimiseForIndexLittle()) {
                 return checkFormatSupportedAllFingerOptimise(ExportConfig.getFormat());
-            }else{
+            } else {
                 return checkFormatSupportedCapture8F(ExportConfig.getFormat());
             }
 
-        }else if(isCapture2THUMB() || isCaptureTHUMB()){
+        } else if (isCapture2THUMB() || isCaptureTHUMB()) {
             return checkFormatSupportedCaptureThumb(ExportConfig.getFormat());
-        }else{
+        } else {
             return true;
         }
     }
@@ -2215,7 +2216,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     /* Check the chosen format is supported for 4F capture
      * @return True if supported, else false
      */
-    public static boolean checkFormatSupportedCapture4F(TemplateFormat choosenFormat){
+    public static boolean checkFormatSupportedCapture4F(TemplateFormat choosenFormat) {
         // supports all listed formats
         return true;
     }
@@ -2223,8 +2224,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     /* Check the chosen format is supported for 8F capture
      * @return True if supported, else false
      */
-    public static boolean checkFormatSupportedCapture8F(TemplateFormat choosenFormat){
-        switch (choosenFormat){
+    public static boolean checkFormatSupportedCapture8F(TemplateFormat choosenFormat) {
+        switch (choosenFormat) {
             case FORMAT_VERIDFP:
                 return false;
             case FORMAT_NIST:
@@ -2243,10 +2244,10 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     /* Check the chosen format is supported for thumb capture
- * @return True if supported, else false
- */
-    public static boolean checkFormatSupportedCaptureThumb(TemplateFormat choosenFormat){
-        switch (choosenFormat){
+     * @return True if supported, else false
+     */
+    public static boolean checkFormatSupportedCaptureThumb(TemplateFormat choosenFormat) {
+        switch (choosenFormat) {
             case FORMAT_VERIDFP:
                 return false;
             case FORMAT_NIST:
@@ -2265,10 +2266,10 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     /* Check the chosen format is supported for 8F capture
- * @return True if supported, else false
- */
-    public static boolean checkFormatSupportedAllFingerOptimise(TemplateFormat choosenFormat){
-        switch (choosenFormat){
+     * @return True if supported, else false
+     */
+    public static boolean checkFormatSupportedAllFingerOptimise(TemplateFormat choosenFormat) {
+        switch (choosenFormat) {
             case FORMAT_VERIDFP:
                 return false;
             case FORMAT_NIST:
@@ -2311,8 +2312,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.dialog_processing);
 
-        final SlidingImageView slidingImageView = (SlidingImageView)dialog.findViewById(R.id.processing_fingerprint);
-        final ImageView line = (ImageView)dialog.findViewById(R.id.splash_line);
+        final SlidingImageView slidingImageView = (SlidingImageView) dialog.findViewById(R.id.processing_fingerprint);
+        final ImageView line = (ImageView) dialog.findViewById(R.id.splash_line);
 
 
         final ValueAnimator va = ValueAnimator.ofFloat(0f, 1f);
@@ -2322,8 +2323,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         va.setDuration(mDuration);
         va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                slidingImageView.mPercent = ((float)animation.getAnimatedValue());
-                line.setTranslationX((((float)animation.getAnimatedValue()) * slidingImageView.getWidth())  - (line.getWidth() *0.5f) );
+                slidingImageView.mPercent = ((float) animation.getAnimatedValue());
+                line.setTranslationX((((float) animation.getAnimatedValue()) * slidingImageView.getWidth()) - (line.getWidth() * 0.5f));
             }
 
         });
@@ -2334,7 +2335,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
     private void showDialogWithMode(int mode) {
-        if(fourFFragment!=null) {
+        if (fourFFragment != null) {
             fourFFragment.tv_placeYourFingers.setVisibility(View.GONE);
         }
         dialog = new Dialog(this);
@@ -2376,7 +2377,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                if(fourFFragment!=null) {
+                if (fourFFragment != null) {
                     fourFFragment.tv_placeYourFingers.setVisibility(View.VISIBLE);
                 }
                 kickOffBiometricsProcess();
@@ -2387,7 +2388,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                if(fourFFragment!=null) {
+                if (fourFFragment != null) {
                     fourFFragment.tv_placeYourFingers.setVisibility(View.VISIBLE);
                 }
                 DefaultFourFBiometricsActivity.super.onComplete(finalResults);
@@ -2398,24 +2399,21 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                if(fourFFragment!=null) {
+                if (fourFFragment != null) {
                     fourFFragment.tv_placeYourFingers.setVisibility(View.VISIBLE);
                 }
                 retry();
             }
         };
 
-        if(mode == ENROLLMENT_STEP1_COMPLETE)
-        {
+        if (mode == ENROLLMENT_STEP1_COMPLETE) {
             mainText.setText(getString(R.string.success_nfirst_scan_complete));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
             image.setImageDrawable(UICustomization.getImageWithBackgroundColor(getResources().getDrawable(R.drawable.complete_background)));
             image2.setImageDrawable(UICustomization.getImageWithForegroundColor(getResources().getDrawable(R.drawable.complete_foreground)));
             next.setOnClickListener(nextClickListenerContinue);
             dialog.show();
-        }
-        else if(mode == INDEX_COMPLETE)
-        {
+        } else if (mode == INDEX_COMPLETE) {
             mainText.setText(getString(R.string.success_n_scan_complete));
             smallText.setText(getString(R.string.please_move_hand_upwards_for_next_picture));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
@@ -2423,10 +2421,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             image2.setImageDrawable(UICustomization.getImageWithForegroundColor(getResources().getDrawable(R.drawable.complete_foreground)));
             next.setOnClickListener(nextClickListenerContinue);
             dialog.show();
-        }
-
-        else if(mode == SWITCH_HANDS)
-        {
+        } else if (mode == SWITCH_HANDS) {
             mainText.setText(getString(R.string.success_nchange_hands));
             smallText.setText(getString(R.string.please_change_hands));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
@@ -2434,9 +2429,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             image2.setImageDrawable(UICustomization.getImageWithBackgroundColor(getResources().getDrawable(R.drawable.switch_hand_foreground)));
             next.setOnClickListener(nextClickListenerContinue);
             dialog.show();
-        }
-        else if(mode == ENROLLMENT_COMPLETE)
-        {
+        } else if (mode == ENROLLMENT_COMPLETE) {
             mainText.setText(getString(R.string.success_nsecond_scan_complete));
             smallText.setText(getString(R.string.you_have_completed_enrollment));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
@@ -2450,9 +2443,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             params.weight = 2.0f;
             next.setLayoutParams(params);
             showCompleteDialog(dialog, mode);
-        }
-        else if(mode == AUTHENTICATION_COMPLETE)
-        {
+        } else if (mode == AUTHENTICATION_COMPLETE) {
             mainText.setText(getString(R.string.success));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
             image.setImageDrawable(UICustomization.getImageWithBackgroundColor(getResources().getDrawable(R.drawable.complete_background)));
@@ -2464,9 +2455,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             params.weight = 2.0f;
             next.setLayoutParams(params);
             showCompleteDialog(dialog, mode);
-        }
-        else if(mode == FAILED_SCAN)
-        {
+        } else if (mode == FAILED_SCAN) {
             mainText.setText(getString(R.string.could_not_process));
             smallText.setText(getString(R.string.tips));
             smallText.setTextColor(UICustomization.getBackgroundColor());
@@ -2483,9 +2472,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             next.setText(getString(R.string.retry));
             next.setOnClickListener(nextClickListenerRetry);
             dialog.show();
-        }
-        else if(mode == CAPTURE_COMPLETE)
-        {
+        } else if (mode == CAPTURE_COMPLETE) {
             mainText.setText(getString(R.string.success_n_scan_complete));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
             image.setImageDrawable(UICustomization.getImageWithBackgroundColor(getResources().getDrawable(R.drawable.complete_background)));
@@ -2497,8 +2484,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             next.setLayoutParams(params);
             next.setOnClickListener(nextClickListenerFinish);
             showCompleteDialog(dialog, mode);
-        }
-        else if(mode == PASSIVE_LIVENESS_FAILED){
+        } else if (mode == PASSIVE_LIVENESS_FAILED) {
             mainText.setText(getString(R.string.sorry));
             smallText.setText(getString(R.string.passive_failed));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
@@ -2507,8 +2493,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
             next.setText(getString(R.string.retry));
             next.setOnClickListener(nextClickListenerRetry);
             dialog.show();
-        }
-        else if(mode == RETRY_CAPTURE){
+        } else if (mode == RETRY_CAPTURE) {
             mainText.setText(getString(R.string.failed_capture_retry_prompt));
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
             image.setImageDrawable(UICustomization.getImageWithBackgroundColor(getResources().getDrawable(R.drawable.error_background)));
@@ -2533,12 +2518,12 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
     }
 
 
-    private void showNextIndividualDialog(CaptureConfig nextConfig, int nextFinger){
+    private void showNextIndividualDialog(CaptureConfig nextConfig, int nextFinger) {
         Drawable[] drawableIndicators = new Drawable[]{getResources().getDrawable(R.drawable.lefthand_thumb_instructional),
                 getResources().getDrawable(R.drawable.indicator_index),
                 getResources().getDrawable(R.drawable.indicator_middle),
                 getResources().getDrawable(R.drawable.indicator_ring),
-                getResources().getDrawable(R.drawable.indicator_little) };
+                getResources().getDrawable(R.drawable.indicator_little)};
 
 
         dialog = new Dialog(this);
@@ -2575,16 +2560,16 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         params.weight = 2.0f;
         next.setLayoutParams(params);
 
-        if(nextConfig.isRightHand()) {
+        if (nextConfig.isRightHand()) {
             int imageIndex = nextFinger - 1;
             Bitmap outputHand;
-            Bitmap inputHand = ((BitmapDrawable)(drawableIndicators[imageIndex])).getBitmap();
+            Bitmap inputHand = ((BitmapDrawable) (drawableIndicators[imageIndex])).getBitmap();
             Matrix matrix = new Matrix();
             matrix.preScale(-1.0f, 1.0f);
             outputHand = Bitmap.createBitmap(inputHand, 0, 0, inputHand.getWidth(), inputHand.getHeight(), matrix, true);
 
             image.setImageBitmap(outputHand);
-        }else{
+        } else {
             int imageIndex = nextFinger - 6;
             image.setImageDrawable(drawableIndicators[imageIndex]);
 
@@ -2604,14 +2589,13 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
 
     }
 
-    protected void showTipsDialog(){
+    protected void showTipsDialog() {
 
         final Dialog dialog = new Dialog(this);
         dialog.setCancelable(false);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.dialog_tips);
-
 
 
         TextView mainText = (TextView) dialog.findViewById(R.id.tv_mainText);
@@ -2645,7 +2629,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         See CustomFourFBiometricsActivity.java in demoappexport sample app
         (UICust)
      */
-    protected void showCompleteDialog(Dialog mDialog, int actionId){
+    protected void showCompleteDialog(Dialog mDialog, int actionId) {
         dialog.show();
     }
 }
