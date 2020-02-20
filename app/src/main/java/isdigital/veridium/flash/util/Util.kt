@@ -431,8 +431,7 @@ fun changeDateFormat(dateStr: String, formatoFin: String, _formatoInit: String?)
 
     val parser = SimpleDateFormat(formatoInit)
     val formatter = SimpleDateFormat(formatoFin)
-    val output: String = formatter.format(parser.parse(dateStr))
-    return output
+    return formatter.format(parser.parse(dateStr))
 }
 
 fun getPlanType(c_planType: String): String {

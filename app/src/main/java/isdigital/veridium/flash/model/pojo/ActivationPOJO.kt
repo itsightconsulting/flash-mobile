@@ -10,15 +10,15 @@ data class ActivationPOJO(
     var iccid: String?,
     var formCreationDate: String?, // YYYY-DD-MM HH-mm-ss
 
-    val dni: String,
-    val name: String,
-    val lastName: String,
+    var dni: String,
+    var name: String,
+    var lastName: String,
     var birthDate: String, // YYYY-MM-DD
-    val email: String,
-    val wantPortability: Boolean,
-    val sponsorTeamId: String?,
-    val phoneNumber: String?,
-    val currentCompany: String?,
+    var email: String,
+    var wantPortability: Boolean,
+    var sponsorTeamId: String?,
+    var phoneNumber: String?,
+    var currentCompany: String?,
     var planType: String?,
 
     var validationBiometric: Boolean?,

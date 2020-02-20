@@ -84,9 +84,12 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                 if (it) {
                     var error = activationViewModel.loadError.value ?: false
                     var formError = activationViewModel.formError.value ?: false
+
                     if (error) {
+                        UserPrefs.putUserBarscanAttempts(context)
+
                         val attemps = UserPrefs.getUserBarscanAttempts(context)
-                        if (attemps > 4) {
+                        if (attemps == MAX_SCANNER_TEMPS) {
                             val form = UserPrefs.getActivation(context)
                             form.formStatus = FORMSTATUS.REJECTICCD.value
                             form.formCreationDate = SimpleDateFormat(
@@ -95,30 +98,25 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             ).format(Date())
                             form.validationBiometric = false
                             form.iccid = iccid
-                            form.birthDate =
-                                changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
-                            form.planType = getPlanType(form.planType!!)
+                            form.birthDate = changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
 
                             activationViewModel.sendFormWithStatus(form)
                             activationViewModel.loadError.value = false
 
                         } else {
-                            UserPrefs.putUserBarscanAttempts(context)
                             Toast.makeText(context!!, "Vuelva a intentarlo...", Toast.LENGTH_SHORT)
                                 .show()
                             mScannerView.resumeCameraPreview(this)
                             mScannerView.setResultHandler(this)
                             mScannerView.startCamera()
                         }
+                        return@let
+                    }
 
-                    } else if (formError) {
+                    if (formError) {
                         simcardError()
                     } else {
-
-                        if (UserPrefs.getUserBarscanAttempts(context) > 4) {
-                            simcardError()
-                            return@let
-                        }
+                        UserPrefs.resetUserBarscanAttempts(context)
 
                         val diagSucc = invokerBarcodeSuccess(context!!)
                         diagSucc.show()
