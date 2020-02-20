@@ -32,27 +32,32 @@ class OrdersListAdapter(
     override fun getItemCount() = ordersList.size
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        if (ordersList[position].wantPortability){
+        if (ordersList[position].wantPortability) {
             holder.view.orderType.text = "Activación y portabilidad"
             holder.view.orderNumber.text = "Número telefónico: " + ordersList[position].phoneNumber
-        }
-        else holder.view.orderType.text = "Activación de nuevo número telefónico"
+        } else holder.view.orderType.text = "Activación de nuevo número telefónico"
 
-        holder.view.orderDate.text = changeDateFormat(ordersList[position].formCreationDate!!,"dd/MM/yyyy HH:mm","yyyy-MM-dd HH:mm:ss") //  + " a las " + ordersList[position].formCreationDate
+        val orderDate = changeDateFormat(
+            ordersList[position].formCreationDate!!,
+            "dd/MM/yyyy HH:mm",
+            "yyyy-MM-dd HH:mm:ss"
+        )
+        val orderDateArr = orderDate.split(" ")
+        holder.view.orderDate.text = orderDateArr[0] + " a las " + orderDateArr[1]
         val ordersList = ordersList[position]
         holder.bind(ordersList, itemClickListener)
     }
 
     class ContactViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
-        private val type: TextView = view.orderType
+        //private val type: TextView = view.orderType
 
         fun bind(
             posApplicant: OrderInformationArgs,
             clickListener: RecyclerViewOnItemClickListener<OrderInformationArgs>
         ) {
-            if (posApplicant.wantPortability)
-                type.text = "Activación y portabilidad"
-            type.text = "Activación de nuevo número telefónico"
+            //if (posApplicant.wantPortability)
+            //  type.text = "Activación y portabilidad"
+            //else type.text = "Activación de nuevo número telefónico"
 
             //type.text = posApplicant.type
 
