@@ -2,11 +2,19 @@ package isdigital.veridium.flash.view
 
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.veridiumid.sdk.IBiometricFormats
+import com.veridiumid.sdk.IVeridiumSDK
+import com.veridiumid.sdk.fourf.defaultui.activity.DefaultFourFBiometricsActivity
+import com.veridiumid.sdk.fourfintegration.ExportConfig
 import isdigital.veridium.flash.R
+import isdigital.veridium.flash.util.MyVeridiumPreferencesManager
+import kotlinx.android.synthetic.main.biometric_fragment.*
 
 /**
  * A simple [Fragment] subclass.
@@ -26,7 +34,7 @@ class BiometricFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        /*imgLeftHand.setOnClickListener {
+        imgLeftHand.setOnClickListener {
 
             val fingerSelected = 1
             MyVeridiumPreferencesManager.saveFinger(context!!, "$fingerSelected")
@@ -45,20 +53,20 @@ class BiometricFragment : Fragment() {
                 ExportConfig.CaptureHand.RIGHT_ENFORCED,
                 MyVeridiumPreferencesManager.getFinger(context!!).toInt() % 5
             )
-        }*/
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-//        imgLeftHand.setColorFilter(
-//            ContextCompat.getColor(context!!, R.color.black),
-//            PorterDuff.Mode.SRC_IN
-//        )
+        imgLeftHand.setColorFilter(
+            ContextCompat.getColor(context!!, R.color.black),
+            PorterDuff.Mode.SRC_IN
+        )
     }
 
 
-    /*fun launchVeridium(hand: ExportConfig.CaptureHand, finger: Int) {
+    fun launchVeridium(hand: ExportConfig.CaptureHand, finger: Int) {
         ExportConfig.setCaptureHand(hand)
         ExportConfig.setIndividualthumb(finger == 1)
         ExportConfig.setIndividualindex(finger == 2)
@@ -89,7 +97,7 @@ class BiometricFragment : Fragment() {
             putExtra("validator", "com.veridiumid.sdk.fourf.FourFValidator")
             action = IVeridiumSDK.ACTION_CAPTURE_INDIVIDUALF
         }, 141)
-    }*/
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

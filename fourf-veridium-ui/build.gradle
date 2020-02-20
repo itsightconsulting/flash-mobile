@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.8"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled project.minifyDebug
+        }
+
+        release {
+            minifyEnabled project.minifyRelease
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation rootProject.ext.appcompatV7
+
+    implementation project(':biometricsupport')
+    implementation project (':defaultdata')
+    implementation project(':sdk')
+    implementation project (':core')
+    implementation project(':fourfnative')
+    implementation project(':fourfimaging')
+    implementation project(':analytics');
+    implementation project(':fourfdefaultui');
+}
