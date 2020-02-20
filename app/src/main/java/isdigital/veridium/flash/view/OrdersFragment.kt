@@ -12,18 +12,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import isdigital.veridium.flash.R
+import isdigital.veridium.flash.model.args.DataResponseVerifyDNIArgs
+import isdigital.veridium.flash.model.parcelable.OrderInformationArgs
 import isdigital.veridium.flash.util.RecyclerViewOnItemClickListener
 import isdigital.veridium.flash.view.adapter.OrdersListAdapter
 import isdigital.veridium.flash.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.orders_fragment.*
-<<<<<<< HEAD:app/src/main/java/pe/mobile/cuy/view/OrdersFragment.kt
-import pe.mobile.cuy.model.args.DataResponseVerifyDNIArgs
-import pe.mobile.cuy.model.parcelable.OrderInformationArgs
-import pe.mobile.cuy.model.pojo.ActivationPOJO
-=======
-import isdigital.veridium.flash.model.pojo.ActivationPOJO
->>>>>>> 2bf39b6d2d4fbba7ebdc1965b5675e7b8d2edf04:app/src/main/java/isdigital/veridium/flash/view/OrdersFragment.kt
-
 /**
  * A simple [Fragment] subclass.
  */
@@ -31,7 +25,7 @@ class OrdersFragment : Fragment() {
 
     private lateinit var ordersListAdapter: OrdersListAdapter
     private lateinit var orderViewModel: OrderViewModel
-    private val safeArgs: OrdersFragmentArgs by navArgs()
+    //private val safeArgs: OrdersFragmentArgs by navArgs()
 
 
     override fun onCreateView(

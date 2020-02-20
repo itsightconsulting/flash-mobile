@@ -6,15 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import isdigital.veridium.flash.R
+import isdigital.veridium.flash.model.parcelable.OrderInformationArgs
 import isdigital.veridium.flash.util.RecyclerViewOnItemClickListener
+import isdigital.veridium.flash.util.changeDateFormat
 import kotlinx.android.synthetic.main.item_order.view.*
-<<<<<<< HEAD:app/src/main/java/pe/mobile/cuy/view/adapter/OrdersListAdapter.kt
-import pe.mobile.cuy.model.parcelable.OrderInformationArgs
-import pe.mobile.cuy.model.pojo.ActivationPOJO
-import pe.mobile.cuy.util.changeDateFormat
-=======
-import isdigital.veridium.flash.model.pojo.ActivationPOJO
->>>>>>> 2bf39b6d2d4fbba7ebdc1965b5675e7b8d2edf04:app/src/main/java/isdigital/veridium/flash/view/adapter/OrdersListAdapter.kt
 import java.util.*
 
 class OrdersListAdapter(
