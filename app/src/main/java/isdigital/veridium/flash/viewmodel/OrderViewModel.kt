@@ -43,32 +43,10 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                     loading.value = true
                     loadError.value = false
                 }
-
                 override fun onError(e: Throwable) {
-                    // userHasOrders = false
-                    /*
-                    lstOrder.value = arrayListOf(
-                        OrderInformation(
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            true,
-                            UUID.randomUUID().toString(),
-                            "",
-                            "",
-                            ""
-                        )
-                    )
-                     */
-                    loading.value = true
                     loadError.value = true
-
-                    /*errorMessage = instanceHttpError(e).message
-                    loadError.value = true*/
+                    loading.value = false
+                    //errorMessage = instanceHttpError(e).message
                 }
             })
         )

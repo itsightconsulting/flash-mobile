@@ -49,18 +49,11 @@ class OrdersListAdapter(
     }
 
     class ContactViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
-        //private val type: TextView = view.orderType
 
         fun bind(
             posApplicant: OrderInformationArgs,
             clickListener: RecyclerViewOnItemClickListener<OrderInformationArgs>
         ) {
-            //if (posApplicant.wantPortability)
-            //  type.text = "Activación y portabilidad"
-            //else type.text = "Activación de nuevo número telefónico"
-
-            //type.text = posApplicant.type
-
             itemView.setOnClickListener {
                 clickListener.onItemClicked(posApplicant)
             }

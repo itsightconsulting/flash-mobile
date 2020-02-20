@@ -75,7 +75,19 @@ class PreActivationFragment : Fragment() {
             )
             startActivity(browserIntent)
         }
+        orderViewModel.loadError.observe(this, Observer { loadError ->
+            loadError?.let {
+                if (loadError) {
+                    orderViewModel.loadError.value = false
+                    hideSpinner(activity)
+                    this.view?.visibility = View.VISIBLE
 
+                    val action =
+                        PreActivationFragmentDirections.actionPreActivationFragmentToFormFragment()
+                    findNavController().navigate(action)
+                }
+            }
+        })
         orderViewModel.loading.observe(this, Observer { loading ->
             loading?.let {
                 if (loading) {
@@ -85,6 +97,7 @@ class PreActivationFragment : Fragment() {
                     this.view?.visibility = View.VISIBLE
 
                     UserPrefs.putUserDni(FlashApplication.appContext, etDNI.text.toString())
+
 
                     if (!orderViewModel.userHasOrders) {
                         val action =
