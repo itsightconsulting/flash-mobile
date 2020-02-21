@@ -92,6 +92,7 @@ class PreActivationFragment : Fragment() {
         orderViewModel.loading.observe(this, Observer { loading ->
             loading?.let {
                 if (loading) {
+
                     orderViewModel.loading.value = false
 
                     hideSpinner(activity)

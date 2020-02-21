@@ -9,7 +9,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.model.pojo.ActivationPOJO
+import isdigital.veridium.flash.preferences.UserPrefs
+import kotlinx.android.synthetic.main.pre_activation_fragment.*
 import javax.inject.Inject
 
 class OrderViewModel(application: Application) : BaseViewModel(application) {
@@ -31,6 +34,8 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun getAllByDni(dni: String) {
+        UserPrefs.putUserDni(FlashApplication.appContext, dni)
+
         loading.value = false
 
         disposable.add(
