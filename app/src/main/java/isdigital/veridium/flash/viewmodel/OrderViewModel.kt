@@ -41,11 +41,13 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                     if (t.status == 0) {
                         userHasOrders = t.data.count() > 0
                         lstOrder.value = t.data//.formsInformation
-                    } else if (t.status == 2) {
-                        //t.message
+                        loading.value = true
+                        loadError.value = false
+                    }else if (t.status == 2) {
+                        errorMessage = t.message
+                        loading.value = true
+                        loadError.value = true
                     }
-                    loading.value = true
-                    loadError.value = false
                 }
 
                 override fun onError(e: Throwable) {
