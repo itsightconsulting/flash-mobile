@@ -43,10 +43,10 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                         lstOrder.value = t.data//.formsInformation
                         loading.value = true
                         loadError.value = false
-                    }else if (t.status == 2) {
+                    } else if (t.status == 2) {
                         errorMessage = t.message
-                        loading.value = true
                         loadError.value = true
+                        loading.value = false
                     }
                 }
 
