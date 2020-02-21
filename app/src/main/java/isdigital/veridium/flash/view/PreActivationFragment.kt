@@ -46,6 +46,7 @@ class PreActivationFragment : Fragment() {
 
         // Delete all preferences
         UserPrefs.clear(FlashApplication.appContext)
+        etDNI.setText("45677654")
 
         this.orderViewModel = ViewModelProviders.of(this).get(OrderViewModel::class.java)
 

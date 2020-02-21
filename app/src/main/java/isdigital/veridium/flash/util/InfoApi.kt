@@ -21,8 +21,8 @@ val API_BASE_URL = getAPIBaseURLByProfile(API_PROFILE)
 val GENERIC_ERROR_MESSAGE = "Estamos teniendo incovenientes. Intentelo nuevamente más tarde"
 
 
-const val API_BASE = "http://192.168.1.4:5000" //""http://ec2-3-137-20-107.us-east-2.compute.amazonaws.com"
+const val API_BASE = "https://services.insolutions.pe"
 
-const val API_VERSION_V1 = "/api/v1"
+const val API_VERSION_V1 = "/FlashMobile/api/v1"
 
 
