@@ -27,6 +27,6 @@ interface ActivationApi {
         @Field("validationBiometricDate") validationBiometricDate: String?
     ): Single<ConsolidatedDataResponse>
 
-    @GET( "$API_VERSION_V1/users")
-    fun validateICCID(@Query("iccid") iccid: String): Single<VerifyIccidResponse>
+    @GET( "$API_VERSION_V1/simcards/{iccid}")
+    fun validateICCID(@Path("iccid") iccid: String): Single<VerifyIccidResponse>
 }

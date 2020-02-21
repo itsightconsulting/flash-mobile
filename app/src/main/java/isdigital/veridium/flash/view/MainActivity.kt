@@ -1,5 +1,6 @@
 package isdigital.veridium.flash.view
 
+//import com.google.firebase.analytics.FirebaseAnalytics
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -20,12 +22,19 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
-//import com.google.firebase.analytics.FirebaseAnalytics
+import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
+import isdigital.veridium.flash.api.TokenApi
+import isdigital.veridium.flash.configuration.ServiceManager
+import isdigital.veridium.flash.model.dto.Token
+import isdigital.veridium.flash.model.generic.ApiResponse
 import isdigital.veridium.flash.preferences.UserPrefs
+import isdigital.veridium.flash.util.API_PASSWORD
+import isdigital.veridium.flash.util.API_USERNAME
 import isdigital.veridium.flash.util.invokerQuitDialog
 import kotlinx.android.synthetic.main.navigation_activity.*
-import isdigital.veridium.flash.FlashApplication
+import retrofit2.Call
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +53,22 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
+        val bodyToken = HashMap<String, String>()
+        bodyToken["username"] = API_USERNAME
+        bodyToken["password"] = API_PASSWORD
+        ServiceManager().createService(TokenApi::class.java).getToken(bodyToken).enqueue(
+            object: retrofit2.Callback<ApiResponse<Token>> {
+                override fun onFailure(call: Call<ApiResponse<Token>>, t: Throwable) {
+                    Toast.makeText(applicationContext, "Obtención del token fallida", Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(
+                    call: Call<ApiResponse<Token>>,
+                    response: Response<ApiResponse<Token>>
+                ) {
+                    UserPrefs.setApiToken(applicationContext, response.body()!!.data.token)
+                }
+            })
 
         // Obtain the FirebaseAnalytics instance.
 //        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -112,7 +137,7 @@ class MainActivity : AppCompatActivity() {
 
         var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
         if (estado)
-            graph.startDestination = R.id.biometricFragment
+            graph.startDestination = R.id.preActivationFragment
         else
             graph.startDestination = R.id.initialFragment
         host.navController.graph = graph

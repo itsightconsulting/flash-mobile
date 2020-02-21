@@ -19,12 +19,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.zxing.Result
-import kotlinx.android.synthetic.main.sim_card_fragment.*
-import me.dm7.barcodescanner.zxing.ZXingScannerView
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.util.*
 import isdigital.veridium.flash.viewmodel.ActivationViewModel
+import isdigital.veridium.flash.viewmodel.BiometricViewModel
+import kotlinx.android.synthetic.main.sim_card_fragment.*
+import me.dm7.barcodescanner.zxing.ZXingScannerView
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
@@ -41,6 +42,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
     private val REQUEST_CAMERA_CAPTURE = 1
     private lateinit var mScannerView: ZXingScannerView
     private lateinit var activationViewModel: ActivationViewModel
+    private lateinit var biometricViewModel: BiometricViewModel
     private var dialog: Dialog? = null
     private var iccid: String = ""
 
@@ -61,6 +63,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
     private fun viewModelInjections() {
         this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
+        this.biometricViewModel = ViewModelProviders.of(this).get(BiometricViewModel::class.java)
     }
 
     private fun eventListeners() {
@@ -98,7 +101,8 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             ).format(Date())
                             form.validationBiometric = false
                             form.iccid = iccid
-                            form.birthDate = changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
+                            form.birthDate =
+                                changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
 
                             activationViewModel.sendFormWithStatus(form)
                             activationViewModel.loadError.value = false
@@ -124,10 +128,27 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                         diagSucc.findViewById<Button>(R.id.btnBarcodeSuccess).setOnClickListener {
                             diagSucc.dismiss()
                             dialog?.dismiss()
-                            val action =
-                                SimCardFragmentDirections.actionSimCardFragmentToBiometricFragment()
-                            findNavController().navigate(action)
+                            showSpinner(this.activity)
+                            this.biometricViewModel.storeBestFingerprintsByDni(UserPrefs.getUserDni(context!!)!!)
                         }
+                    }
+                }
+            }
+
+        })
+
+        this.biometricViewModel.loading.observe(this, Observer { loading ->
+            loading?.let {
+                if (loading) {
+                    if (!biometricViewModel.loadError.value!!) {
+                        hideSpinner(this.activity)
+
+                        val action =
+                            SimCardFragmentDirections.actionSimCardFragmentToBiometricFragment()
+                        findNavController().navigate(action)
+                    } else {
+                        hideSpinner(this.activity)
+                        simcardError()
                     }
                 }
             }
@@ -238,7 +259,6 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
     }
 
     override fun handleResult(rawResult: Result?) {
-        Toast.makeText(context!!, "${rawResult?.text}", Toast.LENGTH_LONG).show()
 
         mScannerView.stopCamera()
 

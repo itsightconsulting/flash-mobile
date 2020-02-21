@@ -25,4 +25,7 @@ const val API_BASE = "https://services.insolutions.pe"
 
 const val API_VERSION_V1 = "/FlashMobile/api/v1"
 
+const val API_USERNAME = "ISFlashActivation"
+const val API_PASSWORD = "m^A7QqXxzz^Dk+fk"
+
 

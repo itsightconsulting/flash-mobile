@@ -13,6 +13,8 @@ import com.veridiumid.sdk.IVeridiumSDK
 import com.veridiumid.sdk.fourf.defaultui.activity.DefaultFourFBiometricsActivity
 import com.veridiumid.sdk.fourfintegration.ExportConfig
 import isdigital.veridium.flash.R
+import isdigital.veridium.flash.model.dto.Fingers
+import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.util.MyVeridiumPreferencesManager
 import kotlinx.android.synthetic.main.biometric_fragment.*
 
@@ -20,6 +22,8 @@ import kotlinx.android.synthetic.main.biometric_fragment.*
  * A simple [Fragment] subclass.
  */
 class BiometricFragment : Fragment() {
+
+    private lateinit var fingers: Fingers
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,36 +37,71 @@ class BiometricFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        this.fingers = UserPrefs.getBestFingerPrints(context!!)
+        imgLeftHand.setImageResource(getImageResourceId(this.fingers.left))
+        imgRightHand.setImageResource(getImageResourceId(this.fingers.right))
+        leftFingerDesc.text = this.fingers.descriptionLeft
+        rightFingerDesc.text = this.fingers.descriptionRight
 
         imgLeftHand.setOnClickListener {
 
-            val fingerSelected = 1
-            MyVeridiumPreferencesManager.saveFinger(context!!, "$fingerSelected")
-
             launchVeridium(
                 ExportConfig.CaptureHand.LEFT_ENFORCED,
-                MyVeridiumPreferencesManager.getFinger(context!!).toInt() % 5
+                this.fingers.left % 5
             )
         }
 
         imgRightHand.setOnClickListener {
 
-            val fingerSelected = 6
-            MyVeridiumPreferencesManager.saveFinger(context!!, "$fingerSelected")
             launchVeridium(
                 ExportConfig.CaptureHand.RIGHT_ENFORCED,
-                MyVeridiumPreferencesManager.getFinger(context!!).toInt() % 5
+                this.fingers.right % 5
             )
+        }
+    }
+
+    private fun getImageResourceId(fingerId: Int): Int {
+        when (fingerId) {
+            1 -> {
+                return R.drawable.right_thumb
+            }
+            2 -> {
+                return R.drawable.right_index
+            }
+            3 -> {
+                return R.drawable.right_middle
+            }
+            4 -> {
+                return R.drawable.right_ring
+            }
+            5 -> {
+                return R.drawable.right_little
+            }
+            6 -> {
+                return R.drawable.left_thumb
+            }
+            7 -> {
+                return R.drawable.left_index
+            }
+            8 -> {
+                return R.drawable.left_middle
+            }
+            9 -> {
+                return R.drawable.left_ring
+            }
+            else -> {
+                return R.drawable.left_little
+            }
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-        imgLeftHand.setColorFilter(
-            ContextCompat.getColor(context!!, R.color.black),
-            PorterDuff.Mode.SRC_IN
-        )
+//        imgLeftHand.setColorFilter(
+//            ContextCompat.getColor(context!!, R.color.black),
+//            PorterDuff.Mode.SRC_IN
+//        )
     }
 
 

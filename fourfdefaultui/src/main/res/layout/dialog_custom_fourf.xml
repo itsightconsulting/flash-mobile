@@ -124,6 +124,9 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        app:cornerRadius="40dp"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/open_sans"
                         android:textAllCaps="false"
@@ -145,15 +148,15 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
                         app:cornerRadius="40dp"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/open_sans"
                         android:textAllCaps="false"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp" />
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 
