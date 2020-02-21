@@ -11,12 +11,12 @@ import android.widget.ImageView;
 
 public class UICustomization {
 
-    private static int mBackgroundColor = 0xff38C0CC;
+    private static int mBackgroundColor = 0xff6A237C;
     private static int mForegroundColor = Color.WHITE;
     private static int mDialogColour = Color.WHITE;
     private static int mDialogTextColor = Color.BLACK;
 
-    public static final int defaultBackgroundColor = 0xff38C0CC;
+    public static final int defaultBackgroundColor = 0xff6A237C;
     public static final int defaultForegroundColor = Color.WHITE;
     public static final int defaultDialogColor = Color.WHITE;
     public static final int defaultDialogTextColor = Color.BLACK;

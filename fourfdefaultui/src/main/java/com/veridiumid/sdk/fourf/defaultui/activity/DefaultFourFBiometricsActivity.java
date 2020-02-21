@@ -2373,6 +2373,8 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         });
 
         next.setText(getString(R.string.next));
+        next.setTextColor(Color.parseColor("#FFFFFF"));
+
         View.OnClickListener nextClickListenerContinue = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -2552,7 +2554,7 @@ public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivit
         View horizontalLine = (View) dialog.findViewById(R.id.lineAcross1);
 
         next.setText(getString(R.string.next));
-
+        next.setTextColor(Color.parseColor("#000000"));
 
         cancel.setVisibility(View.GONE);
         verticalLine.setVisibility(View.GONE);
