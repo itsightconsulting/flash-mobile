@@ -1,8 +1,10 @@
 package isdigital.veridium.flash.preferences
 
 import android.content.Context
-import androidx.preference.PreferenceManager
 import android.text.TextUtils
+import androidx.preference.PreferenceManager
+import isdigital.veridium.flash.model.dto.BestFingers
+import isdigital.veridium.flash.model.dto.Fingers
 import isdigital.veridium.flash.model.pojo.ActivationPOJO
 
 object UserPrefs {
@@ -34,6 +36,11 @@ object UserPrefs {
     private val ACTIVATION_CURRENTCOMPANY = "flash.user.prefs.ACTIVATION_CURRENTCOMPANY"
     private val ACTIVATION_PLANTYPE = "flash.user.prefs.ACTIVATION_PLANTYPE"
     private val API_TOKEN = "API_TOKEN"
+
+    private val SCANNER_BEST_FINGERPRINT_LEFT = "flash.user.prefs.fingerprint.left"
+    private val SCANNER_BEST_FINGERPRINT_RIGHT = "flash.user.prefs.fingerprint.right"
+    private val SCANNER_DESC_BEST_FINGERPRINT_LEFT = "flash.user.prefs.fingerprint.left.desc"
+    private val SCANNER_DESC_BEST_FINGERPRINT_RIGHT = "flash.user.prefs.fingerprint.right.desc"
 
     fun setApiToken(context: Context?, apiToken: String) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
@@ -195,6 +202,57 @@ object UserPrefs {
     fun getUserDni(context: Context): String? {
         return PreferenceManager.getDefaultSharedPreferences(context).get {
             getString(USER_DNI, "")
+        }
+    }
+
+    fun setFingerPrintLeft(context: Context?, apiToken: String) {
+        PreferenceManager.getDefaultSharedPreferences(context).put {
+            putString(SCANNER_BEST_FINGERPRINT_LEFT, apiToken)
+        }
+    }
+
+    fun getFingerPrintLeft(context: Context?): String {
+        return PreferenceManager.getDefaultSharedPreferences(context).get {
+            getString(SCANNER_BEST_FINGERPRINT_LEFT, "")!!
+        }
+    }
+
+    fun setFingerPrintRight(context: Context?, apiToken: String) {
+        PreferenceManager.getDefaultSharedPreferences(context).put {
+            putString(SCANNER_BEST_FINGERPRINT_RIGHT, apiToken)
+        }
+    }
+
+    fun getFingerPrintRight(context: Context?): String {
+        return PreferenceManager.getDefaultSharedPreferences(context).get {
+            getString(SCANNER_BEST_FINGERPRINT_RIGHT, "")!!
+        }
+    }
+
+    fun putBestFingerPrints(context: Context, bestFingers: BestFingers) {
+        PreferenceManager.getDefaultSharedPreferences(context).put {
+            putInt(SCANNER_BEST_FINGERPRINT_LEFT, bestFingers.codigoIzq.replace("0", "").toInt())
+            putInt(SCANNER_BEST_FINGERPRINT_RIGHT, bestFingers.codigoDer.replace("0", "").toInt())
+            putString(SCANNER_DESC_BEST_FINGERPRINT_LEFT, bestFingers.descripcionIzq)
+            putString(SCANNER_DESC_BEST_FINGERPRINT_RIGHT, bestFingers.descripcionDer)
+        }
+    }
+
+
+
+    fun getBestFingerPrints(context: Context?): Fingers {
+        return PreferenceManager.getDefaultSharedPreferences(context).get {
+            val right = getInt(SCANNER_BEST_FINGERPRINT_LEFT, -1)
+            val left = getInt(SCANNER_BEST_FINGERPRINT_RIGHT, -1)
+            val descriptionRight = getString(SCANNER_DESC_BEST_FINGERPRINT_LEFT, "")
+            val descriptionLeft = getString(SCANNER_DESC_BEST_FINGERPRINT_RIGHT, "")
+
+            Fingers(
+                right,
+                left,
+                descriptionRight!!,
+                descriptionLeft!!
+            )
         }
     }
 }
