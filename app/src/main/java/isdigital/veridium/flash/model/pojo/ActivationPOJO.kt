@@ -22,7 +22,8 @@ data class ActivationPOJO(
     var planType: String?,
 
     var validationBiometric: Boolean?,
-    var validationBiometricDate: String? // YYYY-MM-DD HH-mm-ss
+    var validationBiometricDate: String?, // YYYY-MM-DD HH-mm-ss
+    var creationDate: String?
 
 ) : Serializable {
     constructor(
@@ -48,7 +49,7 @@ data class ActivationPOJO(
         phoneNumber,
         currentCompany,
         planType,
-        null, null
+        null, null, null
     )
 
 }
