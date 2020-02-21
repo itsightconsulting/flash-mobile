@@ -55,8 +55,7 @@ class BiometricViewModel : ViewModel() {
                         loading.value = true
                         e.printStackTrace()
                     }
-                }
-                )
+                })
         )
     }
 

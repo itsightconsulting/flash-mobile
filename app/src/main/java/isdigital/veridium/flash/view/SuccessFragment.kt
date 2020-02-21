@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 
 import isdigital.veridium.flash.R
+import isdigital.veridium.flash.util.forceMinimize
 import kotlinx.android.synthetic.main.success_fragment.*
 
 /**
@@ -26,6 +27,7 @@ class SuccessFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        forceMinimize(requireActivity(), this)
 
         btnFinalize.setOnClickListener {
             val action = SuccessFragmentDirections.actionSuccessFragmentToPreActivationFragment()

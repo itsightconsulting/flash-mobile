@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.error_fragment.*
 
 import isdigital.veridium.flash.R
+import isdigital.veridium.flash.util.forceMinimize
 
 /**
  * A simple [Fragment] subclass.
@@ -26,6 +27,8 @@ class ErrorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        forceMinimize(requireActivity(), this)
+
         btnBackHome.setOnClickListener {
             val action = ErrorFragmentDirections.actionErrorFragmentToPreActivationFragment()
             findNavController().navigate(action)
