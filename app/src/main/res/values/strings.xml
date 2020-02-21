@@ -8,7 +8,7 @@
     <string name="spinner_message">Validating...</string>
 
     <!-- Carrusel - Quick Guide -->
-    <string name="flash_mobile_peru">Flash Mobile Peru</string>
+    <string name="flash_mobile_peru">Flash Mobile Perú</string>
     <string name="title_carrusel_1">Bienvenido a tu app\n Activa tu Flash Perú</string>
     <string name="description_carrusel_1">Completa las activaciones que hayas iniciado desde nuestro sitio web o empieza nuevas solicitudes de activación.</string>
     <string name="title_carrusel_2">Elige qué deseas hacer</string>
@@ -71,7 +71,7 @@
 
     <!-- Step 7 -->
     <string name="term_and_conditions">Términos y condiciones</string>
-    <string name="term_and_conditions_detail">I. FLash Mobile Peru</string>
+    <string name="term_and_conditions_detail">I. FLash Mobile Perú</string>
     <string name="term_and_conditions_check_accept">He leído y acepto| los términos y condiciones del servicio. Valido que mi información es verdadera.</string>
     <string name="accept">Aceptar</string>
 
