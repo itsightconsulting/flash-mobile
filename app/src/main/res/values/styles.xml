@@ -59,6 +59,7 @@
         <item name="android:fontFamily">@font/gotham_light</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/dark</item>
+        <item name="android:lineSpacingMultiplier">1.4</item>
     </style>
 
     <style name="text_description_bold">
@@ -91,6 +92,12 @@
         <item name="android:textColor">@color/gray_medium</item>
     </style>
 
+    <style name="title_transition_view">
+        <item name="android:fontFamily">@font/gotham_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/dark_purple</item>
+    </style>
+
     <style name="subtitles_fields">
         <item name="android:fontFamily">@font/gotham_medium</item>
         <item name="android:textSize">18sp</item>
@@ -106,6 +113,13 @@
     <style name="text_options_radio">
         <item name="android:fontFamily">@font/gotham_light</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
+    <style name="bold_summary_text">
+        <item name="android:fontFamily">@font/gotham_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.8</item>
         <item name="android:textColor">@color/dark</item>
     </style>
 
@@ -145,6 +159,17 @@
         <item name="android:fontFamily">@font/gotham_bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/purple</item>
+    </style>
+
+    <style name="special_title">
+        <item name="android:paddingLeft">32dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingRight">32dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:fontFamily">@font/gotham_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/dark_purple</item>
+        <item name="android:lineSpacingMultiplier">1.4</item>
     </style>
 
     <style name="button_purple">
@@ -215,6 +240,14 @@
     <style name="carrusel_titles">
         <item name="android:fontFamily">@font/gotham_bold</item>
         <item name="android:textSize">25sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/dark_purple</item>
+        <item name="android:lineSpacingMultiplier">1.4</item>
+    </style>
+
+    <style name="especial_parcial_title">
+        <item name="android:fontFamily">@font/gotham_bold</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/dark_purple</item>
         <item name="android:lineSpacingMultiplier">1.4</item>

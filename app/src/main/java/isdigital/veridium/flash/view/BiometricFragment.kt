@@ -2,12 +2,11 @@ package isdigital.veridium.flash.view
 
 
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.*
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.veridiumid.sdk.IBiometricFormats
 import com.veridiumid.sdk.IVeridiumSDK
 import com.veridiumid.sdk.fourf.defaultui.activity.DefaultFourFBiometricsActivity
@@ -15,7 +14,7 @@ import com.veridiumid.sdk.fourfintegration.ExportConfig
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.model.dto.Fingers
 import isdigital.veridium.flash.preferences.UserPrefs
-import isdigital.veridium.flash.util.MyVeridiumPreferencesManager
+import isdigital.veridium.flash.util.csSnackbar
 import kotlinx.android.synthetic.main.biometric_fragment.*
 
 /**
@@ -44,19 +43,41 @@ class BiometricFragment : Fragment() {
         rightFingerDesc.text = this.fingers.descriptionRight
 
         imgLeftHand.setOnClickListener {
+            if (it.alpha == 1.0f) {
+                return@setOnClickListener
+            }
+            imgRightHand.alpha = it.alpha
+            it.alpha = 1.0f
 
-            launchVeridium(
-                ExportConfig.CaptureHand.LEFT_ENFORCED,
-                this.fingers.left % 5
-            )
         }
 
         imgRightHand.setOnClickListener {
+            if (it.alpha == 1.0f) {
+                return@setOnClickListener
+            }
+            imgLeftHand.alpha = it.alpha
+            it.alpha = 1.0f
 
-            launchVeridium(
-                ExportConfig.CaptureHand.RIGHT_ENFORCED,
-                this.fingers.right % 5
-            )
+//            launchVeridium(
+//                ExportConfig.CaptureHand.RIGHT_ENFORCED,
+//                this.fingers.right % 5
+//            )
+        }
+
+        btnVeridiumInit.setOnClickListener {
+            val left = imgLeftHand.alpha == 1.0f
+            val right = imgRightHand.alpha == 1.0f
+            if (left || right) {
+                launchVeridium(
+                    if (left) ExportConfig.CaptureHand.LEFT_ENFORCED else ExportConfig.CaptureHand.RIGHT_ENFORCED,
+                    (if (left) this.fingers.left else this.fingers.right) % 5
+                )
+            } else {
+                this.view?.csSnackbar(
+                    "Debe seleccionar una huella antes de continuar",
+                    Snackbar.LENGTH_SHORT
+                )
+            }
         }
     }
 

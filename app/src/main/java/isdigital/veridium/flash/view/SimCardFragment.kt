@@ -108,11 +108,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             activationViewModel.loadError.value = false
 
                         } else {
-                            Toast.makeText(context!!, "Vuelva a intentarlo...", Toast.LENGTH_SHORT)
-                                .show()
-                            mScannerView.resumeCameraPreview(this)
-                            mScannerView.setResultHandler(this)
-                            mScannerView.startCamera()
+                            tryScanAgain()
                         }
                         return@let
                     }
@@ -267,15 +263,20 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                 activationViewModel.checkIccidValid(it.text)
                 iccid = it.text
             } else {
-
-                val diagError = invokerBarcodeError(context!!)
-                diagError.show()
-
-                diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
-                    diagError.dismiss()
-                    dialog?.dismiss()
-                }
+                tryScanAgain()
             }
+        }
+    }
+
+    private fun tryScanAgain() {
+        val diagError = invokerBarcodeError(context!!)
+        diagError.show()
+
+        diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
+            diagError.dismiss()
+            mScannerView.resumeCameraPreview(this)
+            mScannerView.setResultHandler(this)
+            mScannerView.startCamera()
         }
     }
 }

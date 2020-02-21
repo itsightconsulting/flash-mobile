@@ -32,9 +32,9 @@
         android:layout_height="wrap_content"
         android:background="@color/sim_color"
         android:paddingLeft="30dp"
-        android:paddingTop="40dp"
+        android:paddingTop="55dp"
         android:paddingRight="30dp"
-        android:paddingBottom="30dp"
+        android:paddingBottom="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frameLayout">
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_act_app_simcard" />
+            android:src="@drawable/ic_act_app_simcard"/>
 
     </FrameLayout>
 
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:maxLines="6"
         android:text="@string/sim_validation_description"
@@ -73,11 +73,11 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/button_border"
-        android:paddingLeft="60dp"
-        android:paddingTop="15dp"
-        android:paddingRight="60dp"
-        android:paddingBottom="15dp"
-        android:src="@drawable/ic_purple_camera"
+        android:paddingLeft="50dp"
+        android:paddingTop="12dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="12dp"
+        android:src="@drawable/ic_purple_camera_t"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

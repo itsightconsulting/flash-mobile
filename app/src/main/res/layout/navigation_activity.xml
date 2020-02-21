@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/spinner_message"
-                android:textStyle="bold"
+                style="@style/title_transition_view"
                 android:textAlignment="center"
                 android:layout_marginTop="10dp"/>
 

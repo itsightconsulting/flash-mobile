@@ -5,7 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- GENERAL SPINNER -->
-    <string name="spinner_message">Validating...</string>
+    <string name="spinner_message">Procesando solicitud</string>
 
     <!-- Carrusel - Quick Guide -->
     <string name="flash_mobile_peru">Flash Mobile Perú</string>
@@ -109,7 +109,7 @@
     <!-- Step 11 -->
     <string name="biometric">Validación biométrica</string>
     <string name="biometric_title">Selecciona la huella dactilar</string>
-    <string name="biometric_description">que quieres utilizar para la validación biométrica. Después haz clic en "Siguiente".</string>
+    <string name="biometric_description">que quieres utilizar para la validación biométrica. Después haz clic en \"Siguiente\".</string>
 
 
     <!-- Step 10 Error -->
