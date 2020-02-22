@@ -57,11 +57,6 @@ class BiometricFragment : Fragment() {
             }
             imgLeftHand.alpha = it.alpha
             it.alpha = 1.0f
-
-//            launchVeridium(
-//                ExportConfig.CaptureHand.RIGHT_ENFORCED,
-//                this.fingers.right % 5
-//            )
         }
 
         btnVeridiumInit.setOnClickListener {
