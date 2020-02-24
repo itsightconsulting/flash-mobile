@@ -71,6 +71,11 @@ enum class OPERATORS(val value: String) {
     MOVISTAR("Movistar")
 }
 
+enum class HANDS(val value: String) {
+    LEFT("Left"),
+    RIGHT("Right")
+}
+
 
 val documentTypes: HashMap<Int, String> = hashMapOf(
     1 to "RUC",

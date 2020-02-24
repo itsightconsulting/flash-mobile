@@ -4,6 +4,8 @@ package isdigital.veridium.flash.view
 import android.Manifest
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -11,7 +13,6 @@ import android.view.*
 import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -29,8 +30,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 /**
@@ -44,6 +43,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
     private lateinit var activationViewModel: ActivationViewModel
     private lateinit var biometricViewModel: BiometricViewModel
     private var dialog: Dialog? = null
+    private var dialogSpin: Dialog? = null
     private var iccid: String = ""
 
     override fun onCreateView(
@@ -87,27 +87,26 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                 if (it) {
                     var error = activationViewModel.loadError.value ?: false
                     var formError = activationViewModel.formError.value ?: false
+                    dialogSpin?.dismiss()
 
                     if (error) {
                         UserPrefs.putUserBarscanAttempts(context)
 
                         val attemps = UserPrefs.getUserBarscanAttempts(context)
-                        if (attemps == MAX_SCANNER_TEMPS) {
+                        if (attemps == MAX_BAR_SCANNER_TEMPS) {
+
                             val form = UserPrefs.getActivation(context)
-                            form.formStatus = FORMSTATUS.REJECTICCD.value
-                            form.formCreationDate = SimpleDateFormat(
-                                resources.getString(R.string.datetime_format),
-                                Locale.getDefault()
-                            ).format(Date())
-                            form.validationBiometric = false
                             form.iccid = iccid
                             if (form.formId!!.isEmpty())
                                 form.birthDate =
                                     changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
 
-                            activationViewModel.sendFormWithStatus(form)
+                            activationViewModel.sendFormWithStatus(
+                                PartnerData.formPreparation(
+                                    form, passBarcode = false, passBiometric = false
+                                )
+                            )
                             activationViewModel.loadError.value = false
-
                         } else {
                             tryScanAgain()
                         }
@@ -126,11 +125,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             diagSucc.dismiss()
                             dialog?.dismiss()
                             showSpinner(this.activity)
-                            this.biometricViewModel.storeBestFingerprintsByDni(
-                                UserPrefs.getUserDni(
-                                    context!!
-                                )!!
-                            )
+                            this.biometricViewModel.storeBestFingerprintsByDni(UserPrefs.getUserDni(context!!)!!)
                         }
                     }
                 }
@@ -265,8 +260,11 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
         rawResult?.let {
             if (it.text.length == 20 && validateOnlyNumber(it.text)) {
+                instanceDialogSpinner()
+
                 activationViewModel.checkIccidValid(it.text)
                 iccid = it.text
+                UserPrefs.putIccid(context, iccid)
             } else {
                 tryScanAgain()
             }
@@ -282,6 +280,17 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             mScannerView.resumeCameraPreview(this)
             mScannerView.setResultHandler(this)
             mScannerView.startCamera()
+        }
+    }
+
+    private fun instanceDialogSpinner(){
+        dialogSpin = Dialog(context!!, R.style.dialog_scanner)
+        dialogSpin?.let {
+            it.setContentView(R.layout.alert_scanner_spin)
+            it.setCanceledOnTouchOutside(false)
+            it.setCancelable(false)
+            it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            it.show()
         }
     }
 }

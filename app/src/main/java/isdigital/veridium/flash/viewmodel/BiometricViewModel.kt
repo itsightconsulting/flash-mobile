@@ -8,6 +8,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.model.dto.BestFingers
+import isdigital.veridium.flash.model.dto.ReniecUser
 import isdigital.veridium.flash.model.generic.ApiResponse
 import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.service.component.DaggerBiometricComponent
@@ -50,6 +51,31 @@ class BiometricViewModel : ViewModel() {
                         }
                     }
 
+                    override fun onError(e: Throwable) {
+                        loadError.value = true
+                        loading.value = true
+                        e.printStackTrace()
+                    }
+                })
+        )
+    }
+
+    fun validateVeridiumFingerprints(body: HashMap<String, String>) {
+        disposable.add(
+            api.validateFingerprints(body).subscribeOn(
+                Schedulers.newThread()
+            ).observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<ApiResponse<ReniecUser>>() {
+                    override fun onSuccess(t: ApiResponse<ReniecUser>) {
+                        val success: Boolean = t.status == 0
+                        if (success) {
+                            loadError.value = false
+                            loading.value = true
+                        } else {
+                            loadError.value = true
+                            loading.value = true
+                        }
+                    }
                     override fun onError(e: Throwable) {
                         loadError.value = true
                         loading.value = true
