@@ -13,7 +13,9 @@ import isdigital.veridium.flash.model.dto.VerifyIccidResponse
 import isdigital.veridium.flash.model.pojo.ActivationPOJO
 import isdigital.veridium.flash.service.component.DaggerActivationComponent
 import isdigital.veridium.flash.service.module.ActivationService
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.HashMap
 
 class ActivationViewModel(application: Application) : BaseViewModel(application) {
 
@@ -31,33 +33,24 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
         DaggerActivationComponent.create().inject(this)
     }
 
-    fun sendFormWithStatus(form: ActivationPOJO) {
+    fun sendFormWithStatus(form: HashMap<String, String>) {
         loading.value = false
         disposable.add(
             activationService.saveActivationForm(
-                form.formId,
-                form.dni,
-                form.formStatus!!,
-                form.iccid!!,
-                form.formCreationDate!!,
-                form.name,
-                form.lastName,
-                form.birthDate,
-                form.email,
-                form.sponsorTeamId,
-                form.wantPortability,
-                form.phoneNumber,
-                form.planType,
-                form.validationBiometric!!,
-                form.formCreationDate
+                form
             )
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<ConsolidatedDataResponse>() {
                     override fun onSuccess(t: ConsolidatedDataResponse) {
-                        formError.value = false
-                        loading.value = true
+                        val success: Boolean = t.status == 0
+                        if (success) {
+                            formError.value = false
+                            loading.value = true
+                        } else {
+                            formError.value = true
+                            loading.value = true
+                        }
                     }
-
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
                         formError.value = true

@@ -21,4 +21,7 @@ class BiometricService {
     fun get() = this
 
     fun getBestFingerprintsByDni(body:  HashMap<String, String>) = api.getBestFingerprintsByDni(body)
+
+    fun validateFingerprints(body:  HashMap<String, String>) = api.validateFingerprints(body)
+
 }

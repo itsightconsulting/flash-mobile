@@ -94,13 +94,7 @@ import static java.lang.Math.abs;
 public class DefaultFourFBiometricsActivity extends BaseImagingBiometricsActivity implements IFourFTrackingListener, IFourFProcessingListener {
 
     public class Comp {
-        public static final String FOURF = "4FF";
         public static final String FOURF_EXP = "4FE";
-        public static final String LUXAND_FACE = "LFA";
-        public static final String VERID_FACE = "VFA";
-        public static final String NATIVE_BIO = "NBI";
-        public static final String SERVER = "VSR";
-        public static final String CORE = "COR";
 
         public Comp() {
         }

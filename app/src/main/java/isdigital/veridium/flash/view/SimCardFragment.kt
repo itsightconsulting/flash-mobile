@@ -11,7 +11,6 @@ import android.view.*
 import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -29,8 +28,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 /**
@@ -92,21 +89,17 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                         UserPrefs.putUserBarscanAttempts(context)
 
                         val attemps = UserPrefs.getUserBarscanAttempts(context)
-                        if (attemps == MAX_SCANNER_TEMPS) {
+                        if (attemps == MAX_BAR_SCANNER_TEMPS) {
+
                             val form = UserPrefs.getActivation(context)
-                            form.formStatus = FORMSTATUS.REJECTICCD.value
-                            form.formCreationDate = SimpleDateFormat(
-                                resources.getString(R.string.datetime_format),
-                                Locale.getDefault()
-                            ).format(Date())
-                            form.validationBiometric = false
                             form.iccid = iccid
-                            form.birthDate =
-                                changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
 
-                            activationViewModel.sendFormWithStatus(form)
+                            activationViewModel.sendFormWithStatus(
+                                PartnerData.formPreparation(
+                                    form, passBarcode = false, passBiometric = false
+                                )
+                            )
                             activationViewModel.loadError.value = false
-
                         } else {
                             tryScanAgain()
                         }
@@ -262,6 +255,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             if (it.text.length == 20 && validateOnlyNumber(it.text)) {
                 activationViewModel.checkIccidValid(it.text)
                 iccid = it.text
+                UserPrefs.putIccid(context, iccid)
             } else {
                 tryScanAgain()
             }

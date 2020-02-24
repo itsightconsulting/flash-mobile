@@ -23,6 +23,7 @@ object UserPrefs {
     private val USER_BIOMETRIC_WRONG_ATTEMPTS = "flash.user.prefs.BIOMETRIC_ATTEMPTS"
     private val USER_ICCID_WRONG_ATTEMPTS = "flash.user.prefs.BIOMETRIC_ATTEMPTS"
     private val USER_HIDE_CAROUSEL = "flash.user.prefs.HIDE_CAROUSEL"
+    private val USER_HAND_SELECTED = "flash.user.prefs.USER_HAND_SELECTED"
 
     private val ACTIVATION_DNI = "flash.user.prefs.ACTIVATION_DNI"
     private val ACTIVATION_NAME = "flash.user.prefs.ACTIVATION_NAME"
@@ -122,13 +123,13 @@ object UserPrefs {
     }
 
 
-    fun putUserBiometricWrongAttempts(context: Context, wrongAttempts: Int) {
+    fun putUserBiometricWrongAttempts(context: Context?) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
-            putInt(USER_BIOMETRIC_WRONG_ATTEMPTS, wrongAttempts)
+            putInt(USER_BIOMETRIC_WRONG_ATTEMPTS, getUserBiometricWrongAttempts(context) + 1)
         }
     }
 
-    fun getUserBiometricWrongAttempts(context: Context): Int {
+    fun getUserBiometricWrongAttempts(context: Context?): Int {
         return PreferenceManager.getDefaultSharedPreferences(context).get {
             getInt(USER_BIOMETRIC_WRONG_ATTEMPTS, 0)
         }
@@ -205,6 +206,19 @@ object UserPrefs {
         }
     }
 
+    fun putIccid(context: Context?, iccid: String) {
+        PreferenceManager.getDefaultSharedPreferences(context).put {
+            putString(ACTIVATION_ICCID, iccid)
+        }
+    }
+
+    fun getIccid(context: Context?): String? {
+        return PreferenceManager.getDefaultSharedPreferences(context).get {
+            getString(ACTIVATION_ICCID, "")
+        }
+    }
+
+
     fun setFingerPrintLeft(context: Context?, apiToken: String) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
             putString(SCANNER_BEST_FINGERPRINT_LEFT, apiToken)
@@ -238,8 +252,6 @@ object UserPrefs {
         }
     }
 
-
-
     fun getBestFingerPrints(context: Context?): Fingers {
         return PreferenceManager.getDefaultSharedPreferences(context).get {
             val right = getInt(SCANNER_BEST_FINGERPRINT_LEFT, -1)
@@ -253,6 +265,18 @@ object UserPrefs {
                 descriptionRight!!,
                 descriptionLeft!!
             )
+        }
+    }
+
+    fun putHandSelected(context: Context?, hand: String) {
+        PreferenceManager.getDefaultSharedPreferences(context).put {
+            putString(USER_HAND_SELECTED, hand)
+        }
+    }
+
+    fun getHandSelected(context: Context?): String? {
+        return PreferenceManager.getDefaultSharedPreferences(context).get {
+            getString(USER_HAND_SELECTED, "")
         }
     }
 }

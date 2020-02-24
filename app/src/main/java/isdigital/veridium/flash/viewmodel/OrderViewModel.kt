@@ -2,17 +2,16 @@ package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import isdigital.veridium.flash.model.dto.ResponseVerifyDNI
-import isdigital.veridium.flash.service.component.DaggerOrderComponent
-import isdigital.veridium.flash.service.module.OrderService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import isdigital.veridium.flash.FlashApplication
+import isdigital.veridium.flash.model.dto.ResponseVerifyDNI
 import isdigital.veridium.flash.model.pojo.ActivationPOJO
 import isdigital.veridium.flash.preferences.UserPrefs
-import kotlinx.android.synthetic.main.pre_activation_fragment.*
+import isdigital.veridium.flash.service.component.DaggerOrderComponent
+import isdigital.veridium.flash.service.module.OrderService
 import javax.inject.Inject
 
 class OrderViewModel(application: Application) : BaseViewModel(application) {
