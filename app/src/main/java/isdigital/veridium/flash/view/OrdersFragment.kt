@@ -7,17 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.model.args.DataResponseVerifyDNIArgs
 import isdigital.veridium.flash.model.parcelable.OrderInformationArgs
+import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.util.RecyclerViewOnItemClickListener
 import isdigital.veridium.flash.view.adapter.OrdersListAdapter
 import isdigital.veridium.flash.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.orders_fragment.*
+import isdigital.veridium.flash.model.pojo.ActivationPOJO
+
 /**
  * A simple [Fragment] subclass.
  */
@@ -46,15 +49,42 @@ class OrdersFragment : Fragment() {
         ordersListAdapter = OrdersListAdapter(
             myArgs!!.list
             , object : RecyclerViewOnItemClickListener<OrderInformationArgs> {
-                override fun onItemClicked(posApplicant: OrderInformationArgs) {
-                    Toast.makeText(context!!, "${posApplicant.id}", Toast.LENGTH_SHORT)
+                override fun onItemClicked(oOrderInformation: OrderInformationArgs) {
+                    Toast.makeText(
+                        context!!,
+                        "onItemClicked ${oOrderInformation.id}",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
-//                    findNavController().navigate(action)
-//                    Navigation.createNavigateOnClickListener(R.id.action_contactsFragment_to_contactProfileFragment)
+                    var dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
+                    val fecha = oOrderInformation.birthDate!!
+                    val ActivationPOJO = ActivationPOJO(
+                        oOrderInformation.id!!,
+                        dni!!,
+                        oOrderInformation.name!!,
+                        oOrderInformation.lastName!!,
+                        fecha,
+                        oOrderInformation.email!!,
+                        oOrderInformation.wantPortability,
+                        oOrderInformation.sponsorTeamId,
+                        oOrderInformation.phoneNumber,
+                        oOrderInformation.currentCompany,
+                        oOrderInformation.planType,
+                        oOrderInformation.formCreationDate
+                    )
+
+                    UserPrefs.putActivation(FlashApplication.appContext, ActivationPOJO)
+
+                    val action = OrdersFragmentDirections.actionOrdersFragmentToTermsFragment()
+                    findNavController().navigate(action)
                 }
 
                 override fun onCallButtonClicked(posApplicant: OrderInformationArgs) {
-                    Toast.makeText(context!!, "${posApplicant.id}", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        context!!,
+                        "onCallButtonClicked ${posApplicant.id}",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }
@@ -72,6 +102,9 @@ class OrdersFragment : Fragment() {
 
     }
 
+    fun saveActivation(pos: Int) {
+
+    }
 }
 
 /*

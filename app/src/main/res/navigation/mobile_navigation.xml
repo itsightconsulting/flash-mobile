@@ -55,6 +55,9 @@
             android:defaultValue="@null"
             app:argType="isdigital.veridium.flash.model.args.DataResponseVerifyDNIArgs"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_ordersFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
     </fragment>
 
     <fragment

@@ -42,13 +42,24 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 AndroidSchedulers.mainThread()
             ).subscribeWith(object : DisposableSingleObserver<ResponseVerifyDNI>() {
                 override fun onSuccess(t: ResponseVerifyDNI) {
-                    if (t.status == 0) {
+                    if (t.status == 0 && t.code == "0000000000") {
                         userHasOrders = t.data.count() > 0
                         lstOrder.value = t.data//.formsInformation
                         loading.value = true
                         loadError.value = false
                     } else if (t.status == 2) {
-                        errorMessage = t.message
+                        if (t.code == "1111111111" || t.code == "2222222222" || t.code == "2050001001" || t.code == "2050001002") {
+                            // error del servidor HTTP estado 500
+                            errorMessage = t.message
+                        } else if (t.code == "0040400000" || t.code == "0044000000" || t.code == "0040100000") {
+                            // error del servidor HTTP estado 400 Token
+                            // REFRESH TOKEN
+                            errorMessage = t.message
+                        } else if (t.code == "2040001001" || t.code == "2040001002" || t.code == "2040401001") {
+                            // error del servidor HTTP estado 400
+                            errorMessage = t.message
+                        }
+
                         loadError.value = true
                         loading.value = false
                     }
