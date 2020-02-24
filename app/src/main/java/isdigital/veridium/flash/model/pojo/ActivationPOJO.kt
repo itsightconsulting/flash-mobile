@@ -52,4 +52,32 @@ data class ActivationPOJO(
         null, null, null
     )
 
+    constructor(
+        formId: String,
+        dni: String,
+        name: String,
+        lastName: String,
+        birthDate: String,
+        email: String,
+        wantPortability: Boolean,
+        sponsorTeamId: String?,
+        phoneNumber: String?,
+        currentCompany: String?,
+        planType: String?,
+        creationDate: String?
+    ) : this(
+        formId, null, null, null,
+        dni,
+        name,
+        lastName,
+        birthDate,
+        email,
+        wantPortability,
+        sponsorTeamId,
+        phoneNumber,
+        currentCompany,
+        planType,
+        null, null, creationDate
+    )
+
 }
