@@ -42,8 +42,16 @@ class OrdersListAdapter(
             "dd/MM/yyyy HH:mm",
             "yyyy-MM-dd HH:mm:ss"
         )
+
         val orderDateArr = orderDate.split(" ")
-        holder.view.orderDate.text = orderDateArr[0] + " a las " + orderDateArr[1]
+        val horas = changeDateFormat(orderDateArr[1], "HH", "HH:mm").toInt()
+        var formatoAMPM: String = "";
+        if (horas >= 0 && horas < 12)
+            formatoAMPM = " AM"
+        else if (horas >= 12 && horas < 25)
+            formatoAMPM = " PM"
+
+        holder.view.orderDate.text = orderDateArr[0] + " a las " + orderDateArr[1] + formatoAMPM
         val ordersList = ordersList[position]
         holder.bind(ordersList, itemClickListener)
     }

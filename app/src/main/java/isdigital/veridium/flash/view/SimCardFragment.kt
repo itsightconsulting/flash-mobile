@@ -101,8 +101,9 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             ).format(Date())
                             form.validationBiometric = false
                             form.iccid = iccid
-                            form.birthDate =
-                                changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
+                            if (form.formId!!.isEmpty())
+                                form.birthDate =
+                                    changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
 
                             activationViewModel.sendFormWithStatus(form)
                             activationViewModel.loadError.value = false
@@ -125,7 +126,11 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             diagSucc.dismiss()
                             dialog?.dismiss()
                             showSpinner(this.activity)
-                            this.biometricViewModel.storeBestFingerprintsByDni(UserPrefs.getUserDni(context!!)!!)
+                            this.biometricViewModel.storeBestFingerprintsByDni(
+                                UserPrefs.getUserDni(
+                                    context!!
+                                )!!
+                            )
                         }
                     }
                 }

@@ -50,42 +50,26 @@ class OrdersFragment : Fragment() {
             myArgs!!.list
             , object : RecyclerViewOnItemClickListener<OrderInformationArgs> {
                 override fun onItemClicked(oOrderInformation: OrderInformationArgs) {
+                    /*
                     Toast.makeText(
                         context!!,
                         "onItemClicked ${oOrderInformation.id}",
                         Toast.LENGTH_SHORT
                     )
                         .show()
-                    var dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
-                    val fecha = oOrderInformation.birthDate!!
-                    val ActivationPOJO = ActivationPOJO(
-                        oOrderInformation.id!!,
-                        dni!!,
-                        oOrderInformation.name!!,
-                        oOrderInformation.lastName!!,
-                        fecha,
-                        oOrderInformation.email!!,
-                        oOrderInformation.wantPortability,
-                        oOrderInformation.sponsorTeamId,
-                        oOrderInformation.phoneNumber,
-                        oOrderInformation.currentCompany,
-                        oOrderInformation.planType,
-                        oOrderInformation.formCreationDate
-                    )
-
-                    UserPrefs.putActivation(FlashApplication.appContext, ActivationPOJO)
-
-                    val action = OrdersFragmentDirections.actionOrdersFragmentToTermsFragment()
-                    findNavController().navigate(action)
+                     */
+                    selectOrder(oOrderInformation)
                 }
 
-                override fun onCallButtonClicked(posApplicant: OrderInformationArgs) {
-                    Toast.makeText(
+                override fun onCallButtonClicked(oOrderInformation: OrderInformationArgs) {
+                    /*Toast.makeText(
                         context!!,
                         "onCallButtonClicked ${posApplicant.id}",
                         Toast.LENGTH_SHORT
                     )
                         .show()
+                     */
+                    selectOrder(oOrderInformation)
                 }
             }
         )
@@ -102,30 +86,28 @@ class OrdersFragment : Fragment() {
 
     }
 
-    fun saveActivation(pos: Int) {
+    fun selectOrder(oOrderInformation: OrderInformationArgs) {
 
+        var dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
+        //val fecha = oOrderInformation.birthDate!!
+        val oActivationPOJO = ActivationPOJO(
+            oOrderInformation.id!!,
+            dni!!,
+            oOrderInformation.name!!,
+            oOrderInformation.lastName!!,
+            oOrderInformation.birthDate!!,
+            oOrderInformation.email!!,
+            oOrderInformation.wantPortability,
+            oOrderInformation.sponsorTeamId,
+            oOrderInformation.phoneNumber,
+            oOrderInformation.currentCompany,
+            oOrderInformation.planType,
+            oOrderInformation.formCreationDate
+        )
+
+        UserPrefs.putActivation(FlashApplication.appContext, oActivationPOJO)
+
+        val action = OrdersFragmentDirections.actionOrdersFragmentToTermsFragment()
+        findNavController().navigate(action)
     }
 }
-
-/*
-arrayListOf(
-                OrderPOJO(
-                    "Activation & portability",
-                    "15/01/2020 at 09:45 am",
-                    "Phone number: 94483-8302\n"
-                ),
-                OrderPOJO("New phone number activation ", "18/01/2020 at 02:10 pm", ""),
-                OrderPOJO(
-                    "Activation & portability",
-                    "18/01/2020 at 05:34 pm",
-                    "Phone number: 92726-3521"
-                ),
-                OrderPOJO("New phone number activation ", "18/01/2020 at 02:10 pm", ""),
-                OrderPOJO(
-                    "Activation & portability",
-                    "18/01/2020 at 05:34 pm",
-                    "Phone number: 92726-3521"
-                ),
-                OrderPOJO("New phone number activation ", "18/01/2020 at 02:10 pm", "")
-            )
- */

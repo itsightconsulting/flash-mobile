@@ -111,7 +111,7 @@
     </style>
 
     <style name="text_options_radio">
-        <item name="android:fontFamily">@font/gotham_light</item>
+        <item name="android:fontFamily">@font/gotham_light</item>fields_name
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/dark</item>
     </style>

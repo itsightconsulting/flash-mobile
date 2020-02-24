@@ -43,11 +43,19 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 AndroidSchedulers.mainThread()
             ).subscribeWith(object : DisposableSingleObserver<ResponseVerifyDNI>() {
                 override fun onSuccess(t: ResponseVerifyDNI) {
+
+                    var estado: Boolean = false;
+
                     if (t.status == 0 && t.code == "0000000000") {
-                        userHasOrders = t.data.count() > 0
-                        lstOrder.value = t.data//.formsInformation
-                        loading.value = true
-                        loadError.value = false
+                        if (t.data.count() < 6) {
+                            userHasOrders = t.data.count() > 0
+                            lstOrder.value = t.data//.formsInformation
+                            loading.value = true
+                            loadError.value = false
+                        } else {
+                            estado = true
+                            errorMessage = "Has alcanzado las 5 activaciones por DNI. Ingresa un DNI diferente"
+                        }
                     } else if (t.status == 2) {
                         if (t.code == "1111111111" || t.code == "2222222222" || t.code == "2050001001" || t.code == "2050001002") {
                             // error del servidor HTTP estado 500
@@ -60,8 +68,11 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                             // error del servidor HTTP estado 400
                             errorMessage = t.message
                         }
+                        estado = true;
+                    }
 
-                        loadError.value = true
+                    if (estado) {
+                        loadError.value = estado
                         loading.value = false
                     }
                 }
