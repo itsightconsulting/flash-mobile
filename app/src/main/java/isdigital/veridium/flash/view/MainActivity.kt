@@ -41,7 +41,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-//    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    //    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private val toolbarTitleParams: LinearLayout.LayoutParams =
         LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,

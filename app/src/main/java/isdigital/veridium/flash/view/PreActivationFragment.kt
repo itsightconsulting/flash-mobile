@@ -85,6 +85,18 @@ class PreActivationFragment : Fragment() {
                     orderViewModel.loadError.value = false
                     hideSpinner(activity)
                     this.view?.visibility = View.VISIBLE
+
+                    if (verifyAvailableNetwork(activity!!))
+                        this.view?.csSnackbar(
+                            message = orderViewModel.errorMessage,
+                            duration = Snackbar.LENGTH_LONG
+                        )
+                    else
+                        this.view?.csSnackbar(
+                            message = "Sin conexión",
+                            duration = Snackbar.LENGTH_LONG
+                        )
+
                     this.view?.csSnackbar(
                         message = orderViewModel.errorMessage,
                         duration = Snackbar.LENGTH_LONG
