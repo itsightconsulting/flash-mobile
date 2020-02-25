@@ -12,6 +12,7 @@ import isdigital.veridium.flash.model.pojo.ActivationPOJO
 import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.service.component.DaggerOrderComponent
 import isdigital.veridium.flash.service.module.OrderService
+import isdigital.veridium.flash.util.verifyAvailableNetwork
 import javax.inject.Inject
 
 class OrderViewModel(application: Application) : BaseViewModel(application) {
@@ -62,6 +63,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                         } else if (t.code == "0040400000" || t.code == "0044000000" || t.code == "0040100000") {
                             // error del servidor HTTP estado 400 Token
                             // REFRESH TOKEN
+
                             errorMessage = t.message
                         } else if (t.code == "2040001001" || t.code == "2040001002" || t.code == "2040401001") {
                             // error del servidor HTTP estado 400
@@ -87,7 +89,10 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 override fun onError(e: Throwable) {
                     loadError.value = true
                     loading.value = false
-                    //errorMessage = instanceHttpError(e).message
+                   // if (verifyAvailableNetwork())
+                        errorMessage = e.message.toString()
+                  //  else errorMessage = "Sin conexión"
+                    // instanceHttpError(e).message
                 }
             })
         )

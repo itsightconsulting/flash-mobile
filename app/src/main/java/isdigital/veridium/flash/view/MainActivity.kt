@@ -4,6 +4,7 @@ package isdigital.veridium.flash.view
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -57,9 +58,17 @@ class MainActivity : AppCompatActivity() {
         bodyToken["username"] = API_USERNAME
         bodyToken["password"] = API_PASSWORD
         ServiceManager().createService(TokenApi::class.java).getToken(bodyToken).enqueue(
-            object: retrofit2.Callback<ApiResponse<Token>> {
+            object : retrofit2.Callback<ApiResponse<Token>> {
                 override fun onFailure(call: Call<ApiResponse<Token>>, t: Throwable) {
-                    Toast.makeText(applicationContext, "Obtención del token fallida", Toast.LENGTH_LONG).show()
+                    var mensaje = "Obtención del token fallida"
+                    if (!verifyAvailableNetwork())
+                        mensaje = "Sin conexión"
+
+                    Toast.makeText(
+                        applicationContext,
+                        mensaje,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
                 override fun onResponse(
@@ -223,5 +232,11 @@ class MainActivity : AppCompatActivity() {
             val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(activity.window.decorView.windowToken, 0)
         }
+    }
+
+    fun verifyAvailableNetwork(): Boolean {
+        val connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return connectivityManager != null
     }
 }

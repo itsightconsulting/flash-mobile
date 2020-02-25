@@ -5,6 +5,8 @@ import android.content.ContentUris
 import android.content.Context
 import android.content.res.Resources
 import android.database.Cursor
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -12,6 +14,7 @@ import android.os.Parcel
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
@@ -19,6 +22,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
@@ -380,7 +384,7 @@ fun Boolean.nextEvaluation(
 }
 
 fun Parcel.writeBooleanMe(flag: Boolean?) {
-    when(flag) {
+    when (flag) {
         true -> writeInt(1)
         false -> writeInt(0)
         else -> writeInt(-1)
@@ -388,12 +392,13 @@ fun Parcel.writeBooleanMe(flag: Boolean?) {
 }
 
 fun Parcel.readBooleanMe(): Boolean {
-    return when(readInt()) {
+    return when (readInt()) {
         1 -> true
         0 -> false
         else -> false
     }
 }
+
 fun orderInformationToArgsBase(
     orders: List<OrderInformation>,
     ordersArgs: ArrayList<OrderInformationArgs>
@@ -461,4 +466,10 @@ fun getPlanType(c_planType: String): String {
     else if (c_planType == PLAN_TYPES.PREPAGO.value) n_planType = "Prepaid (prepago)"
     else throw Resources.NotFoundException()
     return n_planType
+}
+
+fun verifyAvailableNetwork(activity: FragmentActivity): Boolean {
+    val connectivityManager =
+        activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    return connectivityManager != null
 }

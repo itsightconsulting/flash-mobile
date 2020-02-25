@@ -1,7 +1,9 @@
 package isdigital.veridium.flash.view
 
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -83,13 +85,18 @@ class PreActivationFragment : Fragment() {
                     orderViewModel.loadError.value = false
                     hideSpinner(activity)
                     this.view?.visibility = View.VISIBLE
+                    this.view?.csSnackbar(
+                        message = orderViewModel.errorMessage,
+                        duration = Snackbar.LENGTH_LONG
+                    )
+
+                    /*
                     Toast.makeText(
                         FlashApplication.appContext,
                         orderViewModel.errorMessage,
                         Toast.LENGTH_LONG
                     ).show()
 
-                    /*
                     val action =
                         PreActivationFragmentDirections.actionPreActivationFragmentToFormFragment()
                     findNavController().navigate(action)
@@ -130,5 +137,4 @@ class PreActivationFragment : Fragment() {
             }
         })
     }
-
 }
