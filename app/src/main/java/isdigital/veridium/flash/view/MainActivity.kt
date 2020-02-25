@@ -41,7 +41,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    //    private lateinit var firebaseAnalytics: FirebaseAnalytics
+//    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private val toolbarTitleParams: LinearLayout.LayoutParams =
         LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
             toolbar_title.text = toolbar.title
         }
 
-        var estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
+        val estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
         if (estado)
             graph.startDestination = R.id.preActivationFragment
         else
@@ -212,14 +212,14 @@ class MainActivity : AppCompatActivity() {
         val v = currentFocus
 
         if (v != null &&
-            (ev!!.action == MotionEvent.ACTION_UP || ev!!.action == MotionEvent.ACTION_MOVE) &&
+            (ev!!.action == MotionEvent.ACTION_UP || ev.action == MotionEvent.ACTION_MOVE) &&
             v is EditText &&
             !v.javaClass.name.startsWith("android.webkit.")
         ) {
             val scrcoords = IntArray(2)
             v.getLocationOnScreen(scrcoords)
-            val x = ev!!.rawX + v.left - scrcoords[0]
-            val y = ev!!.rawY + v.top - scrcoords[1]
+            val x = ev.rawX + v.left - scrcoords[0]
+            val y = ev.rawY + v.top - scrcoords[1]
 
             if (x < v.left || x > v.right || y < v.top || y > v.bottom)
                 hideKeyboard(this)
@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
-    fun hideKeyboard(activity: Activity?) {
+    private fun hideKeyboard(activity: Activity?) {
         if (activity != null && activity.window != null) {
             val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(activity.window.decorView.windowToken, 0)

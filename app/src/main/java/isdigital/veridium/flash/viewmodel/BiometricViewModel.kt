@@ -34,6 +34,7 @@ class BiometricViewModel : ViewModel() {
         val body = HashMap<String, String>()
         body["dni"] = dni
         body["hostName"] = tempHostName
+
         disposable.add(
             api.getBestFingerprintsByDni(body).subscribeOn(
                 Schedulers.newThread()

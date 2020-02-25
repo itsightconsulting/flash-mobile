@@ -38,7 +38,7 @@ class Validations(
             it.setOnFocusChangeListener { view: View, focus: Boolean ->
                 if (focus) return@setOnFocusChangeListener
                 if (this.list.size > 0) {
-                    var ele = this.list.firstOrNull { !it.check() }
+                    val ele = this.list.firstOrNull { !it.check() }
                     ele?.let {
                         textInputLayout.error = it.msg
                     }
@@ -50,7 +50,7 @@ class Validations(
 
             it.doAfterTextChanged {
                 if (this.list.size > 0) {
-                    var ele = this.list.firstOrNull { !it.check() }
+                    val ele = this.list.firstOrNull { !it.check() }
                     if (ele == null) {
                         textInputLayout.error = ""
                     }
@@ -62,7 +62,7 @@ class Validations(
             if (!eventEnabled) return@let
 
             it.setOnItemClickListener { parent, view, position, id ->
-                var ele = this.list.firstOrNull { !it.check() }
+                val ele = this.list.firstOrNull { !it.check() }
                 ele?.let {
                     textInputLayout.error = it.msg
                 }
@@ -75,7 +75,7 @@ class Validations(
 
     fun internalValidation(): Boolean {
         var flValid = true
-        var ele = this.list.firstOrNull { !it.check() }
+        val ele = this.list.firstOrNull { !it.check() }
         ele?.let {
             flValid = false
             textInputLayout.error = it.msg

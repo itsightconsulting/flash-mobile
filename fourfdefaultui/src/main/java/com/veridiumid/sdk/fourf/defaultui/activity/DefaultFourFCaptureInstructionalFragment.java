@@ -2,7 +2,6 @@ package com.veridiumid.sdk.fourf.defaultui.activity;
 
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Surface;
