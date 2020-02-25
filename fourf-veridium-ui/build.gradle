@@ -31,6 +31,6 @@ dependencies {
     implementation project (':core')
     implementation project(':fourfnative')
     implementation project(':fourfimaging')
-    implementation project(':analytics');
-    implementation project(':fourfdefaultui');
+    implementation project(':analytics')
+    implementation project(':fourfdefaultui')
 }

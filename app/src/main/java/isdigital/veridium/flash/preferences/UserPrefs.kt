@@ -25,6 +25,7 @@ object UserPrefs {
     private const val USER_HIDE_CAROUSEL = "flash.user.prefs.HIDE_CAROUSEL"
     private const val USER_HAND_SELECTED = "flash.user.prefs.USER_HAND_SELECTED"
 
+    private const val ACTIVATION_FORM_ID = "flash.user.prefs.ACTIVATION_FORM_ID"
     private const val ACTIVATION_DNI = "flash.user.prefs.ACTIVATION_DNI"
     private const val ACTIVATION_NAME = "flash.user.prefs.ACTIVATION_NAME"
     private const val ACTIVATION_LASTNAME = "flash.user.prefs.ACTIVATION_LASTNAME"
@@ -90,6 +91,7 @@ object UserPrefs {
 
             //remove(USER_HIDE_CAROUSEL)
 
+            remove(ACTIVATION_FORM_ID)
             remove(ACTIVATION_DNI)
             remove(ACTIVATION_NAME)
             remove(ACTIVATION_LASTNAME)
@@ -149,6 +151,7 @@ object UserPrefs {
 
     fun putActivation(context: Context, activation: ActivationPOJO) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
+            putString(ACTIVATION_FORM_ID, activation.formId)
             putString(ACTIVATION_DNI, activation.dni)
 
             putString(ACTIVATION_NAME, activation.name)
@@ -166,6 +169,7 @@ object UserPrefs {
 
     fun getActivation(context: Context?): ActivationPOJO {
         return PreferenceManager.getDefaultSharedPreferences(context).get {
+            val formId = getString(ACTIVATION_FORM_ID, "")
             val dni = getString(ACTIVATION_DNI, "")
 
             val name = getString(ACTIVATION_NAME, "")
@@ -179,7 +183,7 @@ object UserPrefs {
             val currentCompany = getString(ACTIVATION_CURRENTCOMPANY, "")
             val planType = getString(ACTIVATION_PLANTYPE, "")
 
-            ActivationPOJO(
+            val form = ActivationPOJO(
                 dni!!,
                 name!!,
                 lastName!!,
@@ -191,6 +195,10 @@ object UserPrefs {
                 currentCompany,
                 planType
             )
+
+            form.formId = formId
+
+            form
         }
     }
 
