@@ -41,6 +41,12 @@ class PartnerData {
             body["dni"] = activation.dni
             body["name"] = activation.name
             body["lastName"] = activation.lastName
+
+            if (activation.formId.isNullOrEmpty())
+                activation.birthDate =
+                    changeDateFormat(activation.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
+
+
             body["birthDate"] = activation.birthDate
             body["email"] = activation.email
             if (activation.wantPortability != null) {

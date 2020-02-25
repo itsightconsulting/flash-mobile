@@ -97,9 +97,6 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
                             val form = UserPrefs.getActivation(context)
                             form.iccid = iccid
-                            if (form.formId!!.isEmpty())
-                                form.birthDate =
-                                    changeDateFormat(form.birthDate, "yyyy-MM-dd", "dd/MM/yyyy")
 
                             activationViewModel.sendFormWithStatus(
                                 PartnerData.formPreparation(

@@ -349,7 +349,7 @@ class BiometricFragment : Fragment() {
 
                         hideSpinner(this.activity)
                         this.view?.csSnackbar(
-                            message = "La proceso de validación ha fallado, intentelo nuevamente.",
+                            message = "El proceso de validación ha fallado, intentelo nuevamente.",
                             duration = Snackbar.LENGTH_LONG
                         )
                     }
