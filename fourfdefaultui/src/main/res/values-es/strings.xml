@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FlashMobile</string>
+    <string name="app_name">Flash Mobile</string>
     <string name="veridium_fourf_biometrics_activity_4_finger_touchlessid">4 Fingers TouchlessID</string>
 
     <string name="cancel">Cancelar</string>
