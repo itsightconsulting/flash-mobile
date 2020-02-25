@@ -1,8 +1,6 @@
 package isdigital.veridium.flash.util
 
-import isdigital.veridium.flash.R
 import isdigital.veridium.flash.model.pojo.ActivationPOJO
-import isdigital.veridium.flash.preferences.UserPrefs
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
