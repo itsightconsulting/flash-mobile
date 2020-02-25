@@ -89,23 +89,44 @@ class OrdersFragment : Fragment() {
     fun selectOrder(oOrderInformation: OrderInformationArgs) {
 
         var dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
-        //val fecha = oOrderInformation.birthDate!!
-        val oActivationPOJO = ActivationPOJO(
-            oOrderInformation.id!!,
-            dni!!,
-            oOrderInformation.name!!,
-            oOrderInformation.lastName!!,
-            oOrderInformation.birthDate!!,
-            oOrderInformation.email!!,
-            oOrderInformation.wantPortability,
-            oOrderInformation.sponsorTeamId,
-            oOrderInformation.phoneNumber,
-            oOrderInformation.currentCompany,
-            oOrderInformation.planType,
-            oOrderInformation.formCreationDate
-        )
 
-        UserPrefs.putActivation(FlashApplication.appContext, oActivationPOJO)
+        if (oOrderInformation.wantPortability) {
+            val oActivationPOJO = ActivationPOJO(
+                oOrderInformation.id!!,
+                dni!!,
+                oOrderInformation.name!!,
+                oOrderInformation.lastName!!,
+                oOrderInformation.birthDate!!,
+                oOrderInformation.email!!,
+                oOrderInformation.wantPortability,
+                oOrderInformation.sponsorTeamId,
+                oOrderInformation.phoneNumber,
+                oOrderInformation.currentCompany,
+                oOrderInformation.planType,
+                oOrderInformation.formCreationDate
+            )
+
+            UserPrefs.putActivation(FlashApplication.appContext, oActivationPOJO)
+
+        } else {
+            val oActivationPOJO = ActivationPOJO(
+                oOrderInformation.id!!,
+                dni!!,
+                oOrderInformation.name!!,
+                oOrderInformation.lastName!!,
+                oOrderInformation.birthDate!!,
+                oOrderInformation.email!!,
+                oOrderInformation.wantPortability,
+                oOrderInformation.sponsorTeamId,
+                null,
+                null,
+                null,
+                oOrderInformation.formCreationDate
+            )
+
+            UserPrefs.putActivation(FlashApplication.appContext, oActivationPOJO)
+
+        }
 
         val action = OrdersFragmentDirections.actionOrdersFragmentToTermsFragment()
         findNavController().navigate(action)

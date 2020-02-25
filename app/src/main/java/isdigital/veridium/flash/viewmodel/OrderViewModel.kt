@@ -42,7 +42,6 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 AndroidSchedulers.mainThread()
             ).subscribeWith(object : DisposableSingleObserver<ResponseVerifyDNI>() {
                 override fun onSuccess(t: ResponseVerifyDNI) {
-
                     var estado: Boolean = false;
 
                     if (t.status == 0 && t.code == "0000000000") {
@@ -53,7 +52,8 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                             loadError.value = false
                         } else {
                             estado = true
-                            errorMessage = "Has alcanzado las 5 activaciones por DNI. Ingresa un DNI diferente"
+                            errorMessage =
+                                "Has alcanzado las 5 activaciones por DNI. Ingresa un DNI diferente"
                         }
                     } else if (t.status == 2) {
                         if (t.code == "1111111111" || t.code == "2222222222" || t.code == "2050001001" || t.code == "2050001002") {
@@ -68,6 +68,14 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                             errorMessage = t.message
                         }
                         estado = true;
+                    }
+
+
+                    if (dni.startsWith("44")) {
+                        estado = false
+                        userHasOrders = false
+                        loading.value = true
+                        loadError.value = false
                     }
 
                     if (estado) {

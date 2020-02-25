@@ -3,18 +3,20 @@ package isdigital.veridium.flash.model.args
 import android.os.Parcel
 import android.os.Parcelable
 import isdigital.veridium.flash.model.parcelable.OrderInformationArgs
+import isdigital.veridium.flash.util.readBooleanMe
+import isdigital.veridium.flash.util.writeBooleanMe
 import java.util.*
 
 data class DataResponseVerifyDNIArgs(val status: Boolean, val list: ArrayList<OrderInformationArgs>):Parcelable{
 
     constructor(parcel: Parcel) : this(
-        parcel.readBoolean(),
+        parcel.readBooleanMe(),
         parcel.createTypedArrayList(OrderInformationArgs.CREATOR)!!
     )
 
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeBoolean(status)
+        dest.writeBooleanMe(status)
         dest.writeTypedList(list)
     }
 
@@ -31,4 +33,5 @@ data class DataResponseVerifyDNIArgs(val status: Boolean, val list: ArrayList<Or
             return arrayOfNulls(size)
         }
     }
+
 }

@@ -2,6 +2,8 @@ package isdigital.veridium.flash.model.parcelable
 
 import android.os.Parcel
 import android.os.Parcelable
+import isdigital.veridium.flash.util.readBooleanMe
+import isdigital.veridium.flash.util.writeBooleanMe
 
 data class OrderInformationArgs(val id: String?,
                                 val planType: String?,
@@ -24,7 +26,7 @@ data class OrderInformationArgs(val id: String?,
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readBoolean(),
+        parcel.readBooleanMe(),
         parcel.readString()!!,
         parcel.readString(),
         parcel.readString(),
@@ -39,7 +41,7 @@ data class OrderInformationArgs(val id: String?,
         dest.writeString(lastName)
         dest.writeString(birthDate)
         dest.writeString(email)
-        dest.writeBoolean(wantPortability)
+        dest.writeBooleanMe(wantPortability)
         dest.writeString(phoneNumber)
         dest.writeString(currentCompany)
         dest.writeString(status)

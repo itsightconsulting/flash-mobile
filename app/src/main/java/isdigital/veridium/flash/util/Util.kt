@@ -8,6 +8,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.Parcel
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.method.ScrollingMovementMethod
@@ -378,7 +379,21 @@ fun Boolean.nextEvaluation(
     return this
 }
 
+fun Parcel.writeBooleanMe(flag: Boolean?) {
+    when(flag) {
+        true -> writeInt(1)
+        false -> writeInt(0)
+        else -> writeInt(-1)
+    }
+}
 
+fun Parcel.readBooleanMe(): Boolean {
+    return when(readInt()) {
+        1 -> true
+        0 -> false
+        else -> false
+    }
+}
 fun orderInformationToArgsBase(
     orders: List<OrderInformation>,
     ordersArgs: ArrayList<OrderInformationArgs>
