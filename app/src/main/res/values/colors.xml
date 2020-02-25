@@ -25,4 +25,5 @@
     <color name="button_error">#86599b</color>
     <color name="text_error">#cdc8ce</color>
     <color name="sim_color">#f4f4f6</color>
+    <color name="link_color">#0000EE</color>
 </resources>

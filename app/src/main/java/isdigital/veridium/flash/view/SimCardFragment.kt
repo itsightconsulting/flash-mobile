@@ -3,6 +3,7 @@ package isdigital.veridium.flash.view
 
 import android.Manifest
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,10 +16,13 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.zxing.Result
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.preferences.UserPrefs
@@ -125,7 +129,11 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             diagSucc.dismiss()
                             dialog?.dismiss()
                             showSpinner(this.activity)
-                            this.biometricViewModel.storeBestFingerprintsByDni(UserPrefs.getUserDni(context!!)!!)
+                            this.biometricViewModel.storeBestFingerprintsByDni(
+                                UserPrefs.getUserDni(
+                                    context!!
+                                )!!
+                            )
                         }
                     }
                 }
@@ -191,7 +199,6 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
         tv.gravity = Gravity.BOTTOM
         tv.top
-        tv.setTextColor(ContextCompat.getColor(context!!, R.color.white))
         tv.textSize = 18f
         val tvParams = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -208,6 +215,54 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             tv, tvParams
         )
 
+        val prefixText2 = SpannableString("\uD83D\uDC47 Ingresar ICCID manualmente")
+        val prefixText2Len = prefixText2.length
+
+        prefixText2.setSpan(
+            CustomTypefaceSpan("", ResourcesCompat.getFont(context!!, R.font.gotham_bold)!!),
+            0,
+            prefixText2Len,
+            0
+        )
+
+        prefixText2.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.dark_purple
+                )
+            ), 0, prefixText2Len, 0
+        )
+
+        val tv2 = TextView(context)
+        tv2.text = ""
+        tv2.append(prefixText2)
+        tv2.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        tv2.gravity = Gravity.BOTTOM
+        tv2.top
+        tv2.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+        tv2.textSize = 18f
+
+        val tvParams2 = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        tvParams2.setMargins(
+            96,
+            (context!!.resources.displayMetrics.heightPixels * 0.92).toInt(),
+            96,
+            0
+        )
+        tv2.layoutParams = tvParams2
+
+        tv2.setOnClickListener {
+            invokerICCIDDialog(context!!).show()
+        }
+
+        dialog?.addContentView(
+            tv2, tvParams2
+        )
         mScannerView.setResultHandler(this)
         mScannerView.startCamera()
     }
@@ -260,11 +315,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
         rawResult?.let {
             if (it.text.length == 20 && validateOnlyNumber(it.text)) {
-                instanceDialogSpinner()
-
-                activationViewModel.checkIccidValid(it.text)
-                iccid = it.text
-                UserPrefs.putIccid(context, iccid)
+                evaluateIccid(it.text)
             } else {
                 tryScanAgain()
             }
@@ -283,7 +334,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         }
     }
 
-    private fun instanceDialogSpinner(){
+    private fun instanceDialogSpinner() {
         dialogSpin = Dialog(context!!, R.style.dialog_scanner)
         dialogSpin?.let {
             it.setContentView(R.layout.alert_scanner_spin)
@@ -292,5 +343,49 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             it.show()
         }
+    }
+
+    fun invokerICCIDDialog(context: Context): Dialog {
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.dialog_enter_iccid)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setCancelable(false)
+
+        dialog.window!!.setLayout(
+            (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        val buttonDialog = dialog.findViewById(R.id.btnIccidDialog) as Button
+        val txtIccid = dialog.findViewById(R.id.txtIccid) as TextInputLayout
+        val etIccid = dialog.findViewById(R.id.etIccid) as TextInputEditText
+
+        etIccid.doAfterTextChanged {
+            if (etIccid.length() == 20) {
+                txtIccid.error = ""
+            }
+        }
+
+        buttonDialog.setOnClickListener {
+            val iccidLen = etIccid.length()
+            if (iccidLen != 20) {
+                txtIccid.error = "Debe ingresar 20 dígitos"
+            } else {
+                dialog.dismiss()
+                evaluateIccid(etIccid.text.toString())
+            }
+        }
+        val btnCancelIccidDialog = dialog.findViewById(R.id.btnCancelIccidDialog) as Button
+        btnCancelIccidDialog.setOnClickListener {
+            dialog.dismiss()
+        }
+        return dialog
+    }
+
+    fun evaluateIccid(flIccid: String){
+        instanceDialogSpinner()
+
+        activationViewModel.checkIccidValid(flIccid)
+        iccid = flIccid
+        UserPrefs.putIccid(context, iccid)
     }
 }
