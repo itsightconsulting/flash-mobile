@@ -32,7 +32,7 @@ class InitialFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         btnGetStarted.visibility = View.INVISIBLE
 
-        var imageListener =
+        val imageListener =
             ImageListener { position, imageView ->
                 run {
                     imageView.setImageResource(sampleImages[position])

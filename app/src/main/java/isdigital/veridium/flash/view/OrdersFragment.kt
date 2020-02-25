@@ -88,7 +88,7 @@ class OrdersFragment : Fragment() {
 
     fun selectOrder(oOrderInformation: OrderInformationArgs) {
 
-        var dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
+        val dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
 
         if (oOrderInformation.wantPortability) {
             val oActivationPOJO = ActivationPOJO(

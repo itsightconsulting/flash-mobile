@@ -107,25 +107,25 @@ class FormFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    fun BuildDatePickerDialog(year: Int, month: Int, day: Int, minDate: Date) {
+    private fun BuildDatePickerDialog(year: Int, month: Int, day: Int, minDate: Date) {
         val dpd = DatePickerDialog(
             context!!,
             DatePickerDialog.OnDateSetListener { view, nYear, nMonth, nDayOfMonth ->
                 var nDayOfMonthStr = nDayOfMonth.toString()
                 var nMonthStr = (nMonth + 1).toString()
                 if (nDayOfMonth < 10)
-                    nDayOfMonthStr = "0" + nDayOfMonth
+                    nDayOfMonthStr = "0$nDayOfMonth"
 
                 if ((nMonth + 1) < 10)
                     nMonthStr = "0" + (nMonth + 1)
-                etDateOfBirth.setText(nDayOfMonthStr + "/" + nMonthStr + "/" + nYear)
+                etDateOfBirth.setText("$nDayOfMonthStr/$nMonthStr/$nYear")
             }, year, month, day
         )
         dpd.datePicker.maxDate = minDate.time
         dpd.show()
     }
 
-    fun ClickListener_for_btnContinue() {
+    private fun ClickListener_for_btnContinue() {
         var estado: Boolean? = null;
         if (rbDoNotWantToPort.isChecked) estado = false
         if (rbWantToPort.isChecked) estado = true
@@ -149,9 +149,9 @@ class FormFragment : Fragment() {
         }
     }
 
-    fun saveActivationPojo(estado: Boolean) {
+    private fun saveActivationPojo(estado: Boolean) {
 
-        var dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
+        val dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
         // val fecha: String = etDateOfBirth.text.toString()
         // val fechaFormat: String = changeDateFormat(fecha, "MM/dd/yyyy", null)
         val ActivationPOJO = ActivationPOJO(

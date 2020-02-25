@@ -33,7 +33,7 @@ class FormConfirmFragment : Fragment() {
 
         btn_confirm.setOnClickListener {
 
-            var oActivation = UserPrefs.getActivation(FlashApplication.appContext)
+            val oActivation = UserPrefs.getActivation(FlashApplication.appContext)
             if (oActivation == null) throw  Resources.NotFoundException()
 
             UserPrefs.putActivation(FlashApplication.appContext, oActivation)
@@ -43,10 +43,10 @@ class FormConfirmFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        btn_cancel.setOnClickListener({
+        btn_cancel.setOnClickListener {
             val action = FormConfirmFragmentDirections.actionFormConfirmFragmentToFormFragment()
             findNavController().navigate(action)
-        })
+        }
 
     }
 
@@ -55,7 +55,7 @@ class FormConfirmFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    fun showInformation() {
+    private fun showInformation() {
 
         tvName.text = tvName.text.toString() + ": "
         tvLastName.text = tvLastName.text.toString() + ": "

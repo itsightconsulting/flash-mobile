@@ -146,7 +146,7 @@ class BiometricFragment : Fragment() {
     }
 
 
-    fun launchVeridium(hand: ExportConfig.CaptureHand, finger: Int) {
+    private fun launchVeridium(hand: ExportConfig.CaptureHand, finger: Int) {
         ExportConfig.setCaptureHand(hand)
         ExportConfig.setIndividualthumb(finger == 1)
         ExportConfig.setIndividualindex(finger == 2)
@@ -210,12 +210,12 @@ class BiometricFragment : Fragment() {
         }
     }
 
-    fun navigateErrorFragment() {
+    private fun navigateErrorFragment() {
         val action = BiometricFragmentDirections.actionBiometricFragmentToErrorFragment()
         findNavController().navigate(action)
     }
 
-    fun navigateSuccessFragment() {
+    private fun navigateSuccessFragment() {
         val action =
             BiometricFragmentDirections.actionBiometricFragmentToSuccessFragment()
         findNavController().navigate(action)
@@ -228,7 +228,7 @@ class BiometricFragment : Fragment() {
         print?.let {
             showSpinner(activity)
             if (it.size > 0) {
-                var result: JSONObject?
+                val result: JSONObject?
 
                 try {
                     val zip: File = File.createTempFile(
@@ -313,7 +313,7 @@ class BiometricFragment : Fragment() {
         }
     }
 
-    fun listeners() {
+    private fun listeners() {
         activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
         biometricViewModel = ViewModelProviders.of(this).get(BiometricViewModel::class.java)
 

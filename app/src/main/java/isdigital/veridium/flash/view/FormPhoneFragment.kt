@@ -75,7 +75,7 @@ class FormPhoneFragment : Fragment() {
         }
     }
 
-    fun checkPortabilityArtificial(): Boolean {
+    private fun checkPortabilityArtificial(): Boolean {
         return true
     }
 
@@ -84,7 +84,7 @@ class FormPhoneFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    fun setAdapterToElement(listado: Array<String>, elemento: AutoCompleteTextView) {
+    private fun setAdapterToElement(listado: Array<String>, elemento: AutoCompleteTextView) {
         val adapter = ArrayAdapter(
             context!!,
             R.layout.dropdown_menu_popup_item,
@@ -94,7 +94,7 @@ class FormPhoneFragment : Fragment() {
         elemento.setAdapter(adapter)
     }
 
-    fun ClickListener_for_btnContinue() {
+    private fun ClickListener_for_btnContinue() {
 
         if (this.validatorMatrix.checkValidity()) {
             if (oActivation == null) throw  Resources.NotFoundException()

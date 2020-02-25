@@ -89,8 +89,8 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         activationViewModel.loading.observe(this, Observer { loading ->
             loading?.let {
                 if (it) {
-                    var error = activationViewModel.loadError.value ?: false
-                    var formError = activationViewModel.formError.value ?: false
+                    val error = activationViewModel.loadError.value ?: false
+                    val formError = activationViewModel.formError.value ?: false
                     dialogSpin?.dismiss()
 
                     if (error) {
@@ -345,7 +345,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         }
     }
 
-    fun invokerICCIDDialog(context: Context): Dialog {
+    private fun invokerICCIDDialog(context: Context): Dialog {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dialog_enter_iccid)
         dialog.setCanceledOnTouchOutside(false)
@@ -381,7 +381,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         return dialog
     }
 
-    fun evaluateIccid(flIccid: String){
+    private fun evaluateIccid(flIccid: String){
         instanceDialogSpinner()
 
         activationViewModel.checkIccidValid(flIccid)

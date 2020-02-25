@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.item_order.view.*
 import java.util.*
 
 class OrdersListAdapter(
-    val ordersList: ArrayList<OrderInformationArgs>
-    , val itemClickListener: RecyclerViewOnItemClickListener<OrderInformationArgs>
+    private val ordersList: ArrayList<OrderInformationArgs>
+    , private val itemClickListener: RecyclerViewOnItemClickListener<OrderInformationArgs>
 ) : RecyclerView.Adapter<OrdersListAdapter.ContactViewHolder>() {
 
     fun updateordersList(newordersList: List<OrderInformationArgs>) {
