@@ -97,11 +97,6 @@ class PreActivationFragment : Fragment() {
                             duration = Snackbar.LENGTH_LONG
                         )
 
-                    this.view?.csSnackbar(
-                        message = orderViewModel.errorMessage,
-                        duration = Snackbar.LENGTH_LONG
-                    )
-
                     /*
                     Toast.makeText(
                         FlashApplication.appContext,

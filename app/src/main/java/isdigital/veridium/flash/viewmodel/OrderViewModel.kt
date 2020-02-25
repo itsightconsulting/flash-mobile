@@ -90,6 +90,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 override fun onError(e: Throwable) {
                     loadError.value = true
                     loading.value = false
+                    errorMessage = e.message.toString()
                     // instanceHttpError(e).message
                 }
             })

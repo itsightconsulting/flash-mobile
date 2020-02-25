@@ -471,5 +471,6 @@ fun getPlanType(c_planType: String): String {
 fun verifyAvailableNetwork(activity: FragmentActivity): Boolean {
     val connectivityManager =
         activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    return connectivityManager != null
+    val networkInfo = connectivityManager.activeNetworkInfo
+    return networkInfo != null && networkInfo.isConnected
 }
