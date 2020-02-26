@@ -290,7 +290,7 @@ class BiometricFragment : Fragment() {
 
                     val jsonInSolutions = HashMap<String, String>()
 
-                    jsonInSolutions["hostName"] = "AAA111BBB222CCC333"
+                    jsonInSolutions["hostName"] = ""
                     jsonInSolutions["dniCliente"] = UserPrefs.getUserDni(context!!)!!
                     jsonInSolutions["rawBase64"] =
                         FingerImpressionImage.getString("BinaryBase64ObjectRAW")
