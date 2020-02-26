@@ -1,7 +1,6 @@
 package isdigital.veridium.flash.preferences
 
 import android.content.Context
-import android.text.TextUtils
 import androidx.preference.PreferenceManager
 import isdigital.veridium.flash.model.dto.BestFingers
 import isdigital.veridium.flash.model.dto.Fingers
@@ -47,18 +46,6 @@ object UserPrefs {
     fun setApiToken(context: Context?, apiToken: String) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
             putString(API_TOKEN, apiToken)
-        }
-    }
-
-    fun getApiToken(context: Context?): String {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
-            getString(API_TOKEN, "")!!
-        }
-    }
-
-    fun isLoggedIn(context: Context?): Boolean {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
-            !TextUtils.isEmpty(getString(USER_TOKEN, ""))
         }
     }
 
@@ -226,31 +213,6 @@ object UserPrefs {
         }
     }
 
-
-    fun setFingerPrintLeft(context: Context?, apiToken: String) {
-        PreferenceManager.getDefaultSharedPreferences(context).put {
-            putString(SCANNER_BEST_FINGERPRINT_LEFT, apiToken)
-        }
-    }
-
-    fun getFingerPrintLeft(context: Context?): String {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
-            getString(SCANNER_BEST_FINGERPRINT_LEFT, "")!!
-        }
-    }
-
-    fun setFingerPrintRight(context: Context?, apiToken: String) {
-        PreferenceManager.getDefaultSharedPreferences(context).put {
-            putString(SCANNER_BEST_FINGERPRINT_RIGHT, apiToken)
-        }
-    }
-
-    fun getFingerPrintRight(context: Context?): String {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
-            getString(SCANNER_BEST_FINGERPRINT_RIGHT, "")!!
-        }
-    }
-
     fun putBestFingerPrints(context: Context, bestFingers: BestFingers) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
             putInt(SCANNER_BEST_FINGERPRINT_LEFT, bestFingers.codigoIzq.replace("0", "").toInt())
@@ -279,12 +241,6 @@ object UserPrefs {
     fun putHandSelected(context: Context?, hand: String) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
             putString(USER_HAND_SELECTED, hand)
-        }
-    }
-
-    fun getHandSelected(context: Context?): String? {
-        return PreferenceManager.getDefaultSharedPreferences(context).get {
-            getString(USER_HAND_SELECTED, "")
         }
     }
 }

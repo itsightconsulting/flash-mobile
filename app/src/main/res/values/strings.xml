@@ -29,9 +29,10 @@
     <string name="web_activation_orders">Órdenes de activación</string>
     <string name="web_activation_orders_description">Lista de órdenes que iniciaste desde nuestro sitio web. Elige las que quieras completar.</string>
     <string name="web_activation_orders_info">Recuerda que sólo se permite hacer 5 activaciones por DNI.</string>
-    <string name="web_activation_order_type_ph">Activation &amp; portability </string>
+    <string name="web_activation_order_type_ph">Activación y portabilidad </string>
     <string name="web_activation_order_date_ph">15/01/2020 at 09:45 am </string>
-    <string name="web_activation_order_number_ph">Phone number: 94483-8302 </string>
+    <string name="web_activation_order_number_ph">Número telefónico:&#160;</string>
+    <string name="web_activation_order_new">Activación de nuevo número telefónico</string>
 
     <!-- Step 2b.1 and 2b.2 -->
     <string name="flash_activation_form">Formato de activación</string>
@@ -137,4 +138,21 @@
     <string name="datetime_format">YYYY-MM-DD HH-mm-ss</string>
     <string name="title_activation">Activación de nuevo número telefónico</string>
     <string name="title_activation_portability">Activación y portabilidad</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="error_alert">¡Ha ocurrido un error!</string>
+    <string name="btn_aceptar">Aceptar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="temp_left_finger">Pulgar izquierdo</string>
+    <string name="temp_right_finger">Pulgar derecho</string>
+    <string name="lbl_iccid">ICCID:</string>
+    <string name="date_format">dd/mm/yy</string>
+    <string name="email_wildcard">\@</string>
+    <string name="escaneo_completado">Escaneo completado</string>
+    <string name="icon_title">Hm</string>
+    <string name="terms_wildcard">I. Flash Mobile Peru Ctrero eos et accusamus et iusto odio dignissimos ducimus</string>
+    <string name="label_colon">:&#160;</string>
+
+    <string name="datetime_format_one">dd/MM/yyyy HH:mm</string>
+    <string name="datetime_format_two">yyyy-MM-dd HH:mm:ss</string>
+
 </resources>

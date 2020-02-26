@@ -76,8 +76,6 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$lifeCycleExtensionVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-
 
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation "com.android.support:palette-v7:$supportVersion"
@@ -87,11 +85,7 @@ dependencies {
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
 
     /* This library is used by veridium*/
-    implementation "com.google.android.gms:play-services-analytics:16.0.7"
-
-
-    implementation "androidx.room:room-runtime:$roomVersion"
-    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "com.google.android.gms:play-services-analytics:17.0.0"
 
     // Add the Firebase SDK for Crashlytics.
 //    implementation 'com.google.firebase:firebase-analytics:17.2.0'

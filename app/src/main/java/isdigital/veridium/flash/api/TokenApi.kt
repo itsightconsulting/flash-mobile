@@ -1,6 +1,5 @@
 package isdigital.veridium.flash.api
 
-import io.reactivex.Single
 import isdigital.veridium.flash.model.dto.Token
 import isdigital.veridium.flash.model.generic.ApiResponse
 import isdigital.veridium.flash.util.API_VERSION_V1

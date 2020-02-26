@@ -11,10 +11,6 @@ import isdigital.veridium.flash.api.BiometricApi
 @Module
 class ApiModule {
 
-    init {
-
-    }
-
     @Provides
     fun restApiOrder(): OrderApi {
         return ServiceManager().createService(OrderApi::class.java)

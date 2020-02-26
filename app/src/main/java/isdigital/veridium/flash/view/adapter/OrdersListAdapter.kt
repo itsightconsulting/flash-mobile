@@ -3,8 +3,8 @@ package isdigital.veridium.flash.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.model.parcelable.OrderInformationArgs
 import isdigital.veridium.flash.util.RecyclerViewOnItemClickListener
@@ -16,6 +16,8 @@ class OrdersListAdapter(
     private val ordersList: ArrayList<OrderInformationArgs>
     , private val itemClickListener: RecyclerViewOnItemClickListener<OrderInformationArgs>
 ) : RecyclerView.Adapter<OrdersListAdapter.ContactViewHolder>() {
+
+    private val resources = FlashApplication.appContext.resources
 
     fun updateordersList(newordersList: List<OrderInformationArgs>) {
         ordersList.clear()
@@ -33,22 +35,23 @@ class OrdersListAdapter(
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         if (ordersList[position].wantPortability) {
-            holder.view.orderType.text = "Activación y portabilidad"
-            holder.view.orderNumber.text = "Número telefónico: " + ordersList[position].phoneNumber
-        } else holder.view.orderType.text = "Activación de nuevo número telefónico"
+            holder.view.orderType.text = resources.getString(R.string.web_activation_order_type_ph)
+
+            holder.view.orderNumber.text = resources.getString(R.string.web_activation_order_number_ph) + ordersList[position].phoneNumber
+        } else holder.view.orderType.text = resources.getString(R.string.web_activation_order_new)
 
         val orderDate = changeDateFormat(
             ordersList[position].formCreationDate!!,
-            "dd/MM/yyyy HH:mm",
-            "yyyy-MM-dd HH:mm:ss"
+            resources.getString(R.string.datetime_format_one),
+            resources.getString(R.string.datetime_format_two)
         )
 
         val orderDateArr = orderDate.split(" ")
         val horas = changeDateFormat(orderDateArr[1], "HH", "HH:mm").toInt()
-        var formatoAMPM: String = "";
-        if (horas >= 0 && horas < 12)
+        var formatoAMPM = ""
+        if (horas in 0..11)
             formatoAMPM = " AM"
-        else if (horas >= 12 && horas < 25)
+        else if (horas in 12..24)
             formatoAMPM = " PM"
 
         holder.view.orderDate.text = orderDateArr[0] + " a las " + orderDateArr[1] + formatoAMPM

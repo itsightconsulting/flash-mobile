@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -14,12 +13,12 @@ import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.model.args.DataResponseVerifyDNIArgs
 import isdigital.veridium.flash.model.parcelable.OrderInformationArgs
+import isdigital.veridium.flash.model.pojo.ActivationPOJO
 import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.util.RecyclerViewOnItemClickListener
 import isdigital.veridium.flash.view.adapter.OrdersListAdapter
 import isdigital.veridium.flash.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.orders_fragment.*
-import isdigital.veridium.flash.model.pojo.ActivationPOJO
 
 /**
  * A simple [Fragment] subclass.

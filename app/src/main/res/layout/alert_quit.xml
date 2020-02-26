@@ -51,7 +51,7 @@
             android:layout_weight="0.5"
             android:background="@color/white"
             android:backgroundTint="@color/white"
-            android:text="Cancelar"
+            android:text="@string/btn_cancelar"
             android:textAlignment="center"
             android:textColor="@color/purple"
             android:textSize="18dp"

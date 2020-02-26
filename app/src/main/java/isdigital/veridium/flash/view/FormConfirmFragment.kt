@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import isdigital.veridium.flash.R
 import kotlinx.android.synthetic.main.form_confirm_fragment.*
 import isdigital.veridium.flash.FlashApplication
+import isdigital.veridium.flash.model.pojo.ActivationPOJO
 import isdigital.veridium.flash.preferences.UserPrefs
 
 /**
@@ -57,15 +58,14 @@ class FormConfirmFragment : Fragment() {
 
     private fun showInformation() {
 
-        tvName.text = tvName.text.toString() + ": "
-        tvLastName.text = tvLastName.text.toString() + ": "
-        tvDateOfBirth.text = tvDateOfBirth.text.toString() + ": "
-        tvSponsorTeamId.text = tvSponsorTeamId.text.toString() + ": "
-        tvPlanType.text = tvPlanType.text.toString() + ": "
+        tvName.text = tvName.text.toString() + resources.getString(R.string.label_colon)
+        tvLastName.text = tvLastName.text.toString() + resources.getString(R.string.label_colon)
+        tvDateOfBirth.text = tvDateOfBirth.text.toString() + resources.getString(R.string.label_colon)
+        tvSponsorTeamId.text = tvSponsorTeamId.text.toString() + resources.getString(R.string.label_colon)
+        tvPlanType.text = tvPlanType.text.toString() + resources.getString(R.string.label_colon)
 
 
-        var oActivation = UserPrefs.getActivation(FlashApplication.appContext)
-        if (oActivation == null) throw  Resources.NotFoundException()
+        val oActivation: ActivationPOJO = UserPrefs.getActivation(FlashApplication.appContext)
 
         tvDniResumen.text = oActivation.dni
         tvNameResumen.text = oActivation.name

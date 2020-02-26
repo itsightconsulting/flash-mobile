@@ -1,52 +1,30 @@
 package isdigital.veridium.flash.util
 
 import android.app.Dialog
-import android.content.ContentUris
 import android.content.Context
 import android.content.res.Resources
-import android.database.Cursor
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.net.Uri
-import android.os.Build
-import android.os.Environment
 import android.os.Parcel
-import android.provider.DocumentsContract
-import android.provider.MediaStore
-import android.text.method.ScrollingMovementMethod
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
-import org.json.JSONObject
-import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.model.dto.ErrorResponse
 import isdigital.veridium.flash.model.dto.OrderInformation
 import isdigital.veridium.flash.model.parcelable.OrderInformationArgs
 import isdigital.veridium.flash.model.pojo.ActivationPOJO
+import org.json.JSONObject
 import retrofit2.HttpException
-import java.io.File
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-
-
-enum class POSTYPES(val value: Int) {
-    POS_APPROVED(1),
-    POS_APPLICANT(2)
-}
 
 enum class RULESVAL(val value: Int) {
     REQUIRED(0),
@@ -80,24 +58,6 @@ enum class HANDS(val value: String) {
     LEFT("Left"),
     RIGHT("Right")
 }
-
-
-val documentTypes: HashMap<Int, String> = hashMapOf(
-    1 to "RUC",
-    2 to "DNI",
-    3 to "CE",
-    4 to "PASAPORTE"
-)
-
-val profiles: HashMap<Int, String> = hashMapOf(
-    1 to "Super Admin",
-    2 to "Proveedor",
-    3 to "Disribuidor",
-    4 to "Administrador",
-    5 to "BackOffice",
-    6 to "Vendedor(a)",
-    7 to "PDV"
-)
 
 fun getText(editText: EditText): String {
     return editText.text.toString()
@@ -158,75 +118,6 @@ fun instanceHttpError(e: Throwable): ErrorResponse {
     )
 }
 
-fun getRealPathFromUri(uri: Uri): String? {
-    // DocumentProvider
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(
-            FlashApplication.appContext,
-            uri
-        )
-    ) {
-        // ExternalStorageProvider
-        if (isExternalStorageDocument(uri)) {
-            val docId = DocumentsContract.getDocumentId(uri)
-            val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-            val type = split[0]
-
-            if ("primary".equals(type, ignoreCase = true)) {
-                return Environment.getExternalStorageState().toString() + "/" + split[1]
-            }
-        } else if (isDownloadsDocument(uri)) {
-
-            val id = DocumentsContract.getDocumentId(uri)
-            val contentUri = ContentUris.withAppendedId(
-                Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
-            )
-
-            return getDataColumn(FlashApplication.appContext, contentUri, null, null)
-        } else if (isMediaDocument(uri)) {
-            val docId = DocumentsContract.getDocumentId(uri)
-            val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-            val type = split[0]
-
-            var contentUri: Uri? = null
-            if ("image" == type) {
-                contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            } else if ("video" == type) {
-                contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-            } else if ("audio" == type) {
-                contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-            }
-
-            val selection = "_id=?"
-            val selectionArgs = arrayOf(split[1])
-
-            return contentUri?.let {
-                getDataColumn(
-                    FlashApplication.appContext,
-                    it,
-                    selection,
-                    selectionArgs
-                )
-            }
-        }// MediaProvider
-        // DownloadsProvider
-    } else if ("content".equals(uri.scheme, ignoreCase = true)) {
-
-        // Return the remote address
-        return if (isGooglePhotosUri(uri)) uri.lastPathSegment else getDataColumn(
-            FlashApplication.appContext,
-            uri,
-            null,
-            null
-        )
-
-    } else if ("file".equals(uri.scheme, ignoreCase = true)) {
-        return uri.path
-    }// File
-    // MediaStore (and general)
-
-    return null
-}
-
 fun isExternalStorageDocument(uri: Uri): Boolean {
     return "com.android.externalstorage.documents" == uri.authority
 }
@@ -253,83 +144,6 @@ fun forceMinimize(requireActivity: FragmentActivity, lifecycleOwner: LifecycleOw
     requireActivity.onBackPressedDispatcher.addCallback(
         lifecycleOwner, onBackPressedCallback
     )
-}
-
-fun getDataColumn(
-    context: Context, uri: Uri, selection: String?,
-    selectionArgs: Array<String>?
-): String? {
-
-    var cursor: Cursor? = null
-    val column = "_data"
-    val projection = arrayOf(column)
-
-    try {
-        cursor = context.contentResolver.query(uri, projection, selection, selectionArgs, null)
-        if (cursor != null && cursor.moveToFirst()) {
-            val index = cursor.getColumnIndexOrThrow(column)
-            return cursor.getString(index)
-        }
-    } finally {
-        if (cursor != null)
-            cursor.close()
-    }
-    return null
-}
-
-
-@Throws(IOException::class)
-public fun createImageFile(context: Context): File {
-    // Create an image file name
-    val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-    val storageDir: File = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-    return File.createTempFile(
-        "JPEG_${timeStamp}_", /* prefix */
-        ".jpg", /* suffix */
-        storageDir /* directory */
-    )
-}
-
-fun invokerSuccessDialog(context: Context, bodyMessage: String?): Dialog {
-    val dialog = Dialog(context)
-    dialog.setContentView(R.layout.alert_success)
-    dialog.setCanceledOnTouchOutside(false)
-    dialog.setCancelable(false)
-
-    dialog.window!!.setLayout(
-        (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
-        WindowManager.LayoutParams.WRAP_CONTENT
-    )
-    bodyMessage?.let {
-        dialog.findViewById<TextView>(R.id.alertSuccessMessage).text = bodyMessage
-    }
-    val buttonDialog = dialog.findViewById(R.id.btnAlertDismiss) as Button
-    buttonDialog.setOnClickListener {
-        dialog.dismiss()
-    }
-    return dialog
-}
-
-fun invokerErrorDialog(context: Context, bodyMessage: String?): Dialog {
-    val dialog = Dialog(context)
-    dialog.setContentView(R.layout.alert_error)
-    dialog.setCanceledOnTouchOutside(false)
-    dialog.setCancelable(false)
-
-    dialog.window!!.setLayout(
-        (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
-        WindowManager.LayoutParams.WRAP_CONTENT
-    )
-    bodyMessage?.let {
-        val txtMsg = dialog.findViewById<TextView>(R.id.alertErrorMessage)
-        txtMsg.text = bodyMessage
-        txtMsg.movementMethod = ScrollingMovementMethod()
-    }
-    val buttonDialog = dialog.findViewById(R.id.btnAlertDismiss) as Button
-    buttonDialog.setOnClickListener {
-        dialog.dismiss()
-    }
-    return dialog
 }
 
 fun invokerQuitDialog(context: Context): Dialog {
@@ -366,21 +180,6 @@ fun invokerBarcodeError(context: Context): Dialog {
         WindowManager.LayoutParams.WRAP_CONTENT
     )
     return dialog
-}
-
-fun Boolean.onTrue(block: (et: TextInputEditText) -> Unit, et: TextInputEditText): Boolean {
-    if (this) block(et)
-    return this
-}
-
-fun Boolean.nextEvaluation(
-    block: (et: TextInputEditText) -> Boolean,
-    et: TextInputEditText
-): Boolean {
-    if (!block(et)) {
-        return false
-    }
-    return this
 }
 
 fun Parcel.writeBooleanMe(flag: Boolean?) {
@@ -459,18 +258,17 @@ fun changeDateFormat(dateStr: String, formatoFin: String, _formatoInit: String?)
     return formatter.format(parser.parse(dateStr))
 }
 
-fun getPlanType(c_planType: String): String {
-    // "example": "Prepaid (prepago)"
-    var n_planType: String = ""
-    if (c_planType == PLAN_TYPES.POSTPAGO.value) n_planType = "Postpaid (postpago)"
-    else if (c_planType == PLAN_TYPES.PREPAGO.value) n_planType = "Prepaid (prepago)"
-    else throw Resources.NotFoundException()
-    return n_planType
+fun getPlanType(plantType: String): String {
+    return when (plantType) {
+        PLAN_TYPES.POSTPAGO.value -> "Postpaid (postpago)"
+        PLAN_TYPES.PREPAGO.value -> "Prepaid (prepago)"
+        else -> throw Resources.NotFoundException()
+    }
 }
 
 fun verifyAvailableNetwork(activity: FragmentActivity): Boolean {
     val connectivityManager =
-        activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val networkInfo = connectivityManager.activeNetworkInfo
     return networkInfo != null && networkInfo.isConnected
 }

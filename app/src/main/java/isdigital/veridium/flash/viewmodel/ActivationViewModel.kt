@@ -10,12 +10,9 @@ import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.model.dto.ConsolidatedDataResponse
 import isdigital.veridium.flash.model.dto.VerifyIccidResponse
-import isdigital.veridium.flash.model.pojo.ActivationPOJO
 import isdigital.veridium.flash.service.component.DaggerActivationComponent
 import isdigital.veridium.flash.service.module.ActivationService
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.HashMap
 
 class ActivationViewModel(application: Application) : BaseViewModel(application) {
 
