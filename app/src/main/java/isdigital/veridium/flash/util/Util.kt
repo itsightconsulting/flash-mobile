@@ -82,6 +82,12 @@ enum class HANDS(val value: String) {
 }
 
 
+enum class ERROR_TYPES(val value: String) {
+    SERVER("Server"),
+    TOKEN("Token"),
+    INTERNO("Interno")
+}
+
 val documentTypes: HashMap<Int, String> = hashMapOf(
     1 to "RUC",
     2 to "DNI",
@@ -473,4 +479,20 @@ fun verifyAvailableNetwork(activity: FragmentActivity): Boolean {
         activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val networkInfo = connectivityManager.activeNetworkInfo
     return networkInfo != null && networkInfo.isConnected
+}
+
+fun manageCode(code: String): String {
+    var errorType = ""
+    if (code == "1111111111" || code == "2222222222" || code == "2050001001" || code == "2050001002") {
+        // error del servidor HTTP estado 500
+        errorType = ERROR_TYPES.SERVER.value
+    } else if (code == "0040400000" || code == "0044000000" || code == "0040100000") {
+        // error del servidor HTTP estado 400 Token
+        // REFRESH TOKEN
+        errorType = ERROR_TYPES.TOKEN.value
+    } else if (code == "2040001001" || code == "2040001002" || code == "2040401001") {
+        // error del servidor HTTP estado 400
+        errorType = ERROR_TYPES.INTERNO.value
+    }
+    return errorType
 }

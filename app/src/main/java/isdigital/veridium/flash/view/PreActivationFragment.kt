@@ -83,6 +83,13 @@ class PreActivationFragment : Fragment() {
             loadError?.let {
                 if (loadError) {
                     orderViewModel.loadError.value = false
+
+                    if (orderViewModel.refreshToken.value!!) {
+                        // ACTUALIZAR TOKEN
+                        // ACTUALIZAR CANT PARA CONTROLAR LLAMADAS
+
+                    }
+
                     hideSpinner(activity)
                     this.view?.visibility = View.VISIBLE
 
@@ -96,19 +103,6 @@ class PreActivationFragment : Fragment() {
                             message = "Sin conexión",
                             duration = Snackbar.LENGTH_LONG
                         )
-
-                    /*
-                    Toast.makeText(
-                        FlashApplication.appContext,
-                        orderViewModel.errorMessage,
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                    val action =
-                        PreActivationFragmentDirections.actionPreActivationFragmentToFormFragment()
-                    findNavController().navigate(action)
-                    */
-
                 }
             }
         })

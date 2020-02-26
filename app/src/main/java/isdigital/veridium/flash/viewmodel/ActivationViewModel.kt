@@ -1,6 +1,7 @@
 package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -8,11 +9,22 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
+import isdigital.veridium.flash.api.TokenApi
+import isdigital.veridium.flash.configuration.ServiceManager
 import isdigital.veridium.flash.model.dto.ConsolidatedDataResponse
+import isdigital.veridium.flash.model.dto.Token
 import isdigital.veridium.flash.model.dto.VerifyIccidResponse
+import isdigital.veridium.flash.model.generic.ApiResponse
 import isdigital.veridium.flash.model.pojo.ActivationPOJO
+import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.service.component.DaggerActivationComponent
 import isdigital.veridium.flash.service.module.ActivationService
+import isdigital.veridium.flash.util.API_PASSWORD
+import isdigital.veridium.flash.util.API_USERNAME
+import isdigital.veridium.flash.util.ERROR_TYPES
+import isdigital.veridium.flash.util.manageCode
+import retrofit2.Call
+import retrofit2.Response
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.HashMap
@@ -42,15 +54,23 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<ConsolidatedDataResponse>() {
                     override fun onSuccess(t: ConsolidatedDataResponse) {
-                        val success: Boolean = t.status == 0
+                        //val success: Boolean = t.status == 0
+                        val success: Boolean = (t.status == 0 && t.code == "0000000000")
                         if (success) {
                             formError.value = false
                             loading.value = true
                         } else {
+                            val errorType = manageCode(t.code)
+                            if (errorType == ERROR_TYPES.TOKEN.value) {
+                                errorMessage = t.message
+                            } else {
+                                errorMessage = t.message
+                            }
                             formError.value = true
                             loading.value = true
                         }
                     }
+
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
                         formError.value = true
@@ -82,6 +102,34 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                 }
             }
         ))
+    }
+
+    fun auth() {
+        val bodyToken = HashMap<String, String>()
+        bodyToken["username"] = API_USERNAME
+        bodyToken["password"] = API_PASSWORD
+
+        ServiceManager().createService(TokenApi::class.java).getToken(bodyToken).enqueue(
+            object : retrofit2.Callback<ApiResponse<Token>> {
+                override fun onFailure(call: Call<ApiResponse<Token>>, t: Throwable) {
+                    var mensaje = "Obtención del token fallida"
+                    //if (!verifyAvailableNetwork())
+                    //mensaje = "Sin conexión"
+
+                    //Toast.makeText(
+                    //  applicationContext,
+                    //mensaje,
+                    //Toast.LENGTH_LONG
+                    //).show()
+                }
+
+                override fun onResponse(
+                    call: Call<ApiResponse<Token>>,
+                    response: Response<ApiResponse<Token>>
+                ) {
+                    //UserPrefs.setApiToken(applicationContext, response.body()!!.data.token)
+                }
+            })
     }
 
     override fun onCleared() {

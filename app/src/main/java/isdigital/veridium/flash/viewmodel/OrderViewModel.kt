@@ -12,6 +12,8 @@ import isdigital.veridium.flash.model.pojo.ActivationPOJO
 import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.service.component.DaggerOrderComponent
 import isdigital.veridium.flash.service.module.OrderService
+import isdigital.veridium.flash.util.ERROR_TYPES
+import isdigital.veridium.flash.util.manageCode
 import isdigital.veridium.flash.util.verifyAvailableNetwork
 import isdigital.veridium.flash.view.MainActivity
 import javax.inject.Inject
@@ -28,6 +30,8 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
     val loadError = MutableLiveData<Boolean>()
     var userHasOrders: Boolean = false
     var errorMessage: String = ""
+    var refreshToken = MutableLiveData<Boolean>()
+    var cantRefreshToken: Int = 0
 
 
     init {
@@ -58,29 +62,24 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                                 "Has alcanzado las 5 activaciones por DNI. Ingresa un DNI diferente"
                         }
                     } else if (t.status == 2) {
-                        if (t.code == "1111111111" || t.code == "2222222222" || t.code == "2050001001" || t.code == "2050001002") {
-                            // error del servidor HTTP estado 500
-                            errorMessage = t.message
-                        } else if (t.code == "0040400000" || t.code == "0044000000" || t.code == "0040100000") {
-                            // error del servidor HTTP estado 400 Token
-                            // REFRESH TOKEN
-
-                            errorMessage = t.message
-                        } else if (t.code == "2040001001" || t.code == "2040001002" || t.code == "2040401001") {
-                            // error del servidor HTTP estado 400
+                        val errorType = manageCode(t.code)
+                        if (errorType == ERROR_TYPES.TOKEN.value) {
+                            cantRefreshToken += 1
+                            refreshToken.value = true
+                        } else {
                             errorMessage = t.message
                         }
                         estado = true;
                     }
 
-
+/*
                     if (dni.startsWith("44")) {
                         estado = false
                         userHasOrders = false
                         loading.value = true
                         loadError.value = false
                     }
-
+ */
                     if (estado) {
                         loadError.value = estado
                         loading.value = false

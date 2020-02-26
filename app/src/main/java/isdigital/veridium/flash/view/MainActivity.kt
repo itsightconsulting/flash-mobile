@@ -15,6 +15,8 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -33,6 +35,7 @@ import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.util.API_PASSWORD
 import isdigital.veridium.flash.util.API_USERNAME
 import isdigital.veridium.flash.util.invokerQuitDialog
+import isdigital.veridium.flash.viewmodel.ActivationViewModel
 import kotlinx.android.synthetic.main.navigation_activity.*
 import retrofit2.Call
 import retrofit2.Response
@@ -41,6 +44,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var activationViewModel: ActivationViewModel
     //    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private val toolbarTitleParams: LinearLayout.LayoutParams =
         LinearLayout.LayoutParams(
@@ -54,30 +58,8 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        val bodyToken = HashMap<String, String>()
-        bodyToken["username"] = API_USERNAME
-        bodyToken["password"] = API_PASSWORD
-        ServiceManager().createService(TokenApi::class.java).getToken(bodyToken).enqueue(
-            object : retrofit2.Callback<ApiResponse<Token>> {
-                override fun onFailure(call: Call<ApiResponse<Token>>, t: Throwable) {
-                    var mensaje = "Obtención del token fallida"
-                    if (!verifyAvailableNetwork())
-                        mensaje = "Sin conexión"
-
-                    Toast.makeText(
-                        applicationContext,
-                        mensaje,
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
-                override fun onResponse(
-                    call: Call<ApiResponse<Token>>,
-                    response: Response<ApiResponse<Token>>
-                ) {
-                    UserPrefs.setApiToken(applicationContext, response.body()!!.data.token)
-                }
-            })
+        this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
+        activationViewModel.auth()
 
         // Obtain the FirebaseAnalytics instance.
 //        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -239,5 +221,16 @@ class MainActivity : AppCompatActivity() {
             this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
+    }
+
+    fun eventListeners() {
+        activationViewModel.loading.observe(this, Observer { loading ->
+            loading?.let {
+                if (it) {
+
+                }
+            }
+
+        })
     }
 }
