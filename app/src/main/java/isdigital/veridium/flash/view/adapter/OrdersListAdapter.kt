@@ -17,6 +17,9 @@ class OrdersListAdapter(
     , private val itemClickListener: RecyclerViewOnItemClickListener<OrderInformationArgs>
 ) : RecyclerView.Adapter<OrdersListAdapter.ContactViewHolder>() {
 
+    private val hourFormat = "HH"
+    private val hourMinuteFormat = "HH:mm"
+
     private val resources = FlashApplication.appContext.resources
 
     fun updateordersList(newordersList: List<OrderInformationArgs>) {
@@ -47,14 +50,14 @@ class OrdersListAdapter(
         )
 
         val orderDateArr = orderDate.split(" ")
-        val horas = changeDateFormat(orderDateArr[1], "HH", "HH:mm").toInt()
+        val horas = changeDateFormat(orderDateArr[1], hourFormat, hourMinuteFormat).toInt()
         var formatoAMPM = ""
         if (horas in 0..11)
             formatoAMPM = " AM"
         else if (horas in 12..24)
             formatoAMPM = " PM"
 
-        holder.view.orderDate.text = orderDateArr[0] + " a las " + orderDateArr[1] + formatoAMPM
+        holder.view.orderDate.text = "${orderDateArr[0]} a las ${orderDateArr[1]} $formatoAMPM"
         val ordersList = ordersList[position]
         holder.bind(ordersList, itemClickListener)
     }
