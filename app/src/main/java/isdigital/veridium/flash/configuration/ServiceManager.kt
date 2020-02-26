@@ -97,6 +97,5 @@ class ServiceManager {
                     .build()
                 chain.proceed(newRequest)
             }.build()
-        //return OkHttpClient.Builder().addInterceptor(CustomRequestInterceptor()).build()
     }
 }

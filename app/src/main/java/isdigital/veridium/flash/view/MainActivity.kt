@@ -8,6 +8,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -15,6 +16,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -91,6 +93,7 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBar(navController, appBarConfiguration)
 
+
         navController.addOnDestinationChangedListener { _, dest, _ ->
 
             toolbarTitleParams.setMargins(-(aproxToolbarTitleLeftMargin), 0, 0, 0)
@@ -150,11 +153,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
+        if(transitionerLayout.isVisible){
+            return false
+        }
         return findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.preActivationFragment) {
+            if(transitionerLayout.isVisible){
+                return true
+            }
+
             val quitDialog = invokerQuitDialog(this)
             quitDialog.show()
 

@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class BiometricViewModel : ViewModel() {
 
-    private val tempHostName = "AAA111BBB222CCC333"
+    private val tempHostName = ""
 
     @Inject
     lateinit var api: BiometricService

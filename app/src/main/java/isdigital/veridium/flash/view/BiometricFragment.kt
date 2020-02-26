@@ -139,10 +139,6 @@ class BiometricFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-//        imgLeftHand.setColorFilter(
-//            ContextCompat.getColor(context!!, R.color.black),
-//            PorterDuff.Mode.SRC_IN
-//        )
     }
 
 
@@ -294,7 +290,7 @@ class BiometricFragment : Fragment() {
 
                     val jsonInSolutions = HashMap<String, String>()
 
-                    jsonInSolutions["hostName"] = "AAA111BBB222CCC333"
+                    jsonInSolutions["hostName"] = ""
                     jsonInSolutions["dniCliente"] = UserPrefs.getUserDni(context!!)!!
                     jsonInSolutions["rawBase64"] =
                         FingerImpressionImage.getString("BinaryBase64ObjectRAW")
@@ -349,7 +345,7 @@ class BiometricFragment : Fragment() {
 
                         hideSpinner(this.activity)
                         this.view?.csSnackbar(
-                            message = "El proceso de validación ha fallado, intentelo nuevamente.",
+                            message = "⚠️ El proceso de validación ha fallado, inténtelo nuevamente.",
                             duration = Snackbar.LENGTH_LONG
                         )
                     }

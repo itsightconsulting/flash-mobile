@@ -18,7 +18,7 @@ val API_PROFILE = PROFILES.DEV_WORK.name
 
 val API_BASE_URL = getAPIBaseURLByProfile(API_PROFILE)
 
-const val GENERIC_ERROR_MESSAGE = "Estamos teniendo incovenientes. Intentelo nuevamente más tarde"
+const val GENERIC_ERROR_MESSAGE = "Estamos teniendo incovenientes. Inténtelo nuevamente más tarde"
 
 
 const val API_BASE = "https://services.insolutions.pe"
