@@ -49,6 +49,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
             ).subscribeWith(object : DisposableSingleObserver<ResponseVerifyDNI>() {
                 override fun onSuccess(t: ResponseVerifyDNI) {
                     var estado: Boolean = false;
+                    refreshToken.value = false;
 
                     if (t.status == 0 && t.code == "0000000000") {
                         if (t.data.count() < 6) {
@@ -72,14 +73,14 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                         estado = true;
                     }
 
-/*
+
                     if (dni.startsWith("44")) {
                         estado = false
                         userHasOrders = false
                         loading.value = true
                         loadError.value = false
                     }
- */
+
                     if (estado) {
                         loadError.value = estado
                         loading.value = false

@@ -40,6 +40,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     val loadError = MutableLiveData<Boolean>()
     val formError = MutableLiveData<Boolean>()
     var errorMessage: String = ""
+    var api_token: String = ""
 
     init {
         DaggerActivationComponent.create().inject(this)
@@ -112,22 +113,18 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
         ServiceManager().createService(TokenApi::class.java).getToken(bodyToken).enqueue(
             object : retrofit2.Callback<ApiResponse<Token>> {
                 override fun onFailure(call: Call<ApiResponse<Token>>, t: Throwable) {
-                    var mensaje = "Obtención del token fallida"
-                    //if (!verifyAvailableNetwork())
-                    //mensaje = "Sin conexión"
-
-                    //Toast.makeText(
-                    //  applicationContext,
-                    //mensaje,
-                    //Toast.LENGTH_LONG
-                    //).show()
+                    errorMessage = "Obtención del token fallida"
+                    loading.value = true;
+                    loadError.value = true;
                 }
 
                 override fun onResponse(
                     call: Call<ApiResponse<Token>>,
                     response: Response<ApiResponse<Token>>
                 ) {
-                    //UserPrefs.setApiToken(applicationContext, response.body()!!.data.token)
+                    api_token = response.body()!!.data.token
+                    loadError.value = false;
+                    loading.value = true;
                 }
             })
     }

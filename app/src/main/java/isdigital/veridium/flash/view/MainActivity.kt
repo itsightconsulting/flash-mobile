@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
 
         super.onCreate(savedInstanceState)
-
         this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
+        eventListeners()
         activationViewModel.auth()
 
         // Obtain the FirebaseAnalytics instance.
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        if(transitionerLayout.isVisible){
+        if (transitionerLayout.isVisible) {
             return false
         }
         return findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.preActivationFragment) {
-            if(transitionerLayout.isVisible){
+            if (transitionerLayout.isVisible) {
                 return true
             }
 
@@ -237,6 +237,18 @@ class MainActivity : AppCompatActivity() {
         activationViewModel.loading.observe(this, Observer { loading ->
             loading?.let {
                 if (it) {
+                    if (activationViewModel.loadError.value!!) {
+
+                        if (!verifyAvailableNetwork())
+                            activationViewModel.errorMessage = "Sin conexión"
+
+                        Toast.makeText(
+                            applicationContext,
+                            activationViewModel.errorMessage,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else
+                        UserPrefs.setApiToken(applicationContext, activationViewModel.api_token)
 
                 }
             }
