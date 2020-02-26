@@ -1,28 +1,25 @@
 package isdigital.veridium.flash.view
 
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.model.args.DataResponseVerifyDNIArgs
+import isdigital.veridium.flash.preferences.UserPrefs
+import isdigital.veridium.flash.util.*
 import isdigital.veridium.flash.validator.MasterValidation
 import isdigital.veridium.flash.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.pre_activation_fragment.*
-import isdigital.veridium.flash.FlashApplication
-import isdigital.veridium.flash.preferences.UserPrefs
-import isdigital.veridium.flash.util.*
 
 
 /**
