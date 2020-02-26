@@ -250,52 +250,56 @@ class BiometricFragment : Fragment() {
                     val tokener = JSONTokener(resultStr)
                     result = JSONObject(tokener)
 
-                    val SCALE085 = result.getJSONObject("SCALE085")
-                    val Fingerprints = SCALE085.getJSONArray("Fingerprints")
-                    var FingerprintsPositionCode = Fingerprints.getJSONObject(0)
-                    var FingerPositionCode = FingerprintsPositionCode.getInt("FingerPositionCode")
+                    val scale085 = result.getJSONObject("SCALE085")
+                    val fingerprints = scale085.getJSONArray("Fingerprints")
+                    var fingerprintsPositionCode = fingerprints.getJSONObject(0)
+                    var fingerPositionCode = fingerprintsPositionCode.getInt("FingerPositionCode")
 
                     var posicionBusqueda = 0
 
-                    if (FingerPositionCode == 7) {
-                        when (fingers.left) {
-                            7 -> posicionBusqueda = 0
-                            8 -> posicionBusqueda = 1
-                            9 -> posicionBusqueda = 2
-                            10 -> posicionBusqueda = 3
+                    when (fingerPositionCode) {
+                        7 -> {
+                            when (fingers.left) {
+                                7 -> posicionBusqueda = 0
+                                8 -> posicionBusqueda = 1
+                                9 -> posicionBusqueda = 2
+                                10 -> posicionBusqueda = 3
+                            }
+
+                            fingerprintsPositionCode = fingerprints.getJSONObject(posicionBusqueda)
+                            fingerPositionCode = fingerprintsPositionCode.getInt("FingerPositionCode")
+
                         }
+                        2 -> {
+                            when (fingers.right) {
+                                2 -> posicionBusqueda = 0
+                                3 -> posicionBusqueda = 1
+                                4 -> posicionBusqueda = 2
+                                5 -> posicionBusqueda = 3
+                            }
 
-                        FingerprintsPositionCode = Fingerprints.getJSONObject(posicionBusqueda)
-                        FingerPositionCode = FingerprintsPositionCode.getInt("FingerPositionCode")
-
-                    } else if (FingerPositionCode == 2) {
-                        when (fingers.right) {
-                            2 -> posicionBusqueda = 0
-                            3 -> posicionBusqueda = 1
-                            4 -> posicionBusqueda = 2
-                            5 -> posicionBusqueda = 3
+                            fingerprintsPositionCode = fingerprints.getJSONObject(posicionBusqueda)
+                            fingerPositionCode = fingerprintsPositionCode.getInt("FingerPositionCode")
                         }
-
-                        FingerprintsPositionCode = Fingerprints.getJSONObject(posicionBusqueda)
-                        FingerPositionCode = FingerprintsPositionCode.getInt("FingerPositionCode")
-                    } else {
-                        // Para el caso de los pulgares, por default coge el pulgar derecho
-                        posicionBusqueda = 0
-                        FingerprintsPositionCode = Fingerprints.getJSONObject(posicionBusqueda)
-                        FingerPositionCode = FingerprintsPositionCode.getInt("FingerPositionCode")
+                        else -> {
+                            // Para el caso de los pulgares, por default coge el pulgar derecho
+                            posicionBusqueda = 0
+                            fingerprintsPositionCode = fingerprints.getJSONObject(posicionBusqueda)
+                            fingerPositionCode = fingerprintsPositionCode.getInt("FingerPositionCode")
+                        }
                     }
 
-                    val FingerImpressionImage =
-                        FingerprintsPositionCode.getJSONObject("FingerImpressionImage")
+                    val fingerImpressionImage =
+                        fingerprintsPositionCode.getJSONObject("FingerImpressionImage")
 
                     val jsonInSolutions = HashMap<String, String>()
 
                     jsonInSolutions["hostName"] = ""
                     jsonInSolutions["dniCliente"] = UserPrefs.getUserDni(context!!)!!
                     jsonInSolutions["rawBase64"] =
-                        FingerImpressionImage.getString("BinaryBase64ObjectRAW")
-                    jsonInSolutions["rawHeight"] = FingerImpressionImage.getString("Height")
-                    jsonInSolutions["rawWidth"] = FingerImpressionImage.getString("Width")
+                        fingerImpressionImage.getString("BinaryBase64ObjectRAW")
+                    jsonInSolutions["rawHeight"] = fingerImpressionImage.getString("Height")
+                    jsonInSolutions["rawWidth"] = fingerImpressionImage.getString("Width")
                     this.biometricViewModel.validateVeridiumFingerprints(jsonInSolutions)
 
                 } catch (exception: Exception) {

@@ -77,9 +77,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Pulgar izquierdo"
             android:textAlignment="center"
-            tools:text="Pulgar izquierdo"
+            tools:text="@string/temp_left_finger"
             style="@style/text_description_bold"
             />
         <TextView
@@ -87,9 +86,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Pulgar derecho"
             android:textAlignment="center"
-            tools:text="Pulgar derecho"
+            tools:text="@string/temp_right_finger"
             style="@style/text_description_bold"
             />
     </LinearLayout>

@@ -18,13 +18,13 @@ class Validations(
     private val textInputLayout =
         (TextInputEditText ?: autoCompleteTextView!!).parent.parent as TextInputLayout
     val value = (TextInputEditText ?: autoCompleteTextView!!).text.toString()
-    var valid: Boolean = true
+    private var valid: Boolean = true
     val list: ArrayList<Rule> = ArrayList()
-    val editText = TextInputEditText ?: autoCompleteTextView!!
-    val master = masterValidation
+    private val editText = TextInputEditText ?: autoCompleteTextView!!
+    private val master = masterValidation
     val id = (TextInputEditText ?: autoCompleteTextView!!).id
-    val preCallback: (() -> Boolean)? = highPriorityCallback
-    val isAutoCompleteTextView = autoCompleteTextView != null
+    private val preCallback: (() -> Boolean)? = highPriorityCallback
+    private val isAutoCompleteTextView = autoCompleteTextView != null
 
     private var minLen: Int = 0
     private var min: Int = 0
@@ -110,7 +110,7 @@ class Validations(
         return this
     }
 
-    fun flValidateEmail(): Boolean {
+    private fun flValidateEmail(): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(editText.text.toString()).matches()
     }
 
@@ -153,11 +153,11 @@ class Validations(
         return this
     }
 
-    fun flValidateMinLength(): Boolean {
+    private fun flValidateMinLength(): Boolean {
         return editText.text.toString().isBlank() || editText.text.toString().length >= this.minLen
     }
 
-    fun flValidateMaxLength(): Boolean {
+    private fun flValidateMaxLength(): Boolean {
         return editText.text.toString().isBlank() || editText.text.toString().length <= this.maxLen
     }
 
@@ -180,7 +180,7 @@ class Validations(
         this.min = min
         this.list.add(
             Rule(
-                callback = ::flmin,
+                callback = ::flMin,
                 preReqCallback = preCallback,
                 flMsg = "Debe ingresar un valor mayor o igual a: ${"%.2f".format(this.min.toDouble())}",
                 ruleId = RULESVAL.REQUIRED.value
@@ -189,15 +189,15 @@ class Validations(
         return this
     }
 
-    fun flmin(): Boolean {
+    private fun flMin(): Boolean {
         return editText.text.toString().isBlank() || editText.text.toString().toDouble() >= this.min
     }
 
-    fun flRequired(): Boolean {
+    private fun flRequired(): Boolean {
         return editText.text.toString().trim().isNotEmpty()
     }
 
-    fun flStartWith(): Boolean {
+    private fun flStartWith(): Boolean {
         return editText.text.toString().startsWith(this.startWord)
     }
 
@@ -214,7 +214,7 @@ class Validations(
         return this
     }
 
-    fun flEqualsTo(etText: TextInputEditText): Boolean {
+    private fun flEqualsTo(etText: TextInputEditText): Boolean {
         return this.editText.text.toString() == etText.text.toString()
     }
 

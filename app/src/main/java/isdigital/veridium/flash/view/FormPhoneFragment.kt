@@ -56,8 +56,8 @@ class FormPhoneFragment : Fragment() {
                 .required("Campo obligatorio. Por favor selecciona un tipo de plan")
                 .active()
 
-        val OperadorList = arrayOf("Bitel", "Claro", "Cuy", "Entel", "Movistar")
-        val TipoPlanList = arrayOf(PLAN_TYPES.POSTPAGO.value, PLAN_TYPES.PREPAGO.value)
+        val operadorList = arrayOf("Bitel", "Claro", "Cuy", "Entel", "Movistar")
+        val tipoPlanList = arrayOf(PLAN_TYPES.POSTPAGO.value, PLAN_TYPES.PREPAGO.value)
 
         oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation.currentCompany != "" && oActivation.planType != "") {
@@ -67,11 +67,11 @@ class FormPhoneFragment : Fragment() {
             acPlanType.setText(oActivation.planType)
         }
 
-        setAdapterToElement(OperadorList, acCurrentCompany)
-        setAdapterToElement(TipoPlanList, acPlanType)
+        setAdapterToElement(operadorList, acCurrentCompany)
+        setAdapterToElement(tipoPlanList, acPlanType)
 
         btn_continue.setOnClickListener {
-            ClickListener_for_btnContinue()
+            clickListenerForBtnContinue()
         }
     }
 
@@ -94,12 +94,12 @@ class FormPhoneFragment : Fragment() {
         elemento.setAdapter(adapter)
     }
 
-    private fun ClickListener_for_btnContinue() {
+    private fun clickListenerForBtnContinue() {
 
         if (this.validatorMatrix.checkValidity()) {
             if (oActivation == null) throw  Resources.NotFoundException()
 
-            val ActivationPOJO = ActivationPOJO(
+            val activationPOJO = ActivationPOJO(
                 oActivation.dni,
                 oActivation.name,
                 oActivation.lastName,
@@ -111,7 +111,7 @@ class FormPhoneFragment : Fragment() {
                 acCurrentCompany.text.toString().trim(),
                 acPlanType.text.toString().trim()
             )
-            UserPrefs.putActivation(FlashApplication.appContext, ActivationPOJO)
+            UserPrefs.putActivation(FlashApplication.appContext, activationPOJO)
 
             val action =
                 FormPhoneFragmentDirections.actionFormPhoneFragmentToFormConfirmFragment()

@@ -14,8 +14,6 @@ import isdigital.veridium.flash.service.component.DaggerOrderComponent
 import isdigital.veridium.flash.service.module.OrderService
 import isdigital.veridium.flash.util.ERROR_TYPES
 import isdigital.veridium.flash.util.manageCode
-import isdigital.veridium.flash.util.verifyAvailableNetwork
-import isdigital.veridium.flash.view.MainActivity
 import javax.inject.Inject
 
 class OrderViewModel(application: Application) : BaseViewModel(application) {
@@ -48,7 +46,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 AndroidSchedulers.mainThread()
             ).subscribeWith(object : DisposableSingleObserver<ResponseVerifyDNI>() {
                 override fun onSuccess(t: ResponseVerifyDNI) {
-                    var estado: Boolean = false;
+                    var estado = false
                     refreshToken.value = false;
 
                     if (t.status == 0 && t.code == "0000000000") {
@@ -70,7 +68,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                         } else {
                             errorMessage = t.message
                         }
-                        estado = true;
+                        estado = true
                     }
 
 

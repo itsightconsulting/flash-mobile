@@ -52,7 +52,7 @@ class ServiceManager {
      * @param <T>     type of the service.
      * @return the created services implementation.
     </T> */
-    fun <T> createService(clazz: Class<T>, httpUrl: HttpUrl): T {
+    private fun <T> createService(clazz: Class<T>, httpUrl: HttpUrl): T {
         val retrofit = getRetrofit(httpUrl)
         return retrofit.create(clazz)
     }

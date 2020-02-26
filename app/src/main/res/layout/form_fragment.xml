@@ -111,7 +111,7 @@
                     android:clickable="true"
                     android:drawableEnd="@drawable/ic_act_app_calendar"
                     android:focusable="false"
-                    android:hint="dd/mm/yy"
+                    android:hint="@string/date_format"
                     android:inputType="date" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -138,7 +138,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     style="@style/flash_edit_text"
-                    android:hint="\@"
+                    android:hint="@string/email_wildcard"
                     android:inputType="textEmailAddress"
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>

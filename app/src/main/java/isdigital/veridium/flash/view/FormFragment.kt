@@ -90,11 +90,11 @@ class FormFragment : Fragment() {
 
         // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
         etDateOfBirth.setOnClickListener {
-            BuildDatePickerDialog(year, month, day, minDate)
+            buildDatePickerDialog(year, month, day, minDate)
         }
 
         btn_continue.setOnClickListener {
-            ClickListener_for_btnContinue()
+            clickListenerForBtnContinue()
         }
 
 /*this.view?.let {
@@ -107,7 +107,7 @@ class FormFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun BuildDatePickerDialog(year: Int, month: Int, day: Int, minDate: Date) {
+    private fun buildDatePickerDialog(year: Int, month: Int, day: Int, minDate: Date) {
         val dpd = DatePickerDialog(
             context!!,
             DatePickerDialog.OnDateSetListener { view, nYear, nMonth, nDayOfMonth ->
@@ -125,8 +125,8 @@ class FormFragment : Fragment() {
         dpd.show()
     }
 
-    private fun ClickListener_for_btnContinue() {
-        var estado: Boolean? = null;
+    private fun clickListenerForBtnContinue() {
+        var estado: Boolean? = null
         if (rbDoNotWantToPort.isChecked) estado = false
         if (rbWantToPort.isChecked) estado = true
         if (estado == null)
@@ -154,7 +154,7 @@ class FormFragment : Fragment() {
         val dni: String? = UserPrefs.getUserDni(FlashApplication.appContext)
         // val fecha: String = etDateOfBirth.text.toString()
         // val fechaFormat: String = changeDateFormat(fecha, "MM/dd/yyyy", null)
-        val ActivationPOJO = ActivationPOJO(
+        val activationPOJO = ActivationPOJO(
             dni!!,
             etName.text.toString().trim(),
             etLastName.text.toString().trim(),
@@ -166,6 +166,6 @@ class FormFragment : Fragment() {
             oActivation.currentCompany,
             oActivation.planType
         )
-        UserPrefs.putActivation(FlashApplication.appContext, ActivationPOJO)
+        UserPrefs.putActivation(FlashApplication.appContext, activationPOJO)
     }
 }

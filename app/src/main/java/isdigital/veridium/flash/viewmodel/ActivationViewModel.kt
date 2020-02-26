@@ -1,7 +1,6 @@
 package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,8 +14,6 @@ import isdigital.veridium.flash.model.dto.ConsolidatedDataResponse
 import isdigital.veridium.flash.model.dto.Token
 import isdigital.veridium.flash.model.dto.VerifyIccidResponse
 import isdigital.veridium.flash.model.generic.ApiResponse
-import isdigital.veridium.flash.model.pojo.ActivationPOJO
-import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.service.component.DaggerActivationComponent
 import isdigital.veridium.flash.service.module.ActivationService
 import isdigital.veridium.flash.util.API_PASSWORD
@@ -27,7 +24,6 @@ import retrofit2.Call
 import retrofit2.Response
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.HashMap
 
 class ActivationViewModel(application: Application) : BaseViewModel(application) {
 
@@ -71,7 +67,6 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                             loading.value = true
                         }
                     }
-
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
                         formError.value = true
