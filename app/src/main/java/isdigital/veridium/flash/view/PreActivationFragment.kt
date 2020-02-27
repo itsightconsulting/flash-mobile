@@ -18,6 +18,7 @@ import isdigital.veridium.flash.model.args.DataResponseVerifyDNIArgs
 import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.util.*
 import isdigital.veridium.flash.validator.MasterValidation
+import isdigital.veridium.flash.viewmodel.ActivationViewModel
 import isdigital.veridium.flash.viewmodel.OrderViewModel
 import kotlinx.android.synthetic.main.pre_activation_fragment.*
 
@@ -81,9 +82,13 @@ class PreActivationFragment : Fragment() {
                 if (loadError) {
                     orderViewModel.loadError.value = false
 
-                    if (orderViewModel.refreshToken.value!!) {
-                        // ACTUALIZAR TOKEN
-                        // ACTUALIZAR CANT PARA CONTROLAR LLAMADAS
+                    if (orderViewModel.refreshToken.value!! && orderViewModel.cantRefreshToken == 1) {
+
+                        val activationViewModel =
+                            ViewModelProviders.of(this).get(ActivationViewModel::class.java)
+                        activationViewModel.auth()
+                        orderViewModel.cantRefreshToken += 1
+                        orderViewModel.errorMessage = TOKEN_ERROR_MESSAGE
 
                     }
 

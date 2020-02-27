@@ -37,6 +37,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     val formError = MutableLiveData<Boolean>()
     var errorMessage: String = ""
     var api_token: String = ""
+    var cant_refresh_token: Int = 0
 
     init {
         DaggerActivationComponent.create().inject(this)
@@ -67,6 +68,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                             loading.value = true
                         }
                     }
+
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
                         formError.value = true
