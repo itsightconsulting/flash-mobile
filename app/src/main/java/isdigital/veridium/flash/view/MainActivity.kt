@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
@@ -25,6 +26,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.crashlytics.android.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
@@ -49,6 +51,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
+        Crashlytics.log("Testarazo ${System.nanoTime()}")
+        Crashlytics.logException(RuntimeException("Fake exception ${System.nanoTime()}"))
+        Crashlytics.log(Log.WARN, "art", "Testarazo art ${System.nanoTime()}")
+        Crashlytics.log(Log.DEBUG, "debug", "Testarazo debug ${System.nanoTime()}")
+
 
         super.onCreate(savedInstanceState)
         this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
