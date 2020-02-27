@@ -37,7 +37,7 @@ enum class RULESVAL(val value: Int) {
 
 enum class FORMSTATUS(val value: String) {
     COMPLETED("completed"),
-    REJECTICCD("rejected iccd"),
+    REJECTICCD("rejected iccid"),
     REJECTBIO("rejected bio")
 }
 

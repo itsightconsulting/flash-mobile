@@ -23,7 +23,6 @@ class PartnerData {
                 }
             }
 
-
             if (completed) {
                 body["formStatus"] = FORMSTATUS.COMPLETED.value
             } else {
