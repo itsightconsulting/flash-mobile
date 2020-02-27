@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                android:paddingLeft="22dp"
+                android:paddingStart="22dp"
                 android:text="@string/confirmr_your_information"
                 android:textAlignment="textStart" />
         </FrameLayout>
@@ -72,7 +72,7 @@
                     style="@style/fields_name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:text="@string/name" />
 
                 <TextView
@@ -80,7 +80,7 @@
                     style="@style/fields_name_resume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentEnd="true" />
 
             </LinearLayout>
 
@@ -99,7 +99,7 @@
                     style="@style/fields_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:text="@string/last_name" />
 
 
@@ -108,7 +108,7 @@
                     style="@style/fields_name_resume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentEnd="true" />
 
             </LinearLayout>
 
@@ -128,7 +128,7 @@
                     style="@style/fields_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:text="@string/dni" />
 
                 <TextView
@@ -136,7 +136,7 @@
                     style="@style/fields_name_resume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentEnd="true" />
 
             </LinearLayout>
 
@@ -155,7 +155,7 @@
                     style="@style/fields_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:width="110dp"
                     android:text="@string/date_of_birth" />
 
@@ -164,7 +164,7 @@
                     style="@style/fields_name_resume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentEnd="true" />
             </LinearLayout>
 
 
@@ -183,7 +183,7 @@
                     style="@style/fields_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:text="@string/email" />
 
                 <TextView
@@ -191,7 +191,7 @@
                     style="@style/fields_name_resume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentEnd="true" />
 
             </LinearLayout>
 
@@ -211,7 +211,7 @@
                     style="@style/fields_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:text="@string/sponsor_tid"
                     android:visibility="gone" />
 
@@ -220,7 +220,7 @@
                     style="@style/fields_name_resume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -240,7 +240,7 @@
                     style="@style/fields_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:text="@string/number_to_port"
                     android:visibility="gone" />
 
@@ -249,7 +249,7 @@
                     style="@style/fields_name_resume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -269,7 +269,7 @@
                     style="@style/fields_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:text="@string/mobile_operator"
                     android:visibility="gone" />
 
@@ -278,7 +278,7 @@
                     style="@style/fields_name_resume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:visibility="gone" />
             </LinearLayout>
 
@@ -299,7 +299,7 @@
                     style="@style/fields_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:text="@string/plan_type"
                     android:visibility="gone" />
 
@@ -308,7 +308,7 @@
                     style="@style/fields_name_resume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:visibility="gone" />
             </LinearLayout>
 
