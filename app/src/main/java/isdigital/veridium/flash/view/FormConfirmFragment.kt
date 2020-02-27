@@ -60,8 +60,10 @@ class FormConfirmFragment : Fragment() {
 
         tvName.text = tvName.text.toString() + resources.getString(R.string.label_colon)
         tvLastName.text = tvLastName.text.toString() + resources.getString(R.string.label_colon)
-        tvDateOfBirth.text = tvDateOfBirth.text.toString() + resources.getString(R.string.label_colon)
-        tvSponsorTeamId.text = tvSponsorTeamId.text.toString() + resources.getString(R.string.label_colon)
+        tvDateOfBirth.text =
+            tvDateOfBirth.text.toString() + resources.getString(R.string.label_colon)
+        tvSponsorTeamId.text =
+            tvSponsorTeamId.text.toString() + resources.getString(R.string.label_colon)
         tvPlanType.text = tvPlanType.text.toString() + resources.getString(R.string.label_colon)
 
 
@@ -93,5 +95,20 @@ class FormConfirmFragment : Fragment() {
             tvPlanTypeResumen.visibility = View.VISIBLE
             tvPlanTypeResumen.text = oActivation.planType
         }
+    }
+
+    private fun formatoPhoneNumber(phoneNumber: String): String {
+        var _phoneNumber = phoneNumber
+        var index: Int = 0
+        while (phoneNumber[index] != null) {
+            _phoneNumber = phoneNumber.substring(index, 2)
+            index++
+        }
+        if (phoneNumber.length == 9) {
+            _phoneNumber = phoneNumber.substring(0, 2) +
+                    " " + phoneNumber.substring(3, 5) +
+                    " " + phoneNumber.substring(6, 8)
+        }
+        return _phoneNumber
     }
 }

@@ -28,18 +28,10 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
-import isdigital.veridium.flash.api.TokenApi
-import isdigital.veridium.flash.configuration.ServiceManager
-import isdigital.veridium.flash.model.dto.Token
-import isdigital.veridium.flash.model.generic.ApiResponse
 import isdigital.veridium.flash.preferences.UserPrefs
-import isdigital.veridium.flash.util.API_PASSWORD
-import isdigital.veridium.flash.util.API_USERNAME
 import isdigital.veridium.flash.util.invokerQuitDialog
 import isdigital.veridium.flash.viewmodel.ActivationViewModel
 import kotlinx.android.synthetic.main.navigation_activity.*
-import retrofit2.Call
-import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
-        eventListeners()
+        eventListenersAuth()
         activationViewModel.auth()
 
         // Obtain the FirebaseAnalytics instance.
@@ -232,7 +224,7 @@ class MainActivity : AppCompatActivity() {
         return networkInfo != null && networkInfo.isConnected
     }
 
-    fun eventListeners() {
+    fun eventListenersAuth() {
         activationViewModel.loading.observe(this, Observer { loading ->
             loading?.let {
                 if (it) {

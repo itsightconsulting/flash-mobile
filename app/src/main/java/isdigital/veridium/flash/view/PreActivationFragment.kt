@@ -30,8 +30,8 @@ class PreActivationFragment : Fragment() {
 
     private lateinit var validatorMatrix: MasterValidation
     private lateinit var orderViewModel: OrderViewModel
-
-
+    private lateinit var activationViewModel: ActivationViewModel
+    private lateinit var mensajeError: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -82,29 +82,25 @@ class PreActivationFragment : Fragment() {
                 if (loadError) {
                     orderViewModel.loadError.value = false
 
-                    if (orderViewModel.refreshToken.value!! && orderViewModel.cantRefreshToken == 1) {
-
-                        val activationViewModel =
-                            ViewModelProviders.of(this).get(ActivationViewModel::class.java)
-                        activationViewModel.auth()
-                        orderViewModel.cantRefreshToken += 1
-                        orderViewModel.errorMessage = TOKEN_ERROR_MESSAGE
+                    if (orderViewModel.refreshToken.value!!) {
+                        if (orderViewModel.cantRefreshToken == 1) {
+                            this.activationViewModel =
+                                ViewModelProviders.of(this).get(ActivationViewModel::class.java)
+                            eventListenersAuth()
+                            this.activationViewModel.auth()
+                            orderViewModel.cantRefreshToken += 1
+                            orderViewModel.errorMessage = TOKEN_ERROR_MESSAGE
+                        } else
+                            orderViewModel.errorMessage = GENERIC_ERROR_MESSAGE
 
                     }
 
                     hideSpinner(activity)
                     this.view?.visibility = View.VISIBLE
-
-                    if (verifyAvailableNetwork(activity!!))
-                        this.view?.csSnackbar(
-                            message = orderViewModel.errorMessage,
-                            duration = Snackbar.LENGTH_LONG
-                        )
-                    else
-                        this.view?.csSnackbar(
-                            message = "Sin conexión",
-                            duration = Snackbar.LENGTH_LONG
-                        )
+                    this.view?.csSnackbar(
+                        message = orderViewModel.errorMessage,
+                        duration = Snackbar.LENGTH_LONG
+                    )
                 }
             }
         })
@@ -138,6 +134,31 @@ class PreActivationFragment : Fragment() {
                     }
                 }
             }
+        })
+    }
+
+    fun eventListenersAuth() {
+        activationViewModel.loading.observe(this, Observer { loading ->
+            loading?.let {
+                if (it) {
+                    if (activationViewModel.loadError.value!!) {
+
+                        if (!verifyAvailableNetwork(activity!!))
+                            activationViewModel.errorMessage = "Sin conexión"
+
+                        this.view?.csSnackbar(
+                            message = activationViewModel.errorMessage,
+                            duration = Snackbar.LENGTH_LONG
+                        )
+                    } else
+                        UserPrefs.setApiToken(
+                            FlashApplication.appContext,
+                            activationViewModel.api_token
+                        )
+
+                }
+            }
+
         })
     }
 }
