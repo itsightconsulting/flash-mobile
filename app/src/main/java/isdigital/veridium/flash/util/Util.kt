@@ -36,9 +36,9 @@ enum class RULESVAL(val value: Int) {
 }
 
 enum class FORMSTATUS(val value: String) {
-    COMPLETED("Completed"),
-    REJECTICCD("Rejected ICCD"),
-    REJECTBIO("Rejected BIO")
+    COMPLETED("completed"),
+    REJECTICCD("rejected iccd"),
+    REJECTBIO("rejected bio")
 }
 
 enum class PLAN_TYPES(val value: String) {
@@ -284,8 +284,8 @@ fun changeDateFormat(dateStr: String, formatoFin: String, _formatoInit: String?)
 
 fun getPlanType(plantType: String): String {
     return when (plantType) {
-        PLAN_TYPES.POSTPAGO.value -> "Postpaid (postpago)"
-        PLAN_TYPES.PREPAGO.value -> "Prepaid (prepago)"
+        PLAN_TYPES.POSTPAGO.value -> "Postpaid"
+        PLAN_TYPES.PREPAGO.value -> "Prepaid"
         else -> throw Resources.NotFoundException()
     }
 }

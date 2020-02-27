@@ -43,6 +43,8 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     }
 
     fun sendFormWithStatus(form: HashMap<String, String>) {
+        form["iccid"] = ""
+//        form["formId"] = ""
         loading.value = false
         disposable.add(
             activationService.saveActivationForm(
@@ -58,10 +60,10 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                             loading.value = true
                         } else {
                             val errorType = manageCode(t.code)
-                            if (errorType == ERROR_TYPES.TOKEN.value) {
-                                errorMessage = t.message
+                            errorMessage = if (errorType == ERROR_TYPES.TOKEN.value) {
+                                t.message
                             } else {
-                                errorMessage = t.message
+                                t.message
                             }
                             formError.value = true
                             loading.value = true
@@ -109,8 +111,8 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
             object : retrofit2.Callback<ApiResponse<Token>> {
                 override fun onFailure(call: Call<ApiResponse<Token>>, t: Throwable) {
                     errorMessage = "Obtención del token fallida"
-                    loading.value = true;
-                    loadError.value = true;
+                    loading.value = true
+                    loadError.value = true
                 }
 
                 override fun onResponse(
@@ -118,8 +120,8 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                     response: Response<ApiResponse<Token>>
                 ) {
                     api_token = response.body()!!.data.token
-                    loadError.value = false;
-                    loading.value = true;
+                    loadError.value = false
+                    loading.value = true
                 }
             })
     }

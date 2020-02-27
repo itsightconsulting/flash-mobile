@@ -68,7 +68,7 @@
             android:background="@color/white"
             android:backgroundTint="@color/white"
             android:shadowColor="@color/transparent"
-            android:text="Aceptar"
+            android:text="@string/btn_aceptar"
             android:textAlignment="center"
             android:textColor="@color/purple"
             android:textSize="18dp"

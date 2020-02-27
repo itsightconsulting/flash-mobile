@@ -31,7 +31,7 @@
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="-5dp"
+                    android:layout_marginStart="-5dp"
                     android:text="@string/flash_mobile_peru"
                     android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                     style="@style/pages_name"

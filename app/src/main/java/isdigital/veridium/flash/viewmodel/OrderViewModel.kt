@@ -47,7 +47,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
             ).subscribeWith(object : DisposableSingleObserver<ResponseVerifyDNI>() {
                 override fun onSuccess(t: ResponseVerifyDNI) {
                     var estado = false
-                    refreshToken.value = false;
+                    refreshToken.value = false
 
                     if (t.status == 0 && t.code == "0000000000") {
                         if (t.data.count() < 6) {

@@ -19,7 +19,7 @@
             style="@style/pages_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="32dp"
+            android:paddingStart="32dp"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:text="@string/term_and_conditions"

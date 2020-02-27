@@ -24,7 +24,7 @@
                 style="@style/pages_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="32dp"
+                android:paddingStart="32dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:text="@string/flash_activation_form_subtitle"
@@ -214,14 +214,14 @@
                     style="@style/fields_name_with_options"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
+                    android:layout_gravity="start"
                     android:layout_weight="1"
                     android:text="@string/who_refered_you" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
+                    android:layout_gravity="start"
                     android:layout_weight="1"
                     android:fontFamily="@font/gotham_light"
                     android:text="@string/optional"

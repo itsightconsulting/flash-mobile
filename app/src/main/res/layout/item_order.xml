@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.85"
         android:orientation="vertical"
-        android:layout_gravity="left"
-        android:paddingLeft="32dp">
+        android:layout_gravity="start"
+        android:paddingStart="32dp">
 
         <TextView
             android:id="@+id/orderType"
