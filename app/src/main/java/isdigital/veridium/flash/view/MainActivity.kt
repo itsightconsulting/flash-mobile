@@ -1,6 +1,5 @@
 package isdigital.veridium.flash.view
 
-//import com.google.firebase.analytics.FirebaseAnalytics
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -26,27 +25,21 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.firebase.analytics.FirebaseAnalytics
 import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
-import isdigital.veridium.flash.api.TokenApi
-import isdigital.veridium.flash.configuration.ServiceManager
-import isdigital.veridium.flash.model.dto.Token
-import isdigital.veridium.flash.model.generic.ApiResponse
 import isdigital.veridium.flash.preferences.UserPrefs
-import isdigital.veridium.flash.util.API_PASSWORD
-import isdigital.veridium.flash.util.API_USERNAME
 import isdigital.veridium.flash.util.invokerQuitDialog
 import isdigital.veridium.flash.viewmodel.ActivationViewModel
 import kotlinx.android.synthetic.main.navigation_activity.*
-import retrofit2.Call
-import retrofit2.Response
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var activationViewModel: ActivationViewModel
-    //    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private val toolbarTitleParams: LinearLayout.LayoutParams =
         LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -63,12 +56,12 @@ class MainActivity : AppCompatActivity() {
         activationViewModel.auth()
 
         // Obtain the FirebaseAnalytics instance.
-//        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-//        val bundle = Bundle()
-//        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, UUID.randomUUID().toString())
-//        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
-//        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, UUID.randomUUID().toString())
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "test")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         setContentView(R.layout.navigation_activity)
 
         //Load nav host fragment
