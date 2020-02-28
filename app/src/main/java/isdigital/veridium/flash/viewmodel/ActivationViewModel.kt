@@ -45,7 +45,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     }
 
     fun sendFormWithStatus(form: HashMap<String, String>) {
-        form["iccid"] = form["iccid"]!!.substring(0, form["iccid"]!!.length -1)
+        form["iccid"] = form["iccid"]!!.substring(0, form["iccid"]!!.length - 2)
 
         loading.value = false
         disposable.add(
@@ -90,8 +90,17 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
         ).observeOn(AndroidSchedulers.mainThread()).subscribeWith(
             object : DisposableSingleObserver<VerifyIccidResponse>() {
                 override fun onSuccess(t: VerifyIccidResponse) {
-                    loadError.value = false
-                    loading.value = true
+                    val success: Boolean = (t.status.toInt() == 0 && t.code == "0000000000")
+                    if (success) {
+                        loadError.value = false
+                        loading.value = true
+
+                    } else {
+                        loadError.value = true
+                        loading.value = true
+                        errorMessage =
+                            FlashApplication.appContext.resources.getString(R.string.api_generic_error)
+                    }
                 }
 
                 override fun onError(e: Throwable) {
