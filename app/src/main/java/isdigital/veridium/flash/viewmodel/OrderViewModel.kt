@@ -50,7 +50,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                     var estado = false
                     refreshToken.value = false
 
-                    if (t.status == 0 && t.code == "0000000000") {
+                    if (t.status == 0 && (t.code == "0000000000" || t.code == "2040401001")) {
                         if (t.data.maximumActivationsCompletedStateReached) {
                             estado = true
                             errorMessage =
@@ -71,16 +71,12 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                             errorMessage = t.message
 
                         estado = true
+                    } else {
+                        estado = true
+                        errorMessage = "Ocurrio, un error no esperado."
                     }
 
-/*
-                    if (dni.startsWith("44")) {
-                        estado = false
-                        userHasOrders = false
-                        loading.value = true
-                        loadError.value = false
-                    }
-*/
+
 
                     if (estado) {
                         loadError.value = estado

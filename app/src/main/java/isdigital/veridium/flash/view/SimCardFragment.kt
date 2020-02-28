@@ -118,7 +118,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                     if (formError) {
                         simcardError()
                     } else {
-                        if(success){
+                        if (success) {
                             return@let
                         }
                         success = true
@@ -259,11 +259,12 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         )
 
         tvParams2.setMargins(
-            96,
+            64,
             (context!!.resources.displayMetrics.heightPixels * 0.92).toInt(),
-            96,
-            15
+            64,
+            0
         )
+
         tv2.layoutParams = tvParams2
 
         tv2.setOnClickListener {
