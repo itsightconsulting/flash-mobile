@@ -1,7 +1,9 @@
 package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.crashlytics.android.Crashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -65,10 +67,12 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                             }
                             formError.value = true
                             loading.value = true
+                            sendToCrashlyticsFailRequestBody(form = form.toString())
                         }
                     }
 
                     override fun onError(e: Throwable) {
+                        sendToCrashlyticsFailRequestBody(form = form.toString())
                         e.printStackTrace()
                         formError.value = true
                         loading.value = true
@@ -121,17 +125,47 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                     errorMessage = "Obtención del token fallida"
                     loading.value = true
                     loadError.value = true
+                    sendToCrashlyticsTokenFail(errorMessage)
                 }
 
                 override fun onResponse(
                     call: Call<ApiResponse<Token>>,
                     response: Response<ApiResponse<Token>>
                 ) {
-                    api_token = response.body()!!.data.token
-                    loadError.value = false
-                    loading.value = true
+                    val body = response.body()
+                    if (body != null) {
+                        if (body.status == 0) {//success
+                            api_token = body.data.token
+                            loadError.value = false
+                            loading.value = true
+                        } else {
+                            errorMessage = "Obtención del token fallida"
+                            loadError.value = true
+                            loading.value = true
+                            sendToCrashlyticsTokenFail(body.toString())
+                        }
+                    } else {
+                        errorMessage = "Obtención del token fallida"
+                        sendToCrashlyticsTokenFail("Empty body when token endpoint was requested")
+                    }
                 }
             })
+    }
+
+    fun sendToCrashlyticsFailRequestBody(form: String) {
+        Crashlytics.logException(
+            RuntimeException(
+                "Method.sendFormWithStatus(form: HashMap<String, String>), ${System.nanoTime()}: $form"
+            )
+        )
+    }
+
+    fun sendToCrashlyticsTokenFail(response: String) {
+        Crashlytics.logException(
+            RuntimeException(
+                "Method.auth(), ${System.nanoTime()}: $response"
+            )
+        )
     }
 
     override fun onCleared() {

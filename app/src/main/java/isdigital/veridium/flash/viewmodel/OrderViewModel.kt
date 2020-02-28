@@ -2,6 +2,7 @@ package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.crashlytics.android.Crashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -63,6 +64,8 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                         }
 
                     } else if (t.status == 2) {
+                        sendToCrashlyticsFailResponseBody("$t")
+
                         val errorType = manageCode(t.code)
                         if (errorType == ERROR_TYPES.TOKEN.value) {
                             cantRefreshToken += 1
@@ -85,6 +88,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 }
 
                 override fun onError(e: Throwable) {
+                    sendToCrashlyticsFailResponseBody("DNI: $dni")
                     refreshToken.value = false
                     loadError.value = true
                     loading.value = false
@@ -94,6 +98,12 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
             })
         )
     }
+
+    fun sendToCrashlyticsFailResponseBody(response: String){
+        Crashlytics.logException(RuntimeException(
+            "Method.getAllByDni(dni: String), ${System.nanoTime()}: $response"))
+    }
+
 
     override fun onCleared() {
         super.onCleared()

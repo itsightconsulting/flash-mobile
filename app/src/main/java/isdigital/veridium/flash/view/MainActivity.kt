@@ -51,11 +51,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
-        Crashlytics.log("Testarazo ${System.nanoTime()}")
-        Crashlytics.logException(RuntimeException("Fake exception ${System.nanoTime()}"))
-        Crashlytics.log(Log.WARN, "art", "Testarazo art ${System.nanoTime()}")
-        Crashlytics.log(Log.DEBUG, "debug", "Testarazo debug ${System.nanoTime()}")
-
 
         super.onCreate(savedInstanceState)
         this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)

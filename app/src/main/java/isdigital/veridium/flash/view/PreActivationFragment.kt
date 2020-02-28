@@ -32,7 +32,7 @@ class PreActivationFragment : Fragment() {
     private lateinit var validatorMatrix: MasterValidation
     private lateinit var orderViewModel: OrderViewModel
     private lateinit var activationViewModel: ActivationViewModel
-    private lateinit var mensajeError: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -93,7 +93,6 @@ class PreActivationFragment : Fragment() {
                             orderViewModel.errorMessage = TOKEN_ERROR_MESSAGE
                         } else
                             orderViewModel.errorMessage = GENERIC_ERROR_MESSAGE
-
                     }
 
                     hideSpinner(activity)
