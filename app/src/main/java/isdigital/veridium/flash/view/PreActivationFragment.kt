@@ -156,7 +156,7 @@ class PreActivationFragment : Fragment() {
                             FlashApplication.appContext,
                             activationViewModel.api_token
                         )
-                        findNavController().navigate(R.id.preActivationFragment)
+                        //findNavController().navigate(R.id.preActivationFragment)
                     }
                 }
             }

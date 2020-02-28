@@ -13,6 +13,7 @@ import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.service.component.DaggerOrderComponent
 import isdigital.veridium.flash.service.module.OrderService
 import isdigital.veridium.flash.util.ERROR_TYPES
+import isdigital.veridium.flash.util.GENERIC_ERROR_MESSAGE
 import isdigital.veridium.flash.util.manageCode
 import javax.inject.Inject
 
@@ -50,35 +51,36 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                     refreshToken.value = false
 
                     if (t.status == 0 && t.code == "0000000000") {
-                        if (t.data.count() < 6) {
-                            userHasOrders = t.data.count() > 0
-                            lstOrder.value = t.data//.formsInformation
-                            loading.value = true
-                            loadError.value = false
-                        } else {
+                        if (t.data.maximumActivationsCompletedStateReached) {
                             estado = true
                             errorMessage =
                                 "Has alcanzado las 5 activaciones por DNI. Ingresa un DNI diferente"
+                        } else {
+                            userHasOrders = t.data.pendingActivations.count() > 0
+                            lstOrder.value = t.data.pendingActivations
+                            loading.value = true
+                            loadError.value = false
                         }
+
                     } else if (t.status == 2) {
                         val errorType = manageCode(t.code)
                         if (errorType == ERROR_TYPES.TOKEN.value) {
                             cantRefreshToken += 1
                             refreshToken.value = true
-                        } else {
+                        } else
                             errorMessage = t.message
-                        }
+
                         estado = true
                     }
 
-
+/*
                     if (dni.startsWith("44")) {
                         estado = false
                         userHasOrders = false
                         loading.value = true
                         loadError.value = false
                     }
-
+*/
 
                     if (estado) {
                         loadError.value = estado
@@ -87,9 +89,10 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 }
 
                 override fun onError(e: Throwable) {
+                    refreshToken.value = false
                     loadError.value = true
                     loading.value = false
-                    errorMessage = e.message.toString()
+                    errorMessage = GENERIC_ERROR_MESSAGE //e.message.toString()
                     // instanceHttpError(e).message
                 }
             })
