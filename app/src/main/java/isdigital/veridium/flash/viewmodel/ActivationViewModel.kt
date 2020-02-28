@@ -2,7 +2,6 @@ package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.crashlytics.android.Crashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -38,7 +37,6 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     val formError = MutableLiveData<Boolean>()
     var errorMessage: String = ""
     var api_token: String = ""
-    var cant_refresh_token: Int = 0
 
     init {
         DaggerActivationComponent.create().inject(this)

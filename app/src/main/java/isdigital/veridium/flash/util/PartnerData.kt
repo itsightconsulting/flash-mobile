@@ -18,7 +18,7 @@ class PartnerData {
             val body = HashMap<String, String>()
             val completed = passBarcode && passBiometric
             activation.formId?.let {
-                if(it.isNotBlank()){
+                if (it.isNotBlank()) {
                     body["formId"] = it
                 }
             }
@@ -56,7 +56,11 @@ class PartnerData {
             body["sponsorTeamId"] = activation.sponsorTeamId ?: ""
             body["phoneNumber"] = activation.phoneNumber ?: ""
             body["currentCompany"] = activation.currentCompany ?: ""
-            body["planType"] = activation.planType ?: ""
+            if (activation.planType.isNullOrEmpty()) {
+                body["planType"] = ""
+            } else {
+                body["planType"] = getPlanType(activation.planType!!)
+            }
 
             return body
         }
