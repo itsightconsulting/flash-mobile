@@ -8,7 +8,7 @@ import kotlin.collections.HashMap
 class PartnerData {
 
     companion object {
-        private const val DateTimeFormat = "yyyy-MM-dd HH-mm-ss"
+        private const val DateTimeFormat = "yyyy-MM-dd HH:mm:ss"
 
         fun formPreparation(
             activation: ActivationPOJO,
