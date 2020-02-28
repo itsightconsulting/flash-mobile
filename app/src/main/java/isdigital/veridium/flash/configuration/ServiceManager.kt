@@ -84,13 +84,12 @@ class ServiceManager {
 
 
     private fun createClient(): OkHttpClient {
-        val token =
-            PreferenceManager.getDefaultSharedPreferences(FlashApplication.appContext)
-                .getString("API_TOKEN", "")
 
         return OkHttpClient.Builder()
             .readTimeout(1, TimeUnit.MINUTES)
             .connectTimeout(1, TimeUnit.MINUTES).addInterceptor { chain ->
+                val token = PreferenceManager.getDefaultSharedPreferences(FlashApplication.appContext)
+                    .getString("API_TOKEN", "")
                 val newRequest = chain.request().newBuilder()
                     .addHeader("Authorization", "Bearer $token")
                     .addHeader("token", token)

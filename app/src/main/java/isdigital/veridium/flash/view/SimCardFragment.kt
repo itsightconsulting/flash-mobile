@@ -49,6 +49,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
     private var dialog: Dialog? = null
     private var dialogSpin: Dialog? = null
     private var iccid: String = ""
+    private var success = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -117,12 +118,21 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                     if (formError) {
                         simcardError()
                     } else {
+                        if(success){
+                            return@let
+                        }
+                        success = true
+
                         UserPrefs.resetUserBarscanAttempts(context)
 
                         val diagSucc = invokerBarcodeSuccess(context!!)
                         diagSucc.show()
 
                         diagSucc.findViewById<Button>(R.id.btnBarcodeSuccess).setOnClickListener {
+                            success = false
+                            //Important when user are in biometric fragment and want comeback to this view
+                            this.activationViewModel.loading.value = false
+
                             diagSucc.dismiss()
                             dialog?.dismiss()
                             showSpinner(this.activity)
@@ -142,6 +152,9 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             loading?.let {
                 if (loading) {
                     if (!biometricViewModel.loadError.value!!) {
+                        //Important when user are in biometric fragment and want comeback to this view
+                        this.biometricViewModel.loading.value = false
+
                         hideSpinner(this.activity)
 
                         val action =
