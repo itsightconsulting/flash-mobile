@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import isdigital.veridium.flash.FlashApplication
@@ -150,12 +151,13 @@ class PreActivationFragment : Fragment() {
                             message = activationViewModel.errorMessage,
                             duration = Snackbar.LENGTH_LONG
                         )
-                    } else
+                    } else {
                         UserPrefs.setApiToken(
                             FlashApplication.appContext,
                             activationViewModel.api_token
                         )
-
+                        findNavController().navigate(R.id.preActivationFragment)
+                    }
                 }
             }
 

@@ -249,7 +249,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             96,
             (context!!.resources.displayMetrics.heightPixels * 0.92).toInt(),
             96,
-            0
+            15
         )
         tv2.layoutParams = tvParams2
 
@@ -378,7 +378,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         return dialog
     }
 
-    private fun evaluateIccid(flIccid: String){
+    private fun evaluateIccid(flIccid: String) {
         instanceDialogSpinner()
 
         activationViewModel.checkIccidValid(flIccid)

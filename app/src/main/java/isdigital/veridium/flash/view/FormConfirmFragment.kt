@@ -85,7 +85,7 @@ class FormConfirmFragment : Fragment() {
         if (oActivation.wantPortability) {
             tvPhoneNumber.visibility = View.VISIBLE
             tvPhoneNumberResumen.visibility = View.VISIBLE
-            tvPhoneNumberResumen.text = oActivation.phoneNumber
+            tvPhoneNumberResumen.text = formatoPhoneNumber(oActivation.phoneNumber ?: "")
 
             tvCurrentCompany.visibility = View.VISIBLE
             tvCurrentCompanyResumen.visibility = View.VISIBLE
@@ -99,15 +99,17 @@ class FormConfirmFragment : Fragment() {
 
     private fun formatoPhoneNumber(phoneNumber: String): String {
         var _phoneNumber = phoneNumber
-        var index: Int = 0
+        /*var index: Int = 0
         while (phoneNumber[index] != null) {
             _phoneNumber = phoneNumber.substring(index, 2)
             index++
         }
+
+         */
         if (phoneNumber.length == 9) {
-            _phoneNumber = phoneNumber.substring(0, 2) +
-                    " " + phoneNumber.substring(3, 5) +
-                    " " + phoneNumber.substring(6, 8)
+            _phoneNumber = phoneNumber.substring(0, 3) +
+                    " " + phoneNumber.substring(3, 6) +
+                    " " + phoneNumber.substring(6, 9)
         }
         return _phoneNumber
     }

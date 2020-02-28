@@ -155,4 +155,6 @@
     <string name="datetime_format_one">dd/MM/yyyy HH:mm</string>
     <string name="datetime_format_two">yyyy-MM-dd HH:mm:ss</string>
 
+    <string name="com.crashlytics.useFirebaseAppId">true</string>
+
 </resources>

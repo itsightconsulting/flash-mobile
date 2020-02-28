@@ -79,6 +79,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                         loadError.value = false
                     }
 
+
                     if (estado) {
                         loadError.value = estado
                         loading.value = false

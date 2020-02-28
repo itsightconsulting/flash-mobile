@@ -2,6 +2,7 @@ package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.crashlytics.android.Crashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -44,8 +45,8 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     }
 
     fun sendFormWithStatus(form: HashMap<String, String>) {
-        form["iccid"] = ""
-//        form["formId"] = ""
+        form["iccid"] = form["iccid"]!!.substring(0, form["iccid"]!!.length -1)
+
         loading.value = false
         disposable.add(
             activationService.saveActivationForm(
