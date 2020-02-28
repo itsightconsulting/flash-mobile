@@ -43,8 +43,6 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     }
 
     fun sendFormWithStatus(form: HashMap<String, String>) {
-        form["iccid"] = form["iccid"]!!.substring(0, form["iccid"]!!.length - 2)
-
         loading.value = false
         disposable.add(
             activationService.saveActivationForm(
