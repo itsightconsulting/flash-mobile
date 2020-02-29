@@ -2,6 +2,7 @@ package isdigital.veridium.flash.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.crashlytics.android.Crashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -46,12 +47,18 @@ class BiometricViewModel : ViewModel() {
                             loading.value = true
                             UserPrefs.putBestFingerPrints(FlashApplication.appContext, t.data)
                         } else {
+                            if (t.status == 1) {
+                                sendToCrashlyticsFingerprintsFail(t.toString())
+                            }
                             loadError.value = true
                             loading.value = true
                         }
                     }
 
                     override fun onError(e: Throwable) {
+                        e.message?.let {
+                            sendToCrashlyticsFingerprintsFail(it)
+                        }
                         loadError.value = true
                         loading.value = true
                         e.printStackTrace()
@@ -72,16 +79,31 @@ class BiometricViewModel : ViewModel() {
                             loadError.value = false
                             loading.value = true
                         } else {
+                            if (t.status == 1) {
+                                sendToCrashlyticsFingerprintsFail(t.toString())
+                            }
                             loadError.value = true
                             loading.value = true
                         }
                     }
+
                     override fun onError(e: Throwable) {
+                        e.message?.let {
+                            sendToCrashlyticsFingerprintsFail(it)
+                        }
                         loadError.value = true
                         loading.value = true
                         e.printStackTrace()
                     }
                 })
+        )
+    }
+
+    fun sendToCrashlyticsFingerprintsFail(response: String) {
+        Crashlytics.logException(
+            RuntimeException(
+                "Error, ${System.nanoTime()}: $response"
+            )
         )
     }
 
