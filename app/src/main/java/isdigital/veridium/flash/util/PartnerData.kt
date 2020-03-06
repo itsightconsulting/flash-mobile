@@ -30,9 +30,9 @@ class PartnerData {
                     if (passBarcode) FORMSTATUS.REJECTBIO.value else FORMSTATUS.REJECTICCD.value
             }
 
-
             body["iccid"] = activation.iccid ?: ""
-            body["iccid"] = body["iccid"]!!.substring(0, body["iccid"]!!.length - 2)
+            if (body["iccid"]!!.length >= 2)
+                body["iccid"] = body["iccid"]!!.substring(0, body["iccid"]!!.length - 2)
 
             if (passBarcode) {
                 body["validationBiometric"] = passBiometric.toString()

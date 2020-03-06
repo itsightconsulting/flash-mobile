@@ -328,7 +328,26 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             if (it.text.length == 20 && validateOnlyNumber(it.text)) {
                 evaluateIccid(it.text)
             } else {
-                tryScanAgain()
+                UserPrefs.putUserBarscanAttempts(context)
+
+                val attemps = UserPrefs.getUserBarscanAttempts(context)
+                if (attemps == MAX_BAR_SCANNER_TEMPS) {
+
+                    val form = UserPrefs.getActivation(context)
+                    form.iccid = it.text
+
+                    activationViewModel.sendFormWithStatus(
+                        PartnerData.formPreparation(
+                            form, passBarcode = false, passBiometric = false
+                        )
+                    )
+                    activationViewModel.loadError.value = false
+                } else {
+                    tryScanAgain()
+                }
+                //return@let
+                // contar error
+                //tryScanAgain()
             }
         }
     }
