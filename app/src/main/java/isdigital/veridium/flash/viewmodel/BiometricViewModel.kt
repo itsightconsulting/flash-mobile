@@ -18,8 +18,6 @@ import javax.inject.Inject
 
 class BiometricViewModel : ViewModel() {
 
-    private val tempHostName = ""
-
     @Inject
     lateinit var api: BiometricService
     private val disposable = CompositeDisposable()
