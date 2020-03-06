@@ -48,9 +48,11 @@ class PreActivationFragment : Fragment() {
 
         // Delete all preferences
         UserPrefs.clear(FlashApplication.appContext)
-        etDNI.setText("45677654")
+        //etDNI.setText("45677654")
 
         this.orderViewModel = ViewModelProviders.of(this).get(OrderViewModel::class.java)
+        this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
+        this.activationViewModel.auth()
 
         val dniLenMessage = resources.getString(R.string.dni_length)
         this.validatorMatrix = MasterValidation()
@@ -78,6 +80,7 @@ class PreActivationFragment : Fragment() {
             )
             startActivity(browserIntent)
         }
+        eventListenersAuth()
         orderViewModel.loadError.observe(this, Observer { loadError ->
             loadError?.let {
                 if (loadError) {
@@ -85,9 +88,6 @@ class PreActivationFragment : Fragment() {
 
                     if (orderViewModel.refreshToken.value!!) {
                         if (orderViewModel.cantRefreshToken == 1) {
-                            this.activationViewModel =
-                                ViewModelProviders.of(this).get(ActivationViewModel::class.java)
-                            eventListenersAuth()
                             this.activationViewModel.auth()
                             orderViewModel.cantRefreshToken += 1
                             orderViewModel.errorMessage = TOKEN_ERROR_MESSAGE

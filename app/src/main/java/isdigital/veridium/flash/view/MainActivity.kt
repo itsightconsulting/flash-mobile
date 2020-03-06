@@ -40,7 +40,6 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var activationViewModel: ActivationViewModel
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private val toolbarTitleParams: LinearLayout.LayoutParams =
         LinearLayout.LayoutParams(
@@ -53,9 +52,6 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
 
         super.onCreate(savedInstanceState)
-        this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
-        eventListenersAuth()
-        activationViewModel.auth()
 
         // Obtain the FirebaseAnalytics instance.
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -227,31 +223,4 @@ class MainActivity : AppCompatActivity() {
         return networkInfo != null && networkInfo.isConnected
     }
 
-    fun eventListenersAuth() {
-        activationViewModel.loading.observe(this, Observer { loading ->
-            loading?.let {
-                if (it) {
-                    if (activationViewModel.loadError.value!!) {
-
-                        if (!verifyAvailableNetwork())
-                            activationViewModel.errorMessage = "Sin conexión"
-
-                        Toast.makeText(
-                            applicationContext,
-                            activationViewModel.errorMessage,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } else
-                    /*UserPrefs.setApiToken(
-                        applicationContext,
-                        "FQPWy7Zj3Dm+2s90s7H/jnUhpm80jedp"
-                    )
-                     */
-                        UserPrefs.setApiToken(applicationContext, activationViewModel.api_token)
-
-                }
-            }
-
-        })
-    }
 }
