@@ -97,7 +97,8 @@ class MainActivity : AppCompatActivity() {
                 dest.id == R.id.formConfirmFragment ||
                 dest.id == R.id.simCardFragment ||
                 dest.id == R.id.termsFragment ||
-                dest.id == R.id.biometricFragment
+                dest.id == R.id.biometricFragment ||
+                dest.id == R.id.formIccidNumberFragment
             ) {
 
                 toolbar.navigationIcon?.let {

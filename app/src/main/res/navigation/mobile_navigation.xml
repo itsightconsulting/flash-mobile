@@ -190,4 +190,19 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/formIccidNumberFragment"
+        android:name="isdigital.veridium.flash.view.FormIccidNumberFragment"
+        android:label="@string/sim_validation"
+        tools:layout="@layout/form_iccid_number_fragment">
+        <action
+            android:id="@+id/action_formIccidNumberFragment_to_successFragment"
+            app:destination="@id/successFragment" />
+        <action
+            android:id="@+id/action_formIccidNumberFragment_to_errorFragment"
+            app:destination="@id/errorFragment" />
+        <action
+            android:id="@+id/action_formIccidNumberFragment_to_biometricFragment"
+            app:destination="@id/biometricFragment" />
+    </fragment>
 </navigation>

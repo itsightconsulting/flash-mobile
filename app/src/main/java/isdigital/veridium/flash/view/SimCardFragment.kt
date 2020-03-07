@@ -64,6 +64,14 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         super.onViewCreated(view, savedInstanceState)
         viewModelInjections()
         eventListeners()
+/*
+        iccid = UserPrefs.getIccid(context) ?: "";
+        if (!iccid.isNullOrEmpty()) {
+            instanceDialogSpinner()
+            activationViewModel.checkIccidValid(iccid)
+        }
+ */
+
     }
 
     private fun viewModelInjections() {
@@ -268,7 +276,9 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         tv2.layoutParams = tvParams2
 
         tv2.setOnClickListener {
-            invokerICCIDDialog(context!!).show()
+            //invokerICCIDDialog(context!!).show()
+            dialog?.dismiss()
+            findNavController().navigate(R.id.formIccidNumberFragment)
         }
 
         dialog?.addContentView(
