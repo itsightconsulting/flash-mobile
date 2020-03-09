@@ -140,6 +140,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_simCardFragment_to_formIccidNumberFragment"
+            app:destination="@id/formIccidNumberFragment" />
     </fragment>
 
     <fragment

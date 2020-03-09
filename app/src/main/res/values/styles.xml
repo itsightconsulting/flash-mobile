@@ -317,6 +317,13 @@
         <item name="android:textColor">@color/dark_purple</item>
     </style>
 
+    <style name="especial_field_error">
+        <item name="android:fontFamily">@font/gotham_light</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/dark_purple</item>
+        <item name="android:lineSpacingMultiplier">1.4</item>
+    </style>
+
 
     <style name="button_white_without_border">
         <item name="android:fontFamily">@font/gotham_bold</item>

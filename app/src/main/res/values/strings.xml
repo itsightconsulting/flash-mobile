@@ -81,6 +81,7 @@
     <string name="sim_validation">Validación de SIM Card</string>
     <string name="sim_validation_subtitle">Información del ICCID</string>
     <string name="sim_validation_description">El ICCID (identiﬁcador de la tarjeta del circuito integrado) es un número único de cada SIM, que sirve para identiﬁcar el país, la red y el circuito a los que pertenece. </string>
+    <string name="sim_validation_option_two">Ingresa el número ICCID</string>
 
     <!-- Scan ICCID using the camera -->
     <string name="qr_barcode_scanner">Qr BarCode Scanner</string>

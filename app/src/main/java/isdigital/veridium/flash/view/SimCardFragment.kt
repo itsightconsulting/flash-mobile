@@ -80,6 +80,12 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
     }
 
     private fun eventListeners() {
+
+        txtManualICCID.setOnClickListener {
+            val action = SimCardFragmentDirections.actionSimCardFragmentToFormIccidNumberFragment()
+            findNavController().navigate(action)
+        }
+
         imageButton.setOnClickListener {
 
             EasyPermissions.requestPermissions(
@@ -179,10 +185,12 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
     private fun simcardError() {
         UserPrefs.resetUserBarscanAttempts(context)
+        dialog?.setOnDismissListener {
+            val action =
+                SimCardFragmentDirections.actionSimCardFragmentToErrorFragment()
+            findNavController().navigate(action)
+        }
         dialog?.dismiss()
-        val action =
-            SimCardFragmentDirections.actionSimCardFragmentToErrorFragment()
-        findNavController().navigate(action)
     }
 
     private fun initBarcodeScanner() {
@@ -233,7 +241,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             tv, tvParams
         )
 
-        val prefixText2 = SpannableString("\uD83D\uDC47 Ingresar ICCID manualmente")
+        /*val prefixText2 = SpannableString("\uD83D\uDC47 Ingresar ICCID manualmente")
         val prefixText2Len = prefixText2.length
 
         prefixText2.setSpan(
@@ -283,7 +291,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
         dialog?.addContentView(
             tv2, tvParams2
-        )
+        )*/
         mScannerView.setResultHandler(this)
         mScannerView.startCamera()
     }
@@ -355,9 +363,6 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                 } else {
                     tryScanAgain()
                 }
-                //return@let
-                // contar error
-                //tryScanAgain()
             }
         }
     }

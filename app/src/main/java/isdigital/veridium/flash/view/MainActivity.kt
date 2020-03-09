@@ -56,10 +56,6 @@ class MainActivity : AppCompatActivity() {
         // Obtain the FirebaseAnalytics instance.
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, UUID.randomUUID().toString())
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "test")
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         setContentView(R.layout.navigation_activity)
 
         //Load nav host fragment
@@ -74,8 +70,6 @@ class MainActivity : AppCompatActivity() {
         val navController = host.navController
         val inflater = navController.navInflater
         val graph = inflater.inflate(R.navigation.mobile_navigation)
-//        graph.setDe .setDefaultArguments(intent.extras)
-
 
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.initialFragment)

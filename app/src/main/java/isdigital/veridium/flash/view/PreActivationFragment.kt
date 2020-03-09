@@ -52,7 +52,7 @@ class PreActivationFragment : Fragment() {
 
         this.orderViewModel = ViewModelProviders.of(this).get(OrderViewModel::class.java)
         this.activationViewModel = ViewModelProviders.of(this).get(ActivationViewModel::class.java)
-        this.activationViewModel.auth()
+//        this.activationViewModel.auth()
 
         val dniLenMessage = resources.getString(R.string.dni_length)
         this.validatorMatrix = MasterValidation()
@@ -69,7 +69,7 @@ class PreActivationFragment : Fragment() {
                 )
             } else {
                 showSpinner(activity)
-                orderViewModel.getAllByDni(etDNI.text.toString())
+                this.activationViewModel.auth()
             }
         }
 
@@ -130,7 +130,6 @@ class PreActivationFragment : Fragment() {
                             orderInformationToArgs(orderViewModel.lstOrder.value!!, ArrayList())
                         )
                         findNavController().navigate(action)
-
                     }
                 }
             }
@@ -155,7 +154,7 @@ class PreActivationFragment : Fragment() {
                             FlashApplication.appContext,
                             activationViewModel.api_token
                         )
-                        //findNavController().navigate(R.id.preActivationFragment)
+                        orderViewModel.getAllByDni(etDNI.text.toString())
                     }
                 }
             }
