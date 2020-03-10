@@ -122,6 +122,7 @@
 
     <!-- Step 8 Error -->
     <string name="error_in_scan">Error en el escaneo</string>
+    <string name="error_in_barcode_validation">Error en la validación del ICCID</string>
 
     <!-- External links -->
     <string name="chatExternalLink">https://www.marca.com</string>

@@ -56,7 +56,7 @@ class FormIccidNumberFragment : Fragment() {
                     Snackbar.LENGTH_LONG
                 )
             } else {
-                //findNavController().navigate(R.id.simCardFragment)
+                showSpinner(this.activity)
                 evaluateIccid(etICCIDNumber.text.toString())
             }
         }
@@ -163,15 +163,17 @@ class FormIccidNumberFragment : Fragment() {
     }
 
     private fun tryPutAgain() {
-        val diagError = invokerBarcodeError(context!!)
+        val diagError = errorBarCodeValidation(context!!)
         diagError.show()
 
         diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
             diagError.dismiss()
         }
+        hideSpinner(this.activity)
     }
 
     private fun simcardError() {
+        hideSpinner(this.activity)
         UserPrefs.resetUserBarscanAttempts(context)
         val action =
             FormIccidNumberFragmentDirections.actionFormIccidNumberFragmentToErrorFragment()
