@@ -287,6 +287,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -316,22 +317,24 @@
                 style="@style/button_purple_no_mg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="16dp"
+                android:layout_marginVertical="60dp"
                 android:text="@string/confirm"
-                app:layout_constraintBottom_toTopOf="@id/btn_cancel" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout10" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_cancel"
                 style="@style/button_white_without_border"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="16dp"
+                android:layout_marginVertical="18dp"
                 android:background="@color/white"
                 android:stateListAnimator="@null"
                 android:text="@string/modify"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_confirm" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
