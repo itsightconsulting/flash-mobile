@@ -1,6 +1,7 @@
 package isdigital.veridium.flash.view
 
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -28,6 +29,9 @@ import isdigital.veridium.flash.viewmodel.BiometricViewModel
 import kotlinx.android.synthetic.main.biometric_fragment.*
 import org.json.JSONObject
 import org.json.JSONTokener
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
+import pub.devrel.easypermissions.PermissionRequest
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -35,8 +39,10 @@ import java.io.FileReader
 /**
  * A simple [Fragment] subclass.
  */
-class BiometricFragment : Fragment() {
+class BiometricFragment : Fragment(),
+    EasyPermissions.PermissionCallbacks {
 
+    private val REQUEST_CAMERA_CAPTURE = 1
     private lateinit var fingers: Fingers
     private lateinit var biometricViewModel: BiometricViewModel
     private lateinit var activationViewModel: ActivationViewModel
@@ -88,9 +94,16 @@ class BiometricFragment : Fragment() {
                     if (left) HANDS.LEFT.value else HANDS.RIGHT.value
                 )
 
-                launchVeridium(
-                    if (left) ExportConfig.CaptureHand.LEFT_ENFORCED else ExportConfig.CaptureHand.RIGHT_ENFORCED,
-                    (if (left) this.fingers.left else this.fingers.right) % 5
+                EasyPermissions.requestPermissions(
+                    PermissionRequest.Builder(
+                        this,
+                        REQUEST_CAMERA_CAPTURE,
+                        Manifest.permission.CAMERA
+                    )
+                        .setRationale("¿Podría concedernos el permiso para acceder a su cámara?")
+                        .setPositiveButtonText("ACEPTAR")
+                        .setNegativeButtonText("CANCELAR")
+                        .build()
                 )
             } else {
                 this.view?.csSnackbar(
@@ -99,6 +112,15 @@ class BiometricFragment : Fragment() {
                 )
             }
         }
+    }
+
+    private fun initVeridium() {
+        val left = imgLeftHand.alpha == 1.0f
+
+        launchVeridium(
+            if (left) ExportConfig.CaptureHand.LEFT_ENFORCED else ExportConfig.CaptureHand.RIGHT_ENFORCED,
+            (if (left) this.fingers.left else this.fingers.right) % 5
+        )
     }
 
     private fun getImageResourceId(fingerId: Int): Int {
@@ -267,7 +289,8 @@ class BiometricFragment : Fragment() {
                             }
 
                             fingerprintsPositionCode = fingerprints.getJSONObject(posicionBusqueda)
-                            fingerPositionCode = fingerprintsPositionCode.getInt("FingerPositionCode")
+                            fingerPositionCode =
+                                fingerprintsPositionCode.getInt("FingerPositionCode")
 
                         }
                         2 -> {
@@ -279,13 +302,15 @@ class BiometricFragment : Fragment() {
                             }
 
                             fingerprintsPositionCode = fingerprints.getJSONObject(posicionBusqueda)
-                            fingerPositionCode = fingerprintsPositionCode.getInt("FingerPositionCode")
+                            fingerPositionCode =
+                                fingerprintsPositionCode.getInt("FingerPositionCode")
                         }
                         else -> {
                             // Para el caso de los pulgares, por default coge el pulgar derecho
                             posicionBusqueda = 0
                             fingerprintsPositionCode = fingerprints.getJSONObject(posicionBusqueda)
-                            fingerPositionCode = fingerprintsPositionCode.getInt("FingerPositionCode")
+                            fingerPositionCode =
+                                fingerprintsPositionCode.getInt("FingerPositionCode")
                         }
                     }
 
@@ -377,5 +402,32 @@ class BiometricFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (grantResults[0] == -1) {
+            if (EasyPermissions.somePermissionPermanentlyDenied(
+                    activity!!,
+                    permissions.toMutableList()
+                )
+            ) {
+                AppSettingsDialog.Builder(this).build().show()
+            }
+        } else {
+            initVeridium()
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        initVeridium()
     }
 }
