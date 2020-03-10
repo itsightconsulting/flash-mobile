@@ -158,7 +158,7 @@
 
     <string name="com.crashlytics.useFirebaseAppId">true</string>
     <string name="enter_the_iccid_number">Ingrese el número ICCID</string>
-    <string name="iccid_digits">18 dígitos</string>
-    <string name="iccid_extra_information">El ICCID son los 18 números abajo del código de barras de tu tarjeta SIM</string>
-    <string name="iccid_length">Asegúrate de escribir un número de ICCID de 18 dígitos</string>
+    <string name="iccid_digits">20 dígitos</string>
+    <string name="iccid_extra_information">El ICCID son los 20 números abajo del código de barras de tu tarjeta SIM</string>
+    <string name="iccid_length">Asegúrate de escribir un número de ICCID de 20 dígitos</string>
 </resources>

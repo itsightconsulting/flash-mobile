@@ -46,8 +46,8 @@ class FormIccidNumberFragment : Fragment() {
         this.validatorMatrix = MasterValidation()
             .valid(etICCIDNumber, true)
             .required()
-            .minLength(18, IccIdLenMessage)
-            .maxLength(18, IccIdLenMessage).active()
+            .minLength(20, IccIdLenMessage)
+            .maxLength(20, IccIdLenMessage).active()
 
         btnValidateIccId.setOnClickListener {
             if (!this.validatorMatrix.checkValidity()) {
