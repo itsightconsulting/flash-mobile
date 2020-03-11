@@ -18,10 +18,7 @@ import isdigital.veridium.flash.model.dto.VerifyIccidResponse
 import isdigital.veridium.flash.model.generic.ApiResponse
 import isdigital.veridium.flash.service.component.DaggerActivationComponent
 import isdigital.veridium.flash.service.module.ActivationService
-import isdigital.veridium.flash.util.API_PASSWORD
-import isdigital.veridium.flash.util.API_USERNAME
-import isdigital.veridium.flash.util.ERROR_TYPES
-import isdigital.veridium.flash.util.manageCode
+import isdigital.veridium.flash.util.*
 import retrofit2.Call
 import retrofit2.Response
 import java.util.*
@@ -56,7 +53,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                         //val success: Boolean = t.status == 0
                         val success: Boolean = (t.status == 0 && t.code == "0000000000")
                         if (success) {
-                            formError.value = false
+                            formError.value = form["formStatus"] != FORMSTATUS.COMPLETED.value
                             loading.value = true
                         } else {
                             val errorType = manageCode(t.code)

@@ -32,7 +32,7 @@ class PartnerData {
 
             body["iccid"] = activation.iccid ?: ""
             if (body["iccid"]!!.length >= 2)
-                body["iccid"] = body["iccid"]!!.substring(0, body["iccid"]!!.length - 2)
+                body["iccid"] = body["iccid"]!!.substring(0, body["iccid"]!!.length)
 
             if (passBarcode) {
                 body["validationBiometric"] = passBiometric.toString()
