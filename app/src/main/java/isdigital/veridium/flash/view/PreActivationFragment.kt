@@ -68,8 +68,8 @@ class PreActivationFragment : Fragment() {
                     Snackbar.LENGTH_LONG
                 )
             } else {
-                showSpinner(activity)
                 this.activationViewModel.auth()
+                showSpinner(activity)
             }
         }
 
@@ -140,6 +140,7 @@ class PreActivationFragment : Fragment() {
         activationViewModel.loading.observe(this, Observer { loading ->
             loading?.let {
                 if (it) {
+                    activationViewModel.loading.value = false
                     if (activationViewModel.loadError.value!!) {
 
                         if (!verifyAvailableNetwork(activity!!))

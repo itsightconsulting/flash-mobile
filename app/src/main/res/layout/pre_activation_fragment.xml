@@ -51,7 +51,8 @@
                     android:id="@+id/etDNI"
                     style="@style/flash_edit_text"
                     android:hint="@string/digits"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:maxLength="8" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

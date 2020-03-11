@@ -82,7 +82,8 @@
                     android:id="@+id/etPhoneNumber"
                     style="@style/flash_edit_text"
                     android:hint="@string/nine_digits"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:maxLength="9" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -106,7 +107,8 @@
                     android:id="@+id/etConfirmPhoneNumber"
                     style="@style/flash_edit_text"
                     android:hint="@string/nine_digits"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:maxLength="9" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -197,8 +199,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="32dp"
-                android:paddingRight="32dp"
                 android:paddingTop="16dp"
+                android:paddingRight="32dp"
                 android:paddingBottom="24dp"
                 android:text="@string/check_info"
                 android:textAlignment="center"
@@ -216,7 +218,7 @@
             android:text="@string/text_continue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/footerInfo_form"/>
+            app:layout_constraintTop_toBottomOf="@id/footerInfo_form" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
