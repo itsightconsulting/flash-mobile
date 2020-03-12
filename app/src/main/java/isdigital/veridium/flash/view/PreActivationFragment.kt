@@ -73,6 +73,7 @@ class PreActivationFragment : Fragment() {
             }
         }
 
+        /*
         chatExternalLink.setOnClickListener {
             val browserIntent = Intent(
                 Intent.ACTION_VIEW,
@@ -80,6 +81,7 @@ class PreActivationFragment : Fragment() {
             )
             startActivity(browserIntent)
         }
+         */
         eventListenersAuth()
         orderViewModel.loadError.observe(this, Observer { loadError ->
             loadError?.let {
