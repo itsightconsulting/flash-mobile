@@ -125,7 +125,7 @@
     <string name="error_in_barcode_validation">Error en la validación del ICCID</string>
 
     <!-- External links -->
-    <string name="chatExternalLink">https://www.marca.com</string>
+    <string name="chatExternalLink">https://atentoperu.s1gateway.com/pe/9de1462b40bef299137ee42f9750bd11658761d203da0b134d5629abf78120ccb43a0ed41c5ea8f7</string>
     <string name="empty">\u00A0</string>
 
     <!-- Alert quit -->
