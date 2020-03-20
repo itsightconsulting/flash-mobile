@@ -15,7 +15,7 @@
 .cxx
 
 #VeridiumProjects
-
+app/release
 analytics/build
 biometricsupport/build
 core/build
