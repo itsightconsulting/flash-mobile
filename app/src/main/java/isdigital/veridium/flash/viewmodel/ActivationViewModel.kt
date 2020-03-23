@@ -93,6 +93,9 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                         loading.value = true
 
                     } else {
+                        if (t.status.toInt() == 2 && t.code == "0044000000") {//TOKEN EXPIRED
+                            sendToCrashlyticsFailRequestBody(form = t.toString())
+                        }
                         loadError.value = true
                         loading.value = true
                         errorMessage =
