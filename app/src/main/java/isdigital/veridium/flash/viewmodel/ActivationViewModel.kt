@@ -1,7 +1,6 @@
 package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.crashlytics.android.Crashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -50,7 +49,6 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<ConsolidatedDataResponse>() {
                     override fun onSuccess(t: ConsolidatedDataResponse) {
-                        //val success: Boolean = t.status == 0
                         val success: Boolean = (t.status == 0 && t.code == "0000000000")
                         if (success) {
                             formError.value = form["formStatus"] != FORMSTATUS.COMPLETED.value
@@ -64,7 +62,6 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                             }
                             formError.value = true
                             loading.value = true
-                            sendToCrashlyticsFailRequestBody(form = form.toString())
                         }
                     }
 
@@ -104,6 +101,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                 }
 
                 override fun onError(e: Throwable) {
+                    sendToCrashlyticsFailRequestBody(form = "ERROR Throwable: ${e.message}")
                     e.printStackTrace()
                     loadError.value = true
                     loading.value = true

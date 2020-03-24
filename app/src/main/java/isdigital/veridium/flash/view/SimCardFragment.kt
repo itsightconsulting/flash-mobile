@@ -64,14 +64,6 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         super.onViewCreated(view, savedInstanceState)
         viewModelInjections()
         eventListeners()
-/*
-        iccid = UserPrefs.getIccid(context) ?: "";
-        if (!iccid.isNullOrEmpty()) {
-            instanceDialogSpinner()
-            activationViewModel.checkIccidValid(iccid)
-        }
- */
-
     }
 
     private fun viewModelInjections() {
@@ -109,6 +101,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                     dialogSpin?.dismiss()
 
                     if (error) {
+
                         UserPrefs.putUserBarscanAttempts(context)
 
                         val attemps = UserPrefs.getUserBarscanAttempts(context)
