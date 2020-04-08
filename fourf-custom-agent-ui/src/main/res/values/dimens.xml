@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fourf_guide_stroke_width">4dp</dimen>
+    <dimen name="fourf_guide_dash_gap">18dp</dimen>
+</resources>

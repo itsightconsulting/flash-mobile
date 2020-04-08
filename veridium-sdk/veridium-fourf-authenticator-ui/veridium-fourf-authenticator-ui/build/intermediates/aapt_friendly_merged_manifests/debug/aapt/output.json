@@ -1,0 +1,1 @@
+[{"outputType":{"type":"AAPT_FRIENDLY_MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":-1,"versionName":"1.0.1","enabled":true,"outputFile":"veridium-fourf-authenticator-ui-debug.aar","fullName":"debug","baseName":"debug"},"path":"AndroidManifest.xml","properties":{"packageId":"com.veridiumid.sdk.fourf.ui.authenticator","split":""}}]

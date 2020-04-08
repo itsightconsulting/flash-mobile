@@ -1,0 +1,270 @@
+<?xml version ="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <com.veridiumid.sdk.support.ui.AspectRatioSafeFrameLayout
+            android:id="@+id/camera_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/img_finger_hint"
+            android:layout_alignLeft="@+id/camera_preview"
+            android:layout_alignRight="@+id/camera_preview"
+            android:layout_alignTop="@+id/camera_preview"
+            android:layout_alignBottom="@+id/camera_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_placeYourFingers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_topBar"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/veridium_fourf_biometrics_activity_place_your_fingers"
+        android:textColor="@android:color/white"
+        android:textSize="17sp" />
+
+    <ImageView
+        android:id="@+id/iv_handSide"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/lefthand_thumb_instructional"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tv_placeYourFingers"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/left_thumb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_handSide"
+        android:layout_centerInParent="true"
+        android:id="@+id/tv_handside"
+        android:visibility="invisible"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_meterLeft"
+        android:layout_width="50dp"
+        android:layout_height="302dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/iv_meterLeft"
+            android:layout_width="50dp"
+            android:layout_height="302dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/meter" />
+
+        <ImageView
+            android:id="@+id/iv_arrowLeft"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="4dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/triangle_white"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tooFarLeft"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_weight="1"
+                android:gravity="top|center"
+                android:text="@string/veridium_fourf_biometrics_activity_too_nfar"
+                android:textColor="@android:color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_tooCloseLeft"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="36dp"
+                android:layout_weight="1"
+                android:gravity="bottom|center"
+                android:text="@string/veridium_fourf_biometrics_activity_too_nclose"
+                android:textColor="@android:color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_meterRight"
+        android:layout_width="50dp"
+        android:layout_height="302dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/iv_meterRight"
+            android:layout_width="50dp"
+            android:layout_height="302dp"
+            android:scaleType="fitXY"
+            android:scaleX="-1"
+            android:src="@drawable/meter" />
+
+        <ImageView
+            android:id="@+id/iv_arrowRight"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="4dp"
+            android:adjustViewBounds="true"
+            android:scaleX="-1"
+            android:src="@drawable/triangle_white"
+            android:visibility="invisible"  />
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tooFarRight"
+                android:layout_width= "match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_weight="1"
+                android:gravity="top|center"
+                android:text="@string/veridium_fourf_biometrics_activity_too_nfar"
+                android:textColor="@android:color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_tooCloseRight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="36dp"
+                android:layout_weight="1"
+                android:gravity="bottom|center"
+                android:text="@string/veridium_fourf_biometrics_activity_too_nclose"
+                android:textColor="@android:color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/hand_scan_ui_banner" />
+
+        <ImageView
+            android:id="@+id/iv_tips"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:src="@drawable/fourf_authenticator_ui_help_icon"
+            android:tint="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/x_icon" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/veridium_fourf_biometrics_activity_4_finger_touchlessid"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <CheckBox
+        android:id="@+id/left_right_switch"
+        android:layout_width="150dp"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/left_right_selector_checkbox"
+        android:button="@android:color/transparent"
+        android:checked="true"
+        android:visibility="invisible"
+        android:scaleType="fitXY" />
+    <Button
+        android:id="@+id/fake_switch_hand_button"
+        android:layout_width="150dp"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:visibility="invisible"
+        android:id="@+id/screen_overlay">
+    </RelativeLayout>
+
+</RelativeLayout>
