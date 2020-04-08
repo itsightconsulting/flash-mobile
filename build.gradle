@@ -46,6 +46,10 @@ allprojects {
         maven {
             url 'https://maven.fabric.io/public'
         }
+
+        flatDir {
+            dirs rootProject.rootDir.path + '/veridium-sdk'
+        }
     }
 }
 

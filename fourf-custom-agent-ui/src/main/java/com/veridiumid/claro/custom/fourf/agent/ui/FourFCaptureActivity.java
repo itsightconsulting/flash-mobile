@@ -11,6 +11,10 @@ import com.veridiumid.sdk.model.data.persistence.IKVStore;
  * Custom 4F activity that uses {@link FourFCaptureFragment} to display biometric capture and processing.
  */
 public class FourFCaptureActivity extends FourFBiometricsActivity {
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 
     @Override
     protected IKVStore openStorage() {

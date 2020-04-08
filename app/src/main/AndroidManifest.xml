@@ -24,7 +24,7 @@
 
     <application
         android:name=".FlashApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:description="@string/app_name"
@@ -52,17 +52,27 @@
             android:value="j3j7nH9r6CrLBHyKGzySCSYWlvTnGEOvbynK1fqc8pnTsPhWbZbBCVK3HHVDUaRi03I/7S3BgY4UqfVFKyz/B3siZGV2aWNlRmluZ2VycHJpbnQiOiIvZ1hnSzZiNzNHK2R6VTJvbFVRT0pnR24wa2VZNGhLYUd5UmxiU2tQZURrPSIsImxpY2Vuc2UiOiJXdVFFM0Z1bUEyUTA0Y3BsRWU2VjRoaTlrN2dCMGNZWXNrREFrZ0Qxb0YwZTd4TWc3SWdYbkNlTTFuTHA4dUlLb2ErWUpxaGtOVU5SWmxlT0twb3dDWHNpZEhsd1pTSTZJbE5FU3lJc0ltNWhiV1VpT2lKVFJFc2lMQ0pzWVhOMFRXOWthV1pwWldRaU9qRTFPRFUxT0RBeE56QXNJbU52YlhCaGJubE9ZVzFsSWpvaVNXNXpiMngxZEdsdmJuTWdabTl5SUVac1lYTm9JaXdpWTI5dWRHRmpkRWx1Wm04aU9pSkVSVllnTFNCR2JHRnphQ0JOYjJKcGJHVWdMU0JwYzJScFoybDBZV3d1ZG1WeWFXUnBkVzB1Wm14aGMyZ2lMQ0pqYjI1MFlXTjBSVzFoYVd3aU9pSnRhV2QxWld3dWFHVnlibUZ1WkdWNlFHbHVjMjlzZFhScGIyNXpMbkJsSWl3aWMzVmlUR2xqWlc1emFXNW5VSFZpYkdsalMyVjVJam9pUVdReU5GSmljRUZWY1RKaGEwWlRla3hwWTNCaGJGb3hWelJ1Wlc1dmMwZElRbE5aVTBaeU5WVXZNRDBpTENKemRHRnlkRVJoZEdVaU9qRTFPREl3TURJd01EQXNJbVY0Y0dseVlYUnBiMjVFWVhSbElqb3hOVGc0TWpFNU1qQXdMQ0puY21GalpVVnVaRVJoZEdVaU9qRTFPRGd6TURVMk1EQXNJblZ6YVc1blUwRk5URlJ2YTJWdUlqcG1ZV3h6WlN3aWRYTnBibWRHY21WbFVrRkVTVlZUSWpwbVlXeHpaU3dpZFhOcGJtZEJZM1JwZG1WRWFYSmxZM1J2Y25raU9tWmhiSE5sTENKaWFXOXNhV0pHWVdObFJYaHdiM0owUlc1aFlteGxaQ0k2Wm1Gc2MyVXNJbkoxYm5ScGJXVkZiblpwY205dWJXVnVkQ0k2ZXlKelpYSjJaWElpT21aaGJITmxMQ0prWlhacFkyVlVhV1ZrSWpwbVlXeHpaWDBzSW1WdVptOXlZMlVpT25zaWNHRmphMkZuWlU1aGJXVnpJanBiSW1selpHbG5hWFJoYkM1MlpYSnBaR2wxYlM1bWJHRnphQ0pkTENKelpYSjJaWEpEWlhKMFNHRnphR1Z6SWpwYlhYMTkifQ==" />
 
         <meta-data
-            android:name="com.veridiumid.sdk.fourf.LICENSE"
-            android:value="mQiLZsQ9zmwb5RL/+PG7tQpTYCSYmJpAJ2c4C18DJeHalrKHx0UdSjFZeyHiN+5LfLtB9kZNwnA+tXgAZmhzDXsiZGV2aWNlRmluZ2VycHJpbnQiOiIvZ1hnSzZiNzNHK2R6VTJvbFVRT0pnR24wa2VZNGhLYUd5UmxiU2tQZURrPSIsImxpY2Vuc2UiOiJFaU9HeWNlN1A1cmRoMEJFRzNFb1dRaldGOGtOTFg0RjZJS2FwYjR2aDVKVzB2ZXpoV0V3RzR5SzJzVWZwaThPWk5EM25acVVyVEwyMGlkd3hRZ29CM3NpZEhsd1pTSTZJa0pKVDB4SlFsTWlMQ0p1WVcxbElqb2lORVlpTENKc1lYTjBUVzlrYVdacFpXUWlPakUxT0RVMU9EQXhOekEwT0RBc0ltTnZiWEJoYm5sT1lXMWxJam9pU1c1emIyeDFkR2x2Ym5NZ1ptOXlJRVpzWVhOb0lpd2lZMjl1ZEdGamRFbHVabThpT2lKRVJWWWdMU0JHYkdGemFDQk5iMkpwYkdVZ0xTQnBjMlJwWjJsMFlXd3VkbVZ5YVdScGRXMHVabXhoYzJnaUxDSmpiMjUwWVdOMFJXMWhhV3dpT2lKdGFXZDFaV3d1YUdWeWJtRnVaR1Y2UUdsdWMyOXNkWFJwYjI1ekxuQmxJaXdpYzNWaVRHbGpaVzV6YVc1blVIVmliR2xqUzJWNUlqb2lRV1F5TkZKaWNFRlZjVEpoYTBaVGVreHBZM0JoYkZveFZ6UnVaVzV2YzBkSVFsTlpVMFp5TlZVdk1EMGlMQ0p6ZEdGeWRFUmhkR1VpT2pFMU9ESXdNREl3TURBd01EQXNJbVY0Y0dseVlYUnBiMjVFWVhSbElqb3hOVGc0TWpFNU1qQXdNREF3TENKbmNtRmpaVVZ1WkVSaGRHVWlPakUxT0Rnek1EVTJNREF3TURBc0luVnphVzVuVTBGTlRGUnZhMlZ1SWpwbVlXeHpaU3dpZFhOcGJtZEdjbVZsVWtGRVNWVlRJanBtWVd4elpTd2lkWE5wYm1kQlkzUnBkbVZFYVhKbFkzUnZjbmtpT21aaGJITmxMQ0ppYVc5c2FXSkdZV05sUlhod2IzSjBSVzVoWW14bFpDSTZabUZzYzJVc0luSjFiblJwYldWRmJuWnBjbTl1YldWdWRDSTZleUp6WlhKMlpYSWlPbVpoYkhObExDSmtaWFpwWTJWVWFXVmtJanBtWVd4elpYMHNJbVpsWVhSMWNtVnpJanA3SW1KaGMyVWlPblJ5ZFdVc0luTjBaWEpsYjB4cGRtVnVaWE56SWpwMGNuVmxMQ0psZUhCdmNuUWlPblJ5ZFdWOUxDSmxibVp2Y21ObFpGQnlaV1psY21WdVkyVnpJanA3SW0xaGJtUmhkRzl5ZVV4cGRtVnVaWE56SWpwbVlXeHpaWDBzSW5abGNuTnBiMjRpT2lJMUxpb2lmUT09In0=" />
+            android:name="com.veridiumid.sdk.CONFIG"
+            android:value="com.veridiumid.sdk.core.ManifestConfiguration" />
 
         <activity
+            android:name="isdigital.veridium.flash.veridium.CustomFourFActivity"
+            android:label="FourF"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="com.veridiumid.sdk.component.config"
+                android:value="uid=4F, optional=false, validator=com.veridiumid.sdk.fourf.FourFValidator" />
+        </activity>
+
+        <!--<activity
             android:name="com.veridiumid.sdk.fourf.defaultui.activity.DefaultFourFBiometricsActivity"
             android:label="4 Fingers"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="com.veridiumid.sdk.component.config"
                 android:value="uid=4F,optional=false,validator=com.veridiumid.sdk.fourf.FourFValidator" />
-        </activity>
+        </activity>-->
          <!--END VERIDIUM-->
     </application>
 

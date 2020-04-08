@@ -1,2 +1,5 @@
-include ':app', ':sdk', ':core', ':fourfimaging', ':veridium-licensing', ':biometricsupport', ':defaultdata', ':fourfnative', ':analytics', ':fourfdefaultui'
+include ':app', ':fourf-custom-agent-ui', ':veridium-fourf-authenticator-ui'
+//':fourf-custom-agent-ui', ':veridium-fourf-authenticator-ui',
+//include ':app', 'analytics', 'veridium-licensing','biometricsupport', 'core', 'defaultdata', 'fourfimaging', 'fourfnative', 'sdk', 'fourfdefaultui',
 rootProject.name='Flash Mobile'
+project(':veridium-fourf-authenticator-ui').projectDir = new File('veridium-sdk/veridium-fourf-authenticator-ui/veridium-fourf-authenticator-ui')

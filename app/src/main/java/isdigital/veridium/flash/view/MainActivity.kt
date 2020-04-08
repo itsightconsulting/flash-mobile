@@ -3,21 +3,16 @@ package isdigital.veridium.flash.view
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -26,15 +21,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.crashlytics.android.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.util.invokerQuitDialog
-import isdigital.veridium.flash.viewmodel.ActivationViewModel
 import kotlinx.android.synthetic.main.navigation_activity.*
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {

@@ -40,6 +40,11 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -96,13 +101,27 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    api project(':analytics')
-    api project(':biometricsupport')
-    api project(':core')
-    api project(':defaultdata')
-    api project(':fourfimaging')
-    api project(':fourfnative')
-    api project(':sdk')
-    implementation project(':veridium-licensing')
-    implementation project(':fourfdefaultui')
+
+    //Past veridium license
+//    api project(':analytics')
+//    api project(':biometricsupport')
+//    api project(':core')
+//    api project(':defaultdata')
+//    api project(':fourfimaging')
+//    api project(':fourfnative')
+//    api project(':sdk')
+//    implementation project(':veridium-licensing')
+//    implementation project(':fourfdefaultui')
+
+    //New veridium license
+    implementation project(':fourf-custom-agent-ui')
+    implementation project(':veridium-fourf-authenticator-ui')
+
+    implementation(name: 'veridium-analytics-release', ext: 'aar')
+    implementation(name: 'veridium-core-release', ext: 'aar')
+    implementation(name: 'veridium-fourf-release', ext: 'aar')
+    implementation(name: 'veridium-fourf-camera-release', ext: 'aar')
+    implementation(name: 'veridium-sdk-release', ext: 'aar')
+    implementation(name: 'veridium-secure-data-release', ext: 'aar')
+    implementation(name: 'veridium-support-release', ext: 'aar')
 }

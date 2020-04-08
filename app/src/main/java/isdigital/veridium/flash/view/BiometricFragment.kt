@@ -8,18 +8,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.veridiumid.sdk.BiometricResultsParser
-import com.veridiumid.sdk.IBiometricFormats
-import com.veridiumid.sdk.IBiometricResultsHandler
-import com.veridiumid.sdk.IVeridiumSDK
-import com.veridiumid.sdk.fourf.defaultui.activity.DefaultFourFBiometricsActivity
-import com.veridiumid.sdk.fourfintegration.ExportConfig
+import com.veridiumid.sdk.VeridiumSDK
+import com.veridiumid.sdk.fourf.ExportConfig
+import com.veridiumid.sdk.fourf.FourFInterface
+import com.veridiumid.sdk.model.biometrics.packaging.IBiometricFormats
+import com.veridiumid.sdk.model.biometrics.results.BiometricResultsParser
+import com.veridiumid.sdk.model.biometrics.results.handling.IBiometricResultsHandler
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.model.dto.Fingers
 import isdigital.veridium.flash.preferences.UserPrefs
@@ -32,9 +31,7 @@ import org.json.JSONTokener
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
-import java.io.BufferedReader
-import java.io.File
-import java.io.FileReader
+
 
 /**
  * A simple [Fragment] subclass.
@@ -46,6 +43,7 @@ class BiometricFragment : Fragment(),
     private lateinit var fingers: Fingers
     private lateinit var biometricViewModel: BiometricViewModel
     private lateinit var activationViewModel: ActivationViewModel
+    private val REQUEST_EXPORT = 314
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -118,7 +116,7 @@ class BiometricFragment : Fragment(),
         val left = imgLeftHand.alpha == 1.0f
 
         launchVeridium(
-            if (left) ExportConfig.CaptureHand.LEFT_ENFORCED else ExportConfig.CaptureHand.RIGHT_ENFORCED,
+            if (left) ExportConfig.ExportMode.FOUR_F_LEFT_ENFORCED else ExportConfig.ExportMode.FOUR_F_RIGHT_ENFORCED,
             (if (left) this.fingers.left else this.fingers.right) % 5
         )
     }
@@ -164,48 +162,76 @@ class BiometricFragment : Fragment(),
     }
 
 
-    private fun launchVeridium(hand: ExportConfig.CaptureHand, finger: Int) {
-        ExportConfig.setCaptureHand(hand)
-        ExportConfig.setIndividualthumb(finger == 1)
-        ExportConfig.setIndividualindex(finger == 2)
-        ExportConfig.setIndividualmiddle(finger == 3)
-        ExportConfig.setIndividualring(finger == 4)
-        ExportConfig.setIndividuallittle(finger == 5)
+    private fun launchVeridium(hand: ExportConfig.ExportMode, finger: Int) {
+        val finalFinger =
+            if (hand == ExportConfig.ExportMode.FOUR_F_LEFT_ENFORCED) this.fingers.left else this.fingers.right
+
+        when (finalFinger) {
+            1 -> {
+                ExportConfig.setFingersToCapture(listOf(ExportConfig.FingerID.THUMB_RIGHT))
+            }
+            2 -> {
+                ExportConfig.setFingersToCapture(ExportConfig.ExportMode.FOUR_F_RIGHT_ENFORCED)
+            }
+            3 -> {
+                ExportConfig.setFingersToCapture(ExportConfig.ExportMode.FOUR_F_RIGHT_ENFORCED)
+            }
+            4 -> {
+                ExportConfig.setFingersToCapture(ExportConfig.ExportMode.FOUR_F_RIGHT_ENFORCED)
+            }
+            5 -> {
+                ExportConfig.setFingersToCapture(ExportConfig.ExportMode.FOUR_F_RIGHT_ENFORCED)
+            }
+            6 -> {
+                ExportConfig.setFingersToCapture(listOf(ExportConfig.FingerID.THUMB_LEFT))
+            }
+            7 -> {
+                ExportConfig.setFingersToCapture(ExportConfig.ExportMode.FOUR_F_LEFT_ENFORCED)
+            }
+            8 -> {
+                ExportConfig.setFingersToCapture(ExportConfig.ExportMode.FOUR_F_LEFT_ENFORCED)
+            }
+            9 -> {
+                ExportConfig.setFingersToCapture(ExportConfig.ExportMode.FOUR_F_LEFT_ENFORCED)
+            }
+            else -> {
+                ExportConfig.setFingersToCapture(ExportConfig.ExportMode.FOUR_F_LEFT_ENFORCED)
+            }
+        }
 
         ExportConfig.setFormat(IBiometricFormats.TemplateFormat.FORMAT_JSON)
         ExportConfig.setCalculate_NFIQ(true)
-        ExportConfig.setBackground_remove(true)
         ExportConfig.setPackDebugInfo(false)
         ExportConfig.setPackExtraScale(true)
         ExportConfig.setPackAuditImage(true)
-        ExportConfig.setLaxLiveness(false)
+        ExportConfig.setUseLiveness(false)
 
-        ExportConfig.setPack_raw_scaled(true)
-        ExportConfig.getPack_raw_scaled()
+        ExportConfig.setPack_raw(true)
+        ExportConfig.getPack_raw()
 
-        ExportConfig.getPack_wsq_scaled()
-        ExportConfig.setPack_wsq_scaled(true)
+        ExportConfig.getPack_wsq()
+        ExportConfig.setPack_wsq(true)
 
         ExportConfig.setUseNistType4(false)
         ExportConfig.setWSQCompressionBitrate(5f)
 
-        startActivityForResult(Intent(context, DefaultFourFBiometricsActivity::class.java).apply {
-            putExtra("uid", "4F")
-            putExtra("optional", "true")
-            putExtra("validator", "com.veridiumid.sdk.fourf.FourFValidator")
-            action =
-                if (finger == 1) IVeridiumSDK.ACTION_CAPTURE_INDIVIDUALF else IVeridiumSDK.ACTION_CAPTURE
-        }, 141)
+        val exportIntent: Intent = VeridiumSDK.getSingleton()!!.export(FourFInterface.UID)
+        startActivityForResult(exportIntent, REQUEST_EXPORT)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 141) {
+        if (requestCode == REQUEST_EXPORT) {
             val handler = object : IBiometricResultsHandler {
-                override fun handleSuccess(res: MutableList<ByteArray>?) {
+                override fun handleSuccess(res: MutableMap<String, Array<ByteArray>>?) {
+                    validateBiometricPrint(res)
+                }
+
+                /*override fun handleSuccess(res: MutableList<ByteArray>?) {
                     validateBiometricPrint(res)
                     Log.d("Biometric sucess", "********************** SCANNER PASSED SUCCESSFULLY")
-                }
+                }*/
 
                 override fun handleFailure() {
                     Log.d("Biometric error", "Unknown failure issue")
@@ -217,10 +243,6 @@ class BiometricFragment : Fragment(),
 
                 override fun handleError(p0: String?) {
                     Log.d("Biometric error", p0)
-                }
-
-                override fun handleLivenessFailure() {
-                    Log.d("Biometric error", "Liveness Failure")
                 }
             }
 
@@ -241,35 +263,16 @@ class BiometricFragment : Fragment(),
 
 
     @SuppressLint("MissingPermission")
-    fun validateBiometricPrint(print: MutableList<ByteArray>?) {
-
+    fun validateBiometricPrint(print: MutableMap<String, Array<ByteArray>>?) {
         print?.let {
             showSpinner(activity)
-            if (it.size > 0) {
+            if (it.isNotEmpty()) {
                 val result: JSONObject?
 
                 try {
-                    val zip: File = File.createTempFile(
-                        "tempfile",
-                        ".zip",
-                        ContextCompat.getCodeCacheDir(context!!)
-                    )
-                    zip.writeBytes(it[0])
-                    val stringBuilder = StringBuilder()
-                    val br = BufferedReader(FileReader(zip))
-                    var line: String? = br.readLine()
+                    val arrayVeridiumResponse = it[FourFInterface.UID]!![1]
 
-                    while (line != null) {
-                        stringBuilder.append(line)
-                        stringBuilder.append('\n')
-                        line = br.readLine()
-                    }
-
-                    br.close()
-
-                    val resultStr = stringBuilder.toString()
-
-                    val tokener = JSONTokener(resultStr)
+                    val tokener = JSONTokener(String(arrayVeridiumResponse))
                     result = JSONObject(tokener)
 
                     val scale085 = result.getJSONObject("SCALE085")
@@ -327,9 +330,9 @@ class BiometricFragment : Fragment(),
                     this.biometricViewModel.validateVeridiumFingerprints(jsonInSolutions)
 
                 } catch (exception: Exception) {
+                    exception.printStackTrace()
                     navigateErrorFragment()
                     Toast.makeText(context, "An error was thrown...", Toast.LENGTH_LONG).show()
-                    exception.printStackTrace()
                 }
             }
         } ?: run {
