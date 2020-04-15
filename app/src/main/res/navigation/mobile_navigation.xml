@@ -164,6 +164,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_biometricFragment_to_portabilitySuccessFragment"
+            app:destination="@id/portabilitySuccessFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -207,5 +214,27 @@
         <action
             android:id="@+id/action_formIccidNumberFragment_to_biometricFragment"
             app:destination="@id/biometricFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/portabilitySuccessFragment"
+        android:name="isdigital.veridium.flash.view.PortabilitySuccessFragment"
+        android:label="@string/sim_success_portability"
+        tools:layout="@layout/portability_success_fragment" >
+        <action
+            android:id="@+id/action_portabilitySuccessFragment_to_portabilityPinFragment"
+            app:destination="@id/portabilityPinFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/portabilityPinFragment"
+        android:name="isdigital.veridium.flash.view.PortabilityPinFragment"
+        android:label="Culminar Portabilidad"
+        tools:layout="@layout/portability_pin_fragment" >
+        <action
+            android:id="@+id/action_portabilityPinFragment_to_preActivationFragment"
+            app:destination="@id/preActivationFragment" />
     </fragment>
 </navigation>

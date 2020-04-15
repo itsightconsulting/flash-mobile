@@ -84,20 +84,29 @@ class MainActivity : AppCompatActivity() {
                 dest.id == R.id.simCardFragment ||
                 dest.id == R.id.termsFragment ||
                 dest.id == R.id.biometricFragment ||
-                dest.id == R.id.formIccidNumberFragment
+                dest.id == R.id.formIccidNumberFragment ||
+                dest.id == R.id.portabilityPinFragment
             ) {
+                var changerAgent = 0
+                var isPortabilityFinal = dest.id == R.id.portabilityPinFragment;
+                if (isPortabilityFinal) {
+                    changerAgent = -250
+                }
 
                 toolbar.navigationIcon?.let {
                     toolbarTitleParams.setMargins(
-                        -(it.intrinsicWidth + aproxToolbarTitleLeftMargin),
+                        -(it.intrinsicWidth + aproxToolbarTitleLeftMargin + changerAgent),
                         0,
                         0,
                         0
                     )
                     toolbar_title.layoutParams = toolbarTitleParams
                 }
-
-                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                if (!isPortabilityFinal) {
+                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                } else {
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                }
             } else {
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
             }

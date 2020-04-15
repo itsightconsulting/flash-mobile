@@ -105,9 +105,13 @@
     <string name="sim_activated">Información del ICCID</string>
     <string name="sim_activated_successfully">Tu SIM Card Flash Mobile se activó con éxito</string>
     <string name="sim_activated_greetings">¡Ahora eres parte de la familia Flash Mobile!</string>
-    <string name="sim_activated_fl_message">Te enviamos un correo de conﬁrmación. Recuerda que si elegiste portar tu número, el proceso de tardará 24 horas en completarse.</string>
+    <string name="sim_activated_greetings_portability">Confirma y completa tu solicitud de portabilidad</string>
+    <string name="sim_activated_fl_message">Te enviamos un correo de conﬁrmación. Recuerda realizar una recarga mínima de S/1 para que tu línea quede activa.</string>
+    <string name="sim_activated_fl_message_portability">Para cambiarte a Flash, por favor ingresa el Pin de validación de 4 dígitos que te llegrá via SMS.</string>
     <string name="sim_finalize">Finalizar</string>
+    <string name="sim_finalize_portability">Ingresar el Pin</string>
     <string name="sim_success">SIM Card activada</string>
+    <string name="sim_success_portability">SIM Card Pre activada</string>
     <!-- Step 11 -->
     <string name="biometric">Validación biométrica</string>
     <string name="biometric_title">Selecciona la huella dactilar</string>

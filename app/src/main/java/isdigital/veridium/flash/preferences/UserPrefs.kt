@@ -30,7 +30,8 @@ object UserPrefs {
     private const val ACTIVATION_LASTNAME = "flash.user.prefs.ACTIVATION_LASTNAME"
     private const val ACTIVATION_BIRTHDATE = "flash.user.prefs.ACTIVATION_BIRTHDATE"
     private const val ACTIVATION_EMAIL = "flash.user.prefs.ACTIVATION_EMAIL"
-    private const val ACTIVATION_WANT_TO_PORTABILITY = "flash.user.prefs.ACTIVATION_WANT_TO_PORTABILITY"
+    private const val ACTIVATION_WANT_TO_PORTABILITY =
+        "flash.user.prefs.ACTIVATION_WANT_TO_PORTABILITY"
     private const val ACTIVATION_SPONSORTEAMID = "flash.user.prefs.ACTIVATION_SPONSORTEAMID"
     private const val ACTIVATION_PHONENUMBER = "flash.user.prefs.ACTIVATION_PHONENUMBER"
     private const val ACTIVATION_ICCID = "flash.user.prefs.ACTIVATION_ICCID"
@@ -41,7 +42,8 @@ object UserPrefs {
     private const val SCANNER_BEST_FINGERPRINT_LEFT = "flash.user.prefs.fingerprint.left"
     private const val SCANNER_BEST_FINGERPRINT_RIGHT = "flash.user.prefs.fingerprint.right"
     private const val SCANNER_DESC_BEST_FINGERPRINT_LEFT = "flash.user.prefs.fingerprint.left.desc"
-    private const val SCANNER_DESC_BEST_FINGERPRINT_RIGHT = "flash.user.prefs.fingerprint.right.desc"
+    private const val SCANNER_DESC_BEST_FINGERPRINT_RIGHT =
+        "flash.user.prefs.fingerprint.right.desc"
 
     fun setApiToken(context: Context?, apiToken: String) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
@@ -198,6 +200,12 @@ object UserPrefs {
     fun getUserDni(context: Context): String? {
         return PreferenceManager.getDefaultSharedPreferences(context).get {
             getString(USER_DNI, "")
+        }
+    }
+
+    fun getPortabilityFlag(context: Context?): Boolean {
+        return PreferenceManager.getDefaultSharedPreferences(context).get {
+            getBoolean(ACTIVATION_WANT_TO_PORTABILITY, false)
         }
     }
 

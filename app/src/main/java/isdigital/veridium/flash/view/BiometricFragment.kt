@@ -44,6 +44,7 @@ class BiometricFragment : Fragment(),
     private lateinit var biometricViewModel: BiometricViewModel
     private lateinit var activationViewModel: ActivationViewModel
     private val REQUEST_EXPORT = 314
+    private lateinit var isPortability: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,6 +111,8 @@ class BiometricFragment : Fragment(),
                 )
             }
         }
+
+        isPortability = UserPrefs.getPortabilityFlag(context).toString()
     }
 
     private fun initVeridium() {
@@ -256,9 +259,15 @@ class BiometricFragment : Fragment(),
     }
 
     private fun navigateSuccessFragment() {
-        val action =
-            BiometricFragmentDirections.actionBiometricFragmentToSuccessFragment()
-        findNavController().navigate(action)
+        if (isPortability == "true") {
+            val action =
+                BiometricFragmentDirections.actionBiometricFragmentToPortabilitySuccessFragment()
+            findNavController().navigate(action)
+        } else {
+            val action =
+                BiometricFragmentDirections.actionBiometricFragmentToSuccessFragment()
+            findNavController().navigate(action)
+        }
     }
 
 
