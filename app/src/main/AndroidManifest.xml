@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="isdigital.veridium.flash"
-    android:versionCode="7"
-    android:versionName="1.1.5">
+    android:versionCode="8"
+    android:versionName="1.1.6">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -64,16 +64,6 @@
                 android:name="com.veridiumid.sdk.component.config"
                 android:value="uid=4F, optional=false, validator=com.veridiumid.sdk.fourf.FourFValidator" />
         </activity>
-
-        <!--<activity
-            android:name="com.veridiumid.sdk.fourf.defaultui.activity.DefaultFourFBiometricsActivity"
-            android:label="4 Fingers"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="com.veridiumid.sdk.component.config"
-                android:value="uid=4F,optional=false,validator=com.veridiumid.sdk.fourf.FourFValidator" />
-        </activity>-->
-         <!--END VERIDIUM-->
     </application>
 
 </manifest>
