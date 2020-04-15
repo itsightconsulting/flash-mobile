@@ -25,6 +25,8 @@ fourfimaging/build
 fourfnative/build
 sdk/build
 veridium-licensing/build
+veridium-sdk/veridium-fourf-authenticator-ui/veridium-fourf-authenticator-ui
+veridium-sdk/veridium-fourf-authenticator-ui/veridium-fourf-authenticator-ui/build
 
 #Google Services
 app/google-services.json
