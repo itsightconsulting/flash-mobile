@@ -231,7 +231,7 @@
     <fragment
         android:id="@+id/portabilityPinFragment"
         android:name="isdigital.veridium.flash.view.PortabilityPinFragment"
-        android:label="Culminar Portabilidad"
+        android:label="Pin de validación"
         tools:layout="@layout/portability_pin_fragment" >
         <action
             android:id="@+id/action_portabilityPinFragment_to_preActivationFragment"

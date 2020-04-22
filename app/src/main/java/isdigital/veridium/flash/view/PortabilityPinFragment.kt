@@ -6,10 +6,9 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import isdigital.veridium.flash.R
+import isdigital.veridium.flash.preferences.UserPrefs
 import isdigital.veridium.flash.util.PORTABILITY_WEB_VIEW
-import kotlinx.android.synthetic.main.portability_pin_fragment.*
 
 /**
  * A simple [Fragment] subclass.
@@ -28,10 +27,11 @@ class PortabilityPinFragment : Fragment() {
 
         val v: View = inflater.inflate(R.layout.portability_pin_fragment, container, false)
         mWebView = v.findViewById<View>(R.id.webView) as WebView
-        mWebView.loadUrl(PORTABILITY_WEB_VIEW)
-
-        // Enable Javascript
-
+        UserPrefs.getIccid(context)?.let {
+            if (it.length > 1) {
+                mWebView.loadUrl(PORTABILITY_WEB_VIEW + it.substring(IntRange(1, 18)))
+            }
+        }
 
         // Enable Javascript
         val webSettings: WebSettings = mWebView.settings

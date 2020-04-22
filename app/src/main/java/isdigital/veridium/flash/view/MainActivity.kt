@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                 var changerAgent = 0
                 var isPortabilityFinal = dest.id == R.id.portabilityPinFragment;
                 if (isPortabilityFinal) {
-                    changerAgent = -250
+                    changerAgent = -230
                 }
 
                 toolbar.navigationIcon?.let {

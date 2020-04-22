@@ -120,9 +120,9 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
         ServiceManager().createService(TokenApi::class.java).getToken(bodyToken).enqueue(
             object : retrofit2.Callback<ApiResponse<Token>> {
                 override fun onFailure(call: Call<ApiResponse<Token>>, t: Throwable) {
+                    loadError.value = true
                     errorMessage = "Obtención del token fallida"
                     loading.value = true
-                    loadError.value = true
                     sendToCrashlyticsTokenFail(errorMessage)
                 }
 
