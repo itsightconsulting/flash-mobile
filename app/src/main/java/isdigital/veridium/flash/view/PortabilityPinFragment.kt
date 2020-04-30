@@ -29,7 +29,7 @@ class PortabilityPinFragment : Fragment() {
         mWebView = v.findViewById<View>(R.id.webView) as WebView
         UserPrefs.getIccid(context)?.let {
             if (it.length > 1) {
-                mWebView.loadUrl(PORTABILITY_WEB_VIEW + it.substring(IntRange(1, 18)))
+                mWebView.loadUrl(PORTABILITY_WEB_VIEW + it.substring(IntRange(0, 18)))
             }
         }
 
