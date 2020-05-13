@@ -1,6 +1,7 @@
 package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.crashlytics.android.Crashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -62,7 +63,6 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                             loading.value = true
                             loadError.value = false
                         }
-
                     } else if (t.status == 2) {
                         sendToCrashlyticsFailResponseBody("$t")
 
@@ -74,11 +74,12 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                             errorMessage = t.message
 
                         estado = true
+                        Log.d("ERRORONE", t.toString())
                     } else {
+                        Log.d("ERRORTWO", t.toString())
                         estado = true
                         errorMessage = "Ocurrio, un error no esperado."
                     }
-
 
 
                     if (estado) {
@@ -88,6 +89,7 @@ class OrderViewModel(application: Application) : BaseViewModel(application) {
                 }
 
                 override fun onError(e: Throwable) {
+                    e.printStackTrace()
                     sendToCrashlyticsFailResponseBody("DNI: $dni")
                     refreshToken.value = false
                     loadError.value = true

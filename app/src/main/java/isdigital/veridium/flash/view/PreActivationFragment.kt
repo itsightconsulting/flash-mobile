@@ -117,10 +117,16 @@ class PreActivationFragment : Fragment() {
 
 
                     if (!orderViewModel.userHasOrders) {
+                        orderViewModel.cantRefreshToken = 0
+                        orderViewModel.loading.value = false
+
                         val action =
                             PreActivationFragmentDirections.actionPreActivationFragmentToFormFragment()
                         findNavController().navigate(action)
                     } else {
+                        orderViewModel.cantRefreshToken = 0
+                        orderViewModel.loading.value = false
+
                         val dni = etDNI.text.toString()
                         val action =
                             PreActivationFragmentDirections.actionPreActivationFragmentToOrdersFragment()

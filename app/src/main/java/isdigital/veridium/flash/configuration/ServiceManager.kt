@@ -1,5 +1,6 @@
 package isdigital.veridium.flash.configuration
 
+import android.util.Log
 import androidx.preference.PreferenceManager
 import isdigital.veridium.flash.util.API_BASE_URL
 import okhttp3.HttpUrl
@@ -43,6 +44,10 @@ class ServiceManager {
         return createService(clazz, HttpUrl.parse(API_BASE_URL)!!)
     }
 
+    fun <T> createServiceSimple(clazz: Class<T>): T {
+        return createServiceSimple(clazz, HttpUrl.parse(API_BASE_URL)!!)
+    }
+
     /**
      * Creates the services for a given HTTP Url, useful when testing
      * through multiple endpoints and unit testing
@@ -57,8 +62,22 @@ class ServiceManager {
         return retrofit.create(clazz)
     }
 
+    private fun <T> createServiceSimple(clazz: Class<T>, httpUrl: HttpUrl): T {
+        val retrofit = getRetrofitSimple(httpUrl)
+        return retrofit.create(clazz)
+    }
+
     fun <T> createService(clazz: Class<T>, retrofit: Retrofit): T {
         return retrofit.create(clazz)
+    }
+
+    private fun getRetrofitSimple(httpUrl: HttpUrl): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(httpUrl)
+            .client(createSimpleClient())
+            .addConverterFactory(getConverter())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
     }
 
     private fun getRetrofit(httpUrl: HttpUrl): Retrofit {
@@ -83,6 +102,13 @@ class ServiceManager {
     }
 
 
+    private fun createSimpleClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .readTimeout(1, TimeUnit.MINUTES)
+            .connectTimeout(1, TimeUnit.MINUTES).build()
+    }
+
+
     private fun createClient(): OkHttpClient {
 
         return OkHttpClient.Builder()
@@ -90,6 +116,7 @@ class ServiceManager {
             .connectTimeout(1, TimeUnit.MINUTES).addInterceptor { chain ->
                 val token = PreferenceManager.getDefaultSharedPreferences(FlashApplication.appContext)
                     .getString("API_TOKEN", "")
+                Log.d("TOKENREQ", token)
                 val newRequest = chain.request().newBuilder()
                     .addHeader("Authorization", "Bearer $token")
                     .addHeader("token", token)

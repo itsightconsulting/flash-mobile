@@ -1,6 +1,7 @@
 package isdigital.veridium.flash.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.crashlytics.android.Crashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -117,9 +118,10 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
         bodyToken["username"] = API_USERNAME
         bodyToken["password"] = API_PASSWORD
 
-        ServiceManager().createService(TokenApi::class.java).getToken(bodyToken).enqueue(
+        ServiceManager().createServiceSimple(TokenApi::class.java).getToken(bodyToken).enqueue(
             object : retrofit2.Callback<ApiResponse<Token>> {
                 override fun onFailure(call: Call<ApiResponse<Token>>, t: Throwable) {
+                    t.printStackTrace()
                     loadError.value = true
                     errorMessage = "Obtención del token fallida"
                     loading.value = true
@@ -134,6 +136,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                     if (body != null) {
                         if (body.status == 0) {//success
                             api_token = body.data.token
+                            Log.d("TOKENRESPONSE", api_token)
                             loadError.value = false
                             loading.value = true
                         } else {

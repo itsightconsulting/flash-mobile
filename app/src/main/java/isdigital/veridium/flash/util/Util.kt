@@ -316,7 +316,6 @@ fun manageCode(code: String): String {
         errorType = ERROR_TYPES.SERVER.value
     } else if (code == "0040400000" || code == "0044000000" || code == "0040100000") {
         // error del servidor HTTP estado 400 Token
-        // REFRESH TOKEN
         errorType = ERROR_TYPES.TOKEN.value
     } else if (code == "2040001001" || code == "2040001002" || code == "2040401001") {
         // error del servidor HTTP estado 400
