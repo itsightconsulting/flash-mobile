@@ -36,11 +36,11 @@ class FormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Datos preview
-        //etName.setText("Miranda")
-        //etLastName.setText("Pedrosa")
-        //etEmail.setText("mail@mail.com")
-        //etDateOfBirth.setText("10/06/1980")
-        //rbDoNotWantToPort.isChecked = true
+//        etName.setText("Miranda")
+//        etLastName.setText("Pedrosa")
+//        etEmail.setText("mail@mail.com")
+//        etDateOfBirth.setText("10/06/1980")
+//        rbDoNotWantToPort.isChecked = true
 
         oActivation = UserPrefs.getActivation(FlashApplication.appContext)
         if (oActivation.name != "" && oActivation.lastName != "") {

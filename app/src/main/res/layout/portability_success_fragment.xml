@@ -79,7 +79,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:gravity="top"
             android:maxLines="5"
             android:text="@string/sim_activated_fl_message_portability"
             android:textAlignment="center"

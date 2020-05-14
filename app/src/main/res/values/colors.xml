@@ -19,7 +19,6 @@
     <color name="transparent">#00000000</color>
     <color name="light_gray">#F4F4F4</color>
 
-
     <!-- Colors error -->
     <color name="black_error">#4c4151</color>
     <color name="button_error">#86599b</color>
