@@ -119,8 +119,7 @@ class BiometricFragment : Fragment(),
         val left = imgLeftHand.alpha == 1.0f
 
         launchVeridium(
-            if (left) ExportConfig.ExportMode.FOUR_F_LEFT_ENFORCED else ExportConfig.ExportMode.FOUR_F_RIGHT_ENFORCED,
-            (if (left) this.fingers.left else this.fingers.right) % 5
+            if (left) ExportConfig.ExportMode.FOUR_F_LEFT_ENFORCED else ExportConfig.ExportMode.FOUR_F_RIGHT_ENFORCED
         )
     }
 
@@ -165,7 +164,7 @@ class BiometricFragment : Fragment(),
     }
 
 
-    private fun launchVeridium(hand: ExportConfig.ExportMode, finger: Int) {
+    private fun launchVeridium(hand: ExportConfig.ExportMode) {
         val finalFinger =
             if (hand == ExportConfig.ExportMode.FOUR_F_LEFT_ENFORCED) this.fingers.left else this.fingers.right
 
@@ -231,11 +230,6 @@ class BiometricFragment : Fragment(),
                     validateBiometricPrint(res)
                 }
 
-                /*override fun handleSuccess(res: MutableList<ByteArray>?) {
-                    validateBiometricPrint(res)
-                    Log.d("Biometric sucess", "********************** SCANNER PASSED SUCCESSFULLY")
-                }*/
-
                 override fun handleFailure() {
                     Log.d("Biometric error", "Unknown failure issue")
                 }
@@ -293,36 +287,33 @@ class BiometricFragment : Fragment(),
 
                     when (fingerPositionCode) {
                         7 -> {
+                            Log.d("FINGER_SEVEN", ">>>7")
                             when (fingers.left) {
                                 7 -> posicionBusqueda = 0
                                 8 -> posicionBusqueda = 1
                                 9 -> posicionBusqueda = 2
                                 10 -> posicionBusqueda = 3
                             }
+                            Log.d("FINGER_SEVEN", "$posicionBusqueda")
 
                             fingerprintsPositionCode = fingerprints.getJSONObject(posicionBusqueda)
-                            fingerPositionCode =
-                                fingerprintsPositionCode.getInt("FingerPositionCode")
-
                         }
                         2 -> {
+                            Log.d("FINGER_TWO", ">>>2")
                             when (fingers.right) {
                                 2 -> posicionBusqueda = 0
                                 3 -> posicionBusqueda = 1
                                 4 -> posicionBusqueda = 2
                                 5 -> posicionBusqueda = 3
                             }
-
+                            Log.d("FINGER_TWO", "$posicionBusqueda")
                             fingerprintsPositionCode = fingerprints.getJSONObject(posicionBusqueda)
-                            fingerPositionCode =
-                                fingerprintsPositionCode.getInt("FingerPositionCode")
                         }
                         else -> {
+                            Log.d("FINGER_ELSE", ">>>ELSE")
                             // Para el caso de los pulgares, por default coge el pulgar derecho
                             posicionBusqueda = 0
                             fingerprintsPositionCode = fingerprints.getJSONObject(posicionBusqueda)
-                            fingerPositionCode =
-                                fingerprintsPositionCode.getInt("FingerPositionCode")
                         }
                     }
 
