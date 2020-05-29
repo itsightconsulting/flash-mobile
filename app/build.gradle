@@ -7,15 +7,15 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "isdigital.veridium.flash"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 28
         multiDexEnabled true
-        versionCode 10
-        versionName "1.1.8"
+        versionCode 11
+        versionName "1.1.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64", "armeabi", "mips"
