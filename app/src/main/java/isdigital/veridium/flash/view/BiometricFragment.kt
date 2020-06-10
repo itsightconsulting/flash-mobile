@@ -387,7 +387,7 @@ class BiometricFragment : Fragment(),
         this.activationViewModel.loading.observe(this, Observer { loading ->
             loading?.let {
                 if (!loading) {
-                    return@let
+                    return@Observer
                 }
 
                 this.activationViewModel.formError.value?.let {
@@ -398,7 +398,7 @@ class BiometricFragment : Fragment(),
                         val attemps = UserPrefs.getUserBiometricWrongAttempts(context)
                         if (attemps == MAX_BIOMETRIC_SCANNER_TEMPS) {
                             navigateErrorFragment()
-                            return@let
+                            return@Observer
                         }
                         navigateSuccessFragment()
                     }

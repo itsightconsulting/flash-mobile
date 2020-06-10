@@ -41,34 +41,17 @@ class OrdersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //if (orderViewModel.userHasOrders) { ArrayList<ActivationPOJO>()
-        // arrayListOf(this.orderViewModel.lstOrder)
         val myArgs = arguments!!.getParcelable<DataResponseVerifyDNIArgs>("orders")
 
         ordersListAdapter = OrdersListAdapter(
             myArgs!!.list
             , object : RecyclerViewOnItemClickListener<OrderInformationArgs> {
-                override fun onItemClicked(oOrderInformation: OrderInformationArgs) {
-                    /*
-                    Toast.makeText(
-                        context!!,
-                        "onItemClicked ${oOrderInformation.id}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                     */
-                    selectOrder(oOrderInformation)
+                override fun onItemClicked(obj: OrderInformationArgs) {
+                    selectOrder(obj)
                 }
 
-                override fun onCallButtonClicked(oOrderInformation: OrderInformationArgs) {
-                    /*Toast.makeText(
-                        context!!,
-                        "onCallButtonClicked ${posApplicant.id}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                     */
-                    selectOrder(oOrderInformation)
+                override fun onCallButtonClicked(obj: OrderInformationArgs) {
+                    selectOrder(obj)
                 }
             }
         )
@@ -77,12 +60,6 @@ class OrdersFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = ordersListAdapter
         }
-        //} else {
-
-        //}
-//        Toast.makeText(context!!, "${safeArgs.dni}", Toast.LENGTH_SHORT).show()
-//        Toast.makeText(context!!, "${safeArgs.orders!!.list}", Toast.LENGTH_SHORT).show()
-
     }
 
     fun selectOrder(oOrderInformation: OrderInformationArgs) {

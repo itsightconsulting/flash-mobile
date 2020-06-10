@@ -97,7 +97,6 @@ class FormPhoneFragment : Fragment() {
     private fun clickListenerForBtnContinue() {
 
         if (this.validatorMatrix.checkValidity()) {
-            if (oActivation == null) throw  Resources.NotFoundException()
 
             val activationPOJO = ActivationPOJO(
                 oActivation.dni,

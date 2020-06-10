@@ -35,7 +35,7 @@ class Validations(
         TextInputEditText?.let { it ->
             if (!eventEnabled) return@let
 
-            it.setOnFocusChangeListener { view: View, focus: Boolean ->
+            it.setOnFocusChangeListener { _: View, focus: Boolean ->
                 if (focus) return@setOnFocusChangeListener
                 if (this.list.size > 0) {
                     val ele = this.list.firstOrNull { !it.check() }
@@ -61,7 +61,7 @@ class Validations(
         autoCompleteTextView?.let { it ->
             if (!eventEnabled) return@let
 
-            it.setOnItemClickListener { parent, view, position, id ->
+            it.setOnItemClickListener { _, _, _, _ ->
                 val ele = this.list.firstOrNull { !it.check() }
                 ele?.let {
                     textInputLayout.error = it.msg

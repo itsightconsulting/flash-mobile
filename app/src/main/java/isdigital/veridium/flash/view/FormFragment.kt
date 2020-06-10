@@ -110,7 +110,7 @@ class FormFragment : Fragment() {
     private fun buildDatePickerDialog(year: Int, month: Int, day: Int, minDate: Date) {
         val dpd = DatePickerDialog(
             context!!,
-            DatePickerDialog.OnDateSetListener { view, nYear, nMonth, nDayOfMonth ->
+            DatePickerDialog.OnDateSetListener { _, nYear, nMonth, nDayOfMonth ->
                 var nDayOfMonthStr = nDayOfMonth.toString()
                 var nMonthStr = (nMonth + 1).toString()
                 if (nDayOfMonth < 10)

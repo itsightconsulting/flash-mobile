@@ -35,7 +35,6 @@ class FormConfirmFragment : Fragment() {
         btn_confirm.setOnClickListener {
 
             val oActivation = UserPrefs.getActivation(FlashApplication.appContext)
-            if (oActivation == null) throw  Resources.NotFoundException()
 
             UserPrefs.putActivation(FlashApplication.appContext, oActivation)
 

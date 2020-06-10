@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="isdigital.veridium.flash"
-    android:versionCode="11"
-    android:versionName="1.1.9">
+    android:versionCode="18"
+    android:versionName="1.2.6">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,10 +15,10 @@
     <uses-feature
         android:name="android.hardware.camera"/>
 
-    <uses-feature
+    <uses-feature android:required="false"
         android:name="android.hardware.camera.autofocus"/>
 
-    <uses-feature
+    <uses-feature android:required="false"
         android:name="android.hardware.sensor.light" />
 
     <application

@@ -119,7 +119,7 @@ class ServiceManager {
                 Log.d("TOKENREQ", token)
                 val newRequest = chain.request().newBuilder()
                     .addHeader("Authorization", "Bearer $token")
-                    .addHeader("token", token)
+                    .addHeader("token", token?:"")
                     .build()
                 chain.proceed(newRequest)
             }.build()
