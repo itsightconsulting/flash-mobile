@@ -73,13 +73,12 @@ class TermsFragment : Fragment() {
         subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
         txtTerms.append(subT1)
         txtTerms.append("La calidad de los servicios contratados depende de: (i) la ubicación (estructura y altura del lugar donde utilizas el servicio; por ejemplo, ascensores, sótanos, túneles, cerros), (ii) las características técnicas, configuración y capacidades del equipo que tengas, (iii) la capacidad contratada, (iv) el uso de aplicaciones “peer to peer” (P2P) o aplicaciones similares, (v) volumen de tráfico y congestión de red; y, (vi) cualquiera causa externa (clima, sismo, hechos de terceros, etc).\n")
-        txtTerms.append("Para conocer las áreas de cobertura entra a .www.flashmobile.pe\n\n")
+        txtTerms.append("Para conocer las áreas de cobertura entra a www.flashmobile.pe\n\n")
 
         subT1 = SpannableString("TARIFAS\n")
         subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
         txtTerms.append(subT1)
-        txtTerms.append("En el siguiente enlace [www.flashmobile.pe] encontrarás la siguiente información sobre las tarifas vigentes. A continuación, detallamos las velocidades de Internet ofrecidas, de acuerdo a la cobertura y tecnología:\n")
-        txtTerms.append("Para conocer las áreas de cobertura entra a .www.flashmobile.pe\n\n")
+        txtTerms.append("En el siguiente enlace www.flashmobile.pe/planes encontrarás la siguiente información sobre las tarifas vigentes. A continuación, detallamos las velocidades de Internet ofrecidas, de acuerdo a la cobertura y tecnología:\n")
         txtTerms.append("- Cobertura y Tecnología\n")
         txtTerms.append("\t + 2G\n")
         txtTerms.append("\t + 3G\n")
@@ -95,7 +94,13 @@ class TermsFragment : Fragment() {
         txtTerms.append("\t + 0.4 Mbps / 0.04 Mbps\n")
         txtTerms.append("\t + 2Mbps / 0.4 Mbps\n")
         txtTerms.append("\n")
-        txtTerms.append("Costo por minutos en llamadas por demanda: S/ 0.\n\n")
+        txtTerms.append("Costo por minutos en llamadas por demanda: S/ 0.49 " +
+                "La información personal puede incluir, entre otros, información de identificación (como nombre, número de tarjeta de identificación y edad), " +
+                "información de contacto (número de teléfono, dirección de correo electrónico y domicilio) e información financiera. " +
+                "Flash podrá realizar el Tratamiento a través de sus trabajadores, consultores, asesores y/o terceros encargados para tal efecto. " +
+                "El abonado declara que ha sido informado sobre sus derechos como titular de los Datos Personales, " +
+                "entre los que se encuentran los derechos de acceso, actualización, inclusión, rectificación, cancelación y oposición. " +
+                "Cualquier consulta o reclamo en relación con el Tratamiento de los Datos Personales del Abonado podrá dirigirse a la siguiente dirección de correo electrónico soporte.clientes@flashmobile.pe.\n\n")
 
         subT1 = SpannableString("SERVICIO FUERA DEL PAÍS (ROAMING)\n")
         subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
@@ -117,27 +122,31 @@ class TermsFragment : Fragment() {
         subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
         txtTerms.append(subT1)
         txtTerms.append("El uso de los servicios es estrictamente personal e intransferible. En caso Flash detectara un uso indebido del Servicio, seguirá el procedimiento establecido en la Resolución de Consejo Directivo N° 060-2006-CD/OSIPTEL que aprueba la “Norma que establece el Procedimiento que aplicaran las empresas operadoras para la suspensión cautelar y el corte definitivo por uso indebido de los servicios públicos de telecomunicaciones”, o la normativa que lo sustituya.\n")
-        txtTerms.append("De manera enunciativa y no limitativa, las siguientes conductas se considerarán como usos indebidos del servicio: (i) comercializar el servicio sin autorización; (ii) utilizar herramientas de hardware o software para realizar llamadas masivas o envío masivo de mensajes de texto; entre otros. Para mayor detalle, visitar el siguiente enlace [www.flashmobile.pe]\n\n")
+        txtTerms.append("De manera enunciativa y no limitativa, las siguientes conductas se considerarán como usos indebidos del servicio: (i) comercializar el servicio sin autorización; (ii) utilizar herramientas de hardware o software para realizar llamadas masivas o envío masivo de mensajes de texto; entre otros. Para mayor detalle, visitar www.flashmobile.pe\n\n")
 
         subT1 = SpannableString("DESACTIVACIÓN O BAJA DEL SERVICIO POR NO USO\n")
         subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
         txtTerms.append(subT1)
-        txtTerms.append("Cuando no hagas uso del servicio (no recibas ni generes comunicaciones, ni actives tarjetas prepago o recargas y no tengas saldos vigentes), durante más de doscientos diez (210) días, podremos desactivar tu línea, previo aviso de quince (15) días hábiles de la fecha de desactivación y el saldo no se podrá recuperar\n")
-        txtTerms.append("Cuando no hagas uso del servicio (no recibas ni generes comunicaciones, ni actives tarjetas prepago o recargas y no tengas saldos vigentes), durante más de ciento veinte (120) días, podremos desactivar tu línea, previo aviso de quince (15) días hábiles de la fecha de desactivación.\n\n")
+        txtTerms.append("Cuando no hagas uso del servicio (no tengas saldos acumulados, no generes comunicaciones, ni actives tarjetas prepago o recargas), podremos desactivar tu línea, previo aviso de 15 días hábiles a la fecha de desactivación.\n")
 
         subT1 = SpannableString("AUTORIZACIÓN PARA TRATAMIENTO DE DATOS PERSONALES\n")
         subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
         txtTerms.append(subT1)
         txtTerms.append("Usted conoce que la información vinculada o que pueda ser asociada a usted (los “Datos Personales”) será incorporada a un banco de datos de titularidad de Flash; por lo que, otorga su consentimiento de manera previa, libre, expresa inequívoca e informada a Flash para, incluidos, sin limitación, su recolección, uso, administración, análisis, segmentación, almacenamiento, transmisión, transferencia y/o supresión (el “Tratamiento”).\n")
-        txtTerms.append("Cualquier consulta o reclamo en relación con el Tratamiento de los Datos Personales del Abonado podrá dirigirse a la siguiente dirección de correo electrónico: soporte.clientes@flashmobile.pe.\n")
-        txtTerms.append("Flash podrá ceder, traspasar en forma total o parcial los derechos y/u obligaciones de este contrato, pero te avisaremos oportunamente.\n")
-        txtTerms.append("La información personal puede incluir, entre otros, información de identificación (como nombre, número de tarjeta de identificación y edad), información de contacto (número de teléfono, dirección de correo electrónico y domicilio) e información financiera. El manejo de los Datos Personales será realizado según el Aviso de Privacidad para los Usuarios del Servicio de Flash, siendo dicha política visible en www,flashmobile.pe]. Flash podrá realizar el Tratamiento a través de sus trabajadores, consultores, asesores y/o terceros encargados para tal efecto. El abonado declara que ha sido informado sobre sus derechos como titular de los Datos Personales, entre los que se encuentran los derechos de acceso, actualización, inclusión, rectificación, cancelación y oposición.\n\n")
 
-        subT1 = SpannableString("TERMINACIÓN CESIÓN DEL CONTRATO\n")
+        //txtTerms.append("Cualquier consulta o reclamo en relación con el Tratamiento de los Datos Personales del Abonado podrá dirigirse a la siguiente dirección de correo electrónico: soporte.clientes@flashmobile.pe.\n")
+        //txtTerms.append("Flash podrá ceder, traspasar en forma total o parcial los derechos y/u obligaciones de este contrato, pero te avisaremos oportunamente.\n")
+        //txtTerms.append("La información personal puede incluir, entre otros, información de identificación (como nombre, número de tarjeta de identificación y edad), información de contacto (número de teléfono, dirección de correo electrónico y domicilio) e información financiera. El manejo de los Datos Personales será realizado según el Aviso de Privacidad para los Usuarios del Servicio de Flash, siendo dicha política visible en www,flashmobile.pe]. Flash podrá realizar el Tratamiento a través de sus trabajadores, consultores, asesores y/o terceros encargados para tal efecto. El abonado declara que ha sido informado sobre sus derechos como titular de los Datos Personales, entre los que se encuentran los derechos de acceso, actualización, inclusión, rectificación, cancelación y oposición.\n\n")
+
+        subT1 = SpannableString("CESIÓN DEL CONTRATO\n")
+        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
+        txtTerms.append(subT1)
+        txtTerms.append("Flash podrá ceder, traspasar en forma total o parcial los derechos y/u obligaciones de este contrato, pero te avisaremos oportunamente.\n\n")
+
+        subT1 = SpannableString("TERMINACIÓN\n")
         subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
         txtTerms.append(subT1)
         txtTerms.append("Puedes desactivar tu línea cuando quieras haciendo tu solicitud a través de cualquiera de nuestros Medios de atención.\n\n")
-
     }
 
     private fun settingTermAcceptText() {

@@ -79,6 +79,9 @@ class FormPhoneFragment : Fragment() {
         btn_continue.setOnClickListener {
             clickListenerForBtnContinue()
         }
+        tvTermsLabel.setOnClickListener {
+            clickListenerFortvTermsLabel()
+        }
     }
 
     private fun checkPortabilityArtificial(): Boolean {
@@ -138,11 +141,15 @@ class FormPhoneFragment : Fragment() {
         return estado;
     }
 
+    private fun clickListenerFortvTermsLabel() {
+
+    }
+
     private fun clickListenerForBtnContinue() {
         var Terms = getTerms();
 
         if (this.validatorMatrix.checkValidity()
-            || Terms == false
+            && Terms == true
         ) {
 
             val activationPOJO = ActivationPOJO(
