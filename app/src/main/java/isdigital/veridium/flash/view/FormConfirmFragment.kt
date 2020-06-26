@@ -1,7 +1,6 @@
 package isdigital.veridium.flash.view
 
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -58,7 +57,11 @@ class FormConfirmFragment : Fragment() {
     private fun showInformation() {
 
         tvName.text = tvName.text.toString() + resources.getString(R.string.label_colon)
-        tvLastName.text = tvLastName.text.toString() + resources.getString(R.string.label_colon)
+        tvPaternalLastName.text =
+            tvPaternalLastName.text.toString() + resources.getString(R.string.label_colon)
+        tvMaternalLastName.text =
+            tvMaternalLastName.text.toString() + resources.getString(R.string.label_colon)
+
         tvDateOfBirth.text =
             tvDateOfBirth.text.toString() + resources.getString(R.string.label_colon)
         tvSponsorTeamId.text =
@@ -70,12 +73,14 @@ class FormConfirmFragment : Fragment() {
 
         tvDniResumen.text = oActivation.dni
         tvNameResumen.text = oActivation.name
-        tvLastNameResumen.text = oActivation.lastName
+        tvPaternalLastNameResumen.text = oActivation.paternalLastName
+        tvMaternalLastNameResumen.text = oActivation.maternalLastName
         tvDateOfBirthResumen.text = oActivation.birthDate
         tvEmailResumen.text = oActivation.email
+        tvPopulatedCenterResumen.text = oActivation.populatedCenter
 
+        lySponsorTeamId.visibility = View.VISIBLE
         if (oActivation.sponsorTeamId != "") {
-            lySponsorTeamId.visibility = View.VISIBLE
             tvSponsorTeamId.visibility = View.VISIBLE
             tvSponsorTeamIdResumen.visibility = View.VISIBLE
             tvSponsorTeamIdResumen.text = oActivation.sponsorTeamId

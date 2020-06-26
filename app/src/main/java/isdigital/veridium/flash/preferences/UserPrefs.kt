@@ -27,7 +27,8 @@ object UserPrefs {
     private const val ACTIVATION_FORM_ID = "flash.user.prefs.ACTIVATION_FORM_ID"
     private const val ACTIVATION_DNI = "flash.user.prefs.ACTIVATION_DNI"
     private const val ACTIVATION_NAME = "flash.user.prefs.ACTIVATION_NAME"
-    private const val ACTIVATION_LASTNAME = "flash.user.prefs.ACTIVATION_LASTNAME"
+    private const val ACTIVATION_PATERNAL_LASTNAME = "flash.user.prefs.ACTIVATION_PATERNAL_LASTNAME"
+    private const val ACTIVATION_MATERNAL_LASTNAME = "flash.user.prefs.ACTIVATION_MATERNAL_LASTNAME"
     private const val ACTIVATION_BIRTHDATE = "flash.user.prefs.ACTIVATION_BIRTHDATE"
     private const val ACTIVATION_EMAIL = "flash.user.prefs.ACTIVATION_EMAIL"
     private const val ACTIVATION_WANT_TO_PORTABILITY =
@@ -37,6 +38,10 @@ object UserPrefs {
     private const val ACTIVATION_ICCID = "flash.user.prefs.ACTIVATION_ICCID"
     private const val ACTIVATION_CURRENTCOMPANY = "flash.user.prefs.ACTIVATION_CURRENTCOMPANY"
     private const val ACTIVATION_PLANTYPE = "flash.user.prefs.ACTIVATION_PLANTYPE"
+    private const val POPULATED_CENTER = "flash.user.prefs.POPULATED_CENTER"
+    private const val COVERAGE_POPULATED_CENTER = "flash.user.prefs.COVERAGE_POPULATED_CENTER"
+    private const val ACCEPT_TERMS_COVERAGE_POPULATED_CENTER =
+        "flash.user.prefs.ACCEPT_TERMS_COVERAGE_POPULATED_CENTER"
     private const val API_TOKEN = "API_TOKEN"
 
     private const val SCANNER_BEST_FINGERPRINT_LEFT = "flash.user.prefs.fingerprint.left"
@@ -83,7 +88,8 @@ object UserPrefs {
             remove(ACTIVATION_FORM_ID)
             remove(ACTIVATION_DNI)
             remove(ACTIVATION_NAME)
-            remove(ACTIVATION_LASTNAME)
+            remove(ACTIVATION_PATERNAL_LASTNAME)
+            remove(ACTIVATION_MATERNAL_LASTNAME)
             remove(ACTIVATION_BIRTHDATE)
             remove(ACTIVATION_EMAIL)
             remove(ACTIVATION_WANT_TO_PORTABILITY)
@@ -91,6 +97,9 @@ object UserPrefs {
             remove(ACTIVATION_PHONENUMBER)
             remove(ACTIVATION_CURRENTCOMPANY)
             remove(ACTIVATION_PLANTYPE)
+            remove(POPULATED_CENTER)
+            remove(COVERAGE_POPULATED_CENTER)
+            remove(ACCEPT_TERMS_COVERAGE_POPULATED_CENTER)
             remove(ACTIVATION_ICCID)
         }
     }
@@ -144,7 +153,8 @@ object UserPrefs {
             putString(ACTIVATION_DNI, activation.dni)
 
             putString(ACTIVATION_NAME, activation.name)
-            putString(ACTIVATION_LASTNAME, activation.lastName)
+            putString(ACTIVATION_PATERNAL_LASTNAME, activation.paternalLastName)
+            putString(ACTIVATION_MATERNAL_LASTNAME, activation.maternalLastName)
             putString(ACTIVATION_BIRTHDATE, activation.birthDate)
             putString(ACTIVATION_EMAIL, activation.email)
             putBoolean(ACTIVATION_WANT_TO_PORTABILITY, activation.wantPortability)
@@ -153,6 +163,12 @@ object UserPrefs {
             putString(ACTIVATION_PHONENUMBER, activation.phoneNumber)
             putString(ACTIVATION_CURRENTCOMPANY, activation.currentCompany)
             putString(ACTIVATION_PLANTYPE, activation.planType)
+            putString(POPULATED_CENTER, activation.populatedCenter)
+            putString(COVERAGE_POPULATED_CENTER, activation.coveragePopulatedCenter)
+            putString(
+                ACCEPT_TERMS_COVERAGE_POPULATED_CENTER,
+                activation.acceptTermsCoveragePopulatedCenter
+            )
         }
     }
 
@@ -162,7 +178,8 @@ object UserPrefs {
             val dni = getString(ACTIVATION_DNI, "")
 
             val name = getString(ACTIVATION_NAME, "")
-            val lastName = getString(ACTIVATION_LASTNAME, "")
+            val paternalLastName = getString(ACTIVATION_PATERNAL_LASTNAME, "")
+            val maternalLastName = getString(ACTIVATION_MATERNAL_LASTNAME, "")
             val birthDate = getString(ACTIVATION_BIRTHDATE, "")
             val email = getString(ACTIVATION_EMAIL, "")
             val wantToPortability = getBoolean(ACTIVATION_WANT_TO_PORTABILITY, false)
@@ -172,17 +189,25 @@ object UserPrefs {
             val currentCompany = getString(ACTIVATION_CURRENTCOMPANY, "")
             val planType = getString(ACTIVATION_PLANTYPE, "")
 
+            val populatedCenter = getString(POPULATED_CENTER, "")
+            val coveragePopulatedCenter = getString(COVERAGE_POPULATED_CENTER, "")
+            val acceptTermsCoveragePopulatedCenter = getString(ACCEPT_TERMS_COVERAGE_POPULATED_CENTER, "")
+
             val form = ActivationPOJO(
                 dni!!,
                 name!!,
-                lastName!!,
+                paternalLastName!!,
+                maternalLastName!!,
                 birthDate!!,
                 email!!,
                 wantToPortability,
                 sponsorTeamId,
                 phoneNumber,
                 currentCompany,
-                planType
+                planType,
+                populatedCenter!!,
+                coveragePopulatedCenter!!,
+                acceptTermsCoveragePopulatedCenter!!
             )
 
             form.formId = formId

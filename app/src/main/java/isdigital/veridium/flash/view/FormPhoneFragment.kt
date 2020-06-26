@@ -1,11 +1,14 @@
 package isdigital.veridium.flash.view
 
 
-import android.content.res.Resources
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -17,6 +20,7 @@ import kotlinx.android.synthetic.main.form_phone_fragment.*
 import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.model.pojo.ActivationPOJO
 import isdigital.veridium.flash.preferences.UserPrefs
+import isdigital.veridium.flash.util.CustomTypefaceSpan
 import isdigital.veridium.flash.util.PLAN_TYPES
 
 /**
@@ -37,13 +41,14 @@ class FormPhoneFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        settingTermAcceptText()
         this.validatorMatrix =
             MasterValidation()
                 .valid(etPhoneNumber, true, ::checkPortabilityArtificial)
                 .required()
                 .startWith("9", "El número telefónico debe empezar con 9")
-                .minLength(9,"El número telefónico debe contener 9 dígitos")
-                .maxLength(9,"El número telefónico debe contener 9 dígitos")
+                .minLength(9, "El número telefónico debe contener 9 dígitos")
+                .maxLength(9, "El número telefónico debe contener 9 dígitos")
                 .validateNumber()
                 .and()
                 .valid(etConfirmPhoneNumber, true, ::checkPortabilityArtificial)
@@ -65,6 +70,7 @@ class FormPhoneFragment : Fragment() {
             etConfirmPhoneNumber.setText(oActivation.phoneNumber)
             acCurrentCompany.setText(oActivation.currentCompany)
             acPlanType.setText(oActivation.planType)
+            chkTermsLabel.isChecked = true;
         }
 
         setAdapterToElement(operadorList, acCurrentCompany)
@@ -94,21 +100,66 @@ class FormPhoneFragment : Fragment() {
         elemento.setAdapter(adapter)
     }
 
-    private fun clickListenerForBtnContinue() {
+    private fun settingTermAcceptText() {
+        tvTermsLabel.text = ""
+        val termsText =
+            resources.getString(R.string.conditions_applicable_to_portability_check_accept)
+                .split("|")
+        val termsTextNb = termsText[0]
+        val termsTextBold = termsText[1]
+        val termsTextNb2 = termsText[2]
+        val prefixText = SpannableString(termsTextBold)
+        val prefixTextLen = prefixText.length
 
-        if (this.validatorMatrix.checkValidity()) {
+        prefixText.setSpan(
+            CustomTypefaceSpan("", ResourcesCompat.getFont(context!!, R.font.gotham_bold)!!),
+            0,
+            prefixTextLen,
+            0
+        )
+        prefixText.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.dark_purple
+                )
+            ), 0, prefixTextLen, 0
+        )
+        tvTermsLabel.append(termsTextNb)
+        tvTermsLabel.append(prefixText)
+        tvTermsLabel.append(termsTextNb2)
+    }
+
+    private fun getTerms(): Boolean {
+        var estado: Boolean = chkTermsLabel.isChecked
+        if (estado)
+            txtTermsLabel.error = ""
+        else txtTermsLabel.error = "   Debes aceptar las condiciones aplicables a la portabilidad"
+        return estado;
+    }
+
+    private fun clickListenerForBtnContinue() {
+        var Terms = getTerms();
+
+        if (this.validatorMatrix.checkValidity()
+            || Terms == false
+        ) {
 
             val activationPOJO = ActivationPOJO(
                 oActivation.dni,
                 oActivation.name,
-                oActivation.lastName,
+                oActivation.paternalLastName,
+                oActivation.maternalLastName,
                 oActivation.birthDate,
                 oActivation.email,
                 oActivation.wantPortability,
                 oActivation.sponsorTeamId,
                 etPhoneNumber.text.toString().trim(),
                 acCurrentCompany.text.toString().trim(),
-                acPlanType.text.toString().trim()
+                acPlanType.text.toString().trim(),
+                oActivation.populatedCenter,
+                oActivation.coveragePopulatedCenter,
+                oActivation.acceptTermsCoveragePopulatedCenter
             )
             UserPrefs.putActivation(FlashApplication.appContext, activationPOJO)
 

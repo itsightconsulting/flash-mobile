@@ -38,9 +38,15 @@
     <string name="flash_activation_form">Formato de activación</string>
     <string name="flash_activation_form_subtitle">Completa la siguiente información:</string>
     <string name="name">Nombre</string>
-    <string name="last_name">Apellido</string>
+    <string name="paternal_last_name">Apellido paterno</string>
+    <string name="maternal_last_name">Apellido materno</string>
     <string name="date_of_birth">Fecha de nacimiento</string>
     <string name="email_account">Correo electrónico</string>
+    <string name="usually_populated_center">Centro poblado de uso frecuente</string>
+    <string name="there_are_service_in_city">¿Hay cobertura en el Centro Poblado de Uso Frecuente?</string>
+    <string name="do_you_not_know_your_city_but_your_decide_accept">¿No conoces tu Centro Poblado de Uso Frecuente o no cuentas con cobertura, pero dejas constancia que quieres contratar el servicio?</string>
+    <string name="Yes">Si</string>
+    <string name="No">No</string>
     <string name="do_you_want_to_port">¿Quieres portar tu número?</string>
     <string name="do_you_want_to_port_negative_answer">No, quiero tener un nuevo número</string>
     <string name="do_you_want_to_port_positve_answer">Sí, quiero portar mi número actual</string>
@@ -66,6 +72,7 @@
     <string name="modify">Editar</string>
     <string name="dni">DNI:\u0020</string>
     <string name="email">Correo:\u0020</string>
+    <string name="city">Centro poblado:\u0020</string>
     <string name="sponsor_tid">Patrocinador</string>
     <string name="number_to_port">Número a portar:\u0020</string>
     <string name="mobile_operator">Operador móvil:\u0020</string>
@@ -74,6 +81,8 @@
     <string name="term_and_conditions">Términos y condiciones</string>
     <string name="term_and_conditions_detail">I. FLash Mobile Perú</string>
     <string name="term_and_conditions_check_accept">He leído y acepto| los términos y condiciones del servicio. Valido que mi información es verdadera.</string>
+    <string name="privacy_policy_personal_data_check_accept">He leído y acepto la| Política de privacidad de datos personales</string>
+    <string name="conditions_applicable_to_portability_check_accept">Declaro haber leido y estar informado sobre las| condiciones aplicables a la portabilidad| que he solicitado</string>
     <string name="accept">Aceptar</string>
 
 

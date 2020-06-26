@@ -245,14 +245,18 @@ fun orderInformationToArgsBase(
                 it.planType,
                 it.sponsorTeamId,
                 it.name,
-                it.lastName,
+                it.paternalLastName,
+                it.maternalLastName,
                 it.birthDate,
                 it.email,
                 it.wantPortability,
                 UUID.randomUUID().toString(),
                 it.currentCompany,
                 it.status,
-                it.creationDate
+                it.creationDate,
+                it.populatedCenter,
+                it.coveragePopulatedCenter,
+                it.acceptTermsCoveragePopulatedCenter
             )
         )
     }
@@ -270,14 +274,18 @@ fun orderInformationToArgs(
                 it.planType,
                 it.sponsorTeamId,
                 it.name,
-                it.lastName,
+                it.paternalLastName,
+                it.maternalLastName,
                 it.birthDate,
                 it.email,
                 it.wantPortability,
                 it.phoneNumber,
                 it.currentCompany,
                 it.formStatus,
-                it.creationDate
+                it.creationDate,
+                it.populatedCenter,
+                it.coveragePopulatedCenter,
+                it.acceptTermsCoveragePopulatedCenter
             )
         )
     }

@@ -71,7 +71,8 @@ class OrdersFragment : Fragment() {
                 oOrderInformation.id!!,
                 dni!!,
                 oOrderInformation.name!!,
-                oOrderInformation.lastName!!,
+                oOrderInformation.paternal_lastName!!,
+                oOrderInformation.maternal_lastName!!,
                 oOrderInformation.birthDate!!,
                 oOrderInformation.email!!,
                 oOrderInformation.wantPortability,
@@ -79,7 +80,10 @@ class OrdersFragment : Fragment() {
                 oOrderInformation.phoneNumber,
                 oOrderInformation.currentCompany,
                 oOrderInformation.planType,
-                oOrderInformation.formCreationDate
+                oOrderInformation.formCreationDate,
+                oOrderInformation.populatedCenter!!,
+                oOrderInformation.coveragePopulatedCenter!!,
+                oOrderInformation.acceptTermsCoveragePopulatedCenter!!
             )
 
             UserPrefs.putActivation(FlashApplication.appContext, oActivationPOJO)
@@ -89,7 +93,8 @@ class OrdersFragment : Fragment() {
                 oOrderInformation.id!!,
                 dni!!,
                 oOrderInformation.name!!,
-                oOrderInformation.lastName!!,
+                oOrderInformation.paternal_lastName!!,
+                oOrderInformation.maternal_lastName!!,
                 oOrderInformation.birthDate!!,
                 oOrderInformation.email!!,
                 oOrderInformation.wantPortability,
@@ -97,7 +102,10 @@ class OrdersFragment : Fragment() {
                 null,
                 null,
                 null,
-                oOrderInformation.formCreationDate
+                oOrderInformation.formCreationDate,
+                oOrderInformation.populatedCenter!!,
+                oOrderInformation.coveragePopulatedCenter!!,
+                oOrderInformation.acceptTermsCoveragePopulatedCenter!!
             )
 
             UserPrefs.putActivation(FlashApplication.appContext, oActivationPOJO)
