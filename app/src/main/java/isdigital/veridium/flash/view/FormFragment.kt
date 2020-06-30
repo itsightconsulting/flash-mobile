@@ -76,6 +76,7 @@ class FormFragment : Fragment() {
                 true
             else rbNoAcceptTermsCoveragePopulatedCenter.isChecked = true
 
+
         }
 
 
@@ -117,7 +118,17 @@ class FormFragment : Fragment() {
 
         // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
         etDateOfBirth.setOnClickListener {
-            buildDatePickerDialog(year, month, day, minDate)
+            if (etDateOfBirth.text.isNullOrEmpty())
+                buildDatePickerDialog(year, month, day, minDate)
+            else {
+//11/06/1998
+                val fechaSelect = etDateOfBirth.text!!.split("/");
+                val s_day = fechaSelect[0].toInt()
+                val s_month = fechaSelect[1].toInt() - 1
+                val s_year = fechaSelect[2].toInt()
+                buildDatePickerDialog(s_year, s_month, s_day, minDate)
+            }
+
         }
 
         btn_continue.setOnClickListener {
@@ -188,7 +199,7 @@ class FormFragment : Fragment() {
         if (rbNoCoveragePopulatedCenter.isChecked) estado = "No"
         if (rbYesCoveragePopulatedCenter.isChecked) estado = "Yes"
         if (estado == "")
-            txtCoveragePopulatedCenter.error = "   Por favor, selecciona una opción"
+            txtCoveragePopulatedCenter.error = "Por favor, selecciona una opción"
         else txtCoveragePopulatedCenter.error = ""
         return estado;
     }
@@ -198,7 +209,7 @@ class FormFragment : Fragment() {
         if (rbNoAcceptTermsCoveragePopulatedCenter.isChecked) estado = "No"
         if (rbYesAcceptTermsCoveragePopulatedCenter.isChecked) estado = "Yes"
         if (estado == "")
-            txtAcceptTermsCoveragePopulatedCenter.error = "   Por favor, selecciona una opción"
+            txtAcceptTermsCoveragePopulatedCenter.error = "Por favor, selecciona una opción"
         else txtAcceptTermsCoveragePopulatedCenter.error = ""
         return estado;
     }
@@ -208,7 +219,7 @@ class FormFragment : Fragment() {
         if (rbDoNotWantToPort.isChecked) estado = false
         if (rbWantToPort.isChecked) estado = true
         if (estado == null)
-            txtDoYouWantToPort.error = "   Por favor, selecciona una opción"
+            txtDoYouWantToPort.error = "Por favor, selecciona una opción"
         else txtDoYouWantToPort.error = ""
         return estado;
     }
@@ -217,7 +228,7 @@ class FormFragment : Fragment() {
         var estado: Boolean = chkTermsLabel.isChecked
         if (estado)
             txtTermsLabel.error = ""
-        else txtTermsLabel.error = "   Debes aceptar la Política de privacidad de datos personales"
+        else txtTermsLabel.error = "Debes aceptar la Política de privacidad de datos personales"
         return estado;
     }
 

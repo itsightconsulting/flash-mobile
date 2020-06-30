@@ -205,48 +205,63 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPopulatedCenter" />
 
-            <RadioGroup
-                android:id="@+id/rgCoveragePopulatedCenter"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:checked="true"
+            <LinearLayout
+                android:id="@+id/linearLayoutCoveragePopulatedCenter"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingLeft="4.0dip"
+                android:paddingTop="5.0dip"
+                android:paddingRight="4.0dip"
+                android:paddingBottom="1.0dip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvOptionGroup2">
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rbYesCoveragePopulatedCenter"
-                    style="@style/text_options_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Yes"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                <RadioGroup
+                    android:id="@+id/rgCoveragePopulatedCenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:checked="true"
+                    android:orientation="horizontal">
 
-                </com.google.android.material.radiobutton.MaterialRadioButton>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbYesCoveragePopulatedCenter"
+                        style="@style/text_options_radio"
+                        android:layout_width="0.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:text="@string/Yes"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rbNoCoveragePopulatedCenter"
-                    style="@style/text_options_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/No"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    </com.google.android.material.radiobutton.MaterialRadioButton>
 
-                </com.google.android.material.radiobutton.MaterialRadioButton>
-            </RadioGroup>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbNoCoveragePopulatedCenter"
+                        style="@style/text_options_radio"
+                        android:layout_width="0.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:text="@string/No"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                    </com.google.android.material.radiobutton.MaterialRadioButton>
+                </RadioGroup>
+            </LinearLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtCoveragePopulatedCenter"
                 style="@style/flash_input_layout"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rgCoveragePopulatedCenter"></com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCoveragePopulatedCenter"></com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView
@@ -260,48 +275,63 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtCoveragePopulatedCenter" />
 
-            <RadioGroup
-                android:id="@+id/rgAcceptTermsCoveragePopulatedCenter"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:checked="true"
+            <LinearLayout
+                android:id="@+id/linearLayoutAcceptTermsCoveragePopulatedCenter"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingLeft="4.0dip"
+                android:paddingTop="5.0dip"
+                android:paddingRight="4.0dip"
+                android:paddingBottom="1.0dip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvOptionGroup1">
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rbYesAcceptTermsCoveragePopulatedCenter"
-                    style="@style/text_options_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Yes"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                <RadioGroup
+                    android:id="@+id/rgAcceptTermsCoveragePopulatedCenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:checked="true"
+                    android:orientation="horizontal">
 
-                </com.google.android.material.radiobutton.MaterialRadioButton>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbYesAcceptTermsCoveragePopulatedCenter"
+                        style="@style/text_options_radio"
+                        android:layout_width="0.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:text="@string/Yes"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rbNoAcceptTermsCoveragePopulatedCenter"
-                    style="@style/text_options_radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/No"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    </com.google.android.material.radiobutton.MaterialRadioButton>
 
-                </com.google.android.material.radiobutton.MaterialRadioButton>
-            </RadioGroup>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbNoAcceptTermsCoveragePopulatedCenter"
+                        style="@style/text_options_radio"
+                        android:layout_width="0.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:text="@string/No"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                    </com.google.android.material.radiobutton.MaterialRadioButton>
+                </RadioGroup>
+            </LinearLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtAcceptTermsCoveragePopulatedCenter"
                 style="@style/flash_input_layout"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rgAcceptTermsCoveragePopulatedCenter">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutAcceptTermsCoveragePopulatedCenter">
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -354,8 +384,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtDoYouWantToPort"
                 style="@style/flash_input_layout"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rgDoYouWantToPort">
@@ -446,9 +477,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtTermsLabel"
                 style="@style/flash_input_layout"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:paddingLeft="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/LinearLayoutTerms">

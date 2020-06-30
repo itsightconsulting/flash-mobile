@@ -139,7 +139,7 @@ class FormPhoneFragment : Fragment() {
         var estado: Boolean = chkTermsLabel.isChecked
         if (estado)
             txtTermsLabel.error = ""
-        else txtTermsLabel.error = "   Debes aceptar las condiciones aplicables a la portabilidad"
+        else txtTermsLabel.error = "Debes aceptar las condiciones aplicables a la portabilidad"
         return estado;
     }
 

@@ -351,7 +351,6 @@ class BiometricFragment : Fragment(),
                     if (!biometricViewModel.loadError.value!!) {
                         val form = UserPrefs.getActivation(context)
                         form.iccid = UserPrefs.getIccid(context)
-
                         activationViewModel.sendFormWithStatus(
                             PartnerData.formPreparation(
                                 form, passBarcode = true, passBiometric = true
@@ -364,7 +363,6 @@ class BiometricFragment : Fragment(),
                         if (attemps == MAX_BIOMETRIC_SCANNER_TEMPS) {
                             val form = UserPrefs.getActivation(context)
                             form.iccid = UserPrefs.getIccid(context)
-
                             this.activationViewModel.loading.value = false
                             activationViewModel.sendFormWithStatus(
                                 PartnerData.formPreparation(
