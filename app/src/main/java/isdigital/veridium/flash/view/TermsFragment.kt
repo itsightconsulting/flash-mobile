@@ -78,7 +78,7 @@ class TermsFragment : Fragment() {
         subT1 = SpannableString("TARIFAS\n")
         subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
         txtTerms.append(subT1)
-        txtTerms.append("En el siguiente enlace www.flashmobile.pe/planes encontrarás la siguiente información sobre las tarifas vigentes. A continuación, detallamos las velocidades de Internet ofrecidas, de acuerdo a la cobertura y tecnología:\n")
+        txtTerms.append("En el siguiente enlace www.flashmobile.pe/planes encontrarás la siguiente información sobre las tarifas vigentes. A continuación, detallamos las velocidades de Internet ofrecidas, de acuerdo a la cobertura y tecnología:\n\n")
         txtTerms.append("- Cobertura y Tecnología\n")
         txtTerms.append("\t + 2G\n")
         txtTerms.append("\t + 3G\n")

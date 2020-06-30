@@ -218,6 +218,18 @@ fun errorBarCodeValidation(context: Context): Dialog {
     return dialog
 }
 
+fun invokerTermContent(context: Context): Dialog {
+    val dialog = Dialog(context)
+    dialog.setContentView(R.layout.terms_content)
+    dialog.setCanceledOnTouchOutside(false)
+    dialog.setCancelable(false)
+    dialog.window!!.setLayout(
+        (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+        WindowManager.LayoutParams.WRAP_CONTENT
+    )
+    return dialog
+}
+
 fun Parcel.writeBooleanMe(flag: Boolean?) {
     when (flag) {
         true -> writeInt(1)

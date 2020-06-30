@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnClose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:overScrollMode="never"
+            android:scrollbarStyle="insideOverlay">
+
+            <TextView
+                android:id="@+id/txtTerms"
+                style="@style/text_options_check_dark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/terms_border"
+                android:lineSpacingMultiplier="1.2"
+                android:padding="12dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:singleLine="false"
+                tools:text="@string/terms_wildcard" />
+        </ScrollView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnClose"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_weight="0.5"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/gotham_bold"
+        android:text="@string/btn_close"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/purple"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -157,6 +157,7 @@
     <string name="error_alert">¡Ha ocurrido un error!</string>
     <string name="btn_aceptar">Aceptar</string>
     <string name="btn_cancelar">Cancelar</string>
+    <string name="btn_close">Cerrar</string>
     <string name="temp_left_finger">Pulgar izquierdo</string>
     <string name="temp_right_finger">Pulgar derecho</string>
     <string name="lbl_iccid">ICCID:</string>
