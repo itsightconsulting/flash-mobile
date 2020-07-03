@@ -102,6 +102,7 @@ class FormFragment : Fragment() {
             .email()
             .and()
             .valid(etSponserTeamID, true)
+            .required()
             .minLength(2)
             .maxLength(10)
             .validateNumber()
@@ -214,7 +215,7 @@ class FormFragment : Fragment() {
         return estado;
     }
 
-    private fun getwantPortability(): Boolean? {
+    private fun getWantPortability(): Boolean? {
         var estado: Boolean? = null
         if (rbDoNotWantToPort.isChecked) estado = false
         if (rbWantToPort.isChecked) estado = true
@@ -246,106 +247,88 @@ class FormFragment : Fragment() {
 
         txtTerms.text = ""
 
-        var subT1 = SpannableString("\nPolítica de privacidad de datos personales\n\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-
-        subT1 = SpannableString("CONDICIONES GENERALES DEL SERVICIO EN MODALIDAD PREPAGO\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("Este contrato lo celebramos FLASH SERVICIOS PERÚ S.R.L., con RUC 20604775834 con domicilio en Av. Primavera 517, oficina 405, distrito de San Borja, a través de la marca FLASH MOBILE (“Flash”) y usted.\n\n")
-
-        subT1 = SpannableString("EL SERVICIO\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("Nos comprometemos a prestarte los servicios que elijas de telefonía móvil, mensajes de texto (SMS) y/o internet en modalidad prepago. Los servicios son ofrecidos bajo la modalidad de recargas; de manera que, podrás acceder a los servicios previo pago de la tarifa correspondiente al plan de la recarga que elijas de acuerdo a tus necesidades.\n\n")
-
-        subT1 = SpannableString("PLAZO\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("Indeterminado.\n\n")
-
-        subT1 = SpannableString("CONDICIONES Y LIMITACIONES DEL SERVICIO\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("La calidad de los servicios contratados depende de: (i) la ubicación (estructura y altura del lugar donde utilizas el servicio; por ejemplo, ascensores, sótanos, túneles, cerros), (ii) las características técnicas, configuración y capacidades del equipo que tengas, (iii) la capacidad contratada, (iv) el uso de aplicaciones “peer to peer” (P2P) o aplicaciones similares, (v) volumen de tráfico y congestión de red; y, (vi) cualquiera causa externa (clima, sismo, hechos de terceros, etc).\n")
-        txtTerms.append("Para conocer las áreas de cobertura entra a www.flashmobile.pe\n\n")
-
-        subT1 = SpannableString("TARIFAS\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("En el siguiente enlace www.flashmobile.pe/planes encontrarás la siguiente información sobre las tarifas vigentes. A continuación, detallamos las velocidades de Internet ofrecidas, de acuerdo a la cobertura y tecnología:\n\n")
-        txtTerms.append("- Cobertura y Tecnología\n")
-        txtTerms.append("\t + 2G\n")
-        txtTerms.append("\t + 3G\n")
-        txtTerms.append("\t + 4G\n")
-        txtTerms.append("\n")
-        txtTerms.append("- Velocidad contratada (baja/subida)\n")
-        txtTerms.append("\t + 0.013Mbps / 0.013 Mbps\n")
-        txtTerms.append("\t + 1Mbps / 0.1 Mbps\n")
-        txtTerms.append("\t + 5 Mbps / 1 Mbps\n")
-        txtTerms.append("\n")
-        txtTerms.append("- Velocidad mínima garantizada (bajada/subida)\n")
-        txtTerms.append("\t + 0.005Mbps / 0.005 Mbps\n")
-        txtTerms.append("\t + 0.4 Mbps / 0.04 Mbps\n")
-        txtTerms.append("\t + 2Mbps / 0.4 Mbps\n")
-        txtTerms.append("\n")
+        //var subT1 = SpannableString("\nPolítica de privacidad de datos personales\n\n")
+        //subT1 = SpannableString("EL SERVICIO\n")
+        //subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
+        //txtTerms.append(subT1)
         txtTerms.append(
-            "Costo por minutos en llamadas por demanda: S/ 0.49 " +
-                    "La información personal puede incluir, entre otros, información de identificación (como nombre, número de tarjeta de identificación y edad), " +
-                    "información de contacto (número de teléfono, dirección de correo electrónico y domicilio) e información financiera. " +
-                    "Flash podrá realizar el Tratamiento a través de sus trabajadores, consultores, asesores y/o terceros encargados para tal efecto. " +
-                    "El abonado declara que ha sido informado sobre sus derechos como titular de los Datos Personales, " +
-                    "entre los que se encuentran los derechos de acceso, actualización, inclusión, rectificación, cancelación y oposición. " +
-                    "Cualquier consulta o reclamo en relación con el Tratamiento de los Datos Personales del Abonado podrá dirigirse a la siguiente dirección de correo electrónico soporte.clientes@flashmobile.pe.\n\n"
+            "\nFLASH Servicios Perú S.R.L. (“FLASH”) se compromete a observar los principios de legalidad, consentimiento, información, calidad, " +
+                    "propósito, proporcionalidad y responsabilidad establecidos por la Ley 29733 Ley de Protección de Datos Personales y su Reglamento aprobado por " +
+                    "el Decreto 003-2013-JUS. En este sentido, FLASH es responsable del tratamiento de la información personal “Información Personal” que ha recopilado " +
+                    "o que recopilará en el futuro y del uso de dicha información y su debida protección. Los términos en mayúscula utilizados pero no definidos en este " +
+                    "Aviso de Privacidad se definen como se especifica en el Contrato. Usted (“Usuario”) por el presente reconoce y acepta que FLASH es el propietario de " +
+                    "la base de datos en la cual se almacena toda su información Personal. FLASH se compromete a proteger la privacidad de la Información Personal de sus " +
+                    "Usuarios. FLASH protege la Información Personal al mantener estrictas garantías físicas, electrónicas y de procedimiento que cumplen o exceden las " +
+                    "leyes y regulaciones aplicables. Por el presente, el Usuario reconoce y acepta que FLASH puede compartir la Información Personal de los Usuarios " +
+                    "con compañías relacionadas con FLASH dentro y fuera del país (flujo transfronterizo de datos personales), de acuerdo con la legislación vigente, " +
+                    "para los fines relacionados con los negocios de FLASH, de acuerdo a lo establecido en este Aviso de Privacidad. En este contexto. FLASH informa " +
+                    "al Usuario sobre los propósitos del tratamiento que se le dará a su Información Personal:\n\n"
         )
 
-        subT1 = SpannableString("SERVICIO FUERA DEL PAÍS (ROAMING)\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("Inicialmente no tendremos este servicio disponible en la República del Perú\n\n")
-
-        subT1 = SpannableString("TRANSFERENCIA DE SALDO\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("La vigencia de las recargas es de mínimo sesenta (60) días.  Si durante la vigencia no consumes todo el valor de tu recarga, el saldo se sumará automáticamente a cualquier nueva recarga que hagas dentro de los treinta (30) días siguientes.\n")
-        txtTerms.append("Si no haces una recarga dentro de los treinta (30) días siguientes a que se venza tu recarga, el saldo que no hayas consumido se perderá, salvo que te hayamos ofrecido recargas con vigencia superior o indeﬁnida.\n\n")
-
-        subT1 = SpannableString("REEMBOLSO TARJETAS DE CRÉDITO/ DÉBITO\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("Para la solicitud de reembolso de transacciones realizadas con tarjeta de crédito o tarjeta débito, deberás solicitar el reembolso directamente por el chat de Servicio al Cliente o por correo electrónico al buzón de correo: soporte.clientes@flashmobile.pe argumentando su interés en un reembolso y adjuntando la certiﬁcación bancaria de la cuenta de ahorros o cuenta corriente del propietario de la tarjeta con la que se realizó la transacción.\n\n")
-
-        subT1 = SpannableString("USO INDEBIDO DEL SERVICIO\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("El uso de los servicios es estrictamente personal e intransferible. En caso Flash detectara un uso indebido del Servicio, seguirá el procedimiento establecido en la Resolución de Consejo Directivo N° 060-2006-CD/OSIPTEL que aprueba la “Norma que establece el Procedimiento que aplicaran las empresas operadoras para la suspensión cautelar y el corte definitivo por uso indebido de los servicios públicos de telecomunicaciones”, o la normativa que lo sustituya.\n")
-        txtTerms.append("De manera enunciativa y no limitativa, las siguientes conductas se considerarán como usos indebidos del servicio: (i) comercializar el servicio sin autorización; (ii) utilizar herramientas de hardware o software para realizar llamadas masivas o envío masivo de mensajes de texto; entre otros. Para mayor detalle, visitar www.flashmobile.pe\n\n")
-
-        subT1 = SpannableString("DESACTIVACIÓN O BAJA DEL SERVICIO POR NO USO\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("Cuando no hagas uso del servicio (no tengas saldos acumulados, no generes comunicaciones, ni actives tarjetas prepago o recargas), podremos desactivar tu línea, previo aviso de 15 días hábiles a la fecha de desactivación.\n")
-
-        subT1 = SpannableString("AUTORIZACIÓN PARA TRATAMIENTO DE DATOS PERSONALES\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("Usted conoce que la información vinculada o que pueda ser asociada a usted (los “Datos Personales”) será incorporada a un banco de datos de titularidad de Flash; por lo que, otorga su consentimiento de manera previa, libre, expresa inequívoca e informada a Flash para, incluidos, sin limitación, su recolección, uso, administración, análisis, segmentación, almacenamiento, transmisión, transferencia y/o supresión (el “Tratamiento”).\n")
-
-        subT1 = SpannableString("CESIÓN DEL CONTRATO\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("Flash podrá ceder, traspasar en forma total o parcial los derechos y/u obligaciones de este contrato, pero te avisaremos oportunamente.\n\n")
-
-        subT1 = SpannableString("TERMINACIÓN\n")
-        subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        txtTerms.append(subT1)
-        txtTerms.append("Puedes desactivar tu línea cuando quieras haciendo tu solicitud a través de cualquiera de nuestros Medios de atención.\n\n")
+        txtTerms.append(
+            "1. La Información Personal proporcionada por el Usuario a FLASH será materia de tratamiento para los siguientes propósitos: (i) " +
+                    "para proporcionar servicios al Usuario; (ii) gestionar las compras de productos y servicios de FLASH por parte del Usuario; (iii) " +
+                    "para fines comerciales, incluida la entrega de productos y servicios; (iv) para fines fiscales y de facturación; (v) " +
+                    "para cumplir con las obligaciones de FLASH con el Usuario; (vi) para fines de control interno, incluyendo el suministro de " +
+                    "productos y servicios al Usuario; y (vii) para fines estadísticos, entre otros.\n\n"
+        )
+        txtTerms.append(
+            "2. Para los fines antes mencionados, FLASH puede recopilar Información Personal como nombre, teléfono, " +
+                    "dirección, correo electrónico, fecha de nacimiento, número de identificación, estado civil, nacionalidad, " +
+                    "sexo, edad, tarjeta de crédito e información de cuenta bancaria, dirección IP, así como otra información " +
+                    "proporcionada durante el plazo de la relación contractual con FLASH. Flash incluirá dicha información en la " +
+                    "base de datos de los Usuarios de FLASH, de acuerdo con los requisitos legales.\n\n\n"
+        )
+        txtTerms.append(
+            "3. El Usuario acepta y autoriza expresamente a FLASH a transferir su Información Personal a aquellos terceros que deben " +
+                    "obtener su Información Personal con el fin de procesar pagos, completando las compras de productos y servicios del Usuario " +
+                    "y gestionando la participación del Usuario dentro del sistema FLASH.\n\n\n"
+        )
+        txtTerms.append(
+            "4. Cada Usuario reconoce que FLASH puede compartir su Información Personal, incluyendo: nombre, correo electrónico, " +
+                    "número de teléfono y dirección física y otra Información Personal, con otros terceros. Uno de los propósitos principales " +
+                    "para compartir esta información es mejorar la efectividad de la herramienta de administración de contactos que está disponible " +
+                    "a través del Back Office de FLASH. Además, FLASH puede compartir la Información Personal del Usuario con empresas relacionadas " +
+                    "en Perú y en el extranjero (flujo transfronterizo de datos personales) para los fines establecidos en este documento.\n\n"
+        )
+        txtTerms.append(
+            "5. El Usuario reconoce y acepta que FLASH tratará la Información Personal, de acuerdo con los términos y condiciones " +
+                    "descritos en este Aviso de Privacidad al continuar el proceso de contratación para convertirse en un Usuario de FLASH. " +
+                    "Además, al continuar con el proceso de contratación, el Usuario acepta los propósitos del tratamiento de la Información " +
+                    "Personal, en los términos y condiciones establecidas en el presente Documento.\n\n"
+        )
+        txtTerms.append("6. El Usuario deberá contactar en www.flashperu.pe para más detalles sobre las prácticas de privacidad de FLASH.\n\n")
+        txtTerms.append(
+            "7. El Usuario puede revocar el consentimiento otorgado a FLASH para el procesamiento de la Información Personal " +
+                    "mediante una solicitud por escrito enviada a Avenida Primavera 517, Oficina 405, San Borja, Lima. Además, el " +
+                    "Usuario tendrá derecho a (i) tener acceso a la Información Personal del Usuario en posesión de FLASH y los " +
+                    "detalles de su procesamiento; (ii) actualizar o rectificar dicha Información Personal cuando sea inexacta o " +
+                    "incompleta; (iii) exigir la cancelación, eliminación o destrucción de su Información Personal y (iv) oponerse " +
+                    "al procesamiento de su Información Personal para fines específicos o porque existe una causa legítima para ello. " +
+                    "El Usuario puede ejercer los derechos de acceso, rectificación, cancelación y oposición mediante solicitud por " +
+                    "escrito con la siguiente información: nombre y dirección, documentos que prueben la identidad del Usuario o la " +
+                    "representación legal del Usuario; una descripción clara y precisa de la Información Personal sobre la que busca " +
+                    "ejercer cualquiera de estos derechos y de la solicitud. Esta solicitud debe enviarse a las oficinas de FLASH, ubicadas en " +
+                    "Avenida Primavera 517, Oficina 405, San Borja, Lima. FLASH responderá su solicitud dentro del período máximo permitido por la ley. " +
+                    "No obstante lo anterior, el Usuario reconoce y acepta que FLASH puede retener cierta información del Usuario que solicita la cancelación, " +
+                    "eliminación o destrucción de la Información personal para los fines permitidos por la ley aplicable, de conformidad con el  artículo 69 " +
+                    "del Reglamento de la Ley de Protección de Datos , aprobado por Decreto Supremo 003-2013-JUS.\n\n"
+        )
+        txtTerms.append(
+            "8. FLASH se reserva el derecho de actualizar y / o modificar los términos de este Aviso de Privacidad. " +
+                    "En caso que los cambios sean sobre una modificación o actualización esencial, FLASH comunicará esta situación " +
+                    "por adelantado por correo electrónico al Usuario.\n\n\n"
+        )
+        txtTerms.append("9. La información general de FLASH en Perú es la siguiente: Flash Services Perú S.R.L. www.flashperu.pe\n\n")
+        txtTerms.append(
+            "10. El Usuario declara haber leído y aceptado este Aviso de Privacidad, de forma expresa y gratuita. " +
+                    "En ese sentido, el Usuario acepta y autoriza a Flash al tratamiento de su Información Personal.\n\n"
+        )
     }
 
     private fun clickListenerForBtnContinue() {
 
-        var wantPortability = getwantPortability();
+        var wantPortability = getWantPortability();
         var coveragePopulatedCenter = getCoveragePopulatedCenter();
         var acceptTermsCoveragePopulatedCenter = getAcceptTermsCoveragePopulatedCenter();
         var Terms = getTerms();

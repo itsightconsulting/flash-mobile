@@ -26,13 +26,12 @@
             <TextView
                 android:id="@+id/txtTerms"
                 style="@style/text_options_check_dark"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/terms_border"
+                android:justificationMode="inter_word"
                 android:lineSpacingMultiplier="1.2"
                 android:padding="12dp"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="vertical"
                 android:singleLine="false"
                 tools:text="@string/terms_wildcard" />
         </ScrollView>

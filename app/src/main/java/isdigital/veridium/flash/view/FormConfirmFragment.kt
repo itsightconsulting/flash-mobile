@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.form_confirm_fragment.*
 import isdigital.veridium.flash.FlashApplication
 import isdigital.veridium.flash.model.pojo.ActivationPOJO
 import isdigital.veridium.flash.preferences.UserPrefs
+import isdigital.veridium.flash.util.hideSponsorTeamId
 
 /**
  * A simple [Fragment] subclass.
@@ -78,13 +79,7 @@ class FormConfirmFragment : Fragment() {
         tvDateOfBirthResumen.text = oActivation.birthDate
         tvEmailResumen.text = oActivation.email
         tvPopulatedCenterResumen.text = oActivation.populatedCenter
-
-        lySponsorTeamId.visibility = View.VISIBLE
-        if (oActivation.sponsorTeamId != "") {
-            tvSponsorTeamId.visibility = View.VISIBLE
-            tvSponsorTeamIdResumen.visibility = View.VISIBLE
-            tvSponsorTeamIdResumen.text = oActivation.sponsorTeamId
-        }
+        tvSponsorTeamIdResumen.text = hideSponsorTeamId(oActivation.sponsorTeamId!!)
 
         if (oActivation.wantPortability) {
             tvPhoneNumber.visibility = View.VISIBLE

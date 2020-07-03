@@ -14,7 +14,7 @@
     <string name="title_carrusel_2">Elige qué deseas hacer</string>
     <string name="description_carrusel_2">Comienza procesos de portabilidad para SIM Cards o activa nuevos números Flash</string>
     <string name="title_carrusel_3">Disfruta tu Flash Mobile</string>
-    <string name="description_carrusel_3">Sólo puedes activar 5 SIM Cards por DNI. Para activar más, ingresa un DNI distinto por cada 5 SIM Cards.</string>
+    <string name="description_carrusel_3">Por este medio sólo puedes activar 5 SIM Cards por DNI. Para activar más comunícate con nuestro equipo de Servicio a clientes</string>
     <string name="get_started">Iniciar</string>
 
     <!-- Step 3 -->
@@ -28,7 +28,7 @@
     <!-- List of web orders -->
     <string name="web_activation_orders">Órdenes de activación</string>
     <string name="web_activation_orders_description">Lista de órdenes que iniciaste desde nuestro sitio web. Elige las que quieras completar.</string>
-    <string name="web_activation_orders_info">Recuerda que sólo se permite hacer 5 activaciones por DNI.</string>
+    <string name="web_activation_orders_info">Recuerda que sólo se permite hacer 5 activaciones por DNI por este canal.</string>
     <string name="web_activation_order_type_ph">Activación y portabilidad </string>
     <string name="web_activation_order_date_ph">15/01/2020 at 09:45 am </string>
     <string name="web_activation_order_number_ph">Número telefónico:&#160;</string>
@@ -42,7 +42,7 @@
     <string name="maternal_last_name">Apellido materno</string>
     <string name="date_of_birth">Fecha de nacimiento</string>
     <string name="email_account">Correo electrónico</string>
-    <string name="usually_populated_center">Centro poblado de uso frecuente</string>
+    <string name="usually_populated_center">Centro poblado de Uso Frecuente</string>
     <string name="there_are_service_in_city">¿Hay cobertura en el Centro Poblado de Uso Frecuente?</string>
     <string name="do_you_not_know_your_city_but_your_decide_accept">¿No conoces tu Centro Poblado de Uso Frecuente o no cuentas con cobertura, pero dejas constancia que quieres contratar el servicio?</string>
     <string name="Yes">Si</string>
@@ -52,7 +52,6 @@
     <string name="do_you_want_to_port_positve_answer">Sí, quiero portar mi número actual</string>
     <string name="who_refered_you">¿Quién te refirió?</string>
     <string name="sponsor_tid_optional">Código del Patrocinador</string>
-    <string name="optional">- opcional -</string>
     <string name="text_continue">Siguiente</string>
 
     <!-- Step 2.2 -->
@@ -112,19 +111,19 @@
 
     <!-- Step 10 -->
     <string name="sim_activated">Información del ICCID</string>
-    <string name="sim_activated_successfully">Tu SIM Card Flash Mobile se activó con éxito</string>
+    <string name="sim_activated_successfully">Tu SIM Card Flash Mobile se activó con éxito.</string>
     <string name="sim_activated_greetings">¡Ahora eres parte de la familia Flash Mobile!</string>
     <string name="sim_activated_greetings_portability">Confirma y completa tu solicitud de portabilidad</string>
-    <string name="sim_activated_fl_message">Te enviamos un correo de conﬁrmación. Recuerda realizar una recarga mínima de S/1 para que tu línea quede activa.</string>
-    <string name="sim_activated_fl_message_portability">Para cambiarte a Flash, por favor ingresa el Pin de validación de 4 dígitos que te llegrá via SMS.</string>
+    <string name="sim_activated_fl_message">Te enviamos un correo de confirmación con una copia del contrato de abonado. A partir de este momento puedes recargar, como mínimo, S/1 para disfrutar de todos los beneficios de tu línea Flash</string>
+    <string name="sim_activated_fl_message_portability">Para cambiarte a Flash, por favor ingresa el Pin de validación de 4 dígitos que te llegará via SMS</string>
     <string name="sim_finalize">Finalizar</string>
     <string name="sim_finalize_portability">Ingresar el Pin</string>
-    <string name="sim_success">SIM Card activada</string>
-    <string name="sim_success_portability">SIM Card Pre activada</string>
+    <string name="sim_success">Proceso completado</string>
+    <string name="sim_success_portability">Proceso completado</string>
     <!-- Step 11 -->
     <string name="biometric">Validación biométrica</string>
     <string name="biometric_title">Selecciona la huella dactilar</string>
-    <string name="biometric_description">que quieres utilizar para la validación biométrica. Después haz clic en \"Siguiente\".</string>
+    <string name="biometric_description">que quieres utilizar para la validación biométrica. Al usar tu huella aceptas los términos y condiciones del servicio, y de la portabilidad si aplicara, presentados anteriormente.</string>
 
 
     <!-- Step 10 Error -->
@@ -161,7 +160,7 @@
     <string name="temp_left_finger">Pulgar izquierdo</string>
     <string name="temp_right_finger">Pulgar derecho</string>
     <string name="lbl_iccid">ICCID:</string>
-    <string name="date_format">dd/mm/yy</string>
+    <string name="date_format">dd/mm/aa</string>
     <string name="email_wildcard">\@</string>
     <string name="escaneo_completado">Escaneo completado</string>
     <string name="icon_title">Hm</string>

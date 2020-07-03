@@ -43,8 +43,8 @@ class PartnerData {
 
             body["dni"] = activation.dni
             body["name"] = activation.name
-            body["paternalLastName"] = activation.paternalLastName
             body["maternalLastName"] = activation.maternalLastName
+            body["paternalLastName"] = activation.paternalLastName
 
             //Come from new form
             if (activation.formId.isNullOrEmpty())
@@ -53,6 +53,9 @@ class PartnerData {
 
             body["birthDate"] = activation.birthDate
             body["email"] = activation.email
+            if (activation.wantPortability != null) {
+                body["wantPortability"] = activation.wantPortability.toString()
+            }
 
             body["populatedCenter"] = activation.populatedCenter.toString()
             body["coveragePopulatedCenter"] = activation.coveragePopulatedCenter.toString()
