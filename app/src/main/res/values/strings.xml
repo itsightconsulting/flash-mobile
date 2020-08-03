@@ -116,6 +116,7 @@
 
     <!-- Step 10 -->
     <string name="sim_activated">Información del ICCID</string>
+    <string name="scan_correctly">Forma correcta de escanear una SIM Card</string>
     <string name="sim_activated_successfully">Tu SIM Card Flash Mobile se activó con éxito.</string>
     <string name="sim_activated_greetings">¡Ahora eres parte de la familia Flash Mobile!</string>
     <string name="sim_activated_greetings_portability">Confirma y completa tu solicitud de portabilidad</string>

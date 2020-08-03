@@ -27,7 +27,7 @@
                 android:paddingStart="32dp"
                 android:paddingTop="14dp"
                 android:paddingBottom="14dp"
-                android:text="@string/sim_activated"
+                android:text="@string/scan_correctly"
                 android:textAlignment="textStart" />
         </FrameLayout>
 
