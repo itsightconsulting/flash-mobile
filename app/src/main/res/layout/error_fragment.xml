@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ErrorFragment"
-    android:background="@color/black_error">
+    android:background="@color/black_error"
+    tools:context=".view.ErrorFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,18 +44,47 @@
             android:lineSpacingMultiplier="1.3"
             android:text="@string/message_support"
             android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnGoToTutorial"
+            style="@style/button_dark_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/look_biometric_tutorial" />
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/text_description_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:lineSpacingMultiplier="1.3"
+            android:text="@string/message_support_bottom"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnExceptionActivation"
+            style="@style/button_dark_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/exception_activation" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnBackHome"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="48dp"
         android:layout_marginRight="48dp"
         android:layout_marginBottom="24dp"
-        android:text="@string/try_again"
+        android:background="@color/black_error"
+        android:backgroundTint="@color/black_error"
+        android:text="@string/finished"
+        android:textColor="@color/veridium_new_purple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/button_dark_error"/>
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

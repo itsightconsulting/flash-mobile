@@ -89,6 +89,11 @@
     <string name="sim_validation">Validación de SIM Card</string>
     <string name="sim_validation_subtitle">Información del ICCID</string>
     <string name="sim_validation_description">El ICCID (identiﬁcador de la tarjeta del circuito integrado) es un número único de cada SIM, que sirve para identiﬁcar el país, la red y el circuito a los que pertenece. </string>
+    <string name="sim_validation_tip_title">Tips para un escaneo exitoso</string>
+    <string name="sim_validation_tip_one">1. Saca la SIM Card del empaque para que se vea como en la imagen de arriba
+    \n\n2. Limpia la cámara de tu celular antes de iniciar
+    \n\n3. Evita generar sombras sobre la SIM Card al momento de hacer el proceso
+    \n\n4. Haz el proceso sobre un fondo uniforme. De preferencia en una superficie de un solo tono</string>
     <string name="sim_validation_option_two">Ingresa el número ICCID</string>
 
     <!-- Scan ICCID using the camera -->
@@ -127,9 +132,13 @@
 
 
     <!-- Step 10 Error -->
-    <string name="error_detail">Ocurrió un error durante el proceso de validación.</string>
-    <string name="message_support">Intenta de nuevo o contacta a nuestro Centro de Servicio a clientes.</string>
+    <string name="error_detail">¡Ocurrió un error! En este momento no pudimos confirmar que tus huellas digitales coincidan con el DNI ingresado en el formulario de inicio.</string>
+    <string name="message_support">Has alcanzado el límite de intentos para el proceso biométrico de identificación de huella dactilar. Debes iniciar el proceso nuevamente.</string>
+    <string name="message_support_bottom">Si ya intentaste el proceso varias veces y aún no logras confirmar que tus huellas digitales coincidan con el DNI ingresado en el formulario de inicio; debes realizar el proceso de activación por excepción.</string>
+    <string name="look_biometric_tutorial">Ver tutorial de biometría</string>
+    <string name="exception_activation">Realiza tu activación por excepción</string>
     <string name="try_again">Intenta de nuevo</string>
+    <string name="finished">Terminar</string>
     <string name="api_generic_error">Validación fallida</string>
 
     <!-- Step 8 Error -->
