@@ -85,6 +85,8 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
         ).observeOn(AndroidSchedulers.mainThread()).subscribeWith(
             object : DisposableSingleObserver<VerifyIccidResponse>() {
                 override fun onSuccess(t: VerifyIccidResponse) {
+                    Log.d("iccid", iccid.toString())
+                    Log.d("VerifyIccidResponse", t.toString())
                     val success: Boolean = (t.status.toInt() == 0 && t.code == "0000000000")
                     if (success) {
                         loadError.value = false
