@@ -190,6 +190,7 @@
                     style="@style/flash_edit_text"
                     android:digits="áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ#0123456789 "
                     android:inputType="text"
+                    android:hint="@string/lbl_city"
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>
 
