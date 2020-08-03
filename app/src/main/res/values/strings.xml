@@ -51,7 +51,7 @@
     <string name="do_you_want_to_port_negative_answer">No, quiero tener un nuevo número</string>
     <string name="do_you_want_to_port_positve_answer">Sí, quiero portar mi número actual</string>
     <string name="who_refered_you">¿Quién te refirió?</string>
-    <string name="sponsor_tid_optional">Código del Patrocinador</string>
+    <string name="sponsor_tid_optional">Código de Brand Leader</string>
     <string name="text_continue">Siguiente</string>
 
     <!-- Step 2.2 -->
@@ -185,4 +185,5 @@
     <string name="iccid_digits">20 dígitos</string>
     <string name="iccid_extra_information">El ICCID son los 20 números abajo del código de barras de tu tarjeta SIM</string>
     <string name="iccid_length">Asegúrate de escribir un número de ICCID de 20 dígitos</string>
+    <string name="lbl_city">Ciudad o población</string>
 </resources>
