@@ -111,11 +111,11 @@
 
     <!-- Step 10 -->
     <string name="sim_activated">Información del ICCID</string>
-    <string name="sim_activated_successfully">Tu SIM Card Flash Mobile se activó con éxito.</string>
+    <string name="sim_activated_successfully">¡Estamos activando tu SIM Card!</string>
     <string name="sim_activated_greetings">¡Ahora eres parte de la familia Flash Mobile!</string>
-    <string name="sim_activated_greetings_portability">Confirma y completa tu solicitud de portabilidad</string>
+    <string name="sim_activated_greetings_portability">Estas a solo una paso de completar tu portabilidad</string>
     <string name="sim_activated_fl_message">Te enviamos un correo de confirmación con una copia del contrato de abonado. A partir de este momento puedes recargar, como mínimo, S/1 para disfrutar de todos los beneficios de tu línea Flash</string>
-    <string name="sim_activated_fl_message_portability">Para cambiarte a Flash, por favor ingresa el Pin de validación de 4 dígitos que te llegará via SMS</string>
+    <string name="sim_activated_fl_message_portability">Si no puedes completar la portabilidad en la app o se genera algún error, ¡no te preocupes! Puedes hacerlo creando tu cuenta Flash en| mi.flashmobile.pe</string>
     <string name="sim_finalize">Finalizar</string>
     <string name="sim_finalize_portability">Ingresar el Pin</string>
     <string name="sim_success">Proceso completado</string>

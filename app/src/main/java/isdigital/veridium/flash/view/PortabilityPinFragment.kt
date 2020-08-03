@@ -1,6 +1,8 @@
 package isdigital.veridium.flash.view
 
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
 import android.view.*
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -53,4 +55,5 @@ class PortabilityPinFragment : Fragment() {
         inflater.inflate(R.menu.main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
+
 }
