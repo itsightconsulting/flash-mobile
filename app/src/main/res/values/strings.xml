@@ -90,11 +90,12 @@
     <string name="sim_validation_subtitle">Información del ICCID</string>
     <string name="sim_validation_description">El ICCID (identiﬁcador de la tarjeta del circuito integrado) es un número único de cada SIM, que sirve para identiﬁcar el país, la red y el circuito a los que pertenece. </string>
     <string name="sim_validation_tip_title">Tips para un escaneo exitoso</string>
-    <string name="sim_validation_tip_one">1. Saca la SIM Card del empaque para que se vea como en la imagen de arriba
-    \n\n2. Limpia la cámara de tu celular antes de iniciar
-    \n\n3. Evita generar sombras sobre la SIM Card al momento de hacer el proceso
-    \n\n4. Haz el proceso sobre un fondo uniforme. De preferencia en una superficie de un solo tono</string>
+    <string name="sim_validation_tip_one">1.| Saca la SIM Card del empaque para que se vea como en la imagen de arriba
+    \n\n|2.| Limpia la cámara de tu celular antes de iniciar
+    \n\n|3.| Evita generar sombras sobre la SIM Card al momento de hacer el proceso
+    \n\n|4.| Haz el proceso sobre un fondo uniforme. De preferencia en una superficie de un solo tono</string>
     <string name="sim_validation_option_two">Ingresa el número ICCID</string>
+    <string name="view_recomendations">Ver las recomendaciones</string>
 
     <!-- Scan ICCID using the camera -->
     <string name="qr_barcode_scanner">Qr BarCode Scanner</string>
@@ -145,6 +146,14 @@
     <!-- Step 8 Error -->
     <string name="error_in_scan">Error en el escaneo</string>
     <string name="error_in_barcode_validation">Error en la validación del ICCID</string>
+    <string name="error_remember_total_intents">Recuerda que tienes 3 intentos de escaneo, de lo contrario tendrás que realizar el proceso de nuevo.\nSigue las recomendaciones para un escaneo exitoso.</string>
+
+    <!-- Step 8 Error #2 -->
+    <string name="error_sim_card_activated">Esta SIM Card ya está activa</string>
+    <string name="error_sim_card_activated_description">Puedes insertarla en tu celular para obtener tu línea Flash y empezar a llamar y navegar.</string>
+    <string name="error_sim_card_activated_or_can">O puedes:</string>
+    <string name="error_sim_card_activated_solicitar_port">Solicitar tu portabilidad</string>
+    <string name="error_sim_card_activated_view_status">Ver el estado de tu portabilidad</string>
 
     <!-- External links -->
     <string name="chatExternalLink">https://atentoperu.s1gateway.com/pe/9de1462b40bef299137ee42f9750bd11658761d203da0b134d5629abf78120ccb43a0ed41c5ea8f7</string>

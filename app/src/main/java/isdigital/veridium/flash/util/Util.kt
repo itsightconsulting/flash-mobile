@@ -194,6 +194,18 @@ fun invokerBarcodeSuccess(context: Context): Dialog {
     return dialog
 }
 
+fun invokerBarcodeErrorActivado(context: Context): Dialog {
+    val dialog = Dialog(context)
+    dialog.setContentView(R.layout.info_barcode_actived)
+    dialog.setCanceledOnTouchOutside(false)
+    dialog.setCancelable(false)
+    dialog.window!!.setLayout(
+        (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+        WindowManager.LayoutParams.WRAP_CONTENT
+    )
+    return dialog
+}
+
 fun invokerBarcodeError(context: Context): Dialog {
     val dialog = Dialog(context)
     dialog.setContentView(R.layout.info_barcode_error)

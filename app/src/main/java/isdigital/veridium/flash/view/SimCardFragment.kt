@@ -6,10 +6,13 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.*
 import android.widget.Button
 import android.widget.RelativeLayout
@@ -64,6 +67,45 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         super.onViewCreated(view, savedInstanceState)
         viewModelInjections()
         eventListeners()
+        settingTipsText()
+    }
+
+    private fun settingTipsText() {
+        txtTipsList.text = ""
+        val tipsListText =
+            resources.getString(R.string.sim_validation_tip_one)
+                .split("|")
+        val tipTextBold = tipsListText[0]
+        val tipTextNB = tipsListText[1]
+
+        val tipTextBold2 = tipsListText[2]
+        val tipTextNB2 = tipsListText[3]
+
+        val tipTextBold3 = tipsListText[4]
+        val tipTextNB3 = tipsListText[5]
+
+        val tipTextBold4 = tipsListText[6]
+        val tipTextNB4 = tipsListText[7]
+
+        var tipBold = SpannableString(tipTextBold)
+        tipBold.setSpan(StyleSpan(Typeface.BOLD), 0, tipTextBold.length, 0)
+        txtTipsList.append(tipBold)
+        txtTipsList.append(tipTextNB)
+
+        tipBold = SpannableString(tipTextBold2)
+        tipBold.setSpan(StyleSpan(Typeface.BOLD), 0, tipTextBold2.length, 0)
+        txtTipsList.append(tipBold)
+        txtTipsList.append(tipTextNB2)
+
+        tipBold = SpannableString(tipTextBold3)
+        tipBold.setSpan(StyleSpan(Typeface.BOLD), 0, tipTextBold3.length, 0)
+        txtTipsList.append(tipBold)
+        txtTipsList.append(tipTextNB3)
+
+        tipBold = SpannableString(tipTextBold4)
+        tipBold.setSpan(StyleSpan(Typeface.BOLD), 0, tipTextBold2.length, 0)
+        txtTipsList.append(tipBold)
+        txtTipsList.append(tipTextNB4)
     }
 
     private fun viewModelInjections() {
@@ -364,11 +406,36 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         val diagError = invokerBarcodeError(context!!)
         diagError.show()
 
-        diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
+        /*diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
             diagError.dismiss()
             mScannerView.resumeCameraPreview(this)
             mScannerView.setResultHandler(this)
             mScannerView.startCamera()
+        }*/
+        diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
+            diagError.dismiss()
+        }
+    }
+
+    private fun ViewInfoSimCard() {
+        val diagError = invokerBarcodeErrorActivado(context!!)
+        diagError.show()
+        val openURL = Intent(Intent.ACTION_VIEW)
+        diagError.findViewById<Button>(R.id.btnSolicitarPort).setOnClickListener {
+            diagError.dismiss()
+            openURL.data = Uri.parse(REQUEST_PORTABILITY)
+            startActivity(openURL)
+        }
+
+        diagError.findViewById<Button>(R.id.btnVerEstado).setOnClickListener {
+            diagError.dismiss()
+            openURL.data = Uri.parse(VIEW_STATUS_SIM_CARD)
+            startActivity(openURL)
+        }
+
+        diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
+            diagError.dismiss()
+
         }
     }
 
