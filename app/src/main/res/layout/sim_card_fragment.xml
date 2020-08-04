@@ -21,14 +21,16 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                style="@style/pages_subtitle"
+                style="@style/text_description_error_bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham_bold"
                 android:paddingStart="32dp"
                 android:paddingTop="14dp"
                 android:paddingBottom="14dp"
                 android:text="@string/scan_correctly"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:textColor="@color/white" />
         </FrameLayout>
 
         <FrameLayout

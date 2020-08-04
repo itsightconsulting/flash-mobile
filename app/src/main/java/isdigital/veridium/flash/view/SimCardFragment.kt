@@ -413,6 +413,8 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             mScannerView.startCamera()
         }*/
         diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
+            mScannerView.stopCamera()
+            dialog?.dismiss()
             diagError.dismiss()
         }
     }
@@ -434,8 +436,13 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         }
 
         diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
-            diagError.dismiss()
-
+            UserPrefs.resetUserBarscanAttempts(context)
+            dialog?.setOnDismissListener {
+                val action =
+                    SimCardFragmentDirections.actionSimCardFragmentToErrorFragment()
+                findNavController().navigate(action)
+            }
+            dialog?.dismiss()
         }
     }
 

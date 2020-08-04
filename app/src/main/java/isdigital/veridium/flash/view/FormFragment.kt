@@ -247,10 +247,6 @@ class FormFragment : Fragment() {
 
         txtTerms.text = ""
 
-        //var subT1 = SpannableString("\nPolítica de privacidad de datos personales\n\n")
-        //subT1 = SpannableString("EL SERVICIO\n")
-        //subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
-        //txtTerms.append(subT1)
         txtTerms.append(
             "\nFLASH Servicios Perú S.R.L. (“FLASH”) se compromete a observar los principios de legalidad, consentimiento, información, calidad, " +
                     "propósito, proporcionalidad y responsabilidad establecidos por la Ley 29733 Ley de Protección de Datos Personales y su Reglamento aprobado por " +

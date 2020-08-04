@@ -72,7 +72,7 @@
     <string name="dni">DNI:\u0020</string>
     <string name="email">Correo:\u0020</string>
     <string name="city">Centro poblado:\u0020</string>
-    <string name="sponsor_tid">Patrocinador</string>
+    <string name="sponsor_tid">Brand Leader</string>
     <string name="number_to_port">Número a portar:\u0020</string>
     <string name="mobile_operator">Operador móvil:\u0020</string>
 
@@ -117,7 +117,6 @@
 
     <!-- Step 10 -->
     <string name="sim_activated">Información del ICCID</string>
-    <string name="sim_activated_successfully">¡Estamos activando tu SIM Card!</string>
     <string name="scan_correctly">Forma correcta de escanear una SIM Card</string>
     <string name="sim_activated_successfully">Tu SIM Card Flash Mobile se activó con éxito.</string>
     <string name="sim_activated_greetings">¡Ahora eres parte de la familia Flash Mobile!</string>
