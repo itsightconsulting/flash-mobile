@@ -87,8 +87,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                 override fun onSuccess(t: VerifyIccidResponse) {
                     Log.d("iccid", iccid.toString())
                     Log.d("VerifyIccidResponse", t.toString())
-                    val success: Boolean =
-                        true; // (t.status.toInt() == 0 && t.code == "0000000000")
+                    val success: Boolean = (t.status.toInt() == 0 && t.code == "0000000000")
                     if (success) {
                         loadError.value = false
                         loading.value = true

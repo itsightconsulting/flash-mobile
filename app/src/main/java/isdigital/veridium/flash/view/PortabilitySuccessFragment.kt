@@ -1,5 +1,7 @@
 package isdigital.veridium.flash.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -12,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.util.CustomTypefaceSpan
+import isdigital.veridium.flash.util.FLASH_MOBILE_HOME
+import isdigital.veridium.flash.util.REQUEST_PORTABILITY
 import isdigital.veridium.flash.util.forceMinimize
 import kotlinx.android.synthetic.main.portability_success_fragment.*
 
@@ -36,11 +40,18 @@ class PortabilitySuccessFragment : Fragment() {
         btnRedirectWebView.setOnClickListener {
             findNavController().navigate(PortabilitySuccessFragmentDirections.actionPortabilitySuccessFragmentToPortabilityPinFragment())
         }
+
+        textView6.setOnClickListener {
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data = Uri.parse(FLASH_MOBILE_HOME)
+            startActivity(openURL)
+        }
     }
 
-    private fun settingDescriptionText(){
+    private fun settingDescriptionText() {
         textView6.text = ""
-        val descriptionText = resources.getString(R.string.sim_activated_fl_message_portability).split("|")
+        val descriptionText =
+            resources.getString(R.string.sim_activated_fl_message_portability).split("|")
         val descriptionTextNb = descriptionText[0]
         val descriptionTextBold = descriptionText[1]
         val prefixText = SpannableString(descriptionTextBold)
@@ -59,7 +70,7 @@ class PortabilitySuccessFragment : Fragment() {
                     context!!,
                     R.color.dark_purple
                 )
-            ),0,prefixTextLen,0
+            ), 0, prefixTextLen, 0
         )
         textView6.append(descriptionTextNb)
         textView6.append(prefixText)
