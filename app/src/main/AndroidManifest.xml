@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="isdigital.veridium.flash"
-    android:versionCode="19"
-    android:versionName="1.2.7">
+    android:versionCode="20"
+    android:versionName="1.2.8">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,27 +12,28 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <uses-feature android:name="android.hardware.camera" />
+
     <uses-feature
-        android:name="android.hardware.camera"/>
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
-    <uses-feature android:required="false"
-        android:name="android.hardware.camera.autofocus"/>
-
-    <uses-feature android:required="false"
-        android:name="android.hardware.sensor.light" />
+    <uses-feature
+        android:name="android.hardware.sensor.light"
+        android:required="false" />
 
     <application
         android:name=".FlashApplication"
         android:allowBackup="false"
+        android:description="@string/app_name"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:description="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:fullBackupContent="false">
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".view.MainActivity"
             android:screenOrientation="portrait"
@@ -42,7 +43,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <nav-graph android:value="@navigation/mobile_navigation"/>
+            <nav-graph android:value="@navigation/mobile_navigation" />
         </activity>
 
         <!-- VERIDIUM -->

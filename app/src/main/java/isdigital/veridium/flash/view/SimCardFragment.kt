@@ -140,28 +140,33 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                 if (it) {
                     val error = activationViewModel.loadError.value ?: false
                     val formError = activationViewModel.formError.value ?: false
+                    val simActivated = activationViewModel.simActivated.value ?: false
                     dialogSpin?.dismiss()
 
                     if (error) {
-
-                        UserPrefs.putUserBarscanAttempts(context)
-
-                        val attemps = UserPrefs.getUserBarscanAttempts(context)
-                        if (attemps == MAX_BAR_SCANNER_TEMPS) {
-
-                            val form = UserPrefs.getActivation(context)
-                            form.iccid = iccid
-
-                            activationViewModel.sendFormWithStatus(
-                                PartnerData.formPreparation(
-                                    form, passBarcode = false, passBiometric = false
-                                )
-                            )
-                            activationViewModel.loadError.value = false
+                        if (simActivated) {
+                            ViewInfoSimCard()
+                            return@let
                         } else {
-                            tryScanAgain()
+                            UserPrefs.putUserBarscanAttempts(context)
+
+                            val attemps = UserPrefs.getUserBarscanAttempts(context)
+                            if (attemps == MAX_BAR_SCANNER_TEMPS) {
+
+                                val form = UserPrefs.getActivation(context)
+                                form.iccid = iccid
+
+                                activationViewModel.sendFormWithStatus(
+                                    PartnerData.formPreparation(
+                                        form, passBarcode = false, passBiometric = false
+                                    )
+                                )
+                                activationViewModel.loadError.value = false
+                            } else {
+                                tryScanAgain()
+                            }
+                            return@let
                         }
-                        return@let
                     }
 
                     if (formError) {
@@ -437,9 +442,10 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
 
         diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
             UserPrefs.resetUserBarscanAttempts(context)
+            diagError.dismiss()
             dialog?.setOnDismissListener {
                 val action =
-                    SimCardFragmentDirections.actionSimCardFragmentToErrorFragment()
+                    SimCardFragmentDirections.actionSimCardFragmentToPreActivationFragment()
                 findNavController().navigate(action)
             }
             dialog?.dismiss()

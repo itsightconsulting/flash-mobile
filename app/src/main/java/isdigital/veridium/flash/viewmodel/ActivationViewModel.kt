@@ -34,6 +34,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     val loading = MutableLiveData<Boolean>()
     val loadError = MutableLiveData<Boolean>()
     val formError = MutableLiveData<Boolean>()
+    val simActivated = MutableLiveData<Boolean>()
     var errorMessage: String = ""
     var api_token: String = ""
 
@@ -93,7 +94,9 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                         loading.value = true
 
                     } else {
-                        if (t.status.toInt() == 2 && t.code == "0044000000") {//TOKEN EXPIRED
+                        if (t.status.toInt() == 2 && t.code == "1040001005") { // ICCID REGISTRADO
+                            simActivated.value = true
+                        } else if (t.status.toInt() == 2 && t.code == "0044000000") {//TOKEN EXPIRED
                             sendToCrashlyticsFailRequestBody(form = t.toString())
                         }
                         loadError.value = true

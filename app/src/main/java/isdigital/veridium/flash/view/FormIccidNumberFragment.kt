@@ -1,5 +1,7 @@
 package isdigital.veridium.flash.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
@@ -74,33 +76,39 @@ class FormIccidNumberFragment : Fragment() {
                 if (it) {
                     val error = activationViewModel.loadError.value ?: false
                     val formError = activationViewModel.formError.value ?: false
-
+                    val simActivated = activationViewModel.simActivated.value ?: false
                     //error = false;
                     //formError = false;
                     if (error) {
-                        UserPrefs.putUserBarscanAttempts(context)
-
-                        val attemps = UserPrefs.getUserBarscanAttempts(context)
-                        if (attemps == MAX_BAR_SCANNER_TEMPS) {
-
-                            val form = UserPrefs.getActivation(context)
-                            form.iccid = iccid
-
-                            activationViewModel.sendFormWithStatus(
-                                PartnerData.formPreparation(
-                                    form, passBarcode = false, passBiometric = false
-                                )
-                            )
-                            activationViewModel.loadError.value = false
+                        if (simActivated) {
+                            ViewInfoSimCard()
+                            return@let
                         } else {
-                            tryPutAgain()
+                            UserPrefs.putUserBarscanAttempts(context)
+
+                            val attemps = UserPrefs.getUserBarscanAttempts(context)
+                            if (attemps == MAX_BAR_SCANNER_TEMPS) {
+
+                                val form = UserPrefs.getActivation(context)
+                                form.iccid = iccid
+
+                                activationViewModel.sendFormWithStatus(
+                                    PartnerData.formPreparation(
+                                        form, passBarcode = false, passBiometric = false
+                                    )
+                                )
+                                activationViewModel.loadError.value = false
+                            } else {
+                                tryPutAgain()
+                            }
+                            return@let
                         }
-                        return@let
                     }
 
                     if (formError) {
                         simcardError()
                     } else {
+
                         if (success) {
                             return@let
                         }
@@ -113,7 +121,7 @@ class FormIccidNumberFragment : Fragment() {
 
                         diagSucc.findViewById<Button>(R.id.btnBarcodeSuccess).setOnClickListener {
                             success = false
-//Important when user are in biometric fragment and want comeback to this view
+                            //Important when user are in biometric fragment and want comeback to this view
                             this.activationViewModel.loading.value = false
 
                             diagSucc.dismiss()
@@ -168,6 +176,32 @@ class FormIccidNumberFragment : Fragment() {
 
         diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
             diagError.dismiss()
+        }
+        hideSpinner(this.activity)
+    }
+
+    private fun ViewInfoSimCard() {
+        val diagError = invokerBarcodeErrorActivado(context!!)
+        diagError.show()
+        val openURL = Intent(Intent.ACTION_VIEW)
+        diagError.findViewById<Button>(R.id.btnSolicitarPort).setOnClickListener {
+            diagError.dismiss()
+            openURL.data = Uri.parse(REQUEST_PORTABILITY)
+            startActivity(openURL)
+        }
+
+        diagError.findViewById<Button>(R.id.btnVerEstado).setOnClickListener {
+            diagError.dismiss()
+            openURL.data = Uri.parse(VIEW_STATUS_SIM_CARD)
+            startActivity(openURL)
+        }
+
+        diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
+            diagError.dismiss()
+            UserPrefs.resetUserBarscanAttempts(context)
+            val action =
+                FormIccidNumberFragmentDirections.actionFormIccidNumberFragmentToPreActivationFragment()
+            findNavController().navigate(action)
         }
         hideSpinner(this.activity)
     }

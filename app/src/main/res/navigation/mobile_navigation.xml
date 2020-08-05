@@ -143,6 +143,9 @@
         <action
             android:id="@+id/action_simCardFragment_to_formIccidNumberFragment"
             app:destination="@id/formIccidNumberFragment" />
+        <action
+            android:id="@+id/action_simCardFragment_to_preActivationFragment"
+            app:destination="@id/preActivationFragment" />
     </fragment>
 
     <fragment
@@ -214,6 +217,9 @@
         <action
             android:id="@+id/action_formIccidNumberFragment_to_biometricFragment"
             app:destination="@id/biometricFragment" />
+        <action
+            android:id="@+id/action_formIccidNumberFragment_to_preActivationFragment"
+            app:destination="@id/preActivationFragment" />
     </fragment>
     <fragment
         android:id="@+id/portabilitySuccessFragment"
