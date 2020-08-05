@@ -131,9 +131,6 @@
             android:id="@+id/action_simCardFragment_to_successFragment"
             app:destination="@id/successFragment" />
         <action
-            android:id="@+id/action_simCardFragment_to_errorFragment"
-            app:destination="@id/errorFragment" />
-        <action
             android:id="@+id/action_simCardFragment_to_biometricFragment"
             app:destination="@id/biometricFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -143,6 +140,12 @@
         <action
             android:id="@+id/action_simCardFragment_to_formIccidNumberFragment"
             app:destination="@id/formIccidNumberFragment" />
+        <action
+            android:id="@+id/action_simCardFragment_to_errorIccIdFragment"
+            app:destination="@id/errorIccIdFragment" />
+        <action
+            android:id="@+id/action_simCardFragment_to_preActivationFragment"
+            app:destination="@id/preActivationFragment" />
     </fragment>
 
     <fragment
@@ -209,11 +212,14 @@
             android:id="@+id/action_formIccidNumberFragment_to_successFragment"
             app:destination="@id/successFragment" />
         <action
-            android:id="@+id/action_formIccidNumberFragment_to_errorFragment"
-            app:destination="@id/errorFragment" />
-        <action
             android:id="@+id/action_formIccidNumberFragment_to_biometricFragment"
             app:destination="@id/biometricFragment" />
+        <action
+            android:id="@+id/action_formIccidNumberFragment_to_errorIccIdFragment"
+            app:destination="@id/errorIccIdFragment" />
+        <action
+            android:id="@+id/action_formIccidNumberFragment_to_preActivationFragment"
+            app:destination="@id/preActivationFragment" />
     </fragment>
     <fragment
         android:id="@+id/portabilitySuccessFragment"
@@ -235,6 +241,15 @@
         tools:layout="@layout/portability_pin_fragment" >
         <action
             android:id="@+id/action_portabilityPinFragment_to_preActivationFragment"
+            app:destination="@id/preActivationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/errorIccIdFragment"
+        android:name="isdigital.veridium.flash.view.ErrorIccIdFragment"
+        android:label="error_iccid_fragment"
+        tools:layout="@layout/error_iccid_fragment" >
+        <action
+            android:id="@+id/action_errorIccIdFragment_to_preActivationFragment"
             app:destination="@id/preActivationFragment" />
     </fragment>
 </navigation>
