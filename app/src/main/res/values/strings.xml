@@ -143,6 +143,9 @@
     <string name="finished">Terminar</string>
     <string name="api_generic_error">Validación fallida</string>
 
+    <string name="error_detail_iccid">Ocurrió un error durante el proceso de validación.</string>
+    <string name="message_support_iccid">Intenta de nuevo o contacta a nuestro Centro de Servicio a clientes.</string>
+
     <!-- Step 8 Error -->
     <string name="error_in_scan">Error en el escaneo</string>
     <string name="error_in_barcode_validation">Error en la validación del ICCID</string>

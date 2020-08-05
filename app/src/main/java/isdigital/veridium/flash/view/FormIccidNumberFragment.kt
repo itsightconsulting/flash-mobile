@@ -175,6 +175,12 @@ class FormIccidNumberFragment : Fragment() {
         diagError.show()
 
         diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
+            UserPrefs.resetUserBarscanAttempts(context)
+            diagError.setOnDismissListener {
+                val action =
+                    SimCardFragmentDirections.actionSimCardFragmentToErrorIccIdFragment() //Validar
+                findNavController().navigate(action)
+            }
             diagError.dismiss()
         }
         hideSpinner(this.activity)
@@ -210,7 +216,7 @@ class FormIccidNumberFragment : Fragment() {
         hideSpinner(this.activity)
         UserPrefs.resetUserBarscanAttempts(context)
         val action =
-            FormIccidNumberFragmentDirections.actionFormIccidNumberFragmentToErrorFragment()
+            FormIccidNumberFragmentDirections.actionFormIccidNumberFragmentToErrorIccIdFragment()
         findNavController().navigate(action)
     }
 }

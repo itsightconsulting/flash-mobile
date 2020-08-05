@@ -227,7 +227,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         UserPrefs.resetUserBarscanAttempts(context)
         dialog?.setOnDismissListener {
             val action =
-                SimCardFragmentDirections.actionSimCardFragmentToErrorFragment()
+                SimCardFragmentDirections.actionSimCardFragmentToErrorIccIdFragment()
             findNavController().navigate(action)
         }
         dialog?.dismiss()
