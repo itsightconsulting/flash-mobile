@@ -22,7 +22,7 @@ class ErrorIccIdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.error_fragment, container, false)
+        return inflater.inflate(R.layout.error_iccid_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +30,8 @@ class ErrorIccIdFragment : Fragment() {
         forceMinimize(requireActivity(), this)
 
         btnBackHome.setOnClickListener {
-            val action = ErrorIccIdFragmentDirections.actionErrorIccIdFragmentToPreActivationFragment()
+            val action =
+                ErrorIccIdFragmentDirections.actionErrorIccIdFragmentToPreActivationFragment()
             findNavController().navigate(action)
         }
 
