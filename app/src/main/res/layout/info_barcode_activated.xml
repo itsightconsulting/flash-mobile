@@ -37,6 +37,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/gotham_light"
             android:gravity="center"
+            android:lineSpacingMultiplier="1.3"
             android:paddingLeft="28dp"
             android:paddingRight="28dp"
             android:text="@string/error_sim_card_activated_description"
