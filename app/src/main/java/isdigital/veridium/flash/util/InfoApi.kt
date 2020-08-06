@@ -25,7 +25,7 @@ const val API_BASE = "https://services.insolutions.pe"
 //const val API_BASE = "http://200.121.128.89"
 
 const val API_VERSION_V1 = "/FlashMobile/api/v1"
-// const val API_VERSION_V1 = "/api/v1"
+//const val API_VERSION_V1 = "/api/v1"
 
 
 const val API_USERNAME = "ISFlashActivation"

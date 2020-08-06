@@ -225,20 +225,20 @@
         android:id="@+id/portabilitySuccessFragment"
         android:name="isdigital.veridium.flash.view.PortabilitySuccessFragment"
         android:label="@string/sim_success_portability"
-        tools:layout="@layout/portability_success_fragment" >
+        tools:layout="@layout/portability_success_fragment">
         <action
             android:id="@+id/action_portabilitySuccessFragment_to_portabilityPinFragment"
             app:destination="@id/portabilityPinFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/portabilityPinFragment"
         android:name="isdigital.veridium.flash.view.PortabilityPinFragment"
         android:label="Pin de validación"
-        tools:layout="@layout/portability_pin_fragment" >
+        tools:layout="@layout/portability_pin_fragment">
         <action
             android:id="@+id/action_portabilityPinFragment_to_preActivationFragment"
             app:destination="@id/preActivationFragment" />
@@ -246,8 +246,8 @@
     <fragment
         android:id="@+id/errorIccIdFragment"
         android:name="isdigital.veridium.flash.view.ErrorIccIdFragment"
-        android:label="error_iccid_fragment"
-        tools:layout="@layout/error_iccid_fragment" >
+        android:label="@string/empty"
+        tools:layout="@layout/error_iccid_fragment">
         <action
             android:id="@+id/action_errorIccIdFragment_to_preActivationFragment"
             app:destination="@id/preActivationFragment" />
