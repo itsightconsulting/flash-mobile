@@ -79,7 +79,7 @@
     <!-- Step 7 -->
     <string name="term_and_conditions">Términos y condiciones</string>
     <string name="term_and_conditions_detail">I. FLash Mobile Perú</string>
-    <string name="term_and_conditions_check_accept">He leído y acepto| los términos y condiciones del servicio. Valido que mi información es verdadera.</string>
+    <string name="term_and_conditions_check_accept">He leído y acepto los términos y condiciones| del servicio. Valido que mi información es verdadera.</string>
     <string name="privacy_policy_personal_data_check_accept">He leído y acepto la| Política de privacidad de datos personales</string>
     <string name="conditions_applicable_to_portability_check_accept">Declaro haber leído y estar informado sobre las| condiciones aplicables a la portabilidad| que he solicitado</string>
     <string name="accept">Aceptar</string>
