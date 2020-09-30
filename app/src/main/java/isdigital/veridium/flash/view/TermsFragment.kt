@@ -94,13 +94,15 @@ class TermsFragment : Fragment() {
         txtTerms.append("\t + 0.4 Mbps / 0.04 Mbps\n")
         txtTerms.append("\t + 2Mbps / 0.4 Mbps\n")
         txtTerms.append("\n")
-        txtTerms.append("Costo por minutos en llamadas por demanda: S/ 0.49 " +
-                "La información personal puede incluir, entre otros, información de identificación (como nombre, número de tarjeta de identificación y edad), " +
-                "información de contacto (número de teléfono, dirección de correo electrónico y domicilio) e información financiera. " +
-                "Flash podrá realizar el Tratamiento a través de sus trabajadores, consultores, asesores y/o terceros encargados para tal efecto. " +
-                "El abonado declara que ha sido informado sobre sus derechos como titular de los Datos Personales, " +
-                "entre los que se encuentran los derechos de acceso, actualización, inclusión, rectificación, cancelación y oposición. " +
-                "Cualquier consulta o reclamo en relación con el Tratamiento de los Datos Personales del Abonado podrá dirigirse a la siguiente dirección de correo electrónico soporte.clientes@flashmobile.pe.\n\n")
+        txtTerms.append(
+            "Costo por minutos en llamadas por demanda: S/ 0.49 " +
+                    "La información personal puede incluir, entre otros, información de identificación (como nombre, número de tarjeta de identificación y edad), " +
+                    "información de contacto (número de teléfono, dirección de correo electrónico y domicilio) e información financiera. " +
+                    "Flash podrá realizar el Tratamiento a través de sus trabajadores, consultores, asesores y/o terceros encargados para tal efecto. " +
+                    "El abonado declara que ha sido informado sobre sus derechos como titular de los Datos Personales, " +
+                    "entre los que se encuentran los derechos de acceso, actualización, inclusión, rectificación, cancelación y oposición. " +
+                    "Cualquier consulta o reclamo en relación con el Tratamiento de los Datos Personales del Abonado podrá dirigirse a la siguiente dirección de correo electrónico soporte.clientes@flashmobile.pe.\n\n"
+        )
 
         subT1 = SpannableString("SERVICIO FUERA DEL PAÍS (ROAMING)\n")
         subT1.setSpan(StyleSpan(Typeface.BOLD), 0, subT1.length, 0)
@@ -167,7 +169,7 @@ class TermsFragment : Fragment() {
             ForegroundColorSpan(
                 ContextCompat.getColor(
                     context!!,
-                    R.color.dark_purple
+                    R.color.black
                 )
             ), 0, prefixTextLen, 0
         )
