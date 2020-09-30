@@ -383,7 +383,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         mScannerView.stopCamera()
 
         rawResult?.let {
-            if (it.text.length == 20 && validateOnlyNumber(it.text)) {
+            if (it.text.length == LENGTH_BAR_CODE && validateOnlyNumber(it.text)) {
                 evaluateIccid(it.text)
             } else {
                 UserPrefs.putUserBarscanAttempts(context)
@@ -463,45 +463,46 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         }
     }
 
-    private fun invokerICCIDDialog(context: Context): Dialog {
-        val dialog = Dialog(context)
-        dialog.setContentView(R.layout.dialog_enter_iccid)
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.setCancelable(false)
+    /*
+        private fun invokerICCIDDialog(context: Context): Dialog {
+            val dialog = Dialog(context)
+            dialog.setContentView(R.layout.dialog_enter_iccid)
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.setCancelable(false)
 
-        dialog.window!!.setLayout(
-            (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-        val buttonDialog = dialog.findViewById(R.id.btnIccidDialog) as Button
-        val txtIccid = dialog.findViewById(R.id.txtIccid) as TextInputLayout
-        val etIccid = dialog.findViewById(R.id.etIccid) as TextInputEditText
+            dialog.window!!.setLayout(
+                (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+            val buttonDialog = dialog.findViewById(R.id.btnIccidDialog) as Button
+            val txtIccid = dialog.findViewById(R.id.txtIccid) as TextInputLayout
+            val etIccid = dialog.findViewById(R.id.etIccid) as TextInputEditText
 
-        etIccid.doAfterTextChanged {
-            if (etIccid.length() == 20) {
-                txtIccid.error = ""
+            etIccid.doAfterTextChanged {
+                if (etIccid.length() == 20) {
+                    txtIccid.error = ""
+                }
             }
-        }
 
-        buttonDialog.setOnClickListener {
-            val iccidLen = etIccid.length()
-            if (iccidLen != 20) {
-                txtIccid.error = "Debe ingresar 20 dígitos"
-            } else {
+            buttonDialog.setOnClickListener {
+                val iccidLen = etIccid.length()
+                if (iccidLen != 20) {
+                    txtIccid.error = "Debe ingresar 20 dígitos"
+                } else {
+                    dialog.dismiss()
+                    evaluateIccid(etIccid.text.toString())
+                }
+            }
+            val btnCancelIccidDialog = dialog.findViewById(R.id.btnCancelIccidDialog) as Button
+            btnCancelIccidDialog.setOnClickListener {
                 dialog.dismiss()
-                evaluateIccid(etIccid.text.toString())
             }
+            return dialog
         }
-        val btnCancelIccidDialog = dialog.findViewById(R.id.btnCancelIccidDialog) as Button
-        btnCancelIccidDialog.setOnClickListener {
-            dialog.dismiss()
-        }
-        return dialog
-    }
-
-    private fun evaluateIccid(flIccid: String) {
+    */
+    private fun evaluateIccid(flPUK: String) {
         instanceDialogSpinner()
-
+        val flIccid = ICCID.replace("{0}", flPUK)
         activationViewModel.checkIccidValid(flIccid)
         iccid = flIccid
         UserPrefs.putIccid(context, iccid)

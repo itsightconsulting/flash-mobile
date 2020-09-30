@@ -30,11 +30,12 @@ class PartnerData {
                     if (passBarcode) FORMSTATUS.REJECTBIO.value else FORMSTATUS.REJECTICCD.value
             }
 
+            /*
             if(!activation.iccid.isNullOrEmpty())
                 body["iccid"] = ICCID.replace("{0}",activation.iccid!!)
-
-            /*body["iccid"] = activation.iccid ?: ""
-            if (body["iccid"]!!.length >= 2)
+*/
+            body["iccid"] = activation.iccid ?: ""
+            /*if (body["iccid"]!!.length >= 2)
                 body["iccid"] = body["iccid"]!!.substring(0, body["iccid"]!!.length)*/
 
             if (passBarcode) {

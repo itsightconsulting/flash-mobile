@@ -3,6 +3,7 @@ package isdigital.veridium.flash.view
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
+import android.util.Log
 import android.view.*
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -30,6 +31,7 @@ class PortabilityPinFragment : Fragment() {
         val v: View = inflater.inflate(R.layout.portability_pin_fragment, container, false)
         mWebView = v.findViewById<View>(R.id.webView) as WebView
         UserPrefs.getIccid(context)?.let {
+            //Log.d("PORTABILITY_WEB_VIEW", PORTABILITY_WEB_VIEW + it.substring(IntRange(0, 18)))
             if (it.length > 1) {
                 mWebView.loadUrl(PORTABILITY_WEB_VIEW + it.substring(IntRange(0, 18)))
             }

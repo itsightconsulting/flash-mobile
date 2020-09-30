@@ -48,8 +48,8 @@ class FormIccidNumberFragment : Fragment() {
         this.validatorMatrix = MasterValidation()
             .valid(etICCIDNumber, true)
             .required()
-            .minLength(8, IccIdLenMessage)
-            .maxLength(8, IccIdLenMessage).active()
+            .minLength(LENGTH_BAR_CODE, IccIdLenMessage)
+            .maxLength(LENGTH_BAR_CODE, IccIdLenMessage).active()
 
         btnValidateIccId.setOnClickListener {
             if (!this.validatorMatrix.checkValidity()) {
@@ -159,7 +159,8 @@ class FormIccidNumberFragment : Fragment() {
         })
     }
 
-    private fun evaluateIccid(flIccid: String) {
+    private fun evaluateIccid(flPUK: String) {
+        val flIccid = ICCID.replace("{0}", flPUK)
         activationViewModel.checkIccidValid(flIccid)
         iccid = flIccid
         UserPrefs.putIccid(context, iccid)

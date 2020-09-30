@@ -195,7 +195,7 @@
     <string name="com.crashlytics.useFirebaseAppId">true</string>
     <string name="enter_the_iccid_number">Ingrese el número PUK</string>
     <string name="iccid_digits">8 dígitos</string>
-    <string name="iccid_extra_information">El ICCID son los 8 números abajo del código de barras de tu tarjeta SIM</string>
+    <string name="iccid_extra_information">El PUK son los 8 números abajo del código de barras de tu tarjeta SIM</string>
     <string name="iccid_length">Asegúrate de escribir un número de PUK de 8 dígitos</string>
     <string name="lbl_city">Ciudad o población</string>
 </resources>
