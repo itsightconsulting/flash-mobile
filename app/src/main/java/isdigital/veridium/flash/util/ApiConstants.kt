@@ -11,3 +11,5 @@ const val ACTIVATION_FOR_EXCEPTION =
 const val REQUEST_PORTABILITY = "https://mi.flashmobile.pe/login"
 const val VIEW_STATUS_SIM_CARD = "https://portabilidad.flashmobile.pe/"
 const val FLASH_MOBILE_HOME = "https://mi.flashmobile.pe"
+
+const val ICCID = "89517160630{0}0"
