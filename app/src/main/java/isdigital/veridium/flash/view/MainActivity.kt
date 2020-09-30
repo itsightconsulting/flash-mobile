@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
         val estado: Boolean = UserPrefs.getHideCarousel(FlashApplication.appContext)
         if (estado)
-            graph.startDestination = R.id.preActivationFragment
+            graph.startDestination = R.id.formIccidNumberFragment/*preActivationFragment*/
         else
             graph.startDestination = R.id.initialFragment
         host.navController.graph = graph

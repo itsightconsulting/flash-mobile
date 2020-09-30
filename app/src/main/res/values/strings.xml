@@ -94,7 +94,7 @@
     \n\n|2.| Limpia la cámara de tu celular antes de iniciar
     \n\n|3.| Evita generar sombras sobre la SIM Card al momento de hacer el proceso
     \n\n|4.| Haz el proceso sobre un fondo uniforme. De preferencia en una superficie de un solo tono</string>
-    <string name="sim_validation_option_two">Ingresa el número ICCID</string>
+    <string name="sim_validation_option_two">Ingresa el número PUK</string>
     <string name="view_recomendations">Ver las recomendaciones</string>
 
     <!-- Scan ICCID using the camera -->
@@ -116,7 +116,7 @@
     <string name="search_complete">Exploración completa</string>
 
     <!-- Step 10 -->
-    <string name="sim_activated">Información del ICCID</string>
+    <string name="sim_activated">Información del PUK</string>
     <string name="scan_correctly">Forma correcta de escanear una SIM Card</string>
     <string name="sim_activated_successfully">¡Estamos activando tu SIM Card!</string>
     <string name="sim_activated_greetings">A partir de este momento puedes recargar tu línea para disfrutar de todos los beneficios Flash</string>
@@ -193,9 +193,9 @@
     <string name="datetime_format_two">yyyy-MM-dd HH:mm:ss</string>
 
     <string name="com.crashlytics.useFirebaseAppId">true</string>
-    <string name="enter_the_iccid_number">Ingrese el número ICCID</string>
-    <string name="iccid_digits">20 dígitos</string>
-    <string name="iccid_extra_information">El ICCID son los 20 números abajo del código de barras de tu tarjeta SIM</string>
-    <string name="iccid_length">Asegúrate de escribir un número de ICCID de 20 dígitos</string>
+    <string name="enter_the_iccid_number">Ingrese el número PUK</string>
+    <string name="iccid_digits">8 dígitos</string>
+    <string name="iccid_extra_information">El ICCID son los 8 números abajo del código de barras de tu tarjeta SIM</string>
+    <string name="iccid_length">Asegúrate de escribir un número de PUK de 8 dígitos</string>
     <string name="lbl_city">Ciudad o población</string>
 </resources>
