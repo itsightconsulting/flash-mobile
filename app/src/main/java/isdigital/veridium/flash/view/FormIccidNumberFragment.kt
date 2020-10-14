@@ -3,8 +3,12 @@ package isdigital.veridium.flash.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.widget.Button
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -41,6 +45,7 @@ class FormIccidNumberFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        settingBoldText()
         viewModelInjections()
         eventListeners()
 
@@ -219,5 +224,23 @@ class FormIccidNumberFragment : Fragment() {
         val action =
             FormIccidNumberFragmentDirections.actionFormIccidNumberFragmentToErrorIccIdFragment()
         findNavController().navigate(action)
+    }
+
+    private fun settingBoldText() {
+        textView3.text = ""
+        val infoText = resources.getString(R.string.iccid_extra_information).split("|")
+        val infoTextBold = infoText[0]
+        val infoTextNb = infoText[1]
+        val prefixText = SpannableString(infoTextBold)
+        val prefixTextLen = prefixText.length
+
+        prefixText.setSpan(
+            CustomTypefaceSpan("",ResourcesCompat.getFont(context!!, R.font.gotham_bold)!!),
+            0,
+            prefixTextLen,
+            0
+        )
+        textView3.append(infoTextBold)
+        textView3.append(infoTextNb)
     }
 }
