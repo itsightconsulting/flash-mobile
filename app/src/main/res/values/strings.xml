@@ -193,9 +193,9 @@
     <string name="datetime_format_two">yyyy-MM-dd HH:mm:ss</string>
 
     <string name="com.crashlytics.useFirebaseAppId">true</string>
-    <string name="enter_the_iccid_number">Ingrese el número PUK</string>
+    <string name="enter_the_iccid_number">Ingresa el número PUK:</string>
     <string name="iccid_digits">8 dígitos</string>
-    <string name="iccid_extra_information">El PUK son los 8 números abajo del código de barras de tu tarjeta SIM</string>
+    <string name="iccid_extra_information">El PUK es el número de 8 dígitos|\n al lado derecho de tu SIM Card, junto al código de barras.</string>
     <string name="iccid_length">Asegúrate de escribir un número de PUK de 8 dígitos</string>
     <string name="lbl_city">Ciudad o población</string>
 </resources>
