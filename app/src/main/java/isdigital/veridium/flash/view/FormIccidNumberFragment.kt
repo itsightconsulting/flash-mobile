@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import androidx.core.content.ContextCompat
@@ -44,10 +45,9 @@ class FormIccidNumberFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        settingBoldText()
         viewModelInjections()
         eventListeners()
+        settingBoldText()
 
         val IccIdLenMessage = resources.getString(R.string.iccid_length)
         this.validatorMatrix = MasterValidation()
@@ -94,14 +94,18 @@ class FormIccidNumberFragment : Fragment() {
                             val attemps = UserPrefs.getUserBarscanAttempts(context)
                             if (attemps == MAX_BAR_SCANNER_TEMPS) {
 
-                                val form = UserPrefs.getActivation(context)
-                                form.iccid = iccid
+                                //val form = UserPrefs.getActivation(context)
+                                //form.iccid = iccid
 
+                                /*
                                 activationViewModel.sendFormWithStatus(
                                     PartnerData.formPreparation(
                                         form, passBarcode = false, passBiometric = false
                                     )
                                 )
+                                 */
+                                this.activationViewModel.formError.value = true;
+                                this.activationViewModel.loading.value = true;
                                 activationViewModel.loadError.value = false
                             } else {
                                 tryPutAgain()
@@ -166,7 +170,12 @@ class FormIccidNumberFragment : Fragment() {
 
     private fun evaluateIccid(flPUK: String) {
         val flIccid = ICCID.replace("{0}", flPUK)
-        activationViewModel.checkIccidValid(flIccid)
+        val form = UserPrefs.getActivation(context)
+        activationViewModel.checkIccidValid(
+            flIccid, PartnerData.formPreparation(
+                form, true, true
+            )
+        )
         iccid = flIccid
         UserPrefs.putIccid(context, iccid)
     }
@@ -228,19 +237,27 @@ class FormIccidNumberFragment : Fragment() {
 
     private fun settingBoldText() {
         textView3.text = ""
-        val infoText = resources.getString(R.string.iccid_extra_information).split("|")
-        val infoTextBold = infoText[0]
-        val infoTextNb = infoText[1]
-        val prefixText = SpannableString(infoTextBold)
+        val termsText = resources.getString(R.string.iccid_extra_information).split("|")
+        val termsTextBold = termsText[0]
+        val termsTextNb = termsText[1]
+        val prefixText = SpannableString(termsTextBold)
         val prefixTextLen = prefixText.length
 
         prefixText.setSpan(
-            CustomTypefaceSpan("",ResourcesCompat.getFont(context!!, R.font.gotham_bold)!!),
+            CustomTypefaceSpan("", ResourcesCompat.getFont(context!!, R.font.gotham_bold)!!),
             0,
             prefixTextLen,
             0
         )
-        textView3.append(infoTextBold)
-        textView3.append(infoTextNb)
+        prefixText.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.black
+                )
+            ), 0, prefixTextLen, 0
+        )
+        textView3.append(prefixText)
+        textView3.append(termsTextNb)
     }
 }

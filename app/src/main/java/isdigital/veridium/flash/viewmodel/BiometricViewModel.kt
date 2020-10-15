@@ -1,5 +1,6 @@
 package isdigital.veridium.flash.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.crashlytics.android.Crashlytics
@@ -66,6 +67,7 @@ class BiometricViewModel : ViewModel() {
     }
 
     fun validateVeridiumFingerprints(body: HashMap<String, String>) {
+        Log.d("validateVeridiu", body.toString())
         disposable.add(
             api.validateFingerprints(body).subscribeOn(
                 Schedulers.newThread()

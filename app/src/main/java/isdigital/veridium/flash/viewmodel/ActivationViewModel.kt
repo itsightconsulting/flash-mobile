@@ -80,9 +80,10 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
         )
     }
 
-    fun checkIccidValid(iccid: String) {
+    fun checkIccidValid(iccid: String, form: HashMap<String, String>) {
+        Log.d("checkIccidValid", form.toString())
         loading.value = false
-        disposable.add(activationService.validateICCID(iccid).subscribeOn(
+        disposable.add(activationService.validateICCID(iccid, form).subscribeOn(
             Schedulers.newThread()
         ).observeOn(AndroidSchedulers.mainThread()).subscribeWith(
             object : DisposableSingleObserver<VerifyIccidResponse>() {

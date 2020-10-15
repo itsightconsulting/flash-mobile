@@ -153,14 +153,17 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             val attemps = UserPrefs.getUserBarscanAttempts(context)
                             if (attemps == MAX_BAR_SCANNER_TEMPS) {
 
-                                val form = UserPrefs.getActivation(context)
-                                form.iccid = iccid
+                                //val form = UserPrefs.getActivation(context)
+                                //form.iccid = iccid
 
-                                activationViewModel.sendFormWithStatus(
+                                /*activationViewModel.sendFormWithStatus(
                                     PartnerData.formPreparation(
                                         form, passBarcode = false, passBiometric = false
                                     )
                                 )
+                                 */
+                                this.activationViewModel.formError.value = true;
+                                this.activationViewModel.loading.value = true;
                                 activationViewModel.loadError.value = false
                             } else {
                                 tryScanAgain()
@@ -391,14 +394,17 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                 val attemps = UserPrefs.getUserBarscanAttempts(context)
                 if (attemps == MAX_BAR_SCANNER_TEMPS) {
 
-                    val form = UserPrefs.getActivation(context)
-                    form.iccid = it.text
-
+                    //val form = UserPrefs.getActivation(context)
+                    //form.iccid = it.text
+/*
                     activationViewModel.sendFormWithStatus(
                         PartnerData.formPreparation(
                             form, passBarcode = false, passBiometric = false
                         )
                     )
+ */
+                    this.activationViewModel.formError.value = true;
+                    this.activationViewModel.loading.value = true;
                     activationViewModel.loadError.value = false
                 } else {
                     tryScanAgain()
@@ -503,7 +509,12 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
     private fun evaluateIccid(flPUK: String) {
         instanceDialogSpinner()
         val flIccid = ICCID.replace("{0}", flPUK)
-        activationViewModel.checkIccidValid(flIccid)
+        val form = UserPrefs.getActivation(context)
+        activationViewModel.checkIccidValid(
+            flIccid, PartnerData.formPreparation(
+                form, true, true
+            )
+        )
         iccid = flIccid
         UserPrefs.putIccid(context, iccid)
     }

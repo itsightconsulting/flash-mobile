@@ -116,7 +116,7 @@
     <string name="search_complete">Exploración completa</string>
 
     <!-- Step 10 -->
-    <string name="sim_activated">Información del PUK</string>
+    <string name="sim_activated">Ingresa manualmente el número PUK</string>
     <string name="scan_correctly">Forma correcta de escanear una SIM Card</string>
     <string name="sim_activated_successfully">¡Estamos activando tu SIM Card!</string>
     <string name="sim_activated_greetings">A partir de este momento puedes recargar tu línea para disfrutar de todos los beneficios Flash</string>
@@ -195,7 +195,7 @@
     <string name="com.crashlytics.useFirebaseAppId">true</string>
     <string name="enter_the_iccid_number">Ingresa el número PUK:</string>
     <string name="iccid_digits">8 dígitos</string>
-    <string name="iccid_extra_information">El PUK es el número de 8 dígitos|\n al lado derecho de tu SIM Card, junto al código de barras.</string>
+    <string name="iccid_extra_information">El PUK es el número de 8 dígitos| al lado derecho de tu SIM Card, junto al código de barras.</string>
     <string name="iccid_length">Asegúrate de escribir un número de PUK de 8 dígitos</string>
     <string name="lbl_city">Ciudad o población</string>
 </resources>

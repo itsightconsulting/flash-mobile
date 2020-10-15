@@ -10,10 +10,13 @@ interface ActivationApi {
 
     @POST("$API_VERSION_V1/users")
     fun saveActivation(
-    @Body body: HashMap<String, String>
+        @Body body: HashMap<String, String>
     ): Single<ConsolidatedDataResponse>
 
-    @GET( "$API_VERSION_V1/simcards/{iccid}")
-    fun validateICCID(@Path("iccid") iccid: String): Single<VerifyIccidResponse>
+    @POST("$API_VERSION_V1/simcards/{iccid}")
+    fun validateICCID(
+        @Path("iccid") iccid: String,
+        @Body body: HashMap<String, String>
+    ): Single<VerifyIccidResponse>
 
 }

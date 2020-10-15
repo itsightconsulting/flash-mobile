@@ -320,9 +320,13 @@ class BiometricFragment : Fragment(),
                     val fingerImpressionImage =
                         fingerprintsPositionCode.getJSONObject("FingerImpressionImage")
 
-                    val jsonInSolutions = HashMap<String, String>()
-
-                    jsonInSolutions["dniCliente"] = UserPrefs.getUserDni(context!!)!!
+                    //val jsonInSolutions = HashMap<String, String>()
+                    val form = UserPrefs.getActivation(context)
+                    form.iccid = UserPrefs.getIccid(context)
+                    val jsonInSolutions = PartnerData.formPreparation(
+                        form, true, true
+                    )
+                    //jsonInSolutions["dniCliente"] = UserPrefs.getUserDni(context!!)!!
                     jsonInSolutions["rawBase64"] =
                         fingerImpressionImage.getString("BinaryBase64ObjectRAW")
                     jsonInSolutions["rawHeight"] = fingerImpressionImage.getString("Height")
@@ -349,26 +353,34 @@ class BiometricFragment : Fragment(),
                 if (loading) {
 
                     if (!biometricViewModel.loadError.value!!) {
-                        val form = UserPrefs.getActivation(context)
-                        form.iccid = UserPrefs.getIccid(context)
-                        activationViewModel.sendFormWithStatus(
-                            PartnerData.formPreparation(
-                                form, passBarcode = true, passBiometric = true
-                            )
-                        )
+                        //val form = UserPrefs.getActivation(context)
+                        //form.iccid = UserPrefs.getIccid(context)
+                        /*  activationViewModel.sendFormWithStatus(
+                              PartnerData.formPreparation(
+                                  form, passBarcode = true, passBiometric = true
+                              )
+                          )
+                         */
+                        this.activationViewModel.formError.value = false
+                        this.activationViewModel.loading.value = true
+
                     } else {
                         UserPrefs.putUserBiometricWrongAttempts(context)
 
                         val attemps = UserPrefs.getUserBiometricWrongAttempts(context)
                         if (attemps == MAX_BIOMETRIC_SCANNER_TEMPS) {
-                            val form = UserPrefs.getActivation(context)
-                            form.iccid = UserPrefs.getIccid(context)
+                            //val form = UserPrefs.getActivation(context)
+                            //form.iccid = UserPrefs.getIccid(context)
                             this.activationViewModel.loading.value = false
+                            /*
                             activationViewModel.sendFormWithStatus(
                                 PartnerData.formPreparation(
                                     form, passBarcode = true, passBiometric = false
                                 )
                             )
+                             */
+                            this.activationViewModel.formError.value = true
+                            this.activationViewModel.loading.value = true
                             return@let
                         }
 

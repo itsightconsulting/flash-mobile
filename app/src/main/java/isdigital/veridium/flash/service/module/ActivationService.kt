@@ -28,5 +28,6 @@ class ActivationService {
         body
     )
 
-    fun validateICCID(iccid: String): Single<VerifyIccidResponse> = api.validateICCID(iccid)
+    fun validateICCID(iccid: String, body: HashMap<String, String>): Single<VerifyIccidResponse> =
+        api.validateICCID(iccid, body)
 }

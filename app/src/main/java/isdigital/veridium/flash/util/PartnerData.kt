@@ -16,19 +16,20 @@ class PartnerData {
             passBiometric: Boolean
         ): HashMap<String, String> {
             val body = HashMap<String, String>()
-            val completed = passBarcode && passBiometric
+            //val completed = passBarcode && passBiometric
             activation.formId?.let {
                 if (it.isNotBlank()) {
                     body["formId"] = it
                 }
             }
-
+/*
             if (completed) {
                 body["formStatus"] = FORMSTATUS.COMPLETED.value
             } else {
                 body["formStatus"] =
                     if (passBarcode) FORMSTATUS.REJECTBIO.value else FORMSTATUS.REJECTICCD.value
             }
+ */
 
             /*
             if(!activation.iccid.isNullOrEmpty())
@@ -45,7 +46,7 @@ class PartnerData {
                 ).format(Date())
             }
 
-            body["dni"] = activation.dni
+            body["dniCliente"] = activation.dni
             body["name"] = activation.name
             body["maternalLastName"] = activation.maternalLastName
             body["paternalLastName"] = activation.paternalLastName
