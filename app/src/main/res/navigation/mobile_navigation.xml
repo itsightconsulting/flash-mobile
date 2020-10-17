@@ -220,6 +220,9 @@
         <action
             android:id="@+id/action_formIccidNumberFragment_to_preActivationFragment"
             app:destination="@id/preActivationFragment" />
+        <action
+            android:id="@+id/action_formIccidNumberFragment_to_simCardFragment"
+            app:destination="@id/simCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/portabilitySuccessFragment"

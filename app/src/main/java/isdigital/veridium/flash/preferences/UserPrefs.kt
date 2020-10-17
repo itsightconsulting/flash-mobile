@@ -19,7 +19,7 @@ object UserPrefs {
     private const val USER_REFERRAL_CODE = "flash.user.prefs.REFERRAL_CODE"
     private const val USER_REFERRAL_URL = "flash.user.prefs.REFERRAL_URL"
     private const val USER_PHONE = "flash.user.prefs.PHONE"
-    private const val USER_BIOMETRIC_WRONG_ATTEMPTS = "flash.user.prefs.BIOMETRIC_ATTEMPTS"
+    //private const val USER_BIOMETRIC_WRONG_ATTEMPTS = "flash.user.prefs.BIOMETRIC_ATTEMPTS"
     private const val USER_ICCID_WRONG_ATTEMPTS = "flash.user.prefs.BIOMETRIC_ATTEMPTS"
     private const val USER_HIDE_CAROUSEL = "flash.user.prefs.HIDE_CAROUSEL"
     private const val USER_HAND_SELECTED = "flash.user.prefs.USER_HAND_SELECTED"
@@ -81,7 +81,7 @@ object UserPrefs {
             remove(USER_REFERRAL_CODE)
             remove(USER_REFERRAL_URL)
             remove(USER_PHONE)
-            remove(USER_BIOMETRIC_WRONG_ATTEMPTS)
+            //remove(USER_BIOMETRIC_WRONG_ATTEMPTS)
 
             //remove(USER_HIDE_CAROUSEL)
 
@@ -122,7 +122,7 @@ object UserPrefs {
         }
     }
 
-
+/*
     fun putUserBiometricWrongAttempts(context: Context?) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
             putInt(USER_BIOMETRIC_WRONG_ATTEMPTS, getUserBiometricWrongAttempts(context) + 1)
@@ -134,6 +134,7 @@ object UserPrefs {
             getInt(USER_BIOMETRIC_WRONG_ATTEMPTS, 0)
         }
     }
+ */
 
     fun putHideCarousel(context: Context, estado: Boolean) {
         PreferenceManager.getDefaultSharedPreferences(context).put {
@@ -191,7 +192,8 @@ object UserPrefs {
 
             val populatedCenter = getString(POPULATED_CENTER, "")
             val coveragePopulatedCenter = getString(COVERAGE_POPULATED_CENTER, "")
-            val acceptTermsCoveragePopulatedCenter = getString(ACCEPT_TERMS_COVERAGE_POPULATED_CENTER, "")
+            val acceptTermsCoveragePopulatedCenter =
+                getString(ACCEPT_TERMS_COVERAGE_POPULATED_CENTER, "")
 
             val form = ActivationPOJO(
                 dni!!,

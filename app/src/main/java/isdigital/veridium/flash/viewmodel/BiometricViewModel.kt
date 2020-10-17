@@ -24,6 +24,7 @@ class BiometricViewModel : ViewModel() {
     private val disposable = CompositeDisposable()
     val loading = MutableLiveData<Boolean>()
     val loadError = MutableLiveData<Boolean>()
+    var responseCode: String = "" // = MutableLiveData<String>() // responseCode
 
     init {
         DaggerBiometricComponent.create().inject(this)
@@ -67,21 +68,31 @@ class BiometricViewModel : ViewModel() {
     }
 
     fun validateVeridiumFingerprints(body: HashMap<String, String>) {
-        Log.d("validateVeridiu", body.toString())
+        //Log.d("validateVeridiu", body.toString())
         disposable.add(
             api.validateFingerprints(body).subscribeOn(
                 Schedulers.newThread()
             ).observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<ApiResponse<ReniecUser>>() {
                     override fun onSuccess(t: ApiResponse<ReniecUser>) {
-                        val success: Boolean = t.status == 0
+                        Log.d("validateVeridiu", t.toString())
+                        val success: Boolean = (t.status.toInt() == 0 && t.code == "0000000000")
                         if (success) {
                             loadError.value = false
                             loading.value = true
                         } else {
-                            if (t.status == 1) {
+
+                            if (t.status == 1 || t.code == "0044000000") {
                                 sendToCrashlyticsFingerprintsFail(t.toString())
                             }
+                            //if (t.status == 2) {
+                            //if (t.code == "0044000000") {//TOKEN EXPIRED
+                            //sendToCrashlyticsFingerprintsFail(t.toString())
+                            //}
+                            //else {
+                            responseCode = t.code; //== "1020001001"; //máximo de intentos
+                            //}
+                            //}
                             loadError.value = true
                             loading.value = true
                         }

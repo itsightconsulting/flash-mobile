@@ -3,7 +3,6 @@ package isdigital.veridium.flash.view
 
 import android.Manifest
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -13,19 +12,17 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.google.zxing.Result
 import isdigital.veridium.flash.R
 import isdigital.veridium.flash.preferences.UserPrefs
@@ -144,6 +141,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                     dialogSpin?.dismiss()
 
                     if (error) {
+                        Log.d("simActivated",simActivated.toString())
                         if (simActivated) {
                             ViewInfoSimCard()
                             return@let
@@ -151,7 +149,8 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                             UserPrefs.putUserBarscanAttempts(context)
 
                             val attemps = UserPrefs.getUserBarscanAttempts(context)
-                            if (attemps == MAX_BAR_SCANNER_TEMPS) {
+                            Log.d("attemps", attemps.toString())
+                            if (this.activationViewModel.responseCode == "1020001001" || attemps == MAX_BAR_SCANNER_TEMPS) {
 
                                 //val form = UserPrefs.getActivation(context)
                                 //form.iccid = iccid
@@ -386,13 +385,14 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         mScannerView.stopCamera()
 
         rawResult?.let {
-            if (it.text.length == LENGTH_BAR_CODE && validateOnlyNumber(it.text)) {
+            if (it.text.length >= LENGTH_BAR_CODE && validateOnlyNumber(it.text)) {
                 evaluateIccid(it.text)
             } else {
                 UserPrefs.putUserBarscanAttempts(context)
 
                 val attemps = UserPrefs.getUserBarscanAttempts(context)
-                if (attemps == MAX_BAR_SCANNER_TEMPS) {
+                Log.d("attemps", attemps.toString())
+                if (this.activationViewModel.responseCode == "1020001001" || attemps == MAX_BAR_SCANNER_TEMPS) {
 
                     //val form = UserPrefs.getActivation(context)
                     //form.iccid = it.text
@@ -506,9 +506,8 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
             return dialog
         }
     */
-    private fun evaluateIccid(flPUK: String) {
+    private fun evaluateIccid(flIccid: String) {
         instanceDialogSpinner()
-        val flIccid = ICCID.replace("{0}", flPUK)
         val form = UserPrefs.getActivation(context)
         activationViewModel.checkIccidValid(
             flIccid, PartnerData.formPreparation(

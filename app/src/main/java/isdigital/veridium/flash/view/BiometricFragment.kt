@@ -365,13 +365,13 @@ class BiometricFragment : Fragment(),
                         this.activationViewModel.loading.value = true
 
                     } else {
-                        UserPrefs.putUserBiometricWrongAttempts(context)
+                        //UserPrefs.putUserBiometricWrongAttempts(context)
 
-                        val attemps = UserPrefs.getUserBiometricWrongAttempts(context)
-                        if (attemps == MAX_BIOMETRIC_SCANNER_TEMPS) {
+                        // val attemps = UserPrefs.getUserBiometricWrongAttempts(context)
+                        if (this.biometricViewModel.responseCode == "3020002001") {
                             //val form = UserPrefs.getActivation(context)
                             //form.iccid = UserPrefs.getIccid(context)
-                            this.activationViewModel.loading.value = false
+                            //this.activationViewModel.loading.value = false
                             /*
                             activationViewModel.sendFormWithStatus(
                                 PartnerData.formPreparation(
@@ -405,8 +405,8 @@ class BiometricFragment : Fragment(),
                     if (it) {
                         navigateErrorFragment()
                     } else {
-                        val attemps = UserPrefs.getUserBiometricWrongAttempts(context)
-                        if (attemps == MAX_BIOMETRIC_SCANNER_TEMPS) {
+                        //val attemps = UserPrefs.getUserBiometricWrongAttempts(context)
+                        if (this.biometricViewModel.responseCode == "3020002001") { //attemps == MAX_BIOMETRIC_SCANNER_TEMPS) {
                             navigateErrorFragment()
                             return@Observer
                         }

@@ -35,6 +35,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     val loadError = MutableLiveData<Boolean>()
     val formError = MutableLiveData<Boolean>()
     val simActivated = MutableLiveData<Boolean>()
+    var responseCode: String = "" // = MutableLiveData<String>() // responseCode
     var errorMessage: String = ""
     var api_token: String = ""
 
@@ -81,30 +82,37 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     }
 
     fun checkIccidValid(iccid: String, form: HashMap<String, String>) {
-        Log.d("checkIccidValid", form.toString())
+        //Log.d("checkIccidValid", form.toString())
         loading.value = false
         disposable.add(activationService.validateICCID(iccid, form).subscribeOn(
             Schedulers.newThread()
         ).observeOn(AndroidSchedulers.mainThread()).subscribeWith(
             object : DisposableSingleObserver<VerifyIccidResponse>() {
                 override fun onSuccess(t: VerifyIccidResponse) {
-                    //Log.d("iccid", iccid.toString())
-                    //Log.d("VerifyIccidResponse", t.toString())
-                    val success: Boolean = (t.status.toInt() == 0 && t.code == "0000000000")
+                    Log.d("iccid", iccid.toString())
+                    Log.d("VerifyIccidResponse", t.toString())
+                    var success: Boolean = (t.status.toInt() == 0 && t.code == "0000000000")
+                    /*if (iccid.get(19) == '0') {
+                        success = true;
+                    }
+                     */
                     if (success) {
                         loadError.value = false
                         loading.value = true
 
                     } else {
-                        if (t.status.toInt() == 2 && t.code == "1040001005") { // ICCID REGISTRADO
-                            simActivated.value = true
-                        } else if (t.status.toInt() == 2 && t.code == "0044000000") {//TOKEN EXPIRED
+                        //if (t.status.toInt() == 2) {
+                        if (t.code == "0044000000") {//TOKEN EXPIRED
                             sendToCrashlyticsFailRequestBody(form = t.toString())
+                        } else {
+                            simActivated.value = t.code == "1040001005"; //ICCID REGISTRADO
+                            responseCode = t.code; //== "1020001001"; //máximo de intentos
                         }
+                        //}
                         loadError.value = true
                         loading.value = true
-                        errorMessage =
-                            FlashApplication.appContext.resources.getString(R.string.api_generic_error)
+                        errorMessage = t.message;
+                        //FlashApplication.appContext.resources.getString(R.string.api_generic_error)
                     }
                 }
 

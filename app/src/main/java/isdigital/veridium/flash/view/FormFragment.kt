@@ -102,7 +102,6 @@ class FormFragment : Fragment() {
             .email()
             .and()
             .valid(etSponserTeamID, true)
-            .required()
             .minLength(2)
             .maxLength(10)
             .validateNumber()

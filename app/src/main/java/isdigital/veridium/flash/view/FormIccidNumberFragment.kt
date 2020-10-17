@@ -49,12 +49,12 @@ class FormIccidNumberFragment : Fragment() {
         eventListeners()
         settingBoldText()
 
-        val IccIdLenMessage = resources.getString(R.string.iccid_length)
+        val PukLenMessage = resources.getString(R.string.iccid_length)
         this.validatorMatrix = MasterValidation()
             .valid(etICCIDNumber, true)
             .required()
-            .minLength(LENGTH_BAR_CODE, IccIdLenMessage)
-            .maxLength(LENGTH_BAR_CODE, IccIdLenMessage).active()
+            .minLength(LENGTH_PUK_CODE, PukLenMessage)
+            .maxLength(LENGTH_PUK_CODE, PukLenMessage).active()
 
         btnValidateIccId.setOnClickListener {
             if (!this.validatorMatrix.checkValidity()) {
@@ -92,7 +92,9 @@ class FormIccidNumberFragment : Fragment() {
                             UserPrefs.putUserBarscanAttempts(context)
 
                             val attemps = UserPrefs.getUserBarscanAttempts(context)
-                            if (attemps == MAX_BAR_SCANNER_TEMPS) {
+                            Log.d("attemps", attemps.toString())
+                            if (this.activationViewModel.responseCode == "1020001001" || attemps == MAX_BAR_SCANNER_TEMPS) {
+                                // attemps == MAX_BAR_SCANNER_TEMPS) {
 
                                 //val form = UserPrefs.getActivation(context)
                                 //form.iccid = iccid
@@ -186,14 +188,14 @@ class FormIccidNumberFragment : Fragment() {
     }
 
     private fun tryPutAgain() {
-        val diagError = errorBarCodeValidation(context!!)
+        val diagError = errorBarCodeValidation(context!!) // invokerBarcodeError(context!!)
         diagError.show()
 
         diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
-            UserPrefs.resetUserBarscanAttempts(context)
+            //UserPrefs.resetUserBarscanAttempts(context)
             diagError.setOnDismissListener {
                 val action =
-                    SimCardFragmentDirections.actionSimCardFragmentToErrorIccIdFragment() //Validar
+                    FormIccidNumberFragmentDirections.actionFormIccidNumberFragmentToSimCardFragment();
                 findNavController().navigate(action)
             }
             diagError.dismiss()
@@ -205,6 +207,8 @@ class FormIccidNumberFragment : Fragment() {
         val diagError = invokerBarcodeErrorActivado(context!!)
         diagError.show()
         val openURL = Intent(Intent.ACTION_VIEW)
+        UserPrefs.resetUserBarscanAttempts(context)
+
         diagError.findViewById<Button>(R.id.btnSolicitarPort).setOnClickListener {
             diagError.dismiss()
             openURL.data = Uri.parse(REQUEST_PORTABILITY)
@@ -219,7 +223,6 @@ class FormIccidNumberFragment : Fragment() {
 
         diagError.findViewById<Button>(R.id.btnBarcodeError).setOnClickListener {
             diagError.dismiss()
-            UserPrefs.resetUserBarscanAttempts(context)
             val action =
                 FormIccidNumberFragmentDirections.actionFormIccidNumberFragmentToPreActivationFragment()
             findNavController().navigate(action)

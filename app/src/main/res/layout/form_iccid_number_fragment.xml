@@ -82,7 +82,8 @@
                     android:id="@+id/etICCIDNumber"
                     style="@style/flash_edit_text"
                     android:hint="@string/iccid_digits"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:maxLength="8" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
