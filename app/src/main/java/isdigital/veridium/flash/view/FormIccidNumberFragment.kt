@@ -171,14 +171,14 @@ class FormIccidNumberFragment : Fragment() {
     }
 
     private fun evaluateIccid(flPUK: String) {
-        val flIccid = ICCID.replace("{0}", flPUK)
+        //val flIccid = ICCID.replace("{0}", flPUK)
         val form = UserPrefs.getActivation(context)
         activationViewModel.checkIccidValid(
-            flIccid, PartnerData.formPreparation(
+            flPUK, PartnerData.formPreparation(
                 form, true, true
             )
         )
-        iccid = flIccid
+        iccid = flPUK
         UserPrefs.putIccid(context, iccid)
     }
 
