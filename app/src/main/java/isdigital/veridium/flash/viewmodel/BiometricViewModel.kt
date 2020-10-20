@@ -75,7 +75,7 @@ class BiometricViewModel : ViewModel() {
             ).observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<ApiResponse<ReniecUser>>() {
                     override fun onSuccess(t: ApiResponse<ReniecUser>) {
-                        Log.d("validateVeridiu", t.toString())
+                        //Log.d("validateVeridiu", t.toString())
                         val success: Boolean = (t.status.toInt() == 0 && t.code == "0000000000")
                         if (success) {
                             loadError.value = false
@@ -90,7 +90,7 @@ class BiometricViewModel : ViewModel() {
                             //sendToCrashlyticsFingerprintsFail(t.toString())
                             //}
                             //else {
-                            responseCode = t.code; //== "1020001001"; //máximo de intentos
+                            responseCode = t.code; //== "3020002001"; //máximo de intentos
                             //}
                             //}
                             loadError.value = true
