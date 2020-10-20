@@ -1,6 +1,6 @@
 package isdigital.veridium.flash.util
 
-const val LENGTH_BAR_CODE = 19
+const val LENGTH_BAR_CODE = 20
 const val LENGTH_PUK_CODE = 8
 const val MAX_BAR_SCANNER_TEMPS = 3
 const val MAX_BIOMETRIC_SCANNER_TEMPS = 3

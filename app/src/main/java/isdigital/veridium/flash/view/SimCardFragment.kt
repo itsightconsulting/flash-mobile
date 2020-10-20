@@ -385,7 +385,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         mScannerView.stopCamera()
 
         rawResult?.let {
-            if (it.text.length >= LENGTH_BAR_CODE && validateOnlyNumber(it.text)) {
+            if ((it.text.length == LENGTH_BAR_CODE || it.text.length == LENGTH_PUK_CODE) && validateOnlyNumber(it.text)) {
                 evaluateIccid(it.text)
             } else {
                 UserPrefs.putUserBarscanAttempts(context)
