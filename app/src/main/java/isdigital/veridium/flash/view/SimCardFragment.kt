@@ -211,6 +211,8 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                         //Important when user are in biometric fragment and want comeback to this view
                         this.biometricViewModel.loading.value = false
 
+                        UserPrefs.putIccid(context, this.activationViewModel.responseIccid)
+
                         hideSpinner(this.activity)
 
                         val action =
@@ -458,17 +460,6 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         }
     }
 
-    private fun instanceDialogSpinner() {
-        dialogSpin = Dialog(context!!, R.style.dialog_scanner)
-        dialogSpin?.let {
-            it.setContentView(R.layout.alert_scanner_spin)
-            it.setCanceledOnTouchOutside(false)
-            it.setCancelable(false)
-            it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            it.show()
-        }
-    }
-
     /*
         private fun invokerICCIDDialog(context: Context): Dialog {
             val dialog = Dialog(context)
@@ -514,7 +505,18 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                 form, true, true
             )
         )
-        iccid = flIccid
-        UserPrefs.putIccid(context, iccid)
+        //iccid = flIccid
+        //UserPrefs.putIccid(context, iccid)
+    }
+
+    private fun instanceDialogSpinner() {
+        dialogSpin = Dialog(context!!, R.style.dialog_scanner)
+        dialogSpin?.let {
+            it.setContentView(R.layout.alert_scanner_spin)
+            it.setCanceledOnTouchOutside(false)
+            it.setCancelable(false)
+            it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            it.show()
+        }
     }
 }

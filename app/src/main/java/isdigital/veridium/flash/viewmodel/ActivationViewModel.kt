@@ -36,6 +36,7 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
     val formError = MutableLiveData<Boolean>()
     val simActivated = MutableLiveData<Boolean>()
     var responseCode: String = "" // = MutableLiveData<String>() // responseCode
+    var responseIccid: String = ""
     var errorMessage: String = ""
     var api_token: String = ""
 
@@ -92,14 +93,11 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                     //Log.d("iccid", iccid.toString())
                     //Log.d("VerifyIccidResponse", t.toString())
                     var success: Boolean = (t.status.toInt() == 0 && t.code == "0000000000")
-                    /*if (iccid.get(19) == '0') {
-                        success = true;
-                    }
-                     */
+                    /*if (iccid.get(19) == '0') success = true;*/
                     if (success) {
                         loadError.value = false
                         loading.value = true
-
+                        responseIccid = t.data.iccid!!
                     } else {
                         //if (t.status.toInt() == 2) {
                         if (t.code == "0044000000") {//TOKEN EXPIRED
