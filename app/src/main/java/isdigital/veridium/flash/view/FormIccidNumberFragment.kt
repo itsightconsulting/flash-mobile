@@ -125,6 +125,7 @@ class FormIccidNumberFragment : Fragment() {
                         }
                         success = true
 
+                        UserPrefs.putIccid(context, this.activationViewModel.responseIccid)
                         UserPrefs.resetUserBarscanAttempts(context)
 
                         val diagSucc = invokerBarcodeSuccess(context!!)
@@ -178,8 +179,8 @@ class FormIccidNumberFragment : Fragment() {
                 form, true, true
             )
         )
-        iccid = flPUK
-        UserPrefs.putIccid(context, iccid)
+        //iccid = flPUK
+        //UserPrefs.putIccid(context, iccid)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
