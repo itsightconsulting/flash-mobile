@@ -358,12 +358,13 @@ fun manageCode(code: String): String {
 
 fun hideSponsorTeamId(sponsorTeamId: String): String {
     var text_replace: String = "";
-    if (sponsorTeamId.length <= 2)
-        text_replace = sponsorTeamId.replaceRange(
-            0, sponsorTeamId.length, "***"
+    if (!sponsorTeamId.isNullOrEmpty())
+        if (sponsorTeamId.length <= 2)
+            text_replace = sponsorTeamId.replaceRange(
+                0, sponsorTeamId.length, "***"
+            );
+        else text_replace = sponsorTeamId.replaceRange(
+            sponsorTeamId.length - 3, sponsorTeamId.length, "***"
         );
-    else text_replace = sponsorTeamId.replaceRange(
-        sponsorTeamId.length - 3, sponsorTeamId.length, "***"
-    );
     return text_replace;
 }

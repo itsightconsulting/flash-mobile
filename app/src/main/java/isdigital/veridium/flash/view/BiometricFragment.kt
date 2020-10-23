@@ -323,9 +323,11 @@ class BiometricFragment : Fragment(),
                     //val jsonInSolutions = HashMap<String, String>()
                     val form = UserPrefs.getActivation(context)
                     form.iccid = UserPrefs.getIccid(context)
+                    //Log.d("form.iccid", form.iccid.toString());
                     val jsonInSolutions = PartnerData.formPreparation(
                         form, true, true
                     )
+                    //Log.d("jsonInSolutions", jsonInSolutions.toString());
                     //jsonInSolutions["dniCliente"] = UserPrefs.getUserDni(context!!)!!
                     jsonInSolutions["rawBase64"] =
                         fingerImpressionImage.getString("BinaryBase64ObjectRAW")

@@ -31,7 +31,7 @@ class FormIccidNumberFragment : Fragment() {
     private lateinit var validatorMatrix: MasterValidation
     private lateinit var activationViewModel: ActivationViewModel
     private lateinit var biometricViewModel: BiometricViewModel
-    private var iccid: String = ""
+    //private var iccid: String = ""
     private var success = false
 
     override fun onCreateView(
@@ -125,7 +125,6 @@ class FormIccidNumberFragment : Fragment() {
                         }
                         success = true
 
-                        UserPrefs.putIccid(context, this.activationViewModel.responseIccid)
                         UserPrefs.resetUserBarscanAttempts(context)
 
                         val diagSucc = invokerBarcodeSuccess(context!!)
@@ -156,7 +155,7 @@ class FormIccidNumberFragment : Fragment() {
                     if (!biometricViewModel.loadError.value!!) {
                         //Important when user are in biometric fragment and want comeback to this view
                         this.biometricViewModel.loading.value = false
-
+                        UserPrefs.putIccid(context, this.activationViewModel.responseIccid)
                         hideSpinner(this.activity)
 
                         val action =

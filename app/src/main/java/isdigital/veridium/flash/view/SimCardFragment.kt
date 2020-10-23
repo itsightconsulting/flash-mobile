@@ -48,7 +48,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
     private lateinit var biometricViewModel: BiometricViewModel
     private var dialog: Dialog? = null
     private var dialogSpin: Dialog? = null
-    private var iccid: String = ""
+    //private var iccid: String = ""
     private var success = false
 
     override fun onCreateView(
@@ -141,7 +141,7 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
                     dialogSpin?.dismiss()
 
                     if (error) {
-                        Log.d("simActivated",simActivated.toString())
+                        Log.d("simActivated", simActivated.toString())
                         if (simActivated) {
                             ViewInfoSimCard()
                             return@let
@@ -387,7 +387,10 @@ class SimCardFragment : Fragment(), ZXingScannerView.ResultHandler,
         mScannerView.stopCamera()
 
         rawResult?.let {
-            if ((it.text.length == LENGTH_BAR_CODE || it.text.length == LENGTH_PUK_CODE) && validateOnlyNumber(it.text)) {
+            if ((it.text.length == LENGTH_BAR_CODE || it.text.length == LENGTH_PUK_CODE) && validateOnlyNumber(
+                    it.text
+                )
+            ) {
                 evaluateIccid(it.text)
             } else {
                 UserPrefs.putUserBarscanAttempts(context)

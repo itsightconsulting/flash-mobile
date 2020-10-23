@@ -79,7 +79,10 @@ class FormConfirmFragment : Fragment() {
         tvDateOfBirthResumen.text = oActivation.birthDate
         tvEmailResumen.text = oActivation.email
         tvPopulatedCenterResumen.text = oActivation.populatedCenter
-        tvSponsorTeamIdResumen.text = hideSponsorTeamId(oActivation.sponsorTeamId!!)
+        if (!oActivation.sponsorTeamId.isNullOrEmpty()) {
+            lySponsorTeamId.visibility = View.VISIBLE
+            tvSponsorTeamIdResumen.text = hideSponsorTeamId(oActivation.sponsorTeamId!!)
+        }
 
         if (oActivation.wantPortability) {
             tvPhoneNumber.visibility = View.VISIBLE
