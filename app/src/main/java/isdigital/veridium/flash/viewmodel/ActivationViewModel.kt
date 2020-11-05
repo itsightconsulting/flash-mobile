@@ -97,8 +97,8 @@ class ActivationViewModel(application: Application) : BaseViewModel(application)
                     if (success) {
                         loadError.value = false
                         loading.value = true
-                        //if (t.data != null)
-                        responseIccid = t.data.iccid!!
+                        if (t.data != null)
+                            responseIccid = t.data.iccid!!
                     } else {
                         //if (t.status.toInt() == 2) {
                         if (t.code == "0044000000") {//TOKEN EXPIRED
